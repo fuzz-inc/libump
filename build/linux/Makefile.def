@@ -1,0 +1,53 @@
+CONFIG		= debug
+#CONFIG		= release
+
+CC		= gcc
+CFLAGS		= -Wall
+
+CXX		= g++
+CXXFLAGS	= $(CFLAGS) -std=c++11
+
+AR		= ar
+ARFLAGS		= r
+
+LD		= g++
+LDFLAGS		= 
+
+MKDIR		= mkdir -p
+RM		= rm -rf
+
+TOPDIR		:= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/../..)
+SRCDIR		?= $(TOPDIR)
+OBJDIR		= obj/$(CONFIG)
+LIBDIR		= lib/$(CONFIG)
+BINDIR		= bin/$(CONFIG)
+
+OBJEXT		= .o
+LIBEXT		= .a
+BINEXT		= 
+
+ifeq "$(CONFIG)" "debug"
+CFLAGS		+= -O0 -g
+else
+CFLAGS		+= -O2 -DNDEBUG
+endif
+
+#
+#
+#
+$(OBJDIR)/%$(OBJEXT): $(SRCDIR)/%.cpp
+	@echo $@
+	@$(MKDIR) $(dir $@)
+	@$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
+
+$(LIBDIR)/%$(LIBEXT):
+	@$(MKDIR) $(dir $@)
+	$(AR) $(ARFLAGS) $@ $+
+
+$(BINDIR)/%$(BINEXT):
+	@$(MKDIR) $(dir $@)
+	$(LD) -o $@ $+ $(LDFLAGS)
+
+$(OBJDIR)/%.h.gch:
+	@$(MKDIR) $(dir $@)
+	$(CXX) $(CXXFLAGS) -MD -o $@ $<

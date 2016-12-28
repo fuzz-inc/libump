@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		262FB2DA1DB15072004FF73B /* Bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262FB2D81DB15072004FF73B /* Bot.cpp */; };
+		262FB2DB1DB15072004FF73B /* Bot.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 262FB2D91DB15072004FF73B /* Bot.hpp */; };
+		26560BB61DE8A5FB002753D7 /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26560BB41DE8A5FB002753D7 /* Pattern.cpp */; };
+		DA0666791DAF9CD700F29305 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0666771DAF9CD700F29305 /* Player.cpp */; };
+		DA06667A1DAF9CD700F29305 /* Player.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA0666781DAF9CD700F29305 /* Player.hpp */; };
+		DA06667D1DAF9D3A00F29305 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA06667B1DAF9D3A00F29305 /* Game.cpp */; };
+		DA06667E1DAF9D3A00F29305 /* Game.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA06667C1DAF9D3A00F29305 /* Game.hpp */; };
+		DA079B0B1DD47A4800112F03 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA079B091DD47A4800112F03 /* Thread.cpp */; };
+		DA079B0C1DD47A4800112F03 /* Thread.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA079B0A1DD47A4800112F03 /* Thread.hpp */; };
+		DA15CB801DA656DA00843135 /* SslSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA15CB7E1DA656DA00843135 /* SslSocket.cpp */; };
+		DA15CB811DA656DA00843135 /* SslSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA15CB7F1DA656DA00843135 /* SslSocket.hpp */; };
+		DA1BD8D51DA50D2500334BB7 /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA1BD8CF1DA50D2500334BB7 /* Socket.cpp */; };
+		DA1BD8D61DA50D2500334BB7 /* Socket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA1BD8D01DA50D2500334BB7 /* Socket.hpp */; };
+		DA1BD8D91DA50D2500334BB7 /* TcpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA1BD8D31DA50D2500334BB7 /* TcpSocket.cpp */; };
+		DA1BD8DA1DA50D2500334BB7 /* TcpSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA1BD8D41DA50D2500334BB7 /* TcpSocket.hpp */; };
+		DA2EE39C1D86A1A200041D93 /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA2EE39B1D86A1A200041D93 /* Config.cpp */; };
+		DA47AC411D8A645700533933 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA47AC3F1D8A645700533933 /* Server.cpp */; };
+		DA47AC421D8A645700533933 /* Server.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA47AC401D8A645700533933 /* Server.hpp */; };
+		DA81C6FB1DC0B861004470DA /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA81C6F91DC0B861004470DA /* Config.cpp */; };
+		DA81C6FC1DC0B861004470DA /* Config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA81C6FA1DC0B861004470DA /* Config.hpp */; };
+		DA8D01001D9BE99D00F1F5D2 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA8D00FE1D9BE99D00F1F5D2 /* Logger.cpp */; };
+		DA8D01011D9BE99D00F1F5D2 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA8D00FF1D9BE99D00F1F5D2 /* Logger.hpp */; };
+		DAA09F151E02895C00DA374E /* BigNum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAA09F131E02895C00DA374E /* BigNum.cpp */; };
+		DAA597551DF0142B007BE749 /* JobHaipai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAA597531DF0142B007BE749 /* JobHaipai.cpp */; };
+		DAC7FF191D9939E300559942 /* JobSutehai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC7FF171D9939E300559942 /* JobSutehai.cpp */; };
+		DAC7FF1A1D9939E300559942 /* JobSutehai.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAC7FF181D9939E300559942 /* JobSutehai.hpp */; };
+		DAFCE7A31D7D78FF0016A137 /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE75E1D7D78FF0016A137 /* Client.cpp */; };
+		DAFCE7A41D7D78FF0016A137 /* Client.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE75F1D7D78FF0016A137 /* Client.hpp */; };
+		DAFCE7A51D7D78FF0016A137 /* Command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7601D7D78FF0016A137 /* Command.cpp */; };
+		DAFCE7A61D7D78FF0016A137 /* Command.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7611D7D78FF0016A137 /* Command.hpp */; };
+		DAFCE7A91D7D78FF0016A137 /* Agari.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7651D7D78FF0016A137 /* Agari.cpp */; };
+		DAFCE7AA1D7D78FF0016A137 /* Agari.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7661D7D78FF0016A137 /* Agari.hpp */; };
+		DAFCE7AB1D7D78FF0016A137 /* AgariParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7671D7D78FF0016A137 /* AgariParser.cpp */; };
+		DAFCE7AC1D7D78FF0016A137 /* AgariParser.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7681D7D78FF0016A137 /* AgariParser.hpp */; };
+		DAFCE7AD1D7D78FF0016A137 /* Divider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7691D7D78FF0016A137 /* Divider.cpp */; };
+		DAFCE7AE1D7D78FF0016A137 /* Divider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE76A1D7D78FF0016A137 /* Divider.hpp */; };
+		DAFCE7AF1D7D78FF0016A137 /* Hai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE76B1D7D78FF0016A137 /* Hai.cpp */; };
+		DAFCE7B01D7D78FF0016A137 /* Hai.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE76C1D7D78FF0016A137 /* Hai.hpp */; };
+		DAFCE7B11D7D78FF0016A137 /* HaiArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE76D1D7D78FF0016A137 /* HaiArray.cpp */; };
+		DAFCE7B21D7D78FF0016A137 /* HaiArray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE76E1D7D78FF0016A137 /* HaiArray.hpp */; };
+		DAFCE7B31D7D78FF0016A137 /* Hand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE76F1D7D78FF0016A137 /* Hand.cpp */; };
+		DAFCE7B41D7D78FF0016A137 /* Hand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7701D7D78FF0016A137 /* Hand.hpp */; };
+		DAFCE7B51D7D78FF0016A137 /* Kawa.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7711D7D78FF0016A137 /* Kawa.cpp */; };
+		DAFCE7B61D7D78FF0016A137 /* Kawa.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7721D7D78FF0016A137 /* Kawa.hpp */; };
+		DAFCE7B71D7D78FF0016A137 /* Mentsu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7731D7D78FF0016A137 /* Mentsu.cpp */; };
+		DAFCE7B81D7D78FF0016A137 /* Mentsu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7741D7D78FF0016A137 /* Mentsu.hpp */; };
+		DAFCE7B91D7D78FF0016A137 /* Shanten.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7751D7D78FF0016A137 /* Shanten.cpp */; };
+		DAFCE7BA1D7D78FF0016A137 /* Shanten.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7761D7D78FF0016A137 /* Shanten.hpp */; };
+		DAFCE7BB1D7D78FF0016A137 /* Sutehai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7771D7D78FF0016A137 /* Sutehai.cpp */; };
+		DAFCE7BC1D7D78FF0016A137 /* Sutehai.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7781D7D78FF0016A137 /* Sutehai.hpp */; };
+		DAFCE7BD1D7D78FF0016A137 /* Yama.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7791D7D78FF0016A137 /* Yama.cpp */; };
+		DAFCE7BE1D7D78FF0016A137 /* Yama.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE77A1D7D78FF0016A137 /* Yama.hpp */; };
+		DAFCE7C51D7D78FF0016A137 /* Config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7821D7D78FF0016A137 /* Config.hpp */; };
+		DAFCE7C61D7D78FF0016A137 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7831D7D78FF0016A137 /* Game.cpp */; };
+		DAFCE7C71D7D78FF0016A137 /* Game.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7841D7D78FF0016A137 /* Game.hpp */; };
+		DAFCE7C81D7D78FF0016A137 /* Job.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7851D7D78FF0016A137 /* Job.cpp */; };
+		DAFCE7C91D7D78FF0016A137 /* Job.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7861D7D78FF0016A137 /* Job.hpp */; };
+		DAFCE7CA1D7D78FF0016A137 /* JobAgari.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7871D7D78FF0016A137 /* JobAgari.cpp */; };
+		DAFCE7CB1D7D78FF0016A137 /* JobAgari.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7881D7D78FF0016A137 /* JobAgari.hpp */; };
+		DAFCE7CC1D7D78FF0016A137 /* JobGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7891D7D78FF0016A137 /* JobGame.cpp */; };
+		DAFCE7CD1D7D78FF0016A137 /* JobGame.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE78A1D7D78FF0016A137 /* JobGame.hpp */; };
+		DAFCE7CE1D7D78FF0016A137 /* JobKyoku.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE78B1D7D78FF0016A137 /* JobKyoku.cpp */; };
+		DAFCE7CF1D7D78FF0016A137 /* JobKyoku.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE78C1D7D78FF0016A137 /* JobKyoku.hpp */; };
+		DAFCE7D01D7D78FF0016A137 /* JobNaki.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE78D1D7D78FF0016A137 /* JobNaki.cpp */; };
+		DAFCE7D11D7D78FF0016A137 /* JobNaki.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE78E1D7D78FF0016A137 /* JobNaki.hpp */; };
+		DAFCE7D21D7D78FF0016A137 /* JobReady.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE78F1D7D78FF0016A137 /* JobReady.cpp */; };
+		DAFCE7D31D7D78FF0016A137 /* JobReady.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7901D7D78FF0016A137 /* JobReady.hpp */; };
+		DAFCE7D41D7D78FF0016A137 /* JobRyukyoku.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7911D7D78FF0016A137 /* JobRyukyoku.cpp */; };
+		DAFCE7D51D7D78FF0016A137 /* JobRyukyoku.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7921D7D78FF0016A137 /* JobRyukyoku.hpp */; };
+		DAFCE7D61D7D78FF0016A137 /* JobTsumo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7931D7D78FF0016A137 /* JobTsumo.cpp */; };
+		DAFCE7D71D7D78FF0016A137 /* JobTsumo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7941D7D78FF0016A137 /* JobTsumo.hpp */; };
+		DAFCE7DA1D7D78FF0016A137 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7971D7D78FF0016A137 /* Player.cpp */; };
+		DAFCE7DB1D7D78FF0016A137 /* Player.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7981D7D78FF0016A137 /* Player.hpp */; };
+		DAFCE7DC1D7D78FF0016A137 /* Receiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7991D7D78FF0016A137 /* Receiver.cpp */; };
+		DAFCE7DD1D7D78FF0016A137 /* Receiver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE79A1D7D78FF0016A137 /* Receiver.hpp */; };
+		DAFCE7E31D7D78FF0016A137 /* ump.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7A01D7D78FF0016A137 /* ump.hpp */; };
+		DAFCE7E41D7D78FF0016A137 /* Version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7A11D7D78FF0016A137 /* Version.cpp */; };
+		DAFCE7E51D7D78FF0016A137 /* Version.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7A21D7D78FF0016A137 /* Version.hpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		262FB2D81DB15072004FF73B /* Bot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bot.cpp; sourceTree = "<group>"; };
+		262FB2D91DB15072004FF73B /* Bot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bot.hpp; sourceTree = "<group>"; };
+		26560BB41DE8A5FB002753D7 /* Pattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pattern.cpp; sourceTree = "<group>"; };
+		26560BB51DE8A5FB002753D7 /* Pattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pattern.hpp; sourceTree = "<group>"; };
+		DA0666771DAF9CD700F29305 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		DA0666781DAF9CD700F29305 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		DA06667B1DAF9D3A00F29305 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		DA06667C1DAF9D3A00F29305 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		DA079B091DD47A4800112F03 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
+		DA079B0A1DD47A4800112F03 /* Thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thread.hpp; sourceTree = "<group>"; };
+		DA15CB7E1DA656DA00843135 /* SslSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SslSocket.cpp; sourceTree = "<group>"; };
+		DA15CB7F1DA656DA00843135 /* SslSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SslSocket.hpp; sourceTree = "<group>"; };
+		DA1BD8CF1DA50D2500334BB7 /* Socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Socket.cpp; sourceTree = "<group>"; };
+		DA1BD8D01DA50D2500334BB7 /* Socket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Socket.hpp; sourceTree = "<group>"; };
+		DA1BD8D31DA50D2500334BB7 /* TcpSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TcpSocket.cpp; sourceTree = "<group>"; };
+		DA1BD8D41DA50D2500334BB7 /* TcpSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TcpSocket.hpp; sourceTree = "<group>"; };
+		DA2EE39B1D86A1A200041D93 /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
+		DA47AC3F1D8A645700533933 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
+		DA47AC401D8A645700533933 /* Server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Server.hpp; sourceTree = "<group>"; };
+		DA81C6F91DC0B861004470DA /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
+		DA81C6FA1DC0B861004470DA /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
+		DA8D00FE1D9BE99D00F1F5D2 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		DA8D00FF1D9BE99D00F1F5D2 /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		DAA09F131E02895C00DA374E /* BigNum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigNum.cpp; sourceTree = "<group>"; };
+		DAA09F141E02895C00DA374E /* BigNum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BigNum.hpp; sourceTree = "<group>"; };
+		DAA597531DF0142B007BE749 /* JobHaipai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobHaipai.cpp; sourceTree = "<group>"; };
+		DAA597541DF0142B007BE749 /* JobHaipai.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobHaipai.hpp; sourceTree = "<group>"; };
+		DAC7FF171D9939E300559942 /* JobSutehai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobSutehai.cpp; sourceTree = "<group>"; };
+		DAC7FF181D9939E300559942 /* JobSutehai.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobSutehai.hpp; sourceTree = "<group>"; };
+		DAFCE6C21D7D72A60016A137 /* libump.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libump.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAFCE75E1D7D78FF0016A137 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
+		DAFCE75F1D7D78FF0016A137 /* Client.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Client.hpp; sourceTree = "<group>"; };
+		DAFCE7601D7D78FF0016A137 /* Command.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Command.cpp; sourceTree = "<group>"; };
+		DAFCE7611D7D78FF0016A137 /* Command.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Command.hpp; sourceTree = "<group>"; };
+		DAFCE7651D7D78FF0016A137 /* Agari.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Agari.cpp; sourceTree = "<group>"; };
+		DAFCE7661D7D78FF0016A137 /* Agari.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Agari.hpp; sourceTree = "<group>"; };
+		DAFCE7671D7D78FF0016A137 /* AgariParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgariParser.cpp; sourceTree = "<group>"; };
+		DAFCE7681D7D78FF0016A137 /* AgariParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AgariParser.hpp; sourceTree = "<group>"; };
+		DAFCE7691D7D78FF0016A137 /* Divider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Divider.cpp; sourceTree = "<group>"; };
+		DAFCE76A1D7D78FF0016A137 /* Divider.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Divider.hpp; sourceTree = "<group>"; };
+		DAFCE76B1D7D78FF0016A137 /* Hai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hai.cpp; sourceTree = "<group>"; };
+		DAFCE76C1D7D78FF0016A137 /* Hai.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Hai.hpp; sourceTree = "<group>"; };
+		DAFCE76D1D7D78FF0016A137 /* HaiArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HaiArray.cpp; sourceTree = "<group>"; };
+		DAFCE76E1D7D78FF0016A137 /* HaiArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HaiArray.hpp; sourceTree = "<group>"; };
+		DAFCE76F1D7D78FF0016A137 /* Hand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hand.cpp; sourceTree = "<group>"; };
+		DAFCE7701D7D78FF0016A137 /* Hand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Hand.hpp; sourceTree = "<group>"; };
+		DAFCE7711D7D78FF0016A137 /* Kawa.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kawa.cpp; sourceTree = "<group>"; };
+		DAFCE7721D7D78FF0016A137 /* Kawa.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Kawa.hpp; sourceTree = "<group>"; };
+		DAFCE7731D7D78FF0016A137 /* Mentsu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mentsu.cpp; sourceTree = "<group>"; };
+		DAFCE7741D7D78FF0016A137 /* Mentsu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mentsu.hpp; sourceTree = "<group>"; };
+		DAFCE7751D7D78FF0016A137 /* Shanten.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shanten.cpp; sourceTree = "<group>"; };
+		DAFCE7761D7D78FF0016A137 /* Shanten.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shanten.hpp; sourceTree = "<group>"; };
+		DAFCE7771D7D78FF0016A137 /* Sutehai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sutehai.cpp; sourceTree = "<group>"; };
+		DAFCE7781D7D78FF0016A137 /* Sutehai.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sutehai.hpp; sourceTree = "<group>"; };
+		DAFCE7791D7D78FF0016A137 /* Yama.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Yama.cpp; sourceTree = "<group>"; };
+		DAFCE77A1D7D78FF0016A137 /* Yama.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Yama.hpp; sourceTree = "<group>"; };
+		DAFCE7821D7D78FF0016A137 /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
+		DAFCE7831D7D78FF0016A137 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		DAFCE7841D7D78FF0016A137 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		DAFCE7851D7D78FF0016A137 /* Job.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Job.cpp; sourceTree = "<group>"; };
+		DAFCE7861D7D78FF0016A137 /* Job.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Job.hpp; sourceTree = "<group>"; };
+		DAFCE7871D7D78FF0016A137 /* JobAgari.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobAgari.cpp; sourceTree = "<group>"; };
+		DAFCE7881D7D78FF0016A137 /* JobAgari.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobAgari.hpp; sourceTree = "<group>"; };
+		DAFCE7891D7D78FF0016A137 /* JobGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobGame.cpp; sourceTree = "<group>"; };
+		DAFCE78A1D7D78FF0016A137 /* JobGame.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobGame.hpp; sourceTree = "<group>"; };
+		DAFCE78B1D7D78FF0016A137 /* JobKyoku.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobKyoku.cpp; sourceTree = "<group>"; };
+		DAFCE78C1D7D78FF0016A137 /* JobKyoku.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobKyoku.hpp; sourceTree = "<group>"; };
+		DAFCE78D1D7D78FF0016A137 /* JobNaki.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobNaki.cpp; sourceTree = "<group>"; };
+		DAFCE78E1D7D78FF0016A137 /* JobNaki.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobNaki.hpp; sourceTree = "<group>"; };
+		DAFCE78F1D7D78FF0016A137 /* JobReady.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobReady.cpp; sourceTree = "<group>"; };
+		DAFCE7901D7D78FF0016A137 /* JobReady.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobReady.hpp; sourceTree = "<group>"; };
+		DAFCE7911D7D78FF0016A137 /* JobRyukyoku.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobRyukyoku.cpp; sourceTree = "<group>"; };
+		DAFCE7921D7D78FF0016A137 /* JobRyukyoku.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobRyukyoku.hpp; sourceTree = "<group>"; };
+		DAFCE7931D7D78FF0016A137 /* JobTsumo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobTsumo.cpp; sourceTree = "<group>"; };
+		DAFCE7941D7D78FF0016A137 /* JobTsumo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobTsumo.hpp; sourceTree = "<group>"; };
+		DAFCE7971D7D78FF0016A137 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		DAFCE7981D7D78FF0016A137 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		DAFCE7991D7D78FF0016A137 /* Receiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Receiver.cpp; sourceTree = "<group>"; };
+		DAFCE79A1D7D78FF0016A137 /* Receiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Receiver.hpp; sourceTree = "<group>"; };
+		DAFCE7A01D7D78FF0016A137 /* ump.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ump.hpp; sourceTree = "<group>"; };
+		DAFCE7A11D7D78FF0016A137 /* Version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Version.cpp; sourceTree = "<group>"; };
+		DAFCE7A21D7D78FF0016A137 /* Version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Version.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DAFCE6BF1D7D72A60016A137 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DA1BD8CE1DA50D2500334BB7 /* socket */ = {
+			isa = PBXGroup;
+			children = (
+				DA15CB7E1DA656DA00843135 /* SslSocket.cpp */,
+				DA15CB7F1DA656DA00843135 /* SslSocket.hpp */,
+				DA1BD8CF1DA50D2500334BB7 /* Socket.cpp */,
+				DA1BD8D01DA50D2500334BB7 /* Socket.hpp */,
+				DA1BD8D31DA50D2500334BB7 /* TcpSocket.cpp */,
+				DA1BD8D41DA50D2500334BB7 /* TcpSocket.hpp */,
+			);
+			path = socket;
+			sourceTree = "<group>";
+		};
+		DAFCE6B91D7D72A60016A137 = {
+			isa = PBXGroup;
+			children = (
+				DAFCE75C1D7D78FF0016A137 /* ump */,
+				DAFCE6C31D7D72A60016A137 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DAFCE6C31D7D72A60016A137 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAFCE6C21D7D72A60016A137 /* libump.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DAFCE75C1D7D78FF0016A137 /* ump */ = {
+			isa = PBXGroup;
+			children = (
+				DAA09F131E02895C00DA374E /* BigNum.cpp */,
+				DAA09F141E02895C00DA374E /* BigNum.hpp */,
+				DAFCE75D1D7D78FF0016A137 /* client */,
+				DAFCE7601D7D78FF0016A137 /* Command.cpp */,
+				DAFCE7611D7D78FF0016A137 /* Command.hpp */,
+				DA8D00FE1D9BE99D00F1F5D2 /* Logger.cpp */,
+				DA8D00FF1D9BE99D00F1F5D2 /* Logger.hpp */,
+				DAFCE7641D7D78FF0016A137 /* mj */,
+				DAFCE7801D7D78FF0016A137 /* server */,
+				DA1BD8CE1DA50D2500334BB7 /* socket */,
+				DAFCE7A01D7D78FF0016A137 /* ump.hpp */,
+				DAFCE7A11D7D78FF0016A137 /* Version.cpp */,
+				DAFCE7A21D7D78FF0016A137 /* Version.hpp */,
+			);
+			name = ump;
+			path = ../../../ump;
+			sourceTree = "<group>";
+		};
+		DAFCE75D1D7D78FF0016A137 /* client */ = {
+			isa = PBXGroup;
+			children = (
+				262FB2D81DB15072004FF73B /* Bot.cpp */,
+				262FB2D91DB15072004FF73B /* Bot.hpp */,
+				DAFCE75E1D7D78FF0016A137 /* Client.cpp */,
+				DAFCE75F1D7D78FF0016A137 /* Client.hpp */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		DAFCE7641D7D78FF0016A137 /* mj */ = {
+			isa = PBXGroup;
+			children = (
+				DAFCE7651D7D78FF0016A137 /* Agari.cpp */,
+				DAFCE7661D7D78FF0016A137 /* Agari.hpp */,
+				DAFCE7671D7D78FF0016A137 /* AgariParser.cpp */,
+				DAFCE7681D7D78FF0016A137 /* AgariParser.hpp */,
+				DA81C6F91DC0B861004470DA /* Config.cpp */,
+				DA81C6FA1DC0B861004470DA /* Config.hpp */,
+				DAFCE7691D7D78FF0016A137 /* Divider.cpp */,
+				DAFCE76A1D7D78FF0016A137 /* Divider.hpp */,
+				DA06667B1DAF9D3A00F29305 /* Game.cpp */,
+				DA06667C1DAF9D3A00F29305 /* Game.hpp */,
+				DAFCE76B1D7D78FF0016A137 /* Hai.cpp */,
+				DAFCE76C1D7D78FF0016A137 /* Hai.hpp */,
+				DAFCE76D1D7D78FF0016A137 /* HaiArray.cpp */,
+				DAFCE76E1D7D78FF0016A137 /* HaiArray.hpp */,
+				DAFCE76F1D7D78FF0016A137 /* Hand.cpp */,
+				DAFCE7701D7D78FF0016A137 /* Hand.hpp */,
+				DAFCE7711D7D78FF0016A137 /* Kawa.cpp */,
+				DAFCE7721D7D78FF0016A137 /* Kawa.hpp */,
+				DAFCE7731D7D78FF0016A137 /* Mentsu.cpp */,
+				DAFCE7741D7D78FF0016A137 /* Mentsu.hpp */,
+				26560BB41DE8A5FB002753D7 /* Pattern.cpp */,
+				26560BB51DE8A5FB002753D7 /* Pattern.hpp */,
+				DA0666771DAF9CD700F29305 /* Player.cpp */,
+				DA0666781DAF9CD700F29305 /* Player.hpp */,
+				DAFCE7751D7D78FF0016A137 /* Shanten.cpp */,
+				DAFCE7761D7D78FF0016A137 /* Shanten.hpp */,
+				DAFCE7771D7D78FF0016A137 /* Sutehai.cpp */,
+				DAFCE7781D7D78FF0016A137 /* Sutehai.hpp */,
+				DAFCE7791D7D78FF0016A137 /* Yama.cpp */,
+				DAFCE77A1D7D78FF0016A137 /* Yama.hpp */,
+			);
+			path = mj;
+			sourceTree = "<group>";
+		};
+		DAFCE7801D7D78FF0016A137 /* server */ = {
+			isa = PBXGroup;
+			children = (
+				DA2EE39B1D86A1A200041D93 /* Config.cpp */,
+				DAFCE7821D7D78FF0016A137 /* Config.hpp */,
+				DAFCE7831D7D78FF0016A137 /* Game.cpp */,
+				DAFCE7841D7D78FF0016A137 /* Game.hpp */,
+				DAFCE7851D7D78FF0016A137 /* Job.cpp */,
+				DAFCE7861D7D78FF0016A137 /* Job.hpp */,
+				DAFCE7871D7D78FF0016A137 /* JobAgari.cpp */,
+				DAFCE7881D7D78FF0016A137 /* JobAgari.hpp */,
+				DAFCE7891D7D78FF0016A137 /* JobGame.cpp */,
+				DAFCE78A1D7D78FF0016A137 /* JobGame.hpp */,
+				DAA597531DF0142B007BE749 /* JobHaipai.cpp */,
+				DAA597541DF0142B007BE749 /* JobHaipai.hpp */,
+				DAFCE78B1D7D78FF0016A137 /* JobKyoku.cpp */,
+				DAFCE78C1D7D78FF0016A137 /* JobKyoku.hpp */,
+				DAFCE78D1D7D78FF0016A137 /* JobNaki.cpp */,
+				DAFCE78E1D7D78FF0016A137 /* JobNaki.hpp */,
+				DAFCE78F1D7D78FF0016A137 /* JobReady.cpp */,
+				DAFCE7901D7D78FF0016A137 /* JobReady.hpp */,
+				DAFCE7911D7D78FF0016A137 /* JobRyukyoku.cpp */,
+				DAFCE7921D7D78FF0016A137 /* JobRyukyoku.hpp */,
+				DAC7FF171D9939E300559942 /* JobSutehai.cpp */,
+				DAC7FF181D9939E300559942 /* JobSutehai.hpp */,
+				DAFCE7931D7D78FF0016A137 /* JobTsumo.cpp */,
+				DAFCE7941D7D78FF0016A137 /* JobTsumo.hpp */,
+				DAFCE7971D7D78FF0016A137 /* Player.cpp */,
+				DAFCE7981D7D78FF0016A137 /* Player.hpp */,
+				DAFCE7991D7D78FF0016A137 /* Receiver.cpp */,
+				DAFCE79A1D7D78FF0016A137 /* Receiver.hpp */,
+				DA47AC3F1D8A645700533933 /* Server.cpp */,
+				DA47AC401D8A645700533933 /* Server.hpp */,
+				DA079B091DD47A4800112F03 /* Thread.cpp */,
+				DA079B0A1DD47A4800112F03 /* Thread.hpp */,
+			);
+			path = server;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DAFCE6C01D7D72A60016A137 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAFCE7AC1D7D78FF0016A137 /* AgariParser.hpp in Headers */,
+				DAFCE7D51D7D78FF0016A137 /* JobRyukyoku.hpp in Headers */,
+				DAFCE7B01D7D78FF0016A137 /* Hai.hpp in Headers */,
+				DAFCE7C91D7D78FF0016A137 /* Job.hpp in Headers */,
+				DAFCE7E51D7D78FF0016A137 /* Version.hpp in Headers */,
+				DA1BD8DA1DA50D2500334BB7 /* TcpSocket.hpp in Headers */,
+				DAFCE7B81D7D78FF0016A137 /* Mentsu.hpp in Headers */,
+				DAFCE7A61D7D78FF0016A137 /* Command.hpp in Headers */,
+				DAFCE7BE1D7D78FF0016A137 /* Yama.hpp in Headers */,
+				DAFCE7E31D7D78FF0016A137 /* ump.hpp in Headers */,
+				DAFCE7BC1D7D78FF0016A137 /* Sutehai.hpp in Headers */,
+				DAFCE7CD1D7D78FF0016A137 /* JobGame.hpp in Headers */,
+				DA15CB811DA656DA00843135 /* SslSocket.hpp in Headers */,
+				DAFCE7B21D7D78FF0016A137 /* HaiArray.hpp in Headers */,
+				DA8D01011D9BE99D00F1F5D2 /* Logger.hpp in Headers */,
+				DAFCE7B61D7D78FF0016A137 /* Kawa.hpp in Headers */,
+				DAFCE7B41D7D78FF0016A137 /* Hand.hpp in Headers */,
+				DAFCE7DB1D7D78FF0016A137 /* Player.hpp in Headers */,
+				262FB2DB1DB15072004FF73B /* Bot.hpp in Headers */,
+				DA1BD8D61DA50D2500334BB7 /* Socket.hpp in Headers */,
+				DA06667A1DAF9CD700F29305 /* Player.hpp in Headers */,
+				DAC7FF1A1D9939E300559942 /* JobSutehai.hpp in Headers */,
+				DAFCE7CF1D7D78FF0016A137 /* JobKyoku.hpp in Headers */,
+				DAFCE7D31D7D78FF0016A137 /* JobReady.hpp in Headers */,
+				DA81C6FC1DC0B861004470DA /* Config.hpp in Headers */,
+				DAFCE7A41D7D78FF0016A137 /* Client.hpp in Headers */,
+				DA079B0C1DD47A4800112F03 /* Thread.hpp in Headers */,
+				DAFCE7CB1D7D78FF0016A137 /* JobAgari.hpp in Headers */,
+				DA47AC421D8A645700533933 /* Server.hpp in Headers */,
+				DAFCE7C71D7D78FF0016A137 /* Game.hpp in Headers */,
+				DAFCE7AE1D7D78FF0016A137 /* Divider.hpp in Headers */,
+				DAFCE7BA1D7D78FF0016A137 /* Shanten.hpp in Headers */,
+				DA06667E1DAF9D3A00F29305 /* Game.hpp in Headers */,
+				DAFCE7DD1D7D78FF0016A137 /* Receiver.hpp in Headers */,
+				DAFCE7D71D7D78FF0016A137 /* JobTsumo.hpp in Headers */,
+				DAFCE7C51D7D78FF0016A137 /* Config.hpp in Headers */,
+				DAFCE7AA1D7D78FF0016A137 /* Agari.hpp in Headers */,
+				DAFCE7D11D7D78FF0016A137 /* JobNaki.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DAFCE6C11D7D72A60016A137 /* libump */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAFCE6CD1D7D72A60016A137 /* Build configuration list for PBXNativeTarget "libump" */;
+			buildPhases = (
+				DAFCE6BE1D7D72A60016A137 /* Sources */,
+				DAFCE6BF1D7D72A60016A137 /* Frameworks */,
+				DAFCE6C01D7D72A60016A137 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libump;
+			productName = libump;
+			productReference = DAFCE6C21D7D72A60016A137 /* libump.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DAFCE6BA1D7D72A60016A137 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "YASUI Kentarow";
+				TargetAttributes = {
+					DAFCE6C11D7D72A60016A137 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = DAFCE6BD1D7D72A60016A137 /* Build configuration list for PBXProject "libump" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DAFCE6B91D7D72A60016A137;
+			productRefGroup = DAFCE6C31D7D72A60016A137 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAFCE6C11D7D72A60016A137 /* libump */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DAFCE6BE1D7D72A60016A137 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAFCE7B31D7D78FF0016A137 /* Hand.cpp in Sources */,
+				DAFCE7B91D7D78FF0016A137 /* Shanten.cpp in Sources */,
+				DAFCE7E41D7D78FF0016A137 /* Version.cpp in Sources */,
+				262FB2DA1DB15072004FF73B /* Bot.cpp in Sources */,
+				DA2EE39C1D86A1A200041D93 /* Config.cpp in Sources */,
+				DA1BD8D51DA50D2500334BB7 /* Socket.cpp in Sources */,
+				DAFCE7AB1D7D78FF0016A137 /* AgariParser.cpp in Sources */,
+				DAFCE7AD1D7D78FF0016A137 /* Divider.cpp in Sources */,
+				DA1BD8D91DA50D2500334BB7 /* TcpSocket.cpp in Sources */,
+				DAFCE7A31D7D78FF0016A137 /* Client.cpp in Sources */,
+				DAA597551DF0142B007BE749 /* JobHaipai.cpp in Sources */,
+				DAFCE7DA1D7D78FF0016A137 /* Player.cpp in Sources */,
+				DAFCE7AF1D7D78FF0016A137 /* Hai.cpp in Sources */,
+				DAC7FF191D9939E300559942 /* JobSutehai.cpp in Sources */,
+				DAFCE7C61D7D78FF0016A137 /* Game.cpp in Sources */,
+				DAFCE7A91D7D78FF0016A137 /* Agari.cpp in Sources */,
+				DAFCE7BB1D7D78FF0016A137 /* Sutehai.cpp in Sources */,
+				DAFCE7CC1D7D78FF0016A137 /* JobGame.cpp in Sources */,
+				DAFCE7D21D7D78FF0016A137 /* JobReady.cpp in Sources */,
+				DAFCE7CA1D7D78FF0016A137 /* JobAgari.cpp in Sources */,
+				DAFCE7BD1D7D78FF0016A137 /* Yama.cpp in Sources */,
+				DA06667D1DAF9D3A00F29305 /* Game.cpp in Sources */,
+				DA0666791DAF9CD700F29305 /* Player.cpp in Sources */,
+				DA15CB801DA656DA00843135 /* SslSocket.cpp in Sources */,
+				DAFCE7B71D7D78FF0016A137 /* Mentsu.cpp in Sources */,
+				DAFCE7D01D7D78FF0016A137 /* JobNaki.cpp in Sources */,
+				DA079B0B1DD47A4800112F03 /* Thread.cpp in Sources */,
+				26560BB61DE8A5FB002753D7 /* Pattern.cpp in Sources */,
+				DAFCE7D61D7D78FF0016A137 /* JobTsumo.cpp in Sources */,
+				DA47AC411D8A645700533933 /* Server.cpp in Sources */,
+				DAFCE7B11D7D78FF0016A137 /* HaiArray.cpp in Sources */,
+				DAFCE7DC1D7D78FF0016A137 /* Receiver.cpp in Sources */,
+				DAFCE7CE1D7D78FF0016A137 /* JobKyoku.cpp in Sources */,
+				DA8D01001D9BE99D00F1F5D2 /* Logger.cpp in Sources */,
+				DAFCE7A51D7D78FF0016A137 /* Command.cpp in Sources */,
+				DAFCE7B51D7D78FF0016A137 /* Kawa.cpp in Sources */,
+				DA81C6FB1DC0B861004470DA /* Config.cpp in Sources */,
+				DAA09F151E02895C00DA374E /* BigNum.cpp in Sources */,
+				DAFCE7C81D7D78FF0016A137 /* Job.cpp in Sources */,
+				DAFCE7D41D7D78FF0016A137 /* JobRyukyoku.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DAFCE6CB1D7D72A60016A137 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../ump/header.hpp";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../external/mac/openssl/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../..";
+			};
+			name = Debug;
+		};
+		DAFCE6CC1D7D72A60016A137 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../ump/header.hpp";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../../external/mac/openssl/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../..";
+			};
+			name = Release;
+		};
+		DAFCE6CE1D7D72A60016A137 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DAFCE6CF1D7D72A60016A137 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DAFCE6BD1D7D72A60016A137 /* Build configuration list for PBXProject "libump" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAFCE6CB1D7D72A60016A137 /* Debug */,
+				DAFCE6CC1D7D72A60016A137 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAFCE6CD1D7D72A60016A137 /* Build configuration list for PBXNativeTarget "libump" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAFCE6CE1D7D72A60016A137 /* Debug */,
+				DAFCE6CF1D7D72A60016A137 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DAFCE6BA1D7D72A60016A137 /* Project object */;
+}

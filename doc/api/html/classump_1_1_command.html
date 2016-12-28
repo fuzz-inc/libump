@@ -1,0 +1,789 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.12"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>libump: ump::Command クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">libump
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.12 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classump_1_1_command.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">公開型</a> &#124;
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pub-static-methods">静的公開メンバ関数</a> &#124;
+<a href="classump_1_1_command-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">ump::Command クラス</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_command_8hpp_source.html">Command.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+公開型</h2></td></tr>
+<tr class="memitem:a935a6c19b9bc8a5d8f53997d95e4b596"><td class="memItemLeft" align="right" valign="top"><a id="a935a6c19b9bc8a5d8f53997d95e4b596"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> { <br />
+&#160;&#160;<b>TYPE_NULL</b>, 
+<br />
+&#160;&#160;<b>TYPE_HELLO</b>, 
+<br />
+&#160;&#160;<b>TYPE_ERROR</b>, 
+<br />
+&#160;&#160;<b>TYPE_GAMESTART</b>, 
+<br />
+&#160;&#160;<b>TYPE_GAMEEND</b>, 
+<br />
+&#160;&#160;<b>TYPE_KYOKUSTART</b>, 
+<br />
+&#160;&#160;<b>TYPE_KYOKUEND</b>, 
+<br />
+&#160;&#160;<b>TYPE_READY_Q</b>, 
+<br />
+&#160;&#160;<b>TYPE_POINT</b>, 
+<br />
+&#160;&#160;<b>TYPE_DICE</b>, 
+<br />
+&#160;&#160;<b>TYPE_HAIPAI</b>, 
+<br />
+&#160;&#160;<b>TYPE_OPEN</b>, 
+<br />
+&#160;&#160;<b>TYPE_DORA</b>, 
+<br />
+&#160;&#160;<b>TYPE_TSUMO</b>, 
+<br />
+&#160;&#160;<b>TYPE_SUTEHAI_Q</b>, 
+<br />
+&#160;&#160;<b>TYPE_SUTEHAI</b>, 
+<br />
+&#160;&#160;<b>TYPE_NAKI_Q</b>, 
+<br />
+&#160;&#160;<b>TYPE_SAY</b>, 
+<br />
+&#160;&#160;<b>TYPE_AGARI</b>, 
+<br />
+&#160;&#160;<b>TYPE_RYUKYOKU</b>, 
+<br />
+&#160;&#160;<b>TYPE_TENPAI_Q</b>, 
+<br />
+&#160;&#160;<b>TYPE_RICHI</b>, 
+<br />
+&#160;&#160;<b>TYPE_ANKAN</b>, 
+<br />
+&#160;&#160;<b>TYPE_KAKAN</b>, 
+<br />
+&#160;&#160;<b>TYPE_YES</b>, 
+<br />
+&#160;&#160;<b>TYPE_NO</b>, 
+<br />
+&#160;&#160;<b>TYPE_CHI</b>, 
+<br />
+&#160;&#160;<b>TYPE_PON</b>, 
+<br />
+&#160;&#160;<b>TYPE_KAN</b>, 
+<br />
+&#160;&#160;<b>TYPE_RON</b>, 
+<br />
+&#160;&#160;<b>TYPE_TENPAI</b>, 
+<br />
+&#160;&#160;<b>TYPE_NOTEN</b>, 
+<br />
+&#160;&#160;<b>TYPE_MAX</b>
+<br />
+ }</td></tr>
+<tr class="separator:a935a6c19b9bc8a5d8f53997d95e4b596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37a63c312a719b9b9ca9ddbf00355f0a"><td class="memItemLeft" align="right" valign="top"><a id="a37a63c312a719b9b9ca9ddbf00355f0a"></a>
+typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Args</b></td></tr>
+<tr class="separator:a37a63c312a719b9b9ca9ddbf00355f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a6f72a7f99952442465799e967daf840b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a6f72a7f99952442465799e967daf840b">Command</a> (Type command=TYPE_NULL, unsigned int serial=0)</td></tr>
+<tr class="memdesc:a6f72a7f99952442465799e967daf840b"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ  <a href="#a6f72a7f99952442465799e967daf840b">[詳解]</a><br /></td></tr>
+<tr class="separator:a6f72a7f99952442465799e967daf840b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0f6d760468d227570d524b71a09b53f"><td class="memItemLeft" align="right" valign="top"><a id="aa0f6d760468d227570d524b71a09b53f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Command</b> (const <a class="el" href="classump_1_1_command.html">Command</a> &amp;src)=default</td></tr>
+<tr class="separator:aa0f6d760468d227570d524b71a09b53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b56458a98c23702708aea7b153130b2"><td class="memItemLeft" align="right" valign="top"><a id="a0b56458a98c23702708aea7b153130b2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>UMP_ACCESSOR</b> (Type, type_)</td></tr>
+<tr class="separator:a0b56458a98c23702708aea7b153130b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab91eb9e2b5f93c6dfa8f77dbb4d8d6d2"><td class="memItemLeft" align="right" valign="top"><a id="ab91eb9e2b5f93c6dfa8f77dbb4d8d6d2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>UMP_ACCESSOR</b> (Serial, serial_)</td></tr>
+<tr class="separator:ab91eb9e2b5f93c6dfa8f77dbb4d8d6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f8689ad2d8385aa8f6e6de7e719a1a1"><td class="memItemLeft" align="right" valign="top"><a id="a9f8689ad2d8385aa8f6e6de7e719a1a1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a9f8689ad2d8385aa8f6e6de7e719a1a1">clear</a> ()</td></tr>
+<tr class="memdesc:a9f8689ad2d8385aa8f6e6de7e719a1a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">クリア <br /></td></tr>
+<tr class="separator:a9f8689ad2d8385aa8f6e6de7e719a1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa354ce9e0e36bcd2949de7621390f0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#aaa354ce9e0e36bcd2949de7621390f0f">isExist</a> () const</td></tr>
+<tr class="memdesc:aaa354ce9e0e36bcd2949de7621390f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">コマンドが存在するか調べる  <a href="#aaa354ce9e0e36bcd2949de7621390f0f">[詳解]</a><br /></td></tr>
+<tr class="separator:aaa354ce9e0e36bcd2949de7621390f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ea57f614101393387d780a5b285ee3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a77ea57f614101393387d780a5b285ee3">countArg</a> () const</td></tr>
+<tr class="memdesc:a77ea57f614101393387d780a5b285ee3"><td class="mdescLeft">&#160;</td><td class="mdescRight">引数の数を数える  <a href="#a77ea57f614101393387d780a5b285ee3">[詳解]</a><br /></td></tr>
+<tr class="separator:a77ea57f614101393387d780a5b285ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58471a17d763a4590404d359aaccf30a"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a58471a17d763a4590404d359aaccf30a">getArg</a> (size_t index) const</td></tr>
+<tr class="memdesc:a58471a17d763a4590404d359aaccf30a"><td class="mdescLeft">&#160;</td><td class="mdescRight">引数を参照する  <a href="#a58471a17d763a4590404d359aaccf30a">[詳解]</a><br /></td></tr>
+<tr class="separator:a58471a17d763a4590404d359aaccf30a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5bdcf36d29502bf7d0422281b2facb3"><td class="memItemLeft" align="right" valign="top">const Args &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#ad5bdcf36d29502bf7d0422281b2facb3">getArgs</a> () const</td></tr>
+<tr class="memdesc:ad5bdcf36d29502bf7d0422281b2facb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">引数の配列を取得する  <a href="#ad5bdcf36d29502bf7d0422281b2facb3">[詳解]</a><br /></td></tr>
+<tr class="separator:ad5bdcf36d29502bf7d0422281b2facb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22631774ce0a088bafffe1fdaede9d44"><td class="memItemLeft" align="right" valign="top"><a id="a22631774ce0a088bafffe1fdaede9d44"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasArg</b> (const std::string &amp;value) const</td></tr>
+<tr class="separator:a22631774ce0a088bafffe1fdaede9d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26a8d8e1745414613953444d7a68b0db"><td class="memItemLeft" align="right" valign="top"><a id="a26a8d8e1745414613953444d7a68b0db"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasArg</b> (Type type) const</td></tr>
+<tr class="separator:a26a8d8e1745414613953444d7a68b0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a569b81026037f3e241a3b3fa99759a8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classump_1_1_command.html">Command</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a569b81026037f3e241a3b3fa99759a8d">append</a> (const char *value)</td></tr>
+<tr class="memdesc:a569b81026037f3e241a3b3fa99759a8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">引数を追加する  <a href="#a569b81026037f3e241a3b3fa99759a8d">[詳解]</a><br /></td></tr>
+<tr class="separator:a569b81026037f3e241a3b3fa99759a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c1ee96b1eb5fc2c1b68603f70ef6e95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classump_1_1_command.html">Command</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a7c1ee96b1eb5fc2c1b68603f70ef6e95">append</a> (const std::string &amp;value)</td></tr>
+<tr class="memdesc:a7c1ee96b1eb5fc2c1b68603f70ef6e95"><td class="mdescLeft">&#160;</td><td class="mdescRight">引数を追加する  <a href="#a7c1ee96b1eb5fc2c1b68603f70ef6e95">[詳解]</a><br /></td></tr>
+<tr class="separator:a7c1ee96b1eb5fc2c1b68603f70ef6e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e2aff2ae8f8dcd8055f54656bb2aa5b"><td class="memTemplParams" colspan="2"><a id="a8e2aff2ae8f8dcd8055f54656bb2aa5b"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:a8e2aff2ae8f8dcd8055f54656bb2aa5b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classump_1_1_command.html">Command</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>append</b> (const T &amp;value)</td></tr>
+<tr class="separator:a8e2aff2ae8f8dcd8055f54656bb2aa5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d71f2c468943d56eafda736707ffde2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classump_1_1_command.html">Command</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a6d71f2c468943d56eafda736707ffde2">setOption</a> (const std::string &amp;name, const std::string &amp;value)</td></tr>
+<tr class="memdesc:a6d71f2c468943d56eafda736707ffde2"><td class="mdescLeft">&#160;</td><td class="mdescRight">オプションをセットする  <a href="#a6d71f2c468943d56eafda736707ffde2">[詳解]</a><br /></td></tr>
+<tr class="separator:a6d71f2c468943d56eafda736707ffde2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c5933377492c69c270c720186a2c9ed"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a9c5933377492c69c270c720186a2c9ed">getOption</a> (const std::string &amp;name) const</td></tr>
+<tr class="memdesc:a9c5933377492c69c270c720186a2c9ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">オプションの値を取得する  <a href="#a9c5933377492c69c270c720186a2c9ed">[詳解]</a><br /></td></tr>
+<tr class="separator:a9c5933377492c69c270c720186a2c9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92ad9f3b6fe8cd2922ed5ed7b81a3e17"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a92ad9f3b6fe8cd2922ed5ed7b81a3e17">hasOption</a> (const std::string &amp;name) const</td></tr>
+<tr class="memdesc:a92ad9f3b6fe8cd2922ed5ed7b81a3e17"><td class="mdescLeft">&#160;</td><td class="mdescRight">オプションが存在するか調べる  <a href="#a92ad9f3b6fe8cd2922ed5ed7b81a3e17">[詳解]</a><br /></td></tr>
+<tr class="separator:a92ad9f3b6fe8cd2922ed5ed7b81a3e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc1eff607cb129c0cfe57387d17823c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a1fc1eff607cb129c0cfe57387d17823c">parse</a> (const char *command)</td></tr>
+<tr class="memdesc:a1fc1eff607cb129c0cfe57387d17823c"><td class="mdescLeft">&#160;</td><td class="mdescRight">文字列を解析する  <a href="#a1fc1eff607cb129c0cfe57387d17823c">[詳解]</a><br /></td></tr>
+<tr class="separator:a1fc1eff607cb129c0cfe57387d17823c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a326716e01b55b8b5b1fac062139c1576"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a326716e01b55b8b5b1fac062139c1576">toString</a> (bool isEncode) const</td></tr>
+<tr class="memdesc:a326716e01b55b8b5b1fac062139c1576"><td class="mdescLeft">&#160;</td><td class="mdescRight">文字列に変換する  <a href="#a326716e01b55b8b5b1fac062139c1576">[詳解]</a><br /></td></tr>
+<tr class="separator:a326716e01b55b8b5b1fac062139c1576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+静的公開メンバ関数</h2></td></tr>
+<tr class="memitem:ab703c6517acf30ba63bc97c6f7e7757a"><td class="memItemLeft" align="right" valign="top">static Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#ab703c6517acf30ba63bc97c6f7e7757a">GetType</a> (const std::string &amp;string)</td></tr>
+<tr class="memdesc:ab703c6517acf30ba63bc97c6f7e7757a"><td class="mdescLeft">&#160;</td><td class="mdescRight">文字列をタイプに変換する  <a href="#ab703c6517acf30ba63bc97c6f7e7757a">[詳解]</a><br /></td></tr>
+<tr class="separator:ab703c6517acf30ba63bc97c6f7e7757a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4528c085c2ee613f0d462541edc7e917"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a4528c085c2ee613f0d462541edc7e917">SeatToString</a> (size_t seat)</td></tr>
+<tr class="memdesc:a4528c085c2ee613f0d462541edc7e917"><td class="mdescLeft">&#160;</td><td class="mdescRight">席を文字列に変換する  <a href="#a4528c085c2ee613f0d462541edc7e917">[詳解]</a><br /></td></tr>
+<tr class="separator:a4528c085c2ee613f0d462541edc7e917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb95144e9d2af370b8cde6eee085833f"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#adb95144e9d2af370b8cde6eee085833f">StringToSeat</a> (const char *string)</td></tr>
+<tr class="memdesc:adb95144e9d2af370b8cde6eee085833f"><td class="mdescLeft">&#160;</td><td class="mdescRight">文字列を席に変換する  <a href="#adb95144e9d2af370b8cde6eee085833f">[詳解]</a><br /></td></tr>
+<tr class="separator:adb95144e9d2af370b8cde6eee085833f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a574212f8aa57bbadee7ffe59132ac4e7"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a574212f8aa57bbadee7ffe59132ac4e7">Encode</a> (const char *src)</td></tr>
+<tr class="memdesc:a574212f8aa57bbadee7ffe59132ac4e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">ASCII以外の文字をエンコードする  <a href="#a574212f8aa57bbadee7ffe59132ac4e7">[詳解]</a><br /></td></tr>
+<tr class="separator:a574212f8aa57bbadee7ffe59132ac4e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1839384f3384581f76fc4ba49df8dc1e"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classump_1_1_command.html#a1839384f3384581f76fc4ba49df8dc1e">Decode</a> (const char *src, size_t len=0)</td></tr>
+<tr class="memdesc:a1839384f3384581f76fc4ba49df8dc1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">エンコードされた文字列をデコードする  <a href="#a1839384f3384581f76fc4ba49df8dc1e">[詳解]</a><br /></td></tr>
+<tr class="separator:a1839384f3384581f76fc4ba49df8dc1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa288c98a26bd139f1bcdb15fd637476b"><td class="memTemplParams" colspan="2"><a id="aa288c98a26bd139f1bcdb15fd637476b"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:aa288c98a26bd139f1bcdb15fd637476b"><td class="memTemplItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><b>ToString</b> (const T &amp;value)</td></tr>
+<tr class="separator:aa288c98a26bd139f1bcdb15fd637476b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a153ae041d9699db48660bd41230fd7f8"><td class="memItemLeft" align="right" valign="top"><a id="a153ae041d9699db48660bd41230fd7f8"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>ToString</b> (Type type)</td></tr>
+<tr class="separator:a153ae041d9699db48660bd41230fd7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36e0cc3450c4c3c7b6f0beeddbcc01b8"><td class="memTemplParams" colspan="2"><a id="a36e0cc3450c4c3c7b6f0beeddbcc01b8"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:a36e0cc3450c4c3c7b6f0beeddbcc01b8"><td class="memTemplItemLeft" align="right" valign="top">static T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>FromString</b> (const std::string &amp;value)</td></tr>
+<tr class="separator:a36e0cc3450c4c3c7b6f0beeddbcc01b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>コマンド </p>
+</div><h2 class="groupheader">構築子と解体子</h2>
+<a id="a6f72a7f99952442465799e967daf840b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f72a7f99952442465799e967daf840b">&sect;&nbsp;</a></span>Command()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ump::Command::Command </td>
+          <td>(</td>
+          <td class="paramtype">Type&#160;</td>
+          <td class="paramname"><em>type</em> = <code>TYPE_NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>serial</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コンストラクタ </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>種別 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">serial</td><td>シリアル番号 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a569b81026037f3e241a3b3fa99759a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a569b81026037f3e241a3b3fa99759a8d">&sect;&nbsp;</a></span>append() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classump_1_1_command.html">Command</a> &amp; ump::Command::append </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>引数を追加する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>追加する引数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>自分自身 </dd></dl>
+
+</div>
+</div>
+<a id="a7c1ee96b1eb5fc2c1b68603f70ef6e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c1ee96b1eb5fc2c1b68603f70ef6e95">&sect;&nbsp;</a></span>append() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classump_1_1_command.html">Command</a> &amp; ump::Command::append </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>引数を追加する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>追加する引数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>自分自身 </dd></dl>
+
+</div>
+</div>
+<a id="a77ea57f614101393387d780a5b285ee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77ea57f614101393387d780a5b285ee3">&sect;&nbsp;</a></span>countArg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ump::Command::countArg </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>引数の数を数える </p>
+<dl class="section return"><dt>戻り値</dt><dd>引数の数 </dd></dl>
+
+</div>
+</div>
+<a id="a1839384f3384581f76fc4ba49df8dc1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1839384f3384581f76fc4ba49df8dc1e">&sect;&nbsp;</a></span>Decode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ump::Command::Decode </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>エンコードされた文字列をデコードする </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">src</td><td>文字列のポインタ </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>文字列の長さ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>デコードされた文字列 </dd></dl>
+
+</div>
+</div>
+<a id="a574212f8aa57bbadee7ffe59132ac4e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a574212f8aa57bbadee7ffe59132ac4e7">&sect;&nbsp;</a></span>Encode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ump::Command::Encode </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ASCII以外の文字をエンコードする </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">src</td><td>入力文字列 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>エンコードされた文字列 </dd></dl>
+
+</div>
+</div>
+<a id="a58471a17d763a4590404d359aaccf30a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58471a17d763a4590404d359aaccf30a">&sect;&nbsp;</a></span>getArg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ump::Command::getArg </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>引数を参照する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>インデックス </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>引数(範囲外のときは空文字列) </dd></dl>
+
+</div>
+</div>
+<a id="ad5bdcf36d29502bf7d0422281b2facb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5bdcf36d29502bf7d0422281b2facb3">&sect;&nbsp;</a></span>getArgs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Command::Args &amp; ump::Command::getArgs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>引数の配列を取得する </p>
+<dl class="section return"><dt>戻り値</dt><dd>引数の配列 </dd></dl>
+
+</div>
+</div>
+<a id="a9c5933377492c69c270c720186a2c9ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c5933377492c69c270c720186a2c9ed">&sect;&nbsp;</a></span>getOption()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ump::Command::getOption </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>オプションの値を取得する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>オプション名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>オプションの値 </dd></dl>
+
+</div>
+</div>
+<a id="ab703c6517acf30ba63bc97c6f7e7757a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab703c6517acf30ba63bc97c6f7e7757a">&sect;&nbsp;</a></span>GetType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Command::Type ump::Command::GetType </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>文字列をタイプに変換する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">string</td><td>文字列 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>タイプ </dd></dl>
+
+</div>
+</div>
+<a id="a92ad9f3b6fe8cd2922ed5ed7b81a3e17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92ad9f3b6fe8cd2922ed5ed7b81a3e17">&sect;&nbsp;</a></span>hasOption()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ump::Command::hasOption </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>オプションが存在するか調べる </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>オプション名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>存在するとき真 </dd></dl>
+
+</div>
+</div>
+<a id="aaa354ce9e0e36bcd2949de7621390f0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa354ce9e0e36bcd2949de7621390f0f">&sect;&nbsp;</a></span>isExist()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ump::Command::isExist </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コマンドが存在するか調べる </p>
+<dl class="section return"><dt>戻り値</dt><dd>コマンドが存在するとき真 </dd></dl>
+
+</div>
+</div>
+<a id="a1fc1eff607cb129c0cfe57387d17823c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc1eff607cb129c0cfe57387d17823c">&sect;&nbsp;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ump::Command::parse </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>command</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>文字列を解析する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">command</td><td>コマンド文字列 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4528c085c2ee613f0d462541edc7e917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4528c085c2ee613f0d462541edc7e917">&sect;&nbsp;</a></span>SeatToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ump::Command::SeatToString </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>seat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>席を文字列に変換する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">seat</td><td>席 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>席を表す文字列 </dd></dl>
+
+</div>
+</div>
+<a id="a6d71f2c468943d56eafda736707ffde2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d71f2c468943d56eafda736707ffde2">&sect;&nbsp;</a></span>setOption()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classump_1_1_command.html">Command</a> &amp; ump::Command::setOption </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>オプションをセットする </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>オプション名 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>値 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>自分自身 </dd></dl>
+
+</div>
+</div>
+<a id="adb95144e9d2af370b8cde6eee085833f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb95144e9d2af370b8cde6eee085833f">&sect;&nbsp;</a></span>StringToSeat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ump::Command::StringToSeat </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>文字列を席に変換する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">string</td><td>文字列 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>席。文字列が不正なときはsize_tの最大値 </dd></dl>
+
+</div>
+</div>
+<a id="a326716e01b55b8b5b1fac062139c1576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a326716e01b55b8b5b1fac062139c1576">&sect;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ump::Command::toString </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isEncode</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>文字列に変換する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">isEncode</td><td>エンコードするとき真 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>コマンドを表す文字列 </dd></dl>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>/Users/yasui/fuzz/wxump/libump/ump/<a class="el" href="_command_8hpp_source.html">Command.hpp</a></li>
+<li>/Users/yasui/fuzz/wxump/libump/ump/<a class="el" href="_command_8cpp.html">Command.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>ump</b></li><li class="navelem"><a class="el" href="classump_1_1_command.html">Command</a></li>
+    <li class="footer">構築:
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.12 </li>
+  </ul>
+</div>
+</body>
+</html>

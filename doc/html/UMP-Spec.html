@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="default.css" type="text/css" />
+</head>
+<body>
+<h1 id="ump仕様">UMP仕様</h1>
+<ul>
+<li>TCPを介した通信</li>
+<li>使用コードはASCIIのみ。大文字小文字は区別する。コマンドは小文字</li>
+<li>プレイヤーの名前など、ASCIIで入らない場合はUTF-8をURIエンコードしたものを使う</li>
+<li>やりとりは、基本的にサーバからクライアントへ送り、一部コマンド(hello/sutehai?/naku?/tenpai?)はクライアントから返答を返す</li>
+<li>クライアントから任意のタイミングでサーバにコマンドは送らない</li>
+</ul>
+<h2 id="牌の表記">牌の表記</h2>
+<ul>
+<li>数字1文字+アルファベット1文字で一つの牌を表す。</li>
+<li>アルファベットはm(マンズ)、p(ピンズ)、s(ソウズ)、z(字牌)</li>
+<li>字牌は東南西北白発中の順に1z〜7z</li>
+<li>アルファベット大文字はドラ(赤牌)</li>
+<li>伏せ牌はxx(他家の配牌やツモ)</li>
+</ul>
+<h2 id="手牌の表記">手牌の表記</h2>
+<ul>
+<li>基本的には理牌(ソート)して表記。順番はm&lt;p&lt;s&lt;z、1&lt;9</li>
+<li>面前部分は普通に牌を並べ、晒した牌は&lt;&gt;で囲む。暗カンは()
+<ul>
+<li>加槓のopenは刻子を[]で囲む</li>
+</ul></li>
+<li>スベースは空けない</li>
+<li>例
+<ul>
+<li>4m4m6m7m5p6p7p2s3s4s5s6s7s</li>
+<li>2m2m5z5z5z7z7z&lt;2p3p4p&gt;&lt;6z6z6z&gt;</li>
+</ul></li>
+</ul>
+<h2 id="プレイヤー席の表記">プレイヤー(席)の表記</h2>
+<ul>
+<li>起家から順に、A0、B0、C0...Z0、A1、B1...と表記する</li>
+</ul>
+<h2 id="ラウンド">ラウンド</h2>
+<ul>
+<li>親が1巡するまでを1ラウンドと呼ぶ</li>
+<li>ラウンドは0から始まる</li>
+<li>東風線はラウンド0のみ、東南戦はラウンド0、ラウンド1の2ラウンド</li>
+</ul>
+<h2 id="コマンド形式">コマンド形式</h2>
+<ul>
+<li><シリアル番号> <コマンド> [<引数> ...] [<オプション> ...] <CR+LF></li>
+<li>サーバから送られたコマンドに返答するときには、同じシリアル番号を送る</li>
+<li>セパレータは空白1文字</li>
+<li>オプションは<名前>=<値>の形式</li>
+</ul>
+<h2 id="コマンド一覧">コマンド一覧</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">サーバ</th>
+<th align="left">クライアント</th>
+<th align="left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">hello [<オプション> ...]</td>
+<td align="left">hello [<オプション> ...]</td>
+<td align="left">接続確認。オプションについては後述</td>
+</tr>
+<tr class="even">
+<td align="left">error <メッセージ></td>
+<td align="left"></td>
+<td align="left">エラーメッセージを送る(認証失敗等)</td>
+</tr>
+<tr class="odd">
+<td align="left">gamestart <席> <名前1> <名前2> ... [id=<ゲームID>]</td>
+<td align="left"></td>
+<td align="left">ゲーム(半荘)開始</td>
+</tr>
+<tr class="even">
+<td align="left">gameend <プレイヤー> <点数> ...</td>
+<td align="left"></td>
+<td align="left">ゲーム終了。着順にプレイヤーと点数を送る</td>
+</tr>
+<tr class="odd">
+<td align="left">kyokustart <ラウンド> <親> <本場> <供託> <場風> <席風>...</td>
+<td align="left"></td>
+<td align="left">一局が始まるときに送る。席風は起家から順にプレイヤー分続く</td>
+</tr>
+<tr class="even">
+<td align="left">kyokuend</td>
+<td align="left"></td>
+<td align="left">一局終了</td>
+</tr>
+<tr class="odd">
+<td align="left">ready?</td>
+<td align="left">yes</td>
+<td align="left">クライアントの返答を待つ</td>
+</tr>
+<tr class="even">
+<td align="left">point <プレイヤー> (=|+|-)<点数></td>
+<td align="left"></td>
+<td align="left">プレイヤーの点数を通知する。点数の前には必ず=|+|-が付き、=は点数の直指定、+-は増減を意味する</td>
+</tr>
+<tr class="odd">
+<td align="left">dice <サイコロの目1> <サイコロの目2></td>
+<td align="left"></td>
+<td align="left">サイコロの出目を送る</td>
+</tr>
+<tr class="even">
+<td align="left">haipai <プレイヤー> <配牌></td>
+<td align="left"></td>
+<td align="left">配牌を配る</td>
+</tr>
+<tr class="odd">
+<td align="left">open <プレイヤー> <晒した牌> [<鳴いた牌>]</td>
+<td align="left"></td>
+<td align="left">手牌を公開する(和了、流局時のテンパイ宣言、チー、ポン、カン)</td>
+</tr>
+<tr class="even">
+<td align="left">dora <牌></td>
+<td align="left"></td>
+<td align="left">ドラ表示牌を送る</td>
+</tr>
+<tr class="odd">
+<td align="left">tsumo <プレイヤー> <残り枚数> <牌></td>
+<td align="left"></td>
+<td align="left">牌をツモ</td>
+</tr>
+<tr class="even">
+<td align="left">sutehai? [richi <リーチ可能な牌>] [tsumo] [ankan] [kakan]</td>
+<td align="left"></td>
+<td align="left">捨牌を尋ねる。クライアントが可能なコマンドも送る</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">sutehai <牌> [tsumogiri] [richi]</td>
+<td align="left">捨てる。ツモ切り、リーチは引数で指定する</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">tsumo</td>
+<td align="left">ツモあがり</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">ankan <牌列></td>
+<td align="left">暗カン</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">kakan <牌></td>
+<td align="left">加カン</td>
+</tr>
+<tr class="odd">
+<td align="left">sutehai <プレイヤー> <牌> [tsumogiri] [richi]</td>
+<td align="left"></td>
+<td align="left">捨牌。ツモ切り、リーチは引数で指定される</td>
+</tr>
+<tr class="even">
+<td align="left">naki? <牌> [ron] [kan] [pon] [chi]</td>
+<td align="left"></td>
+<td align="left">牌を鳴くか尋ねる。クライアントが可能なコマンドも送る</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">no</td>
+<td align="left">鳴かない</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">ron</td>
+<td align="left">ロン</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">pon <牌列></td>
+<td align="left">ポン</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">chi <牌列></td>
+<td align="left">チー</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">kan <牌列></td>
+<td align="left">明カン</td>
+</tr>
+<tr class="even">
+<td align="left">say <プレイヤー> chi | pon | kan | ron | tsumo | richi | tenpai | noten |</td>
+<td align="left"></td>
+<td align="left">発声</td>
+</tr>
+<tr class="odd">
+<td align="left">agari <プレイヤー> <点数名> <符> <役1> <ハン数1> ...</td>
+<td align="left"></td>
+<td align="left">あがり。点数名は「3900」「満貫」などの文字列</td>
+</tr>
+<tr class="even">
+<td align="left">ryukyoku</td>
+<td align="left"></td>
+<td align="left">流局</td>
+</tr>
+<tr class="odd">
+<td align="left">tenpai?</td>
+<td align="left"></td>
+<td align="left">テンパイを宣言するか尋ねる</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">yes</td>
+<td align="left">宣言する</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">no(yes以外)</td>
+<td align="left">宣言しない</td>
+</tr>
+</tbody>
+</table>
+<h3 id="helloコマンドのオプション">helloコマンドのオプション</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">重要度</th>
+<th align="left">オプション名</th>
+<th align="left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">◎</td>
+<td align="left">ump=<バージョン></td>
+<td align="left">バージョン</td>
+</tr>
+<tr class="even">
+<td align="center">○</td>
+<td align="left">name=<名前></td>
+<td align="left">表示する名前</td>
+</tr>
+<tr class="odd">
+<td align="center">△</td>
+<td align="left">user=<ユーザ名></td>
+<td align="left">認証用ユーザ名</td>
+</tr>
+<tr class="even">
+<td align="center">△</td>
+<td align="left">password=<パスワード></td>
+<td align="left">認証用パスワード</td>
+</tr>
+<tr class="odd">
+<td align="center">△</td>
+<td align="left">lang=<言語></td>
+<td align="left">言語(ja|en|...)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>◎=必須、○=推奨、△=オプショナル</li>
+<li>オプション名が'_'(アンダーバー)で始まるものは、各サーバ/クライアントの実装で自由に使って良い。ただし、指定されなかった場合でもできるだけ動作するようにすること</li>
+</ul>
+<h2 id="補足">補足</h2>
+<ul>
+<li>不正なコマンドを返したとき(持っていないのにponとか)の挙動は、サーバの実装次第(無視、あるいは再度尋ねる等)</li>
+<li>なので、状況についてはサーバから送られてきたものが絶対。クライアントがponやronを送っても、サーバが認めない限り無効</li>
+</ul>
+<h2 id="課題">課題</h2>
+<ul>
+<li>途中流局</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,12 @@
+h1, h2 {
+    color: #ffffff;
+    background-color: #6d56a8;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #c0c0c0;
+}
