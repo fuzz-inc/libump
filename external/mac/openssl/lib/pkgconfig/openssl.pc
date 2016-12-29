@@ -1,9 +1,9 @@
-prefix=/Users/yasui/fuzz/wxump/libump/external/mac/openssl
+prefix=/Users/kentarow/fuzz/wxump/libump/external/mac/openssl
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
 Name: OpenSSL
 Description: Secure Sockets Layer and cryptography libraries and tools
-Version: 1.1.0d-dev
+Version: 1.0.2k-dev
 Requires: libssl libcrypto

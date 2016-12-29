@@ -1,12 +1,13 @@
-prefix=/Users/yasui/fuzz/wxump/libump/external/mac/openssl
+prefix=/Users/kentarow/fuzz/wxump/libump/external/mac/openssl
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
-enginesdir=${libdir}/engines-1.1
+enginesdir=${libdir}/engines
 
 Name: OpenSSL-libcrypto
 Description: OpenSSL cryptography library
-Version: 1.1.0d-dev
+Version: 1.0.2k-dev
+Requires: 
 Libs: -L${libdir} -lcrypto
 Libs.private: 
-Cflags: -I${includedir}
+Cflags: -I${includedir} 
