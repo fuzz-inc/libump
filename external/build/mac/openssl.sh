@@ -10,7 +10,7 @@ DSTDIR=`fullpath $CURDIR/../../mac/openssl`
 
 rm -rf $DSTDIR
 cd $SRCDIR
-./config --prefix=$DSTDIR
+./Configure --prefix=$DSTDIR darwin64-x86_64-cc
 make clean
 make MACOSX_DEPLOYMENT_TARGET=10.10
 make install_sw
