@@ -23,6 +23,7 @@ var classump_1_1_command =
       [ "TYPE_AGARI", "classump_1_1_command.html#a935a6c19b9bc8a5d8f53997d95e4b596a230960dfe68c44f91f25648bf2298480", null ],
       [ "TYPE_RYUKYOKU", "classump_1_1_command.html#a935a6c19b9bc8a5d8f53997d95e4b596a2fa98b2235745da76763946a96d5ee34", null ],
       [ "TYPE_TENPAI_Q", "classump_1_1_command.html#a935a6c19b9bc8a5d8f53997d95e4b596aa8cf3f539462bed93f9e1958bef90317", null ],
+      [ "TYPE_TSUMOGIRI", "classump_1_1_command.html#a935a6c19b9bc8a5d8f53997d95e4b596a107f7115e244b954338a12ff30dfb792", null ],
       [ "TYPE_RICHI", "classump_1_1_command.html#a935a6c19b9bc8a5d8f53997d95e4b596a537e868398f2eec517bad31516959025", null ],
       [ "TYPE_ANKAN", "classump_1_1_command.html#a935a6c19b9bc8a5d8f53997d95e4b596a64b7c3a2cc92076fdeff273c63b1191e", null ],
       [ "TYPE_KAKAN", "classump_1_1_command.html#a935a6c19b9bc8a5d8f53997d95e4b596a957594d4b08cdd5ef89f44ead71f58eb", null ],

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['accept',['accept',['../classump_1_1socket_1_1_socket.html#a9f1c0310ea734072b1c533e52fda4b91',1,'ump::socket::Socket']]],
+  ['addkyotaku',['addKyotaku',['../classump_1_1mj_1_1_game.html#aac2d6d83a1b0aa693a6933624c132cc0',1,'ump::mj::Game']]],
   ['addpoint',['addPoint',['../classump_1_1mj_1_1_player.html#a69b6b774f51682fe2bf95e43ac71a3dc',1,'ump::mj::Player::addPoint()'],['../classump_1_1server_1_1_job.html#a40d8d22f5ce63d1e167cc5ae2efb6e29',1,'ump::server::Job::addPoint()']]],
   ['agari',['Agari',['../classump_1_1mj_1_1_agari.html#a77ce674c183c5db1510290002de21c77',1,'ump::mj::Agari::Agari()'],['../classump_1_1mj_1_1_player.html#ab23601e2bfd5000f5ba68c6f264f2e32',1,'ump::mj::Player::agari()']]],
   ['agariparser',['AgariParser',['../classump_1_1mj_1_1_agari_parser.html#aea06b732edd3d4364dce4a2aa1c3b5b3',1,'ump::mj::AgariParser']]],

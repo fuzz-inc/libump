@@ -23,7 +23,7 @@ var classump_1_1mj_1_1_hand =
     [ "openMentsu", "classump_1_1mj_1_1_hand.html#ac85d77034497fc10b7df6bf0713c3197", null ],
     [ "reset", "classump_1_1mj_1_1_hand.html#a7c1c9f53ab73df88197c6a93e5456ba1", null ],
     [ "sort", "classump_1_1mj_1_1_hand.html#aeb51c5eed7b1d854fdeb1b5bb9b3bb79", null ],
-    [ "sutehai", "classump_1_1mj_1_1_hand.html#ab2d9b9409f9236a8e1b1294c276df938", null ],
+    [ "sutehai", "classump_1_1mj_1_1_hand.html#a3ed2d82894f74c912cc54386399e6aa6", null ],
     [ "toString", "classump_1_1mj_1_1_hand.html#a4cfe269f71073c8e1a998e4519a9cb4e", null ],
     [ "UMP_GETTER", "classump_1_1mj_1_1_hand.html#ae465295e4ccd43b09313d5ea60a29c6e", null ],
     [ "UMP_GETTER", "classump_1_1mj_1_1_hand.html#ac8cd8aea3e8a2d5c0744217b8611fd36", null ],

@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['game',['Game',['../classump_1_1mj_1_1_game.html',1,'ump::mj']]],
-  ['game',['Game',['../classump_1_1server_1_1_game.html',1,'ump::server']]],
-  ['game',['Game',['../classump_1_1mj_1_1_game.html#ac43d78b09d752a9842e16bab0422a3ff',1,'ump::mj::Game::Game()'],['../classump_1_1server_1_1_game.html#aac4b9db5e202464617f7b3020fe14ace',1,'ump::server::Game::Game()']]],
-  ['game_2ecpp',['Game.cpp',['../server_2_game_8cpp.html',1,'']]],
-  ['game_2ecpp',['Game.cpp',['../mj_2_game_8cpp.html',1,'']]],
-  ['game_2ehpp',['Game.hpp',['../mj_2_game_8hpp.html',1,'']]],
-  ['game_2ehpp',['Game.hpp',['../server_2_game_8hpp.html',1,'']]],
+  ['game',['Game',['../classump_1_1mj_1_1_game.html',1,'ump::mj::Game'],['../classump_1_1server_1_1_game.html',1,'ump::server::Game'],['../classump_1_1mj_1_1_game.html#ac43d78b09d752a9842e16bab0422a3ff',1,'ump::mj::Game::Game()'],['../classump_1_1server_1_1_game.html#aac4b9db5e202464617f7b3020fe14ace',1,'ump::server::Game::Game()']]],
+  ['game_2ecpp',['Game.cpp',['../mj_2_game_8cpp.html',1,'(大域名前空間)'],['../server_2_game_8cpp.html',1,'(大域名前空間)']]],
+  ['game_2ehpp',['Game.hpp',['../mj_2_game_8hpp.html',1,'(大域名前空間)'],['../server_2_game_8hpp.html',1,'(大域名前空間)']]],
   ['get',['Get',['../classump_1_1mj_1_1_hai.html#a4c889c5dd58c0d212ae9e147d07a999b',1,'ump::mj::Hai::Get(const char *str)'],['../classump_1_1mj_1_1_hai.html#ad2025213be4b67d1486616d319c5eb4f',1,'ump::mj::Hai::Get(const std::string &amp;str)'],['../classump_1_1mj_1_1_hai.html#a791c3662683dfe5ffacc81a3638aaa07',1,'ump::mj::Hai::Get(int color, int number, bool isDora=false)'],['../classump_1_1_version.html#a38da74027f4247446c52491e75c08c5d',1,'ump::Version::Get()']]],
   ['getagari',['getAgari',['../classump_1_1mj_1_1_player.html#a3a32f0a83bcc40b0d5d0beada07138ea',1,'ump::mj::Player']]],
   ['getarg',['getArg',['../classump_1_1_command.html#a58471a17d763a4590404d359aaccf30a',1,'ump::Command']]],

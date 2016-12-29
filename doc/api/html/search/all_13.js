@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['ump',['ump',['../namespaceump.html',1,'']]],
   ['ump_2ehpp',['ump.hpp',['../ump_8hpp.html',1,'']]],
   ['ump_5fbit_5faccessor',['UMP_BIT_ACCESSOR',['../classump_1_1server_1_1_config.html#aa930eeb030cfbd26fefe006b1b9cbd82',1,'ump::server::Config::UMP_BIT_ACCESSOR(Open, flag_, FLAG_OPEN)'],['../classump_1_1server_1_1_config.html#ac6cc3529b94e82356110b5edcc568e16',1,'ump::server::Config::UMP_BIT_ACCESSOR(Hakoshita, flag_, FLAG_HAKOSHITA)']]],
   ['unique',['unique',['../classump_1_1mj_1_1_hai_array.html#afcb73d94ab85565a4523fb62590cc4bc',1,'ump::mj::HaiArray']]],

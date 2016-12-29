@@ -1,8 +1,7 @@
 var searchData=
 [
   ['decode',['Decode',['../classump_1_1_command.html#a1839384f3384581f76fc4ba49df8dc1e',1,'ump::Command']]],
-  ['divider',['Divider',['../classump_1_1mj_1_1_divider.html',1,'ump::mj']]],
-  ['divider',['Divider',['../classump_1_1mj_1_1_divider.html#a18020215bdf22fbcef865668f9de4cb6',1,'ump::mj::Divider']]],
+  ['divider',['Divider',['../classump_1_1mj_1_1_divider.html',1,'ump::mj::Divider'],['../classump_1_1mj_1_1_divider.html#a18020215bdf22fbcef865668f9de4cb6',1,'ump::mj::Divider::Divider()']]],
   ['divider_2ecpp',['Divider.cpp',['../_divider_8cpp.html',1,'']]],
   ['divider_2ehpp',['Divider.hpp',['../_divider_8hpp.html',1,'']]],
   ['dora',['dora',['../classump_1_1mj_1_1_yama.html#a97cf05e73497f05a94b54ccd23ae9949',1,'ump::mj::Yama']]],

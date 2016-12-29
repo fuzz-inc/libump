@@ -25,5 +25,6 @@ var searchData=
   ['countplayer',['countPlayer',['../classump_1_1mj_1_1_game.html#a7c28fd5a0663a70d1252b5a8fec7bbb5',1,'ump::mj::Game']]],
   ['counttatsu',['countTatsu',['../classump_1_1mj_1_1_divider.html#aa0255eec1e2863c885f5c442427738bb',1,'ump::mj::Divider']]],
   ['countuniqueequal',['countUniqueEqual',['../classump_1_1mj_1_1_hai_array.html#a8db1d1f4ce173ec7d81c349e64dd5fe1',1,'ump::mj::HaiArray']]],
-  ['createplayer',['createPlayer',['../classump_1_1client_1_1_client.html#aab5b1ae21c0a02da90ac116f0bb7c62e',1,'ump::client::Client']]]
+  ['createplayer',['createPlayer',['../classump_1_1client_1_1_client.html#aab5b1ae21c0a02da90ac116f0bb7c62e',1,'ump::client::Client']]],
+  ['ctx',['Ctx',['../classump_1_1_big_num_1_1_ctx.html#a48b8848a7d858054105fd15a21a6fd0d',1,'ump::BigNum::Ctx']]]
 ];

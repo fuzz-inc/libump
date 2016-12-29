@@ -1,7 +1,9 @@
 var searchData=
 [
+  ['_7ebignum',['~BigNum',['../classump_1_1_big_num.html#af8e767772f9fb957ad05f77988536c65',1,'ump::BigNum']]],
   ['_7eclient',['~Client',['../classump_1_1client_1_1_client.html#a751a5cd52c1504c1bbf5348ea8ad2813',1,'ump::client::Client']]],
   ['_7econtext',['~Context',['../classump_1_1socket_1_1_ssl_socket_1_1_context.html#a70eb005577d1dc62f03ae876f0171584',1,'ump::socket::SslSocket::Context']]],
+  ['_7ectx',['~Ctx',['../classump_1_1_big_num_1_1_ctx.html#a8e77f386da1cecec6dd335d6fae429e6',1,'ump::BigNum::Ctx']]],
   ['_7edivider',['~Divider',['../classump_1_1mj_1_1_divider.html#a88b9fb7510021735cee2833abfa625e3',1,'ump::mj::Divider']]],
   ['_7egame',['~Game',['../classump_1_1mj_1_1_game.html#a7b0b16f2339b9dea8f8cd0a63095c236',1,'ump::mj::Game::~Game()'],['../classump_1_1server_1_1_game.html#a33ecba96fe2a4295a6de3c0044220562',1,'ump::server::Game::~Game()']]],
   ['_7ejob',['~Job',['../classump_1_1server_1_1_job.html#a8030c9a2cb2aaf282127cb6c0d374594',1,'ump::server::Job']]],

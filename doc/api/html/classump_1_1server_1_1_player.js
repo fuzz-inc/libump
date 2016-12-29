@@ -9,6 +9,7 @@ var classump_1_1server_1_1_player =
     [ "send", "classump_1_1server_1_1_player.html#a28449016e6d766d1d1f81677f442b505", null ],
     [ "start", "classump_1_1server_1_1_player.html#a773f57e3ad4c91a6cee6e23934459cea", null ],
     [ "stop", "classump_1_1server_1_1_player.html#a0f49ef0402c57157eb8cd29ae243064c", null ],
+    [ "sutehai", "classump_1_1server_1_1_player.html#a31bbc7f1cf9200e3f926a73e32437284", null ],
     [ "UMP_GETTER", "classump_1_1server_1_1_player.html#a3a127d0fd4a4eafb39156ce58cefad69", null ],
     [ "UMP_GETTER", "classump_1_1server_1_1_player.html#a38a9f002478c83c4d8ea2983e151e8ac", null ]
 ];

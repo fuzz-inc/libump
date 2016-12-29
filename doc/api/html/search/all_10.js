@@ -9,6 +9,7 @@ var searchData=
   ['replycommand',['replyCommand',['../classump_1_1client_1_1_client.html#a0ff79c2251643dcd7d880cde3393a538',1,'ump::client::Client']]],
   ['reset',['reset',['../classump_1_1mj_1_1_hand.html#a7c1c9f53ab73df88197c6a93e5456ba1',1,'ump::mj::Hand::reset()'],['../classump_1_1mj_1_1_player.html#a4397ce91308246ca870a274953676bd6',1,'ump::mj::Player::reset()']]],
   ['resetfirst',['resetFirst',['../classump_1_1mj_1_1_player.html#a3eed127b9cbccb20385871cfd7fef7c2',1,'ump::mj::Player']]],
+  ['resetkyotaku',['resetKyotaku',['../classump_1_1mj_1_1_game.html#a721aef69b4b64fe51b7ef153140735e8',1,'ump::mj::Game']]],
   ['resetturn',['resetTurn',['../classump_1_1mj_1_1_game.html#a584238cb461528be2a6f7d25c2f63f69',1,'ump::mj::Game']]],
   ['rinshan',['rinshan',['../classump_1_1mj_1_1_yama.html#a6793332191e0c24a714ad8b0993bff33',1,'ump::mj::Yama']]],
   ['rotate',['rotate',['../classump_1_1mj_1_1_hai.html#a059c8f3303e7509bc534fe6958e22ef7',1,'ump::mj::Hai']]]

@@ -1,7 +1,6 @@
 var searchData=
 [
   ['sayall',['sayAll',['../classump_1_1server_1_1_job.html#aa52847f31eba6f717bdae24e8227817e',1,'ump::server::Job']]],
-  ['sayrichi',['sayRichi',['../classump_1_1mj_1_1_player.html#ad255a113e036d30d685b1aa5836f2796',1,'ump::mj::Player']]],
   ['saytenpai',['sayTenpai',['../classump_1_1mj_1_1_player.html#aae35264d3d0a0c44ef38c761409687d0',1,'ump::mj::Player']]],
   ['seattostring',['SeatToString',['../classump_1_1_command.html#a4528c085c2ee613f0d462541edc7e917',1,'ump::Command']]],
   ['send',['send',['../classump_1_1server_1_1_player.html#a28449016e6d766d1d1f81677f442b505',1,'ump::server::Player::send()'],['../classump_1_1socket_1_1_socket.html#a57580a8cc86df40e36eea0eda3f1dea5',1,'ump::socket::Socket::send()']]],
@@ -12,6 +11,7 @@ var searchData=
   ['setdorahainum',['setDoraHaiNum',['../classump_1_1mj_1_1_config.html#a279bba36bb252327d41e5168e031cda5',1,'ump::mj::Config']]],
   ['setfuriten',['setFuriten',['../classump_1_1mj_1_1_player.html#a28dd45e33f84758ec51bd7fdc8d64239',1,'ump::mj::Player']]],
   ['setgame',['setGame',['../classump_1_1mj_1_1_player.html#aa4d588ac75543655fdd3c8210d6f4827',1,'ump::mj::Player']]],
+  ['sethai',['setHai',['../classump_1_1mj_1_1_sutehai.html#a7b904d0ebd14d0d2d87620260b7b030a',1,'ump::mj::Sutehai']]],
   ['sethainum',['setHaiNum',['../classump_1_1mj_1_1_config.html#ad6fd0ead1198484df3e11d753ced495f',1,'ump::mj::Config']]],
   ['setname',['setName',['../classump_1_1client_1_1_client.html#a20a6b279b331c21893c894b311f98928',1,'ump::client::Client']]],
   ['setoption',['setOption',['../classump_1_1_command.html#a6d71f2c468943d56eafda736707ffde2',1,'ump::Command']]],
@@ -26,5 +26,5 @@ var searchData=
   ['start',['start',['../classump_1_1server_1_1_game.html#a01d6dff941bfb7618ea8dfb80361100b',1,'ump::server::Game::start()'],['../classump_1_1server_1_1_server.html#a22be13b33919ccf0ba5e85258b837ac7',1,'ump::server::Server::start()'],['../classump_1_1server_1_1_thread.html#ac65105efdbff8b6bc40827f42ae2e7fa',1,'ump::server::Thread::start()']]],
   ['stop',['stop',['../classump_1_1server_1_1_thread.html#ae4c945db30a795e4fa70c41bcd5c716e',1,'ump::server::Thread']]],
   ['stringtoseat',['StringToSeat',['../classump_1_1_command.html#adb95144e9d2af370b8cde6eee085833f',1,'ump::Command']]],
-  ['sutehai',['Sutehai',['../classump_1_1mj_1_1_sutehai.html#a9e1510fb2d218d8d8e3fbd13c8804208',1,'ump::mj::Sutehai::Sutehai()'],['../classump_1_1mj_1_1_game.html#a6f343198bddb19f99ad6586427a3f6cd',1,'ump::mj::Game::sutehai()'],['../classump_1_1mj_1_1_hand.html#ab2d9b9409f9236a8e1b1294c276df938',1,'ump::mj::Hand::sutehai()'],['../classump_1_1mj_1_1_player.html#a197006968cd052700eeec885199b554c',1,'ump::mj::Player::sutehai()']]]
+  ['sutehai',['sutehai',['../classump_1_1mj_1_1_game.html#a8c3eceb10a3f4b5ea00f84bd79ce37f4',1,'ump::mj::Game::sutehai()'],['../classump_1_1mj_1_1_hand.html#a3ed2d82894f74c912cc54386399e6aa6',1,'ump::mj::Hand::sutehai()'],['../classump_1_1mj_1_1_player.html#ad438c1fca08d87778f432f2fb76fadc3',1,'ump::mj::Player::sutehai()'],['../classump_1_1server_1_1_player.html#a31bbc7f1cf9200e3f926a73e32437284',1,'ump::server::Player::sutehai()']]]
 ];

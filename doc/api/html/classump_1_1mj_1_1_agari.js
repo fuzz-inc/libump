@@ -56,5 +56,6 @@ var classump_1_1mj_1_1_agari =
     [ "operator<", "classump_1_1mj_1_1_agari.html#a5183ee40bae1c9fc50ce2cb4ae31b256", null ],
     [ "toString", "classump_1_1mj_1_1_agari.html#ad3441d2b7898bed88c090b35ce00bbcb", null ],
     [ "UMP_GETTER", "classump_1_1mj_1_1_agari.html#a785ba0f943260a7d4b554a0f18c8d4f6", null ],
+    [ "UMP_GETTER", "classump_1_1mj_1_1_agari.html#a4098d180a495f0139c6788f93c529291", null ],
     [ "update", "classump_1_1mj_1_1_agari.html#a77ee2a335eb55270cba602b429ace3b4", null ]
 ];

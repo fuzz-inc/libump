@@ -1,11 +1,13 @@
 var hierarchy =
 [
     [ "ump::mj::Agari", "classump_1_1mj_1_1_agari.html", null ],
+    [ "ump::BigNum", "classump_1_1_big_num.html", null ],
     [ "ump::Command", "classump_1_1_command.html", null ],
     [ "ump::mj::Config", "classump_1_1mj_1_1_config.html", [
       [ "ump::server::Config", "classump_1_1server_1_1_config.html", null ]
     ] ],
     [ "ump::socket::SslSocket::Context", "classump_1_1socket_1_1_ssl_socket_1_1_context.html", null ],
+    [ "ump::BigNum::Ctx", "classump_1_1_big_num_1_1_ctx.html", null ],
     [ "ump::mj::Divider", "classump_1_1mj_1_1_divider.html", [
       [ "ump::mj::AgariParser", "classump_1_1mj_1_1_agari_parser.html", null ],
       [ "ump::mj::Shanten", "classump_1_1mj_1_1_shanten.html", null ]

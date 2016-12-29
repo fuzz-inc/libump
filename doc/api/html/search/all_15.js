@@ -36,8 +36,7 @@ var searchData=
   ['yakuman_5fsukantsu',['YAKUMAN_SUKANTSU',['../classump_1_1mj_1_1_agari.html#ae5b826dd8f0897166aa84d0a7961c7b5a6dda9e42d3023cb69f665b3e3d88e78b',1,'ump::mj::Agari']]],
   ['yakuman_5ftenho',['YAKUMAN_TENHO',['../classump_1_1mj_1_1_agari.html#ae5b826dd8f0897166aa84d0a7961c7b5ac969d75f79ec676ce23b22ac4d5efd42',1,'ump::mj::Agari']]],
   ['yakuman_5ftsuisou',['YAKUMAN_TSUISOU',['../classump_1_1mj_1_1_agari.html#ae5b826dd8f0897166aa84d0a7961c7b5a9a7ca1185e9a4d0d292da61cfb736815',1,'ump::mj::Agari']]],
-  ['yama',['Yama',['../classump_1_1mj_1_1_yama.html',1,'ump::mj']]],
-  ['yama',['Yama',['../classump_1_1mj_1_1_yama.html#a77e8db67021ed491c0a1dd5079473974',1,'ump::mj::Yama']]],
+  ['yama',['Yama',['../classump_1_1mj_1_1_yama.html',1,'ump::mj::Yama'],['../classump_1_1mj_1_1_yama.html#a77e8db67021ed491c0a1dd5079473974',1,'ump::mj::Yama::Yama()']]],
   ['yama_2ecpp',['Yama.cpp',['../_yama_8cpp.html',1,'']]],
   ['yama_2ehpp',['Yama.hpp',['../_yama_8hpp.html',1,'']]]
 ];
