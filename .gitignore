@@ -1,0 +1,11 @@
+# Xcode
+DerivedData/
+project.xcworkspace/
+xcuserdata/
+*.xcscmblueprint
+external/build/mac/work/
+
+# Linux
+build/linux/bin/
+build/linux/lib/
+build/linux/obj/
