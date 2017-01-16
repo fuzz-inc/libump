@@ -10,4 +10,4 @@ libumpを使うことで簡単にオンライン麻雀を作成することが�
 # ドキュメント
 
 * [UMP仕様](https://github.com/fuzz-inc/libump/blob/master/docs/UMP-Spec.md)
-* [APIドキュメント](https://fuzz-inc.github.io/libump/api/html/)
+* [libump APIドキュメント](https://fuzz-inc.github.io/libump/api/html/)
