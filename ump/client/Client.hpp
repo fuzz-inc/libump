@@ -110,6 +110,7 @@ class Client
   virtual void onReplyCommand(const Command& command);
   virtual void onGameEnd() {}
 
+  UMP_GETTER(Socket, socket_);
   UMP_ACCESSOR(Hello, hello_);
 
   void beginKyoku();
