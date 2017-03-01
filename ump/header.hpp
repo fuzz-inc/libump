@@ -114,7 +114,6 @@ class JobTsumo;
 class Player;
 class Receiver;
 class Server;
-class Thread;
 }
 
 namespace socket {

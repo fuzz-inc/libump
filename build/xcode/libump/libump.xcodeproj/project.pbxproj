@@ -14,8 +14,6 @@
 		DA06667A1DAF9CD700F29305 /* Player.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA0666781DAF9CD700F29305 /* Player.hpp */; };
 		DA06667D1DAF9D3A00F29305 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA06667B1DAF9D3A00F29305 /* Game.cpp */; };
 		DA06667E1DAF9D3A00F29305 /* Game.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA06667C1DAF9D3A00F29305 /* Game.hpp */; };
-		DA079B0B1DD47A4800112F03 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA079B091DD47A4800112F03 /* Thread.cpp */; };
-		DA079B0C1DD47A4800112F03 /* Thread.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA079B0A1DD47A4800112F03 /* Thread.hpp */; };
 		DA15CB801DA656DA00843135 /* SslSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA15CB7E1DA656DA00843135 /* SslSocket.cpp */; };
 		DA15CB811DA656DA00843135 /* SslSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA15CB7F1DA656DA00843135 /* SslSocket.hpp */; };
 		DA1BD8D51DA50D2500334BB7 /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA1BD8CF1DA50D2500334BB7 /* Socket.cpp */; };
@@ -96,8 +94,6 @@
 		DA0666781DAF9CD700F29305 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		DA06667B1DAF9D3A00F29305 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		DA06667C1DAF9D3A00F29305 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
-		DA079B091DD47A4800112F03 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
-		DA079B0A1DD47A4800112F03 /* Thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thread.hpp; sourceTree = "<group>"; };
 		DA15CB7E1DA656DA00843135 /* SslSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SslSocket.cpp; sourceTree = "<group>"; };
 		DA15CB7F1DA656DA00843135 /* SslSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SslSocket.hpp; sourceTree = "<group>"; };
 		DA1BD8CF1DA50D2500334BB7 /* Socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Socket.cpp; sourceTree = "<group>"; };
@@ -314,8 +310,6 @@
 				DAFCE79A1D7D78FF0016A137 /* Receiver.hpp */,
 				DA47AC3F1D8A645700533933 /* Server.cpp */,
 				DA47AC401D8A645700533933 /* Server.hpp */,
-				DA079B091DD47A4800112F03 /* Thread.cpp */,
-				DA079B0A1DD47A4800112F03 /* Thread.hpp */,
 			);
 			path = server;
 			sourceTree = "<group>";
@@ -353,7 +347,6 @@
 				DAFCE7D31D7D78FF0016A137 /* JobReady.hpp in Headers */,
 				DA81C6FC1DC0B861004470DA /* Config.hpp in Headers */,
 				DAFCE7A41D7D78FF0016A137 /* Client.hpp in Headers */,
-				DA079B0C1DD47A4800112F03 /* Thread.hpp in Headers */,
 				DAFCE7CB1D7D78FF0016A137 /* JobAgari.hpp in Headers */,
 				DA47AC421D8A645700533933 /* Server.hpp in Headers */,
 				DAFCE7C71D7D78FF0016A137 /* Game.hpp in Headers */,
@@ -450,7 +443,6 @@
 				DA15CB801DA656DA00843135 /* SslSocket.cpp in Sources */,
 				DAFCE7B71D7D78FF0016A137 /* Mentsu.cpp in Sources */,
 				DAFCE7D01D7D78FF0016A137 /* JobNaki.cpp in Sources */,
-				DA079B0B1DD47A4800112F03 /* Thread.cpp in Sources */,
 				26560BB61DE8A5FB002753D7 /* Pattern.cpp in Sources */,
 				DAFCE7D61D7D78FF0016A137 /* JobTsumo.cpp in Sources */,
 				DA47AC411D8A645700533933 /* Server.cpp in Sources */,

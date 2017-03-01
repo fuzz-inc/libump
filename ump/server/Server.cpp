@@ -62,20 +62,14 @@ Server::Server(const std::shared_ptr<socket::Socket>& socket,
 ***************************************************************************/
 Server::~Server() {
   stop();
+  join();
 }
 /***********************************************************************//**
 	@brief 実行
 ***************************************************************************/
-void Server::start(int timeout) {
-  while(socket_->isOpen()) {
-    if(auto socket = socket_->accept(timeout)) {
-      auto player = std::make_shared<Player>(socket);
-      player->send(Command(Command::TYPE_HELLO).
-                   setOption("ump", Version::Get().toString()), 
-                   this);
-      player->start();
-    }
-  }
+void Server::start() {
+  assert(!thread_);
+  thread_.reset(new std::thread(std::ref(*this)));
 }
 /***********************************************************************//**
 	@brief 
@@ -86,6 +80,15 @@ void Server::stop() {
     game->stop();
   }
   socket_->close();
+}
+/***********************************************************************//**
+	@brief スレッド終了を待つ
+***************************************************************************/
+void Server::join() {
+  if(thread_) {
+    thread_->join();
+    thread_.reset();
+  }
 }
 /***********************************************************************//**
 	@brief ゲームが終了した
@@ -124,6 +127,20 @@ void Server::onReceive(std::shared_ptr<Player> player,
 ***************************************************************************/
 std::shared_ptr<Game> Server::createGame() {
   return std::make_shared<Game>(getConfig(), *this);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Server::operator()() {
+  while(socket_->isOpen()) {
+    if(auto socket = socket_->accept(getTimeout())) {
+      auto player = std::make_shared<Player>(socket);
+      player->send(Command(Command::TYPE_HELLO).
+                   setOption("ump", Version::Get().toString()), 
+                   this);
+      player->start();
+    }
+  }
 }
 /***********************************************************************//**
 	$Id$

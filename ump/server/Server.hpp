@@ -49,8 +49,10 @@ class Server
   std::shared_ptr<socket::Socket> socket_;
   int port_;
   std::shared_ptr<const Config> config_;
+  int timeout_;
   std::vector<std::shared_ptr<Game>> games_;
   std::shared_ptr<Game> game_;
+  std::unique_ptr<std::thread> thread_;
 
  public:
   Server(const std::shared_ptr<socket::Socket>& socket, 
@@ -58,11 +60,15 @@ class Server
   ~Server() override;
 
   UMP_ACCESSOR(Config, config_);
+  UMP_ACCESSOR(Timeout, timeout_);
 
-  void start(int timeout = 1000);
+  void start();
   void stop();
+  void join();
 
   void onEndGame(Game* game);
+
+  void operator()();
 
  protected:
   void onReceive(std::shared_ptr<Player> player, 
