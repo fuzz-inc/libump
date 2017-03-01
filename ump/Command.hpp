@@ -43,6 +43,7 @@ class Command {
  public:
   enum Type {
     TYPE_NULL, 
+
     TYPE_HELLO, 
     TYPE_ERROR, 
     TYPE_GAMESTART, 
@@ -79,14 +80,20 @@ class Command {
     TYPE_TENPAI, 
     TYPE_NOTEN, 
 
+    TYPE_EX, 
+
     TYPE_MAX
   };
+
+ private:
+  static const std::string OPTION_DATASIZE;
 
  private:
   Type type_;
   unsigned int serial_;
   std::vector<std::string> args_;
   std::map<std::string, std::string> options_;
+  std::shared_ptr<const std::vector<char>> data_;
 
   static const char* TYPE_TABLE[];
 
@@ -117,6 +124,10 @@ class Command {
   Command& setOption(const std::string& name, const std::string& value);
   const std::string& getOption(const std::string& name) const;
   bool hasOption(const std::string& name) const;
+
+  Command& setData(std::shared_ptr<const std::vector<char>> data);
+  UMP_GETTER(Data, data_);
+  size_t getDataSize() const;
 
   bool parse(const char* command);
 

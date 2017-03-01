@@ -53,13 +53,11 @@ class Socket {
   bool listen(int port);
   std::shared_ptr<Socket> accept(int timeout);
 
-  bool send(const char* buff, size_t size);
-  bool recv(char* buff, size_t size);
-
   virtual bool isOpen() const = 0;
   void close();
 
-  bool recvLine(std::string& msg);
+  bool sendCommand(const Command& command);
+  bool recvCommand(Command& command);
 
   const std::string& getError() const {
     return error_;
@@ -84,6 +82,11 @@ class Socket {
   void setError(const std::string& error) {
     error_ = error;
   }
+
+ private:
+  bool send(const char* buff, size_t size);
+  bool recv(char* buff, size_t size);
+  bool recvLine(std::string& msg);
 };
 /***********************************************************************//**
 	$Id$

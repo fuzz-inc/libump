@@ -94,8 +94,7 @@ void Player::send(const Command& command, Receiver* receiver) {
   reply_.clear();
   receiver_ = receiver;
   log(Logger::LEVEL_DEBUG, std::string(" <- ") + command_.toString(false));
-  auto message = command_.toString(true) + socket::Socket::EOL;
-  socket_->send(message.c_str(), message.size());
+  socket_->sendCommand(command_);
 }
 /***********************************************************************//**
 	@copydoc ump::mj::Hand::canRichi
@@ -113,11 +112,9 @@ bool Player::canRichi() const {
 ***************************************************************************/
 void Player::operator()(std::shared_ptr<Player> self) {
   while(isOpen()) {
-    std::string message;
-    if(socket_->recvLine(message)) {
-      Command command;
-      if(command.parse(message.c_str()) && 
-         command.getSerial() == serial_) {
+    Command command;
+    if(socket_->recvCommand(command)) {
+      if(command.getSerial() == serial_) {
         log(Logger::LEVEL_DEBUG, 
             std::string(" -> ") + command.toString(true));
         reply_ = command;
@@ -125,9 +122,6 @@ void Player::operator()(std::shared_ptr<Player> self) {
           receiver_->receive(shared_from_this(), command);
           receiver_ = nullptr;
         }
-      }
-      else {
-        log(Logger::LEVEL_DEBUG, std::string(" -> !") + message);
       }
     }
   }

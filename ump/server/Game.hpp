@@ -95,6 +95,9 @@ class Game
 
   void operator()();
 
+  virtual void onRecvCommand(std::shared_ptr<Player> player, 
+                             const Command& command);
+
  private:
   void updateJob(const std::chrono::milliseconds& deltaTime);
   

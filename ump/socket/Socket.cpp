@@ -30,6 +30,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
+#include "ump/Command.hpp"
 #include "ump/socket/Socket.hpp"
 
 namespace ump {
@@ -69,6 +70,45 @@ std::shared_ptr<Socket> Socket::accept(int timeout) {
   return nullptr;
 }
 /***********************************************************************//**
+	@brief 閉じる
+***************************************************************************/
+void Socket::close() {
+  if(isOpen()) {
+    std::lock_guard<std::mutex> lock(getMutex());
+    onClose();
+  }
+}
+/***********************************************************************//**
+	@brief コマンドを送信する
+	@param[in] command 送信するコマンド
+***************************************************************************/
+bool Socket::sendCommand(const Command& command) {
+  auto message = command.toString(true) + EOL;
+  if(send(message.data(), message.size())) {
+    if(auto data = command.getData()) {
+      return send(data->data(), data->size());
+    }
+  }
+  return false;
+}
+/***********************************************************************//**
+	@brief コマンドを受信する
+***************************************************************************/
+bool Socket::recvCommand(Command& command) {
+  std::string message;
+  if(recvLine(message)) {
+    if(command.parse(message.c_str())) {
+      auto dataSize = command.getDataSize();
+      if(dataSize > 0) {
+        auto data = std::make_shared<std::vector<char>>(dataSize);
+        return recv(data->data(), dataSize);
+      }
+    }
+    return true;
+  }
+  return false;
+}
+/***********************************************************************//**
 	@brief データを送信する
 	@param[in] buff 送信するデータ
 	@param[in] size 送信するサイズ
@@ -92,15 +132,6 @@ bool Socket::recv(char* buff, size_t size) {
     return onRecv(buff, size);
   }
   return false;
-}
-/***********************************************************************//**
-	@brief 閉じる
-***************************************************************************/
-void Socket::close() {
-  if(isOpen()) {
-    std::lock_guard<std::mutex> lock(getMutex());
-    onClose();
-  }
 }
 /***********************************************************************//**
 	@brief 1行読み込み

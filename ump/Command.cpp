@@ -35,6 +35,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace ump {
 const char* Command::TYPE_TABLE[] = {
   "NULL", 
+
   "hello", 
   "error", 
   "gamestart", 
@@ -71,8 +72,12 @@ const char* Command::TYPE_TABLE[] = {
   "tenpai", 
   "noten", 
 
+  "_ex_", 
+
   nullptr
 };
+
+const std::string Command::OPTION_DATASIZE("datasize");
 /***********************************************************************//**
 	@brief コンストラクタ
         @param[in] type 種別
@@ -90,6 +95,7 @@ void Command::clear() {
   setSerial(0);
   args_.clear();
   options_.clear();
+  data_.reset();
 }
 /***********************************************************************//**
 	@brief コマンドが存在するか調べる
@@ -178,6 +184,22 @@ const std::string& Command::getOption(const std::string& name) const {
 ***************************************************************************/
 bool Command::hasOption(const std::string& name) const {
   return options_.find(name) != options_.end();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+Command& Command::setData(std::shared_ptr<const std::vector<char>> data) {
+  data_ = data;
+  setOption(OPTION_DATASIZE, std::to_string(data->size()));
+  return *this;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+size_t Command::getDataSize() const {
+  return hasOption(OPTION_DATASIZE)
+    ? std::stoul(getOption(OPTION_DATASIZE))
+    : 0;
 }
 /***********************************************************************//**
 	@brief 文字列を解析する

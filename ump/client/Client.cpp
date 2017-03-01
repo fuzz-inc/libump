@@ -94,10 +94,9 @@ bool Client::isOpen() const {
 ***************************************************************************/
 void Client::operator()(std::shared_ptr<Client> self) {
   while(socket_->isOpen()) {
-    std::string message;
-    if(socket_->recvLine(message)) {
-      Command command;
-      if(command.parse(message.c_str())) {
+    Command command;
+    if(socket_->recvCommand(command)) {
+      if(command.isExist()) {
         onReceiveCommand(command);
       }
     }
@@ -259,8 +258,7 @@ void Client::onShowHai(const mj::Hai* hai) {
 	@param	command	送信するコマンド
 ***************************************************************************/
 void Client::send(const Command& command) {
-  auto message = command.toString(true) + socket::Socket::EOL;
-  socket_->send(message.c_str(), message.size());
+  socket_->sendCommand(command);
 }
 /***********************************************************************//**
 	@brief ゲーム(半荘)開始

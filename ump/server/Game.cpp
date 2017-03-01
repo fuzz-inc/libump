@@ -191,6 +191,14 @@ void Game::operator()() {
   getServer().onEndGame(this);
 }
 /***********************************************************************//**
+	@brief コマンドを受信した
+	@param[in] player 受信したプレイヤー
+	@param[in] command 受信したコマンド
+***************************************************************************/
+void Game::onRecvCommand(std::shared_ptr<Player> player, 
+                         const Command& command) {
+}
+/***********************************************************************//**
 	@brief ジョブを実行する
 ***************************************************************************/
 void Game::updateJob(const std::chrono::milliseconds& deltaTime) {
