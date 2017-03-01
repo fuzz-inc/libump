@@ -97,6 +97,11 @@ bool TcpSocket::onListen(int port) {
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = htonl(INADDR_ANY);
   open();
+  {
+    const int on = 1;
+    ::setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+    ::setsockopt(fd_, SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on));
+  }
   int result = bind(fd_, reinterpret_cast<struct sockaddr *>(&address), 
                     sizeof(address));
   if(result != 0) {
