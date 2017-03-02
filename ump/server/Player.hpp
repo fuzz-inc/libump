@@ -64,6 +64,8 @@ class Player
 
   std::shared_ptr<Game> getGame() const;
 
+  UMP_GETTER(Socket, socket_);
+
   void start();
   void stop();
 

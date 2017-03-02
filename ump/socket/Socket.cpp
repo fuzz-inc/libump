@@ -96,17 +96,20 @@ bool Socket::sendCommand(const Command& command) {
 ***************************************************************************/
 bool Socket::recvCommand(Command& command) {
   std::string message;
-  if(recvLine(message)) {
-    if(command.parse(message.c_str())) {
-      auto dataSize = command.getDataSize();
-      if(dataSize > 0) {
-        auto data = std::make_shared<std::vector<char>>(dataSize);
-        return recv(data->data(), dataSize);
-      }
-    }
-    return true;
+  if(!recvLine(message)) {
+    return false;
   }
-  return false;
+  if(command.parse(message.c_str())) {
+    auto dataSize = command.getDataSize();
+    if(dataSize > 0) {
+      auto data = std::make_shared<std::vector<char>>(dataSize);
+      if(!recv(data->data(), dataSize)) {
+        return false;
+      }
+      command.setData(data);
+    }
+  }
+  return true;
 }
 /***********************************************************************//**
 	@brief データを送信する

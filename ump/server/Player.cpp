@@ -123,6 +123,7 @@ void Player::operator()(std::shared_ptr<Player> self) {
           receiver_ = nullptr;
         }
       }
+      getGame()->onRecvCommand(shared_from_this(), command);
     }
   }
   thread_.release()->detach();
