@@ -108,6 +108,8 @@ class Client
 
   virtual void onReceiveCommand(const Command& command);
   virtual void onReplyCommand(const Command& command);
+
+  virtual void onGameStart() {}
   virtual void onGameEnd() {}
 
   UMP_GETTER(Socket, socket_);

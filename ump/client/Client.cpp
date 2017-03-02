@@ -162,6 +162,7 @@ void Client::onReceiveCommand(const Command& command) {
     break;
   case Command::TYPE_GAMESTART:
     execGameStart(command);
+    onGameStart();
     break;
   case Command::TYPE_GAMEEND:
     flag_.set(FLAG_GAME_END);

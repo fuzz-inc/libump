@@ -72,6 +72,8 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/socket/Socket.hpp"
 #include "ump/socket/SslSocket.hpp"
 #include "ump/socket/TcpSocket.hpp"
+#include "ump/thread/Condition.hpp"
+#include "ump/thread/Thread.hpp"
 /***********************************************************************//**
 	$Id$
 ***************************************************************************/

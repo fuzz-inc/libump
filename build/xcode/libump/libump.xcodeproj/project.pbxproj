@@ -21,6 +21,8 @@
 		DA1BD8D91DA50D2500334BB7 /* TcpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA1BD8D31DA50D2500334BB7 /* TcpSocket.cpp */; };
 		DA1BD8DA1DA50D2500334BB7 /* TcpSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA1BD8D41DA50D2500334BB7 /* TcpSocket.hpp */; };
 		DA2EE39C1D86A1A200041D93 /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA2EE39B1D86A1A200041D93 /* Config.cpp */; };
+		DA440D9E1E68029700C7A320 /* Condition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA440D9C1E68029700C7A320 /* Condition.cpp */; };
+		DA440DA21E68065900C7A320 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA440DA01E68065900C7A320 /* Thread.cpp */; };
 		DA47AC411D8A645700533933 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA47AC3F1D8A645700533933 /* Server.cpp */; };
 		DA47AC421D8A645700533933 /* Server.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA47AC401D8A645700533933 /* Server.hpp */; };
 		DA81C6FB1DC0B861004470DA /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA81C6F91DC0B861004470DA /* Config.cpp */; };
@@ -101,6 +103,10 @@
 		DA1BD8D31DA50D2500334BB7 /* TcpSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TcpSocket.cpp; sourceTree = "<group>"; };
 		DA1BD8D41DA50D2500334BB7 /* TcpSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TcpSocket.hpp; sourceTree = "<group>"; };
 		DA2EE39B1D86A1A200041D93 /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
+		DA440D9C1E68029700C7A320 /* Condition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Condition.cpp; sourceTree = "<group>"; };
+		DA440D9D1E68029700C7A320 /* Condition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Condition.hpp; sourceTree = "<group>"; };
+		DA440DA01E68065900C7A320 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
+		DA440DA11E68065900C7A320 /* Thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thread.hpp; sourceTree = "<group>"; };
 		DA47AC3F1D8A645700533933 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
 		DA47AC401D8A645700533933 /* Server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Server.hpp; sourceTree = "<group>"; };
 		DA81C6F91DC0B861004470DA /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
@@ -192,6 +198,17 @@
 			path = socket;
 			sourceTree = "<group>";
 		};
+		DA440D9B1E68029700C7A320 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				DA440D9C1E68029700C7A320 /* Condition.cpp */,
+				DA440D9D1E68029700C7A320 /* Condition.hpp */,
+				DA440DA01E68065900C7A320 /* Thread.cpp */,
+				DA440DA11E68065900C7A320 /* Thread.hpp */,
+			);
+			path = thread;
+			sourceTree = "<group>";
+		};
 		DAFCE6B91D7D72A60016A137 = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +238,7 @@
 				DAFCE7641D7D78FF0016A137 /* mj */,
 				DAFCE7801D7D78FF0016A137 /* server */,
 				DA1BD8CE1DA50D2500334BB7 /* socket */,
+				DA440D9B1E68029700C7A320 /* thread */,
 				DAFCE7A01D7D78FF0016A137 /* ump.hpp */,
 				DAFCE7A11D7D78FF0016A137 /* Version.cpp */,
 				DAFCE7A21D7D78FF0016A137 /* Version.hpp */,
@@ -430,6 +448,7 @@
 				DAA597551DF0142B007BE749 /* JobHaipai.cpp in Sources */,
 				DAFCE7DA1D7D78FF0016A137 /* Player.cpp in Sources */,
 				DAFCE7AF1D7D78FF0016A137 /* Hai.cpp in Sources */,
+				DA440D9E1E68029700C7A320 /* Condition.cpp in Sources */,
 				DAC7FF191D9939E300559942 /* JobSutehai.cpp in Sources */,
 				DAFCE7C61D7D78FF0016A137 /* Game.cpp in Sources */,
 				DAFCE7A91D7D78FF0016A137 /* Agari.cpp in Sources */,
@@ -443,6 +462,7 @@
 				DA15CB801DA656DA00843135 /* SslSocket.cpp in Sources */,
 				DAFCE7B71D7D78FF0016A137 /* Mentsu.cpp in Sources */,
 				DAFCE7D01D7D78FF0016A137 /* JobNaki.cpp in Sources */,
+				DA440DA21E68065900C7A320 /* Thread.cpp in Sources */,
 				26560BB61DE8A5FB002753D7 /* Pattern.cpp in Sources */,
 				DAFCE7D61D7D78FF0016A137 /* JobTsumo.cpp in Sources */,
 				DA47AC411D8A645700533933 /* Server.cpp in Sources */,
