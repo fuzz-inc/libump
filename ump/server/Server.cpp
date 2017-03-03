@@ -49,7 +49,8 @@ Server::Server(const std::shared_ptr<socket::Socket>& socket,
                int port)
   : socket_(socket), 
     port_(port), 
-    config_(std::make_shared<Config>())
+    config_(std::make_shared<Config>()), 
+    timeout_(1000)
 {
   while(!socket_->listen(port_)) {
     std::cerr << socket_->getError() << std::endl;

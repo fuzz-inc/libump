@@ -68,6 +68,16 @@ const Config& Game::getConfig() const {
   return static_cast<const Config&>(super::getConfig());
 }
 /***********************************************************************//**
+	@copydoc mj::Game::appendPlayer
+***************************************************************************/
+void Game::appendPlayer(std::shared_ptr<Player> player) {
+  for(auto iter : getPlayers()) {
+    player->send(Command(Command::TYPE_PLAYER).append(iter->getName()));
+  }
+  super::appendPlayer(player);
+  sendAll(Command(Command::TYPE_PLAYER).append(player->getName()));
+}
+/***********************************************************************//**
 	@brief ゲームを開始する
 ***************************************************************************/
 void Game::start() {

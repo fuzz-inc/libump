@@ -38,6 +38,7 @@ const char* Command::TYPE_TABLE[] = {
 
   "hello", 
   "error", 
+  "player", 
   "gamestart", 
   "gameend", 
   "kyokustart", 

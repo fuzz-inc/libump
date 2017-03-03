@@ -72,6 +72,8 @@ class Game
     return server_;
   }
 
+  void appendPlayer(std::shared_ptr<Player> player);
+
   void start();
   void stop();
   bool isStop() const {
