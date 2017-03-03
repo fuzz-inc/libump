@@ -55,7 +55,7 @@ class Bot
   UMP_ACCESSOR(Wait, wait_);
 
  protected:
-  void onReceiveCommand(const Command& command) override;
+  bool onRecvCommand(const Command& command) override;
 
  private:
   void replySutehai(const Command& command);

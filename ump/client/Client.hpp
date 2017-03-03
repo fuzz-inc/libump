@@ -106,7 +106,7 @@ class Client
  protected:
   virtual std::shared_ptr<mj::Player> createPlayer();
 
-  virtual void onReceiveCommand(const Command& command);
+  virtual bool onRecvCommand(const Command& command);
   virtual void onReplyCommand(const Command& command);
 
   virtual void onGameStart() {}

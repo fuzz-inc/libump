@@ -97,7 +97,7 @@ void Client::operator()(std::shared_ptr<Client> self) {
     Command command;
     if(socket_->recvCommand(command)) {
       if(command.isExist()) {
-        onReceiveCommand(command);
+        onRecvCommand(command);
       }
     }
     else {
@@ -154,8 +154,9 @@ std::shared_ptr<mj::Player> Client::createPlayer() {
 /***********************************************************************//**
 	@brief コマンド受信
 	@param[in] command 受信したコマンド
+	@return 中断するとき偽
 ***************************************************************************/
-void Client::onReceiveCommand(const Command& command) {
+bool Client::onRecvCommand(const Command& command) {
   switch(command.getType()) {
   case Command::TYPE_HELLO:
     replyCommand(hello_, command);
@@ -229,6 +230,7 @@ void Client::onReceiveCommand(const Command& command) {
   default:
     break;
   }
+  return true;
 }
 /***********************************************************************//**
 	@brief コマンドを返信した

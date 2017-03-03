@@ -47,10 +47,12 @@ Bot::Bot(std::shared_ptr<const mj::Config> config,
 {
 }
 /***********************************************************************//**
-	@copydoc Client::onReceiveCommand
+	@copydoc Client::onRecvCommand
 ***************************************************************************/
-void Bot::onReceiveCommand(const Command& command) {
-  super::onReceiveCommand(command);
+bool Bot::onRecvCommand(const Command& command) {
+  if(!super::onRecvCommand(command)) {
+    return false;
+  }
   switch(command.getType()) {
   case Command::TYPE_READY_Q:
     replyCommand(Command(Command::TYPE_YES), command);
@@ -67,6 +69,7 @@ void Bot::onReceiveCommand(const Command& command) {
   default:
     break;
   }
+  return true;
 }
 /***********************************************************************//**
 	@brief 
