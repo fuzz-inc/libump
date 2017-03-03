@@ -74,7 +74,7 @@ std::shared_ptr<Socket> Socket::accept(int timeout) {
 ***************************************************************************/
 void Socket::close() {
   if(isOpen()) {
-    std::lock_guard<std::mutex> lock(getMutex());
+    //std::lock_guard<std::mutex> lock(getMutex());
     onClose();
   }
 }
