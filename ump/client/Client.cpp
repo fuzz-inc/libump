@@ -48,6 +48,7 @@ Client::Client(std::shared_ptr<const mj::Config> config,
   : super(config), 
     socket_(socket), 
     hello_(Command::TYPE_HELLO), 
+    seat_(0), 
     rest_(0)
 {
   hello_.setOption("ump", ump::Version::Get().toString());
@@ -116,11 +117,10 @@ Client& Client::setName(const std::string& name) {
   return *this;
 }
 /***********************************************************************//**
-	@brief 自身の席を取得する
-	@return 自身の席
+	@brief 
 ***************************************************************************/
-size_t Client::getSeat() const {
-  return getPlayer()->getSeat();
+std::shared_ptr<mj::Player> Client::getPlayer() const {
+  return getPlayer(getSeat());
 }
 /***********************************************************************//**
 	@brief 返答を送る
@@ -152,6 +152,12 @@ std::shared_ptr<mj::Player> Client::createPlayer() {
   return std::make_shared<mj::Player>();
 }
 /***********************************************************************//**
+	@brief プレイヤーがセットされた
+	@param[in] player プレイヤー
+***************************************************************************/
+void Client::onSetPlayer(std::shared_ptr<mj::Player> player) {
+}
+/***********************************************************************//**
 	@brief コマンド受信
 	@param[in] command 受信したコマンド
 	@return 中断するとき偽
@@ -161,11 +167,16 @@ bool Client::onRecvCommand(const Command& command) {
   case Command::TYPE_HELLO:
     replyCommand(hello_, command);
     break;
+  case Command::TYPE_SEAT:
+    seat_ = Command::StringToSeat(command.getArg(0).c_str());
+    break;
   case Command::TYPE_PLAYER:
     {
+      auto seat = Command::StringToSeat(command.getArg(0).c_str());
       auto player = createPlayer();
       player->setName(command.getArg(1));
-      setPlayer(Command::StringToSeat(command.getArg(0).c_str()), player);
+      setPlayer(seat, player);
+      onSetPlayer(player);
     }
     break;
   case Command::TYPE_GAMESTART:
@@ -278,7 +289,6 @@ void Client::execGameStart(const Command& command) {
   if(command.hasOption("id")) {
     setId(command.getOption("id"));
   }
-  player_ = getPlayer(command.getArg(0).c_str());
 }
 /***********************************************************************//**
 	@brief 局開始

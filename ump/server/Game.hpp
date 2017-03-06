@@ -101,6 +101,8 @@ class Game
                              const Command& command);
 
  private:
+  size_t findSeat() const;
+
   void updateJob(const std::chrono::milliseconds& deltaTime);
   
   void dump() const;

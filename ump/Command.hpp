@@ -46,6 +46,7 @@ class Command {
 
     TYPE_HELLO, 
     TYPE_ERROR, 
+    TYPE_SEAT, 
     TYPE_PLAYER, 
     TYPE_GAMESTART, 
     TYPE_GAMEEND, 

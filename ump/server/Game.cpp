@@ -72,25 +72,14 @@ const Config& Game::getConfig() const {
 	@param[in] player プレイヤー
 ***************************************************************************/
 void Game::appendPlayer(std::shared_ptr<Player> player) {
-  auto rest = countPlayer();
-  for(auto iter : getPlayers()) {
+  auto seat = findSeat();
+  player->send(Command(Command::TYPE_SEAT).
+               append(Command::SeatToString(seat)));
+  for(auto& iter : getPlayers()) {
     if(iter) {
       player->send(Command(Command::TYPE_PLAYER).
                    append(Command::SeatToString(iter->getSeat())).
                    append(iter->getName()));
-      rest--;
-    }
-  }
-  assert(rest > 0);
-  std::uniform_int_distribution<size_t> random(0, rest - 1);
-  rest = random(getRandom());
-  size_t seat;
-  for(seat = 0; seat < countPlayer(); seat++) {
-    if(!getPlayer(seat)) {
-      if(rest == 0) {
-        break;
-      }
-      rest--;
     }
   }
   super::setPlayer(seat, player);
@@ -238,6 +227,20 @@ void Game::operator()() {
 ***************************************************************************/
 void Game::onRecvCommand(std::shared_ptr<Player> player, 
                          const Command& command) {
+}
+/***********************************************************************//**
+	@brief 空いている席をランダムで取得する
+***************************************************************************/
+size_t Game::findSeat() const {
+  std::vector<size_t> seats;
+  for(size_t i = 0, n = countPlayer(); i < n; i++) {
+    if(!getPlayer(i)) {
+      seats.push_back(i);
+    }
+  }
+  assert(!seats.empty());
+  std::uniform_int_distribution<size_t> random(0, seats.size() - 1);
+  return seats.at(random(getRandom()));
 }
 /***********************************************************************//**
 	@brief ジョブを実行する

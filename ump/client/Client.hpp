@@ -57,7 +57,7 @@ class Client
   std::shared_ptr<socket::Socket> socket_;
   std::unique_ptr<std::thread> thread_;
   Command hello_;
-  std::shared_ptr<mj::Player> player_;
+  size_t seat_;
   size_t rest_;
   mj::Pattern ponPattern_;
   mj::Pattern chiPattern_;
@@ -78,8 +78,8 @@ class Client
 
   Client& setName(const std::string& name);
 
-  UMP_GETTER(Player, player_);
-  size_t getSeat() const;
+  UMP_GETTER(Seat, seat_);
+  std::shared_ptr<mj::Player> getPlayer() const;
 
   std::shared_ptr<mj::Player> getPlayer(size_t seat) const {
     return super::getPlayer(seat);
@@ -105,6 +105,7 @@ class Client
 
  protected:
   virtual std::shared_ptr<mj::Player> createPlayer();
+  virtual void onSetPlayer(std::shared_ptr<mj::Player> player);
 
   virtual bool onRecvCommand(const Command& command);
   virtual void onReplyCommand(const Command& command);
