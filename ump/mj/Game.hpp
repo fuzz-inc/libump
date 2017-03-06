@@ -74,7 +74,7 @@ class Game
 
   UMP_ACCESSOR(Id, id_);
   UMP_GETTER(Players, players_);
-  void appendPlayer(std::shared_ptr<Player> player);
+  void setPlayer(size_t seat, std::shared_ptr<Player> player);
   size_t countPlayer() const;
   std::shared_ptr<Player> getPlayer(size_t seat) const;
   std::shared_ptr<Player> getPlayer(const char* seat) const;
@@ -121,7 +121,6 @@ class Game
 
  protected:
   void clearPlayer();
-  void shufflePlayer();
 
   Game& setOya(size_t oya);
   UMP_SETTER(Round, round_);

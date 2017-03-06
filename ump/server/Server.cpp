@@ -116,7 +116,7 @@ void Server::onReceive(std::shared_ptr<Player> player,
       player->setName(command.getOption("name"));
     }
     game_->appendPlayer(player);
-    if(game_->countPlayer() == game_->getConfig().getPlayerNum()) {
+    if(game_->canStart()) {
       game_->start();
       games_.push_back(game_);
       game_.reset();

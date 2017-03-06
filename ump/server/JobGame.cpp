@@ -50,13 +50,9 @@ JobGame::JobGame(Game& game)
 void JobGame::onBegin() {
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     auto player = getPlayer(i);
-    Command command(Command::TYPE_GAMESTART);
-    command.append(player->getSeatString());
-    for(size_t i = 0; i < n; i++) {
-      command.append(getPlayer(i)->getName());
-    }
-    command.setOption("id", getGame().getId());
-    player->send(command);
+    player->send(Command(Command::TYPE_GAMESTART).
+                 append(player->getSeatString()).
+                 setOption("id", getGame().getId()));
   }
 }
 /***********************************************************************//**

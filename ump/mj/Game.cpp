@@ -43,6 +43,7 @@ namespace mj {
 Game::Game(std::shared_ptr<const Config> config)
   : config_(config), 
     random_(new std::default_random_engine(std::random_device()())), 
+    players_(config->getPlayerNum()), 
     oya_(0), 
     round_(0), 
     renchan_(0), 
@@ -58,11 +59,14 @@ Game::~Game() {
 }
 /***********************************************************************//**
 	@brief プレイヤーを追加する
-	@param[in] 追加するプレイヤー
+	@param[in] seat 席
+	@param[in] player 追加するプレイヤー
 ***************************************************************************/
-void Game::appendPlayer(std::shared_ptr<Player> player) {
+void Game::setPlayer(size_t seat, std::shared_ptr<Player> player) {
+  assert(!players_.at(seat));
   player->setGame(shared_from_this());
-  players_.push_back(player);
+  player->setSeat(seat);
+  players_[seat] = player;
 }
 /***********************************************************************//**
 	@brief プレイヤーの人数を取得する
@@ -240,13 +244,9 @@ bool Game::canChi() const {
 	@brief すべてのプレイヤーをクリアする
 ***************************************************************************/
 void Game::clearPlayer() {
-  players_.clear();
-}
-/***********************************************************************//**
-	@brief プレイヤーをランダムに並び替える
-***************************************************************************/
-void Game::shufflePlayer() {
-  std::shuffle(players_.begin(), players_.end(), getRandom());
+  for(auto& player : players_) {
+    player.reset();
+  }
 }
 /***********************************************************************//**
 	@brief 親を変更する

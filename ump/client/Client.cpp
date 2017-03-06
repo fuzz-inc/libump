@@ -161,6 +161,13 @@ bool Client::onRecvCommand(const Command& command) {
   case Command::TYPE_HELLO:
     replyCommand(hello_, command);
     break;
+  case Command::TYPE_PLAYER:
+    {
+      auto player = createPlayer();
+      player->setName(command.getArg(1));
+      setPlayer(Command::StringToSeat(command.getArg(0).c_str()), player);
+    }
+    break;
   case Command::TYPE_GAMESTART:
     execGameStart(command);
     onGameStart();
@@ -271,16 +278,7 @@ void Client::execGameStart(const Command& command) {
   if(command.hasOption("id")) {
     setId(command.getOption("id"));
   }
-  clearPlayer();
-  auto seat = Command::StringToSeat(command.getArg(0).c_str());
-  for(size_t i = 1, n = command.countArg(); i < n; i++) {
-    auto player = createPlayer();
-    player->
-      setSeat(i - 1).
-      setName(command.getArg(i));
-    appendPlayer(player);
-  }
-  player_ = getPlayer(seat);
+  player_ = getPlayer(command.getArg(0).c_str());
 }
 /***********************************************************************//**
 	@brief 局開始

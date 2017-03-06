@@ -73,7 +73,7 @@ class Game
   }
 
   void appendPlayer(std::shared_ptr<Player> player);
-
+  bool canStart() const;
   void start();
   void stop();
   bool isStop() const {

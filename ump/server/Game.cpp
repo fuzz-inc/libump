@@ -68,25 +68,54 @@ const Config& Game::getConfig() const {
   return static_cast<const Config&>(super::getConfig());
 }
 /***********************************************************************//**
-	@copydoc mj::Game::appendPlayer
+	@brief プレイヤーを追加する
+	@param[in] player プレイヤー
 ***************************************************************************/
 void Game::appendPlayer(std::shared_ptr<Player> player) {
+  auto rest = countPlayer();
   for(auto iter : getPlayers()) {
-    player->send(Command(Command::TYPE_PLAYER).append(iter->getName()));
+    if(iter) {
+      player->send(Command(Command::TYPE_PLAYER).
+                   append(Command::SeatToString(iter->getSeat())).
+                   append(iter->getName()));
+      rest--;
+    }
   }
-  super::appendPlayer(player);
-  sendAll(Command(Command::TYPE_PLAYER).append(player->getName()));
+  assert(rest > 0);
+  std::uniform_int_distribution<size_t> random(0, rest - 1);
+  rest = random(getRandom());
+  size_t seat;
+  for(seat = 0; seat < countPlayer(); seat++) {
+    if(!getPlayer(seat)) {
+      if(rest == 0) {
+        break;
+      }
+      rest--;
+    }
+  }
+  super::setPlayer(seat, player);
+  sendAll(Command(Command::TYPE_PLAYER).
+          append(Command::SeatToString(seat)).
+          append(player->getName()));
+}
+/***********************************************************************//**
+	@brief プレイヤーが揃っているか調べる
+	@return プレイヤーが揃っているとき真
+***************************************************************************/
+bool Game::canStart() const {
+  for(auto& player : getPlayers()) {
+    if(!player) {
+      return false;
+    }
+  }
+  return true;
 }
 /***********************************************************************//**
 	@brief ゲームを開始する
 ***************************************************************************/
 void Game::start() {
-  shufflePlayer();
-  for(size_t i = 0, n = countPlayer(); i < n; i++) {
-    auto player = getPlayer(i);
-    player->
-      setSeat(i).
-      setPoint(getConfig().getPoint());
+  for(auto player : getPlayers()) {
+    player->setPoint(getConfig().getPoint());
   }
   beginJob(new JobGame(*this));
   assert(!thread_.get());
@@ -185,8 +214,10 @@ size_t Game::getRest() const {
 	@param[in] command コマンド
 ***************************************************************************/
 void Game::sendAll(const Command& command) const {
-  for(size_t i = 0, n = countPlayer(); i < n; i++) {
-    getPlayer(i)->send(command);
+  for(auto& player : getPlayers()) {
+    if(player) {
+      std::static_pointer_cast<Player>(player)->send(command);
+    }
   }
 }
 /***********************************************************************//**
