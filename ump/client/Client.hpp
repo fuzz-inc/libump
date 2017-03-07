@@ -47,23 +47,25 @@ class Client
 {
   typedef mj::Game super;
 
- private:
-  enum {
-    FLAG_GAME_END, 
-    FLAG_MAX
+ public:
+  enum State {
+    STATE_NULL, 
+    STATE_SEAT, 	/**< 席についた */
+    STATE_GAME, 	/**< ゲーム中 */
+    STATE_END		/**< ゲーム終了 */
   };
 
  private:
   std::shared_ptr<socket::Socket> socket_;
   std::unique_ptr<std::thread> thread_;
   Command hello_;
+  State state_;
   size_t seat_;
   size_t rest_;
   mj::Pattern ponPattern_;
   mj::Pattern chiPattern_;
   mj::Pattern kanPattern_;
   std::map<const mj::Hai*, size_t> hideHaiNums_;
-  std::bitset<FLAG_MAX> flag_;
 
  public:
   Client(std::shared_ptr<const mj::Config> config, 
@@ -75,6 +77,8 @@ class Client
   bool isOpen() const;
 
   void operator()(std::shared_ptr<Client> self);
+
+  UMP_GETTER(State, state_);
 
   Client& setName(const std::string& name);
 
@@ -96,8 +100,6 @@ class Client
   UMP_GETTER(PonPattern, ponPattern_);
   UMP_GETTER(ChiPattern, chiPattern_);
   UMP_GETTER(KanPattern, kanPattern_);
-
-  UMP_BIT_GETTER(GameEnd, flag_, FLAG_GAME_END);
 
   void replyCommand(Command reply, const Command& command);
 
@@ -127,7 +129,10 @@ class Client
   void send(const Command& command);
 
   void recv(const Command& command);
+
+  void execPlayer(const Command& command);
   void execGameStart(const Command& command);
+  void execGameEnd(const Command& command);
   void execKyokuStart(const Command& command);
   void execHaipai(const Command& command);
   void execPoint(const Command& command);

@@ -48,6 +48,7 @@ Client::Client(std::shared_ptr<const mj::Config> config,
   : super(config), 
     socket_(socket), 
     hello_(Command::TYPE_HELLO), 
+    state_(STATE_NULL), 
     seat_(0), 
     rest_(0)
 {
@@ -68,7 +69,6 @@ Client::~Client() {
 bool Client::open(const char* host, int port) {
   close();
   if(socket_->connect(host, port)) {
-    flag_.reset();
     thread_.reset(new std::thread(std::ref(*this), getThis()));
     return true;
   }
@@ -78,6 +78,7 @@ bool Client::open(const char* host, int port) {
 	@brief 接続を閉じる
 ***************************************************************************/
 void Client::close() {
+  state_ = STATE_NULL;
   socket_->close();
   while(thread_) {
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -171,22 +172,13 @@ bool Client::onRecvCommand(const Command& command) {
     seat_ = Command::StringToSeat(command.getArg(0).c_str());
     break;
   case Command::TYPE_PLAYER:
-    {
-      auto seat = Command::StringToSeat(command.getArg(0).c_str());
-      auto player = createPlayer();
-      player->setName(command.getArg(1));
-      setPlayer(seat, player);
-      onSetPlayer(player);
-    }
+    execPlayer(command);
     break;
   case Command::TYPE_GAMESTART:
     execGameStart(command);
-    onGameStart();
     break;
   case Command::TYPE_GAMEEND:
-    flag_.set(FLAG_GAME_END);
-    socket_->close();
-    onGameEnd();
+    execGameEnd(command);
     break;
   case Command::TYPE_KYOKUSTART:
     execKyokuStart(command);
@@ -282,6 +274,20 @@ void Client::send(const Command& command) {
   socket_->sendCommand(command);
 }
 /***********************************************************************//**
+	@brief playerコマンドを実行する
+	@param[in] command コマンド
+***************************************************************************/
+void Client::execPlayer(const Command& command) {
+  auto seat = Command::StringToSeat(command.getArg(0).c_str());
+  auto player = createPlayer();
+  player->setName(command.getArg(1));
+  setPlayer(seat, player);
+  if(seat == getSeat()) {
+    state_ = STATE_SEAT;
+  }
+  onSetPlayer(player);
+}
+/***********************************************************************//**
 	@brief ゲーム(半荘)開始
 	@param[in] command コマンド
 ***************************************************************************/
@@ -289,6 +295,17 @@ void Client::execGameStart(const Command& command) {
   if(command.hasOption("id")) {
     setId(command.getOption("id"));
   }
+  state_ = STATE_GAME;
+  onGameStart();
+}
+/***********************************************************************//**
+	@brief ゲーム終了
+	@param[in] command コマンド
+***************************************************************************/
+void Client::execGameEnd(const Command& command) {
+  state_ = STATE_END;
+  socket_->close();
+  onGameEnd();
 }
 /***********************************************************************//**
 	@brief 局開始
