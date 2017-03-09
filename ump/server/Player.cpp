@@ -137,7 +137,7 @@ void Player::operator()(std::shared_ptr<Player> self) {
 ***************************************************************************/
 mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
   auto sutehai(_sutehai);
-  if(isRichi()) {
+  if(isRichi() || !sutehai.getHai()) {
     sutehai.
       setHai(getTsumoHai()).
       setTsumogiri(true);
