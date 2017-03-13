@@ -184,6 +184,7 @@ bool Client::onRecvCommand(const Command& command) {
     execKyokuStart(command);
     break;
   case Command::TYPE_POINT:
+  case Command::TYPE_RICHI:
     execPoint(command);
     break;
   case Command::TYPE_HAIPAI:

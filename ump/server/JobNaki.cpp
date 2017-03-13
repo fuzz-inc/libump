@@ -116,7 +116,7 @@ Job* JobNaki::onUpdate() {
 void JobNaki::onEnd() {
   if(richier_) {
     auto richiPoint = getConfig().getRichiPoint();
-    addPoint(richier_->getSeat(), -richiPoint);
+    addPoint(richier_->getSeat(), -richiPoint, Command::TYPE_RICHI);
     getGame().addKyotaku(richiPoint);
   }
   auto hai = sutehai_->getHai();
