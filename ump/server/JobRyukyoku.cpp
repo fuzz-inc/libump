@@ -48,8 +48,6 @@ JobRyukyoku::JobRyukyoku(Game& game)
 	@brief 
 ***************************************************************************/
 void JobRyukyoku::onBegin() {
-  Command command(Command::TYPE_RYUKYOKU);
-  sendAll(command);
   getGame().resetTurn();
   askTenpai();
 }
@@ -70,6 +68,7 @@ Job* JobRyukyoku::onUpdate() {
 	@brief 
 ***************************************************************************/
 void JobRyukyoku::onEnd() {
+  sendAll(Command(Command::TYPE_RYUKYOKU));
   int tenpaiNum = 0;
   int notenNum = 0;
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
