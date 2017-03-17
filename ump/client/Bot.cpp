@@ -58,7 +58,7 @@ bool Bot::onRecvCommand(const Command& command) {
     replyCommand(Command(Command::TYPE_YES), command);
     break;
   case Command::TYPE_TENPAI_Q:
-    replyCommand(Command(Command::TYPE_YES), command);
+    replyCommand(Command(Command::TYPE_TENPAI), command);
     break;
   case Command::TYPE_NAKI_Q:
     replyNaki(command);

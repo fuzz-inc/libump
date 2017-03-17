@@ -115,7 +115,7 @@ bool JobRyukyoku::waitTenpai() {
   auto player = getGame().getTurnPlayer();
   const Command reply = player->getReply();
   if(reply.isExist()) {
-    if(reply.getType() == Command::TYPE_YES) {
+    if(reply.getType() == Command::TYPE_TENPAI) {
       player->sayTenpai();
     }
     return true;
