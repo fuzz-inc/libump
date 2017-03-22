@@ -53,8 +53,6 @@ class Game
     FLAG_MAX
   };
 
-  class Thread;
-
  private:
   Server& server_;
   std::unique_ptr<std::thread> thread_;
