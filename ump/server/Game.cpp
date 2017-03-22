@@ -122,7 +122,7 @@ void Game::stop() {
 	@param[in] 開始するジョブ
 ***************************************************************************/
 void Game::beginJob(Job* job) {
-  jobs_.push(job);
+  jobs_.emplace(job);
   job->onBegin();
 }
 /***********************************************************************//**
@@ -243,9 +243,9 @@ size_t Game::findSeat() const {
 ***************************************************************************/
 void Game::updateJob(const std::chrono::milliseconds& deltaTime) {
   if(!jobs_.empty()) {
-    auto job = jobs_.top();
+    auto& job = jobs_.top();
     auto nextJob = job->update(deltaTime);
-    if(nextJob != job) {
+    if(nextJob != job.get()) {
       job->onEnd();
       jobs_.pop();
       if(nextJob) {
@@ -259,7 +259,6 @@ void Game::updateJob(const std::chrono::milliseconds& deltaTime) {
 ***************************************************************************/
 void Game::stopAllJob() {
   while(!jobs_.empty()) {
-    delete jobs_.top();
     jobs_.pop();
   }
 }

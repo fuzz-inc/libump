@@ -51,7 +51,7 @@ class Game
   Server& server_;
   std::unique_ptr<thread::Thread> thread_;
   mj::Yama yama_;
-  std::stack<Job*> jobs_;
+  std::stack<std::unique_ptr<Job>> jobs_;
 
  public:
   Game(std::shared_ptr<const Config> config, Server& server);
