@@ -48,17 +48,10 @@ class Game
   typedef mj::Game super;
 
  private:
-  enum {
-    FLAG_STOP, 
-    FLAG_MAX
-  };
-
- private:
   Server& server_;
-  std::unique_ptr<std::thread> thread_;
+  std::unique_ptr<thread::Thread> thread_;
   mj::Yama yama_;
   std::stack<Job*> jobs_;
-  std::bitset<FLAG_MAX> flag_;
 
  public:
   Game(std::shared_ptr<const Config> config, Server& server);
@@ -70,13 +63,12 @@ class Game
     return server_;
   }
 
+  UMP_GETTER(Thread, thread_);
+
   void appendPlayer(std::shared_ptr<Player> player);
   bool canStart() const;
   void start();
   void stop();
-  bool isStop() const {
-    return flag_.test(FLAG_STOP);
-  }
 
   void beginJob(Job* job);
 
@@ -102,7 +94,8 @@ class Game
   size_t findSeat() const;
 
   void updateJob(const std::chrono::milliseconds& deltaTime);
-  
+  void stopAllJob();
+
   void dump() const;
 
   std::string createId() const;

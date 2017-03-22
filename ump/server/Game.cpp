@@ -37,6 +37,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/JobGame.hpp"
 #include "ump/server/Player.hpp"
 #include "ump/server/Server.hpp"
+#include "ump/thread/Thread.hpp"
 
 namespace ump {
 namespace server {
@@ -59,7 +60,7 @@ Game::Game(std::shared_ptr<const Config> config, Server& server)
 	@brief デストラクタ
 ***************************************************************************/
 Game::~Game() {
-  assert(!thread_);
+  stop();
 }
 /***********************************************************************//**
 	@brief 
@@ -107,18 +108,14 @@ void Game::start() {
     player->setPoint(getConfig().getPoint());
   }
   beginJob(new JobGame(*this));
-  assert(!thread_.get());
-  thread_.reset(new std::thread(std::ref(*this)));
+  thread_.reset(new thread::Thread(new std::thread(std::ref(*this))));
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Game::stop() {
-  flag_.set(FLAG_STOP);
-  if(thread_) {
-    thread_->join();
-    thread_.reset();
-  }
+  stopAllJob();
+  thread_.reset();
 }
 /***********************************************************************//**
 	@brief ジョブを開始する
@@ -214,10 +211,9 @@ void Game::sendAll(const Command& command) const {
 ***************************************************************************/
 void Game::operator()() {
   auto& deltaTime = getConfig().getDeltaTime();
-  while(!isStop()) {
-    updateJob(deltaTime);
-    std::this_thread::sleep_for(deltaTime);
-  }
+  do {
+    updateJob(std::chrono::milliseconds(deltaTime));
+  } while(!thread_->sleep(deltaTime));
   getServer().onEndGame(this);
 }
 /***********************************************************************//**
@@ -256,6 +252,15 @@ void Game::updateJob(const std::chrono::milliseconds& deltaTime) {
         beginJob(nextJob);
       }
     }
+  }
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Game::stopAllJob() {
+  while(!jobs_.empty()) {
+    delete jobs_.top();
+    jobs_.pop();
   }
 }
 /***********************************************************************//**

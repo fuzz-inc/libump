@@ -58,7 +58,7 @@ class Config
   size_t roundMax_;
   size_t doraNum_;
   std::vector<int> uma_;
-  std::chrono::milliseconds deltaTime_;
+  int deltaTime_;
   float speed_;
   float diceWait_;
   float haipaiWait_;
