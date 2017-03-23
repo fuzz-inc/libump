@@ -75,6 +75,7 @@ void JobSutehai::onBegin() {
     }
   }
   player->send(command_);
+  sleep(0.5f);
 }
 /***********************************************************************//**
 	@copydoc Job::onUpdate

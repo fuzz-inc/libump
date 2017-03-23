@@ -68,6 +68,7 @@ Job* JobGame::onUpdate() {
 	@brief 
 ***************************************************************************/
 void JobGame::onEnd() {
+  sleep(0.5f);
   auto players(getGame().getPlayers());
   std::stable_sort(players.begin(), players.end(), 
                    [](const std::shared_ptr<mj::Player>& a, 

@@ -19,6 +19,7 @@ class Thread {
   Thread(std::thread* thread);
   ~Thread();
 
+  void stop();
   bool sleep(int ms);
 };
 /***********************************************************************//**

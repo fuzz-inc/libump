@@ -104,6 +104,7 @@ bool Game::canStart() const {
 	@brief ゲームを開始する
 ***************************************************************************/
 void Game::start() {
+  assert(!thread_);
   for(auto player : getPlayers()) {
     player->setPoint(getConfig().getPoint());
   }
@@ -114,8 +115,11 @@ void Game::start() {
 	@brief 
 ***************************************************************************/
 void Game::stop() {
-  stopAllJob();
-  thread_.reset();
+  if(thread_) {
+    stopAllJob();
+    thread_->stop();
+    thread_.reset();
+  }
 }
 /***********************************************************************//**
 	@brief ジョブを開始する

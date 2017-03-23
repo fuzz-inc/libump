@@ -21,6 +21,7 @@ class Condition {
   void notify();
   void wait();
   bool wait(int ms);
+  void reset();
 };
 /***********************************************************************//**
 	$Id$

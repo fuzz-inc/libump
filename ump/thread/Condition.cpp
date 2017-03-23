@@ -31,20 +31,24 @@ void Condition::wait() {
                   [&]() {
                     return ready_; 
                   });
-  ready_ = false;
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 bool Condition::wait(int ms) {
   std::unique_lock<std::mutex> lock(mutex_);
-  auto result = condition_.wait_for(lock, 
-                                    std::chrono::milliseconds(ms), 
-                                    [&]() {
-                                      return ready_;
-                                    });
+  return condition_.wait_for(lock, 
+                             std::chrono::milliseconds(ms), 
+                             [&]() {
+                               return ready_;
+                             });
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Condition::reset() {
+  std::unique_lock<std::mutex> lock(mutex_);
   ready_ = false;
-  return result;
 }
 /***********************************************************************//**
 	$Id$
