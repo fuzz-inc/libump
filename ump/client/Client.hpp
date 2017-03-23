@@ -78,6 +78,8 @@ class Client
 
   void operator()(std::shared_ptr<Client> self);
 
+  UMP_ACCESSOR(Hello, hello_);
+
   UMP_GETTER(State, state_);
 
   Client& setName(const std::string& name);
@@ -116,7 +118,6 @@ class Client
   virtual void onGameEnd() {}
 
   UMP_GETTER(Socket, socket_);
-  UMP_ACCESSOR(Hello, hello_);
 
   void beginKyoku();
   void onShowHai(const mj::Hai* hai) override;

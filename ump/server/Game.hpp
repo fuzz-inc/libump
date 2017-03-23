@@ -48,19 +48,20 @@ class Game
   typedef mj::Game super;
 
  private:
-  Server& server_;
+  std::weak_ptr<Server> server_;
   std::unique_ptr<thread::Thread> thread_;
   mj::Yama yama_;
   std::stack<std::unique_ptr<Job>> jobs_;
 
  public:
-  Game(std::shared_ptr<const Config> config, Server& server);
+  Game(std::shared_ptr<const Config> config, 
+       std::shared_ptr<Server> server);
   ~Game() override;
 
   const Config& getConfig() const;
 
-  Server& getServer() const {
-    return server_;
+  std::shared_ptr<Server> getServer() const {
+    return server_.lock();
   }
 
   UMP_GETTER(Thread, thread_);

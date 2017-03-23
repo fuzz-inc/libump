@@ -64,7 +64,6 @@ class Server
   void start();
   void stop();
 
-  void startGame(Game* game);
   void onEndGame(Game* game);
 
   void operator()();
@@ -73,10 +72,15 @@ class Server
                      const Command& command);
 
  protected:
-  virtual std::shared_ptr<Game> createGame();
+  std::mutex& getMutex() {
+    return mutex_;
+  }
 
- private:
-  void onStartGame();
+  virtual std::shared_ptr<Game> createGame();
+  void startGame(std::shared_ptr<Game> game);
+
+  virtual void onConnectPlayer(std::shared_ptr<Player> player, 
+                               const Command& command);
 };
 /***********************************************************************//**
 	$Id$

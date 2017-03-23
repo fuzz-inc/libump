@@ -46,7 +46,8 @@ namespace server {
 	@param[in] config 設定
 	@param[in] server サーバー
 ***************************************************************************/
-Game::Game(std::shared_ptr<const Config> config, Server& server)
+Game::Game(std::shared_ptr<const Config> config, 
+           std::shared_ptr<Server> server)
   : super(config), 
     server_(server), 
     yama_(*config)
@@ -218,7 +219,7 @@ void Game::operator()() {
   do {
     updateJob(std::chrono::milliseconds(deltaTime));
   } while(!thread_->sleep(deltaTime));
-  getServer().onEndGame(this);
+  getServer()->onEndGame(this);
 }
 /***********************************************************************//**
 	@brief コマンドを受信した

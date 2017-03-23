@@ -46,8 +46,7 @@ namespace server {
 	@param[in] socket ソケット
 	@param[in] port ポート番号
 ***************************************************************************/
-Server::Server(const std::shared_ptr<socket::Socket>& socket, 
-               int port)
+Server::Server(const std::shared_ptr<socket::Socket>& socket, int port)
   : socket_(socket), 
     port_(port), 
     config_(std::make_shared<Config>()), 
@@ -87,15 +86,6 @@ void Server::stop() {
   }
 }
 /***********************************************************************//**
-	@brief ゲームを開始する
-***************************************************************************/
-void Server::startGame(Game* game) {
-  std::lock_guard<std::mutex> lock(mutex_);
-  if(game_.get() == game) {
-    onStartGame();
-  }
-}
-/***********************************************************************//**
 	@brief ゲームが終了した
 	@param[in] game 終了したゲーム
 ***************************************************************************/
@@ -127,31 +117,38 @@ void Server::onRecvCommand(std::shared_ptr<Player> player,
                            const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
   if(command.getType() == Command::TYPE_HELLO) {
-    if(!game_) {
-      game_ = createGame();
-    }
     if(command.hasOption("name")) {
       player->setName(command.getOption("name"));
     }
-    game_->appendPlayer(player);
-    if(game_->canStart()) {
-      onStartGame();
-    }
+    onConnectPlayer(player, command);
   }
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 std::shared_ptr<Game> Server::createGame() {
-  return std::make_shared<Game>(getConfig(), *this);
+  return std::make_shared<Game>(getConfig(), shared_from_this());
 }
 /***********************************************************************//**
 	@brief ゲームを開始する
 ***************************************************************************/
-void Server::onStartGame() {
-  game_->start();
-  games_.push_back(game_);
-  game_.reset();
+void Server::startGame(std::shared_ptr<Game> game) {
+  games_.push_back(game);
+  game->start();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Server::onConnectPlayer(std::shared_ptr<Player> player, 
+                             const Command& command) {
+  if(!game_) {
+    game_ = createGame();
+  }
+  game_->appendPlayer(player);
+  if(game_->canStart()) {
+    startGame(game_);
+    game_.reset();
+  }
 }
 /***********************************************************************//**
 	$Id$
