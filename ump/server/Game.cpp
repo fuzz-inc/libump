@@ -116,8 +116,8 @@ void Game::start() {
 ***************************************************************************/
 void Game::stop() {
   if(thread_) {
-    stopAllJob();
     thread_->stop();
+    stopAllJob();
     thread_.reset();
   }
 }
