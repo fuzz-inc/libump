@@ -51,15 +51,16 @@ class Player
   class Thread;
 
  private:
+  std::weak_ptr<Server> server_;
   std::shared_ptr<socket::Socket> socket_;
   std::unique_ptr<std::thread> thread_;
-  Receiver* receiver_;
   unsigned int serial_;
   Command command_;
   Command reply_;
 
  public:
-  Player(const std::shared_ptr<socket::Socket>& socket);
+  Player(std::shared_ptr<Server> server, 
+         std::shared_ptr<socket::Socket> socket);
   ~Player();
 
   std::shared_ptr<Game> getGame() const;
@@ -71,7 +72,7 @@ class Player
 
   bool isOpen() const;
 
-  void send(const Command& command, Receiver* receiver = nullptr);
+  void send(const Command& command);
 
   UMP_GETTER(Command, command_);
   UMP_GETTER(Reply, reply_);
@@ -84,6 +85,8 @@ class Player
   mj::Sutehai* sutehai(const mj::Sutehai& sutehai) override;
 
  private:
+  std::shared_ptr<Server> getServer() const;
+
   void log(Logger::Level level, const std::string& message) const;
 };
 /***********************************************************************//**

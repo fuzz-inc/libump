@@ -34,7 +34,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Config.hpp"
 #include "ump/server/Game.hpp"
 #include "ump/server/Player.hpp"
-#include "ump/server/Receiver.hpp"
+#include "ump/server/Server.hpp"
 #include "ump/socket/Socket.hpp"
 
 namespace ump {
@@ -42,9 +42,10 @@ namespace server {
 /***********************************************************************//**
 	@brief コンストラクタ
 ***************************************************************************/
-Player::Player(const std::shared_ptr<socket::Socket>& socket)
-  : socket_(socket), 
-    receiver_(nullptr), 
+Player::Player(std::shared_ptr<Server> server, 
+               std::shared_ptr<socket::Socket> socket)
+  : server_(server), 
+    socket_(socket), 
     serial_(0)
 {
 }
@@ -75,7 +76,6 @@ void Player::stop() {
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
   socket_.reset();
-  receiver_ = nullptr;
 }
 /***********************************************************************//**
 	@brief 
@@ -86,13 +86,11 @@ bool Player::isOpen() const {
 /***********************************************************************//**
 	@brief コマンドを送る
 	@param[in] command 送信するコマンド
-	@param[in] receiver レシーバー
 ***************************************************************************/
-void Player::send(const Command& command, Receiver* receiver) {
+void Player::send(const Command& command) {
   command_ = command;
   command_.setSerial(++serial_);
   reply_.clear();
-  receiver_ = receiver;
   log(Logger::LEVEL_DEBUG, std::string(" <- ") + command_.toString(false));
   socket_->sendCommand(command_);
 }
@@ -118,13 +116,12 @@ void Player::operator()(std::shared_ptr<Player> self) {
         log(Logger::LEVEL_DEBUG, 
             std::string(" -> ") + command.toString(true));
         reply_ = command;
-        if(receiver_) {
-          receiver_->receive(shared_from_this(), command);
-          receiver_ = nullptr;
-        }
       }
       if(auto game = getGame()) {
         game->onRecvCommand(shared_from_this(), command);
+      }
+      else {
+        getServer()->onRecvCommand(shared_from_this(), command);
       }
     }
   }
@@ -166,6 +163,12 @@ mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
     }
   }
   return super::sutehai(sutehai);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+std::shared_ptr<Server> Player::getServer() const {
+  return server_.lock();
 }
 /***********************************************************************//**
 	@brief ログ出力

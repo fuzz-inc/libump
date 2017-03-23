@@ -112,7 +112,6 @@ class JobReady;
 class JobRyukyoku;
 class JobTsumo;
 class Player;
-class Receiver;
 class Server;
 }
 

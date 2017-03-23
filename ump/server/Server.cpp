@@ -37,6 +37,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Player.hpp"
 #include "ump/server/Server.hpp"
 #include "ump/socket/Socket.hpp"
+#include "ump/thread/Thread.hpp"
 
 namespace ump {
 namespace server {
@@ -62,33 +63,36 @@ Server::Server(const std::shared_ptr<socket::Socket>& socket,
 	@brief デストラクタ
 ***************************************************************************/
 Server::~Server() {
-  stop();
-  join();
+  assert(!thread_);
 }
 /***********************************************************************//**
 	@brief 実行
 ***************************************************************************/
 void Server::start() {
   assert(!thread_);
-  thread_.reset(new std::thread(std::ref(*this)));
+  thread_.reset(new thread::Thread(new std::thread(std::ref(*this))));
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Server::stop() {
-  auto games(games_);
-  for(auto& game : games) {
-    game->stop();
+  if(thread_) {
+    auto games(games_);
+    for(auto& game : games) {
+      game->stop();
+    }
+    socket_->close();
+    thread_->stop();
+    thread_.reset();
   }
-  socket_->close();
 }
 /***********************************************************************//**
-	@brief スレッド終了を待つ
+	@brief ゲームを開始する
 ***************************************************************************/
-void Server::join() {
-  if(thread_) {
-    thread_->join();
-    thread_.reset();
+void Server::startGame(Game* game) {
+  std::lock_guard<std::mutex> lock(mutex_);
+  if(game_.get() == game) {
+    onStartGame();
   }
 }
 /***********************************************************************//**
@@ -104,10 +108,24 @@ void Server::onEndGame(Game* game) {
   games_.erase(found);
 }
 /***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Server::operator()() {
+  while(socket_->isOpen()) {
+    if(auto socket = socket_->accept(getTimeout())) {
+      auto player = std::make_shared<Player>(shared_from_this(), socket);
+      player->send(Command(Command::TYPE_HELLO).
+                   setOption("ump", Version::Get().toString()));
+      player->start();
+    }
+  }
+}
+/***********************************************************************//**
 	@copydoc Receiver::onReceive
 ***************************************************************************/
-void Server::onReceive(std::shared_ptr<Player> player, 
-                       const Command& command) {
+void Server::onRecvCommand(std::shared_ptr<Player> player, 
+                           const Command& command) {
+  std::lock_guard<std::mutex> lock(mutex_);
   if(command.getType() == Command::TYPE_HELLO) {
     if(!game_) {
       game_ = createGame();
@@ -117,9 +135,7 @@ void Server::onReceive(std::shared_ptr<Player> player,
     }
     game_->appendPlayer(player);
     if(game_->canStart()) {
-      game_->start();
-      games_.push_back(game_);
-      game_.reset();
+      onStartGame();
     }
   }
 }
@@ -130,18 +146,12 @@ std::shared_ptr<Game> Server::createGame() {
   return std::make_shared<Game>(getConfig(), *this);
 }
 /***********************************************************************//**
-	@brief 
+	@brief ゲームを開始する
 ***************************************************************************/
-void Server::operator()() {
-  while(socket_->isOpen()) {
-    if(auto socket = socket_->accept(getTimeout())) {
-      auto player = std::make_shared<Player>(socket);
-      player->send(Command(Command::TYPE_HELLO).
-                   setOption("ump", Version::Get().toString()), 
-                   this);
-      player->start();
-    }
-  }
+void Server::onStartGame() {
+  game_->start();
+  games_.push_back(game_);
+  game_.reset();
 }
 /***********************************************************************//**
 	$Id$

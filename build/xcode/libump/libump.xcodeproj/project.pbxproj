@@ -80,8 +80,6 @@
 		DAFCE7D71D7D78FF0016A137 /* JobTsumo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7941D7D78FF0016A137 /* JobTsumo.hpp */; };
 		DAFCE7DA1D7D78FF0016A137 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7971D7D78FF0016A137 /* Player.cpp */; };
 		DAFCE7DB1D7D78FF0016A137 /* Player.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7981D7D78FF0016A137 /* Player.hpp */; };
-		DAFCE7DC1D7D78FF0016A137 /* Receiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7991D7D78FF0016A137 /* Receiver.cpp */; };
-		DAFCE7DD1D7D78FF0016A137 /* Receiver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE79A1D7D78FF0016A137 /* Receiver.hpp */; };
 		DAFCE7E31D7D78FF0016A137 /* ump.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7A01D7D78FF0016A137 /* ump.hpp */; };
 		DAFCE7E41D7D78FF0016A137 /* Version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7A11D7D78FF0016A137 /* Version.cpp */; };
 		DAFCE7E51D7D78FF0016A137 /* Version.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE7A21D7D78FF0016A137 /* Version.hpp */; };
@@ -167,8 +165,6 @@
 		DAFCE7941D7D78FF0016A137 /* JobTsumo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobTsumo.hpp; sourceTree = "<group>"; };
 		DAFCE7971D7D78FF0016A137 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		DAFCE7981D7D78FF0016A137 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
-		DAFCE7991D7D78FF0016A137 /* Receiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Receiver.cpp; sourceTree = "<group>"; };
-		DAFCE79A1D7D78FF0016A137 /* Receiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Receiver.hpp; sourceTree = "<group>"; };
 		DAFCE7A01D7D78FF0016A137 /* ump.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ump.hpp; sourceTree = "<group>"; };
 		DAFCE7A11D7D78FF0016A137 /* Version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Version.cpp; sourceTree = "<group>"; };
 		DAFCE7A21D7D78FF0016A137 /* Version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Version.hpp; sourceTree = "<group>"; };
@@ -324,8 +320,6 @@
 				DAFCE7941D7D78FF0016A137 /* JobTsumo.hpp */,
 				DAFCE7971D7D78FF0016A137 /* Player.cpp */,
 				DAFCE7981D7D78FF0016A137 /* Player.hpp */,
-				DAFCE7991D7D78FF0016A137 /* Receiver.cpp */,
-				DAFCE79A1D7D78FF0016A137 /* Receiver.hpp */,
 				DA47AC3F1D8A645700533933 /* Server.cpp */,
 				DA47AC401D8A645700533933 /* Server.hpp */,
 			);
@@ -371,7 +365,6 @@
 				DAFCE7AE1D7D78FF0016A137 /* Divider.hpp in Headers */,
 				DAFCE7BA1D7D78FF0016A137 /* Shanten.hpp in Headers */,
 				DA06667E1DAF9D3A00F29305 /* Game.hpp in Headers */,
-				DAFCE7DD1D7D78FF0016A137 /* Receiver.hpp in Headers */,
 				DAFCE7D71D7D78FF0016A137 /* JobTsumo.hpp in Headers */,
 				DAFCE7C51D7D78FF0016A137 /* Config.hpp in Headers */,
 				DAFCE7AA1D7D78FF0016A137 /* Agari.hpp in Headers */,
@@ -467,7 +460,6 @@
 				DAFCE7D61D7D78FF0016A137 /* JobTsumo.cpp in Sources */,
 				DA47AC411D8A645700533933 /* Server.cpp in Sources */,
 				DAFCE7B11D7D78FF0016A137 /* HaiArray.cpp in Sources */,
-				DAFCE7DC1D7D78FF0016A137 /* Receiver.cpp in Sources */,
 				DAFCE7CE1D7D78FF0016A137 /* JobKyoku.cpp in Sources */,
 				DA8D01001D9BE99D00F1F5D2 /* Logger.cpp in Sources */,
 				DAFCE7A51D7D78FF0016A137 /* Command.cpp in Sources */,

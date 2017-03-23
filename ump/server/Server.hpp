@@ -32,15 +32,13 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
-#include "ump/server/Receiver.hpp"
-
 namespace ump {
 namespace server {
 /***********************************************************************//**
 	@brief サーバー
 ***************************************************************************/
 class Server
-  : public Receiver
+  : public std::enable_shared_from_this<Server>
 {
  public:
   static const int DEFAULT_PORT = 1326;
@@ -52,29 +50,33 @@ class Server
   int timeout_;
   std::vector<std::shared_ptr<Game>> games_;
   std::shared_ptr<Game> game_;
-  std::unique_ptr<std::thread> thread_;
+  std::unique_ptr<thread::Thread> thread_;
+  std::mutex mutex_;
 
  public:
   Server(const std::shared_ptr<socket::Socket>& socket, 
          int port = DEFAULT_PORT);
-  ~Server() override;
+  ~Server();
 
   UMP_ACCESSOR(Config, config_);
   UMP_ACCESSOR(Timeout, timeout_);
 
   void start();
   void stop();
-  void join();
 
+  void startGame(Game* game);
   void onEndGame(Game* game);
 
   void operator()();
 
- protected:
-  void onReceive(std::shared_ptr<Player> player, 
-                 const Command& command) override;
+  void onRecvCommand(std::shared_ptr<Player> player, 
+                     const Command& command);
 
+ protected:
   virtual std::shared_ptr<Game> createGame();
+
+ private:
+  void onStartGame();
 };
 /***********************************************************************//**
 	$Id$

@@ -67,7 +67,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/JobRyukyoku.hpp"
 #include "ump/server/JobTsumo.hpp"
 #include "ump/server/Player.hpp"
-#include "ump/server/Receiver.hpp"
 #include "ump/server/Server.hpp"
 #include "ump/socket/Socket.hpp"
 #include "ump/socket/SslSocket.hpp"
