@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #include "ump/server/Config.hpp"
 #include "ump/server/Game.hpp"
+#include "ump/server/JobReady.hpp"
 #include "ump/server/JobRyukyoku.hpp"
 #include "ump/server/Player.hpp"
 
@@ -56,7 +57,7 @@ void JobRyukyoku::onBegin() {
 ***************************************************************************/
 Job* JobRyukyoku::onUpdate() {
   if(isEnd()) {
-    return nullptr;
+    return new JobReady(getGame());
   }
   if(waitTenpai()) {
     sayTenpai();

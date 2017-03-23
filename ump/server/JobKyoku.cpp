@@ -34,7 +34,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Game.hpp"
 #include "ump/server/JobHaipai.hpp"
 #include "ump/server/JobKyoku.hpp"
-#include "ump/server/JobReady.hpp"
 #include "ump/server/JobRyukyoku.hpp"
 #include "ump/server/JobTsumo.hpp"
 #include "ump/server/Player.hpp"
@@ -65,7 +64,7 @@ void JobKyoku::onBegin() {
 ***************************************************************************/
 Job* JobKyoku::onUpdate() {
   if(isEnd() || getGame().isAgari()) {
-    return new JobReady(getGame());
+    return nullptr;
   }
   if(getGame().getRest() > 0) {
     getGame().beginJob(new JobTsumo(getGame()));
@@ -83,6 +82,7 @@ void JobKyoku::onEnd() {
   Command command(Command::TYPE_KYOKUEND);
   sendAll(command);
   getGame().endKyoku();
+  sleep(0.5f);
 }
 /***********************************************************************//**
 	@brief 

@@ -33,6 +33,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Config.hpp"
 #include "ump/server/Game.hpp"
 #include "ump/server/JobAgari.hpp"
+#include "ump/server/JobReady.hpp"
 #include "ump/server/Player.hpp"
 
 namespace ump {
@@ -55,7 +56,7 @@ void JobAgari::onBegin() {
 	@copydoc Job::onUpdate
 ***************************************************************************/
 Job* JobAgari::onUpdate() {
-  return nullptr;
+  return new JobReady(getGame());
 }
 /***********************************************************************//**
 	@copydoc Job::onEnd
