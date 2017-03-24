@@ -83,11 +83,13 @@ void Socket::close() {
 	@param[in] command 送信するコマンド
 ***************************************************************************/
 bool Socket::sendCommand(const Command& command) {
+  std::lock_guard<std::mutex> lock(getMutex());
   auto message = command.toString(true) + EOL;
   if(send(message.data(), message.size())) {
     if(auto data = command.getData()) {
       return send(data->data(), data->size());
     }
+    return true;
   }
   return false;
 }
@@ -119,7 +121,6 @@ bool Socket::recvCommand(Command& command) {
 ***************************************************************************/
 bool Socket::send(const char* buff, size_t size) {
   if(isOpen()) {
-    std::lock_guard<std::mutex> lock(getMutex());
     return onSend(buff, size);
   }
   return false;
