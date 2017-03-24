@@ -142,8 +142,6 @@ class Client
   void execSay(const Command& command);
   void execAgari(const Command& command);
   void execRyukyoku(const Command& command);
-
-  void replySutehai(const Command& command);
 };
 /***********************************************************************//**
 	$Id$
