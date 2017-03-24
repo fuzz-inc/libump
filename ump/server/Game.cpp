@@ -78,7 +78,7 @@ void Game::appendPlayer(std::shared_ptr<Player> player) {
   sendCommand(player, 
               Command(Command::TYPE_SEAT).
               append(Command::SeatToString(seat)).
-              setOption("gamdid", getId()));
+              setOption(Command::OPTION_GAMEID, getId()));
   for(auto& iter : getPlayers()) {
     if(iter) {
       sendCommand(player, 
