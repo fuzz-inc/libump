@@ -84,9 +84,11 @@ class Game
 
   size_t getRest() const override;
 
-  void sendAll(const Command& command) const;
-
   void operator()();
+
+  void sendAll(const Command& command);
+  virtual void sendCommand(std::shared_ptr<Player> player, 
+                           const Command& command);
 
   virtual void onRecvCommand(std::shared_ptr<Player> player, 
                              const Command& command);

@@ -75,13 +75,16 @@ const Config& Game::getConfig() const {
 ***************************************************************************/
 void Game::appendPlayer(std::shared_ptr<Player> player) {
   auto seat = findSeat();
-  player->send(Command(Command::TYPE_SEAT).
-               append(Command::SeatToString(seat)));
+  sendCommand(player, 
+              Command(Command::TYPE_SEAT).
+              append(Command::SeatToString(seat)).
+              setOption("gamdid", getId()));
   for(auto& iter : getPlayers()) {
     if(iter) {
-      player->send(Command(Command::TYPE_PLAYER).
-                   append(Command::SeatToString(iter->getSeat())).
-                   append(iter->getName()));
+      sendCommand(player, 
+                  Command(Command::TYPE_PLAYER).
+                  append(Command::SeatToString(iter->getSeat())).
+                  append(iter->getName()));
     }
   }
   super::setPlayer(seat, player);
@@ -201,17 +204,6 @@ size_t Game::getRest() const {
   return yama_.getRest();
 }
 /***********************************************************************//**
-	@brief 全員にコマンドを送る
-	@param[in] command コマンド
-***************************************************************************/
-void Game::sendAll(const Command& command) const {
-  for(auto& player : getPlayers()) {
-    if(player) {
-      std::static_pointer_cast<Player>(player)->send(command);
-    }
-  }
-}
-/***********************************************************************//**
         @brief 実行
 ***************************************************************************/
 void Game::operator()() {
@@ -220,6 +212,26 @@ void Game::operator()() {
     updateJob(std::chrono::milliseconds(deltaTime));
   } while(!thread_->sleep(deltaTime));
   getServer()->onEndGame(this);
+}
+/***********************************************************************//**
+	@brief 全員にコマンドを送る
+	@param[in] command コマンド
+***************************************************************************/
+void Game::sendAll(const Command& command) {
+  for(auto& player : getPlayers()) {
+    if(player) {
+      sendCommand(std::static_pointer_cast<Player>(player), command);
+    }
+  }
+}
+/***********************************************************************//**
+	@brief コマンドを送る
+	@param[in] player 送信先のプレイヤー
+	@param[in] command 送信するコマンド
+***************************************************************************/
+void Game::sendCommand(std::shared_ptr<Player> player, 
+                       const Command& command) {
+  player->send(command);
 }
 /***********************************************************************//**
 	@brief コマンドを受信した
