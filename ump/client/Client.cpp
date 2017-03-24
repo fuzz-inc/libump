@@ -124,14 +124,21 @@ std::shared_ptr<mj::Player> Client::getPlayer() const {
   return getPlayer(getSeat());
 }
 /***********************************************************************//**
+	コマンドをサーバに送る
+	@param	command	送信するコマンド
+***************************************************************************/
+bool Client::sendCommand(const Command& command) {
+  return socket_->sendCommand(command);
+}
+/***********************************************************************//**
 	@brief 返答を送る
 	@param[in] reply 返答コマンド
 	@param[in] command 受信コマンド
 ***************************************************************************/
-void Client::replyCommand(Command reply, const Command& command) {
+bool Client::replyCommand(Command reply, const Command& command) {
   reply.setSerial(command.getSerial());
   onReplyCommand(reply);
-  send(reply);
+  return sendCommand(reply);
 }
 /***********************************************************************//**
 	@brief デバッグ表示
@@ -269,13 +276,6 @@ void Client::beginKyoku() {
 void Client::onShowHai(const mj::Hai* hai) {
   super::onShowHai(hai);
   hideHaiNums_[hai->getNormal()]--;
-}
-/***********************************************************************//**
-	コマンドをサーバに送る
-	@param	command	送信するコマンド
-***************************************************************************/
-void Client::send(const Command& command) {
-  socket_->sendCommand(command);
 }
 /***********************************************************************//**
 	@brief playerコマンドを実行する

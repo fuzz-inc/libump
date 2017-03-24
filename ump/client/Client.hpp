@@ -103,7 +103,8 @@ class Client
   UMP_GETTER(ChiPattern, chiPattern_);
   UMP_GETTER(KanPattern, kanPattern_);
 
-  void replyCommand(Command reply, const Command& command);
+  bool sendCommand(const Command& command);
+  bool replyCommand(Command reply, const Command& command);
 
   void dump() const;
 
@@ -126,8 +127,6 @@ class Client
   std::shared_ptr<Client> getThis() {
     return std::static_pointer_cast<Client>(super::shared_from_this());
   }
-
-  void send(const Command& command);
 
   void recv(const Command& command);
 
