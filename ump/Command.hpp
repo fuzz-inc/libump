@@ -87,6 +87,8 @@ class Command {
     TYPE_MAX
   };
 
+  static const std::string OPTION_GAMEID;
+
  private:
   static const std::string OPTION_DATASIZE;
 

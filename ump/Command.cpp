@@ -79,6 +79,7 @@ const char* Command::TYPE_TABLE[] = {
   nullptr
 };
 
+const std::string Command::OPTION_GAMEID("gameid");
 const std::string Command::OPTION_DATASIZE("datasize");
 /***********************************************************************//**
 	@brief コンストラクタ
@@ -353,8 +354,11 @@ void Command::parseElem(const char* pt, size_t len) {
   auto sep = static_cast<const char*>(memchr(pt, '=', len));
   if(sep && sep != pt) {
     size_t nameLen = sep - pt;
+    size_t valueLen = len - nameLen - 1;
     setOption(std::string(pt, nameLen), 
-              Decode(sep + 1, len - nameLen - 1));
+              (valueLen > 0)
+              ? Decode(sep + 1, valueLen)
+              : std::string());
   }
   else {
     append(Decode(pt, len));

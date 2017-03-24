@@ -170,6 +170,9 @@ bool Client::onRecvCommand(const Command& command) {
     break;
   case Command::TYPE_SEAT:
     seat_ = Command::StringToSeat(command.getArg(0).c_str());
+    if(command.hasOption(Command::OPTION_GAMEID)) {
+      setId(command.getOption(Command::OPTION_GAMEID));
+    }
     break;
   case Command::TYPE_PLAYER:
     execPlayer(command);
@@ -293,9 +296,6 @@ void Client::execPlayer(const Command& command) {
 	@param[in] command コマンド
 ***************************************************************************/
 void Client::execGameStart(const Command& command) {
-  if(command.hasOption("id")) {
-    setId(command.getOption("id"));
-  }
   state_ = STATE_GAME;
   onGameStart();
 }
