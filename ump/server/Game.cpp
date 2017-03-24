@@ -120,6 +120,9 @@ void Game::start() {
 ***************************************************************************/
 void Game::stop() {
   if(thread_) {
+    for(auto player : getPlayers()) {
+      std::static_pointer_cast<Player>(player)->stop();
+    }
     thread_->stop();
     stopAllJob();
     thread_.reset();
