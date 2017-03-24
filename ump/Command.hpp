@@ -114,6 +114,7 @@ class Command {
   size_t countArg() const;
   const std::string& getArg(size_t index) const;
   const Args& getArgs() const;
+  bool hasArg() const;
   bool hasArg(const std::string& value) const;
   bool hasArg(Type type) const;
 
