@@ -68,12 +68,7 @@ Job* JobGame::onUpdate() {
 	@brief 
 ***************************************************************************/
 void JobGame::onEnd() {
-  auto players(getGame().getPlayers());
-  std::stable_sort(players.begin(), players.end(), 
-                   [](const std::shared_ptr<mj::Player>& a, 
-                      const std::shared_ptr<mj::Player>& b) {
-                     return a->getPoint() > b->getPoint();
-                   });
+  auto players = getRanking();
   const auto& uma = getConfig().getUma();
   Command command(Command::TYPE_GAMEEND);
   for(size_t i = 0, n = players.size(); i < n; i++) {
@@ -105,7 +100,26 @@ bool JobGame::isNextKyoku() const {
       }
     }
   }
+  if(config.isAgariyame()) {
+    if(game.isLastKyoku() && 
+       game.isRenchan() && 
+       getRanking().at(0) == game.getPlayer(game.getOya())) {
+      return false;
+    }
+  }
   return game.getRound() < config.getRoundMax();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+std::vector<std::shared_ptr<mj::Player>> JobGame::getRanking() const {
+  auto players(getGame().getPlayers());
+  std::stable_sort(players.begin(), players.end(), 
+                   [](const std::shared_ptr<mj::Player>& a, 
+                      const std::shared_ptr<mj::Player>& b) {
+                     return a->getPoint() > b->getPoint();
+                   });
+  return players;
 }
 /***********************************************************************//**
 	$Id$

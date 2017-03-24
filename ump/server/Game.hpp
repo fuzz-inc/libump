@@ -84,6 +84,8 @@ class Game
 
   size_t getRest() const override;
 
+  bool isLastKyoku() const;
+
   void operator()();
 
   void sendAll(const Command& command);

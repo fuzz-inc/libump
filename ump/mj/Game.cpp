@@ -174,9 +174,11 @@ void Game::endKyoku() {
   auto player = getPlayer(getOya());
   if(player->isAgari() || isRyukyoku()) {
     setRenchan(getRenchan() + 1);
+    flag_.set(FLAG_RENCHAN);
   }
   else {
     setRenchan(0);
+    flag_.reset(FLAG_RENCHAN);
   }
   if(!player->isAgari() && !player->isSayTenpai()) {
     auto oya = getOya() + 1;

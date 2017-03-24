@@ -44,6 +44,12 @@ class Game
   : public std::enable_shared_from_this<Game>
 {
  private:
+  enum {
+    FLAG_RENCHAN, 
+    FLAG_MAX
+  };
+
+ private:
   std::shared_ptr<const Config> config_;
   std::unique_ptr<std::default_random_engine> random_;
   std::string id_;
@@ -55,6 +61,7 @@ class Game
   HaiArray dora_;
   size_t turn_;
   Sutehai* lastSutehai_;
+  std::bitset<FLAG_MAX> flag_;
 
  public:
   Game(std::shared_ptr<const Config> config);
@@ -94,6 +101,8 @@ class Game
 
   Sutehai* sutehai(Player& player, const Sutehai& sutehai);
   UMP_GETTER(LastSutehai, lastSutehai_);
+
+  UMP_BIT_GETTER(Renchan, flag_, FLAG_RENCHAN);
 
   const Hai* getBakaze() const;
 

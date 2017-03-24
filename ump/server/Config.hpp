@@ -48,6 +48,7 @@ class Config
   enum {
     FLAG_OPEN, 
     FLAG_HAKOSHITA, 
+    FLAG_AGARIYAME, 
     FLAG_MAX
   };
 
@@ -82,6 +83,11 @@ class Config
    * 箱下続行
    */
   UMP_BIT_ACCESSOR(Hakoshita, flag_, FLAG_HAKOSHITA);
+
+  /**
+   * 和了止め
+   */
+  UMP_BIT_ACCESSOR(Agariyame, flag_, FLAG_AGARIYAME);
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);
