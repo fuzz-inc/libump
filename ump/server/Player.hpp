@@ -57,6 +57,7 @@ class Player
   unsigned int serial_;
   Command command_;
   Command reply_;
+  std::mutex mutex_;
 
  public:
   Player(std::shared_ptr<Server> server, 
@@ -65,14 +66,13 @@ class Player
 
   std::shared_ptr<Game> getGame() const;
 
-  UMP_GETTER(Socket, socket_);
-
   void start();
   void stop();
 
   bool isOpen() const;
 
-  void send(const Command& command);
+  bool send(const Command& command);
+  bool sendCommand(const Command& command);
 
   UMP_GETTER(Command, command_);
   UMP_GETTER(Reply, reply_);
@@ -86,6 +86,7 @@ class Player
 
  private:
   std::shared_ptr<Server> getServer() const;
+  UMP_GETTER(Socket, socket_);
 
   void log(Logger::Level level, const std::string& message) const;
 };

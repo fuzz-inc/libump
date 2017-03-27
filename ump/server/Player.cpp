@@ -71,6 +71,7 @@ void Player::start() {
 	@brief 
 ***************************************************************************/
 void Player::stop() {
+  std::lock_guard<std::mutex> lock(mutex_);
   if(socket_) {
     socket_->close();
   }
@@ -89,16 +90,23 @@ bool Player::isOpen() const {
 	@brief コマンドを送る
 	@param[in] command 送信するコマンド
 ***************************************************************************/
-void Player::send(const Command& command) {
+bool Player::send(const Command& command) {
   command_ = command;
   command_.setSerial(++serial_);
   reply_.clear();
-  if(isOpen() && socket_->sendCommand(command_)) {
-    log(Logger::LEVEL_DEBUG, std::string(" <- ") + command_.toString(false));
+  return sendCommand(command_);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool Player::sendCommand(const Command& command) {
+  std::lock_guard<std::mutex> lock(mutex_);
+  if(isOpen() && socket_->sendCommand(command)) {
+    log(Logger::LEVEL_DEBUG, std::string(" <- ") + command.toString(false));
+    return true;
   }
-  else {
-    log(Logger::LEVEL_ERROR, std::string(" <- ") + command_.toString(false));
-  }
+  log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
+  return false;
 }
 /***********************************************************************//**
 	@copydoc ump::mj::Hand::canRichi
