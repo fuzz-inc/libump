@@ -93,7 +93,7 @@ void Player::send(const Command& command) {
   command_ = command;
   command_.setSerial(++serial_);
   reply_.clear();
-  if(socket_->sendCommand(command_)) {
+  if(isOpen() && socket_->sendCommand(command_)) {
     log(Logger::LEVEL_DEBUG, std::string(" <- ") + command_.toString(false));
   }
   else {
