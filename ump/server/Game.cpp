@@ -113,7 +113,8 @@ void Game::start() {
     player->setPoint(getConfig().getPoint());
   }
   beginJob(new JobGame(*this));
-  thread_.reset(new thread::Thread(new std::thread(std::ref(*this))));
+  thread_.reset(new thread::Thread());
+  thread_->start(new std::thread(std::ref(*this)));
 }
 /***********************************************************************//**
 	@brief 
@@ -221,7 +222,7 @@ void Game::operator()() {
   auto& deltaTime = getConfig().getDeltaTime();
   do {
     updateJob(std::chrono::milliseconds(deltaTime));
-  } while(!thread_->sleep(deltaTime));
+  } while(thread_->sleep(deltaTime));
   getServer()->onEndGame(this);
 }
 /***********************************************************************//**

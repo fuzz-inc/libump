@@ -16,9 +16,10 @@ class Thread {
   Condition cond_;
 
  public:
-  Thread(std::thread* thread);
+  Thread() = default;
   ~Thread();
 
+  void start(std::thread* thread);
   void stop();
   bool sleep(int ms);
 };

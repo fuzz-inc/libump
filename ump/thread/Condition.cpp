@@ -37,11 +37,12 @@ void Condition::wait() {
 ***************************************************************************/
 bool Condition::wait(int ms) {
   std::unique_lock<std::mutex> lock(mutex_);
-  return condition_.wait_for(lock, 
-                             std::chrono::milliseconds(ms), 
-                             [&]() {
-                               return ready_;
-                             });
+  condition_.wait_for(lock, 
+                      std::chrono::milliseconds(ms), 
+                      [&]() {
+                        return ready_;
+                      });
+  return !ready_;
 }
 /***********************************************************************//**
 	@brief 

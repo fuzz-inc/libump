@@ -69,7 +69,8 @@ Server::~Server() {
 ***************************************************************************/
 void Server::start() {
   assert(!thread_);
-  thread_.reset(new thread::Thread(new std::thread(std::ref(*this))));
+  thread_.reset(new thread::Thread());
+  thread_->start(new std::thread(std::ref(*this)));
 }
 /***********************************************************************//**
 	@brief 
