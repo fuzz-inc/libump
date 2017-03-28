@@ -200,6 +200,9 @@ bool Client::onRecvCommand(const Command& command) {
   case Command::TYPE_HAIPAI:
     execHaipai(command);
     break;
+  case Command::TYPE_DORA:
+    appendDora(mj::Hai::Get(command.getArg(0)));
+    break;
   case Command::TYPE_TSUMO:
     execTsumo(command);
     break;
