@@ -21,6 +21,7 @@ class Thread {
 
   void start(std::thread* thread);
   void stop();
+  bool isStop() const;
   bool sleep(int ms);
 };
 /***********************************************************************//**

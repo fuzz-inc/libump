@@ -9,7 +9,7 @@ namespace thread {
 	@brief 
 ***************************************************************************/
 Condition::Condition()
-  : ready_(false)
+  : notify_(false)
 {
 }
 /***********************************************************************//**
@@ -18,7 +18,7 @@ Condition::Condition()
 void Condition::notify() {
   {
     std::lock_guard<std::mutex> lock(mutex_);
-    ready_ = true;
+    notify_ = true;
   }
   condition_.notify_one();
 }
@@ -29,7 +29,7 @@ void Condition::wait() {
   std::unique_lock<std::mutex> lock(mutex_);
   condition_.wait(lock, 
                   [&]() {
-                    return ready_; 
+                    return isNotify();
                   });
 }
 /***********************************************************************//**
@@ -40,16 +40,16 @@ bool Condition::wait(int ms) {
   condition_.wait_for(lock, 
                       std::chrono::milliseconds(ms), 
                       [&]() {
-                        return ready_;
+                        return isNotify();
                       });
-  return !ready_;
+  return !isNotify();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Condition::reset() {
   std::unique_lock<std::mutex> lock(mutex_);
-  ready_ = false;
+  notify_ = false;
 }
 /***********************************************************************//**
 	$Id$
