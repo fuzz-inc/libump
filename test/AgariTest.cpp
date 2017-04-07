@@ -40,7 +40,7 @@ AgariTest::AgariTest()
     player_(std::make_shared<ump::mj::Player>()), 
     parser_(*player_)
 {
-  game_->appendPlayer(player_);
+  game_->setPlayer(0, player_);
 }
 /***********************************************************************//**
 	@brief 
@@ -52,8 +52,10 @@ void AgariTest::onRun() {
     int ronHan;
   } TABLES[] = {
     { "6m6m6m2p3p4p5p6p6p6p7p2s3s4s", 2, 1 }, 
-    /* 七対子 */
-    { "2m2m9m9m3p3p1s1s7s7s1z1z5z5z", 3, 2 }
+    { "2m2m9m9m3p3p1s1s7s7s1z1z5z5z", 3, 2 }, 	// 七対子
+    { "1m2m3m2p3p4p3s4s5s7s8s4z4z9s", 2, 1 }, 	// 平和
+    { "1m2m3m2p3p4p3s4s5s7s8s1z1z9s", 1, 0 }, 	// 平和ではない
+    { "1m2m3m2p3p4p3s4s5s9s9s1z1z1z", 3, 2 }, 	// ダブ東
   };
   for(auto& table : TABLES) {
     {
@@ -73,6 +75,8 @@ const ump::mj::Agari& AgariTest::parse(const char* str, bool isRon) {
   ump::mj::HaiArray hais(str);
   auto hai = hais.removeSame(hais.back());
   player_->reset();
+  player_->setBakaze(ump::mj::Hai::Get("1z"));
+  player_->setZikaze(ump::mj::Hai::Get("1z"));
   player_->drawHaipai(hais);
   player_->resetFirst();
   if(isRon) {

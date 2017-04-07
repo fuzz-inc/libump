@@ -145,6 +145,7 @@ void Agari::update(const Player& player) {
   }
   Info info;
   updateInfo(info, player);
+  checkYakuhai(info, player);
   checkKind(info);
   checkKotsu(info);
   checkIpeikou(info);
@@ -350,10 +351,6 @@ void Agari::updateInfo(Info& info, const Player& player) {
         info.kantsuNum++;
       }
       info.kotsuColor[index] |= color;
-      if((player.getBakaze() && hai->isSame(player.getBakaze())) ||
-         (player.getZikaze() && hai->isSame(player.getZikaze()))) {
-        appendYaku(YAKU_YAKUHAI);
-      }
     }
     else {
       info.toitsuColor[index] |= color;
@@ -465,6 +462,19 @@ void Agari::updateFu() {
   }
 }
 /***********************************************************************//**
+	@brief 役牌を調べる
+***************************************************************************/
+void Agari::checkYakuhai(Info& info, const Player& player) {
+  for(auto hai : GetYakuhais(player)) {
+    if(info.kotsuColor[hai->getNumber() - 1] & COLOR_ZIHAI) {
+      appendYaku(YAKU_YAKUHAI);
+    }
+    if(info.toitsuColor[hai->getNumber() - 1] & COLOR_ZIHAI) {
+      info.isPinfu = false;
+    }
+  }
+}
+/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Agari::checkKotsu(const Info& info) {
@@ -570,7 +580,6 @@ void Agari::checkSangen(const Info& info) {
   for(int i = 4; i < 7; i++) {
     if(info.kotsuColor[i] & COLOR_ZIHAI) {
       num += 3;
-      appendYaku(YAKU_YAKUHAI);
     }
     else if(info.toitsuColor[i] & COLOR_ZIHAI) {
       num += 2;
@@ -646,6 +655,20 @@ size_t Agari::countHai(const Hai* hai) const {
 ***************************************************************************/
 int Agari::Ceil(int value, int base) {
   return (value + base - 1) / base * base;
+}
+/***********************************************************************//**
+	@brief 役になる牌列を取得する
+***************************************************************************/
+HaiArray Agari::GetYakuhais(const Player& player) {
+  static const HaiArray SANGENHAIS("5z6z7z");
+  HaiArray hais(SANGENHAIS);
+  if(player.getBakaze()) {
+    hais.push_back(player.getBakaze());
+  }
+  if(player.getZikaze()) {
+    hais.push_back(player.getZikaze());
+  }
+  return hais;
 }
 /***********************************************************************//**
 	@brief コンストラクタ

@@ -176,6 +176,7 @@ class Agari {
   void updatePoint();
   void updateFu();
 
+  void checkYakuhai(Info& info, const Player& player);
   void checkKotsu(const Info& info);
   void checkIpeikou(const Info& info);
   void checkSanshoku(const Info& info);
@@ -186,6 +187,8 @@ class Agari {
   void checkKind(const Info& info);
 
   size_t countHai(const Hai* hai) const;
+
+  static HaiArray GetYakuhais(const Player& player);
 };
 /***********************************************************************//**
 	$Id$
