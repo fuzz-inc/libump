@@ -100,6 +100,7 @@ Job* JobSutehai::onUpdate() {
         mj::HaiArray hais(reply.getArg(0).c_str());
         if(player->canAnkan(hais)) {
           openMentsu(player, type, hais);
+          game.appendDora();
           return new JobTsumo(game);
         }
       }
@@ -109,6 +110,7 @@ Job* JobSutehai::onUpdate() {
         if(auto hai = mj::Hai::Get(reply.getArg(0))) {
           if(auto mentsu = player->findKakanMentsu(hai)) {
             openMentsu(player, type, *mentsu, hai);
+            game.appendDora();
             return new JobTsumo(game);
           }
         }
