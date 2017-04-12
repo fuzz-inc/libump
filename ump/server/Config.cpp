@@ -51,7 +51,9 @@ Config::Config()
     nakiWait_(10), 
     tenpaiWait_(10), 
     readyWait_(10), 
-    sayWait_(1)
+    sayWait_(1), 
+    agariWait_(1), 
+    uraDoraWait_(1)
 {
   setAgariyame(true);
 }

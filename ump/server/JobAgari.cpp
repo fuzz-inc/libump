@@ -83,12 +83,14 @@ void JobAgari::say() {
 ***************************************************************************/
 void JobAgari::agari() {
   super::openHand(player_);
+  sleep(getConfig().getAgariWait());
   auto& game = getGame();
   auto player = getPlayer(player_);
   auto& agari = player->getAgari();
   if(player->isRichi()) {
     game.uraDora();
     agari.update(*player);
+    sleep(getConfig().getUraDoraWait());
   }
   auto point = agari.getPoint();
   if(player_ == game.getOya()) {

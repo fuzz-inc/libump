@@ -59,7 +59,7 @@ class Job {
   virtual void onBegin() {}
   virtual void onEnd() {}
 
-  void sleep(float sec);
+  void sleep(float sec) const;
 
  protected:
   Job(Game& game);

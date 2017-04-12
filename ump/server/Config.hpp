@@ -67,7 +67,9 @@ class Config
   std::chrono::seconds nakiWait_;
   std::chrono::seconds tenpaiWait_;
   std::chrono::seconds readyWait_;
-  std::chrono::seconds sayWait_;
+  float sayWait_;
+  float agariWait_;
+  float uraDoraWait_;
   std::string logPrefix_;
 
  public:
@@ -105,6 +107,8 @@ class Config
   UMP_ACCESSOR(TenpaiWait, tenpaiWait_);
   UMP_ACCESSOR(ReadyWait, readyWait_);
   UMP_ACCESSOR(SayWait, sayWait_);
+  UMP_ACCESSOR(AgariWait, agariWait_);
+  UMP_ACCESSOR(UraDoraWait, uraDoraWait_);
 
   UMP_ACCESSOR(LogPrefix, logPrefix_);
 };

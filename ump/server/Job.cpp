@@ -53,7 +53,7 @@ Job* Job::update(const std::chrono::milliseconds& deltaTime) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void Job::sleep(float sec) {
+void Job::sleep(float sec) const {
   int msec = getConfig().getSpeed() * sec * 1000;
   getGame().getThread()->sleep(msec);
   //std::this_thread::sleep_for(std::chrono::milliseconds(msec));
@@ -107,7 +107,7 @@ void Job::sendAll(const Command& command) const {
 void Job::sayAll(const Command& command) const {
   assert(command.getType() == Command::TYPE_SAY);
   sendAll(command);
-  std::this_thread::sleep_for(getConfig().getSayWait());
+  sleep(getConfig().getSayWait());
 }
 /***********************************************************************//**
 	@brief 終了フラグを立てる
@@ -131,11 +131,7 @@ void Job::openHand(size_t seat) {
   command.
     append(Command::SeatToString(seat)).
     append(getPlayer(seat)->getMenzen().toString());
-  for(size_t i = 0, n = countPlayer(); i < n; i++) {
-    if(i != seat) {
-      getPlayer(i)->send(command);
-    }
-  }
+  sendAll(command);
 }
 /***********************************************************************//**
 	@brief 面子を晒す
