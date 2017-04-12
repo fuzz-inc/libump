@@ -58,6 +58,7 @@ class Command {
     TYPE_HAIPAI, 
     TYPE_OPEN, 
     TYPE_DORA, 
+    TYPE_URADORA, 
     TYPE_TSUMO, 
     TYPE_SUTEHAI_Q, 
     TYPE_SUTEHAI, 

@@ -30,7 +30,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
-#include "ump/Command.hpp"
 #include "ump/server/Config.hpp"
 #include "ump/server/Game.hpp"
 #include "ump/server/Job.hpp"
@@ -169,18 +168,14 @@ void Game::beginKyoku() {
 	@brief ドラを追加する
 ***************************************************************************/
 void Game::appendDora() {
-  auto dora = yama_.dora();
-  super::appendDora(dora);
-  Command command(Command::TYPE_DORA);
-  command.append(dora->toString());
-  sendAll(command);
+  appendDora(Command::TYPE_DORA);
 }
 /***********************************************************************//**
 	@brief 裏ドラをめくる
 ***************************************************************************/
 void Game::uraDora() {
   for(size_t i = 0, n = getDora().size(); i < n; i++) {
-    appendDora();
+    appendDora(Command::TYPE_URADORA);
   }
 }
 /***********************************************************************//**
@@ -335,6 +330,17 @@ std::string Game::createId() const {
 ***************************************************************************/
 std::string Game::getLogPath(const std::string& id) const {
   return getConfig().getLogPrefix() + id + ".log";
+}
+/***********************************************************************//**
+	@brief ドラを追加する
+	@param[in] type コマンド
+***************************************************************************/
+void Game::appendDora(Command::Type type) {
+  auto dora = yama_.dora();
+  super::appendDora(dora);
+  Command command(type);
+  command.append(dora->toString());
+  sendAll(command);
 }
 /***********************************************************************//**
 	$Id$

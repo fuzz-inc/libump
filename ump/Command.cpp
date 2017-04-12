@@ -50,6 +50,7 @@ const char* Command::TYPE_TABLE[] = {
   "haipai", 
   "open", 
   "dora", 
+  "uradora", 
   "tsumo", 
   "sutehai?", 
   "sutehai", 

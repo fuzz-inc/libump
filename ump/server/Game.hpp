@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/Command.hpp"
 #include "ump/Logger.hpp"
 #include "ump/mj/Game.hpp"
 #include "ump/mj/Yama.hpp"
@@ -105,6 +106,8 @@ class Game
 
   std::string createId() const;
   std::string getLogPath(const std::string& id) const;
+
+  void appendDora(Command::Type type);
 };
 /***********************************************************************//**
 	$Id$
