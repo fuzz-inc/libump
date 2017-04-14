@@ -39,13 +39,6 @@ namespace mj {
 ***************************************************************************/
 class Config {
  private:
-  enum {
-    FLAG_AOTENJO, 
-    FLAG_MAX
-  };
-
- private:
-  std::bitset<FLAG_MAX> flag_;
   std::map<const Hai*, size_t> haiNums_;
   size_t playerNum_;
   size_t haipaiNum_;
@@ -55,8 +48,6 @@ class Config {
  public:
   Config();
   ~Config() = default;
-
-  UMP_BIT_ACCESSOR(Aotenjo, flag_, FLAG_AOTENJO);
 
   Config& setHaiNum(const Hai* hai, size_t num);
   UMP_GETTER(HaiNums, haiNums_);

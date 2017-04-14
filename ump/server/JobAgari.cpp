@@ -93,17 +93,25 @@ void JobAgari::agari() {
     sleep(getConfig().getUraDoraWait());
   }
   auto point = agari.getPoint();
+  auto text = agari.getText();
+  if(getConfig().isAotenjo() && !agari.isYakuman()) {
+    point = agari.getFu();
+    for(size_t i = 0, n = 4 + agari.getHan(); i < n; i++) {
+      point *= 2;
+    }
+    text.clear();
+  }
   if(player_ == game.getOya()) {
     point += point / 2;
   }
   {
     Command command(Command::TYPE_AGARI);
     command.append(player->getSeatString());
-    if(agari.getText().empty()) {
+    if(text.empty()) {
       command.append(mj::Agari::Ceil(point, 100).toString());
     }
     else {
-      command.append(agari.getText());
+      command.append(text);
     }
     command.append(agari.getFu());
     for(int i = 0; i < mj::Agari::YAKU_MAX; i++) {

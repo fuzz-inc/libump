@@ -50,6 +50,7 @@ class Config
     FLAG_OPEN, 
     FLAG_HAKOSHITA, 
     FLAG_AGARIYAME, 
+    FLAG_AOTENJO, 
     FLAG_MAX
   };
 
@@ -91,6 +92,11 @@ class Config
    * 和了止め
    */
   UMP_BIT_ACCESSOR(Agariyame, flag_, FLAG_AGARIYAME);
+
+  /**
+   * 青天井
+   */
+  UMP_BIT_ACCESSOR(Aotenjo, flag_, FLAG_AOTENJO);
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);
