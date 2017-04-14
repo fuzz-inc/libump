@@ -146,10 +146,10 @@ bool Client::replyCommand(Command reply, const Command& command) {
 void Client::dump() const {
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     auto player = getPlayer(i);
-    printf("%s %s %d\n", 
+    printf("%s %s %s\n", 
            player->getSeatString().c_str(), 
            player->getName().c_str(), 
-           player->getPoint());
+           player->getPoint().toString().c_str());
     printf("%s\n", player->toString().c_str());
   }
 }

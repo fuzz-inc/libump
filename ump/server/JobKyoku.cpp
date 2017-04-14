@@ -110,7 +110,7 @@ void JobKyoku::sendPoint() {
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     Command command(Command::TYPE_POINT);
     std::ostringstream buff;
-    buff << "=" << getPlayer(i)->getPoint();
+    buff << "=" << getPlayer(i)->getPoint().toString();
     command.append(Command::SeatToString(i)).append(buff.str());
     sendAll(command);
   }

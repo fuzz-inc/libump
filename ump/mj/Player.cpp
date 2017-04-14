@@ -158,7 +158,7 @@ void Player::onOpen() {
 	@param[in] value 点数
 	@return 自分自身
 ***************************************************************************/
-Player& Player::setPoint(int value) {
+Player& Player::setPoint(const BigNum& value) {
   point_ = value;
   onSetPoint(value);
   return *this;
@@ -168,7 +168,7 @@ Player& Player::setPoint(int value) {
 	@param[in] value 加減算する値
 	@return 自分自身
 ***************************************************************************/
-Player& Player::addPoint(int value) {
+Player& Player::addPoint(const BigNum& value) {
   point_ += value;
   onAddPoint(value);
   return *this;

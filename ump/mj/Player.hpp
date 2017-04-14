@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/BigNum.hpp"
 #include "ump/mj/Agari.hpp"
 #include "ump/mj/Hand.hpp"
 #include "ump/mj/Shanten.hpp"
@@ -61,7 +62,7 @@ class Player
   std::weak_ptr<Game> game_;
   std::bitset<FLAG_MAX> flag_;
   std::string name_;
-  int point_;
+  BigNum point_;
   size_t seat_;
   const Hai* bakaze_;
   const Hai* zikaze_;
@@ -98,8 +99,8 @@ class Player
 
   UMP_ACCESSOR(Name, name_);
 
-  Player& setPoint(int value);
-  Player& addPoint(int value);
+  Player& setPoint(const BigNum& value);
+  Player& addPoint(const BigNum& value);
   UMP_GETTER(Point, point_);
 
   UMP_ACCESSOR(Seat, seat_);
@@ -148,13 +149,13 @@ class Player
    * 点数がセットされたときの処理
    * @param[in] value 点数
    */
-  virtual void onSetPoint(int value) {}
+  virtual void onSetPoint(const BigNum& value) {}
 
   /**
    * 点数が加減算されたときの処理
    * @param[in] value 加算値
    */
-  virtual void onAddPoint(int value) {}
+  virtual void onAddPoint(const BigNum& value) {}
 
   /**
    * 捨て牌時の処理

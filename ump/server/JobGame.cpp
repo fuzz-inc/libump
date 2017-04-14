@@ -73,7 +73,7 @@ void JobGame::onEnd() {
   Command command(Command::TYPE_GAMEEND);
   for(size_t i = 0, n = players.size(); i < n; i++) {
     auto& player = players.at(i);
-    int point = player->getPoint();
+    auto point = player->getPoint();
     if(i == 0) {
       point += getGame().resetKyotaku();
     }
@@ -82,7 +82,7 @@ void JobGame::onEnd() {
     }
     command.
       append(player->getSeatString()).
-      append(point);
+      append(point.toString());
   }
   sendAll(command);
 }

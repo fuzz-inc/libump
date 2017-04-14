@@ -30,6 +30,8 @@ class BigNum {
   BigNum operator/(const BigNum& rhs) const;
   BigNum operator%(const BigNum& rhs) const;
 
+  BigNum operator-() const;
+
   BigNum& operator+=(const BigNum& rhs);
   BigNum& operator-=(const BigNum& rhs);
   BigNum& operator*=(const BigNum& rhs);
@@ -43,6 +45,10 @@ class BigNum {
   bool operator>(const BigNum& rhs) const;
   bool operator==(const BigNum& rhs) const;
   bool operator!=(const BigNum& rhs) const;
+
+  BigNum& neg();
+  BigNum& abs();
+  BigNum getAbs() const;
 
   std::string toString() const;
 };
