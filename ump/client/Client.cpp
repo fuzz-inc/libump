@@ -339,11 +339,13 @@ void Client::execPoint(const Command& command) {
   const char* point = command.getArg(1).c_str();
   switch(point[0]) {
   case '=':
-    player->setPoint(atoi(point + 1));
+    player->setPoint(BigNum(point + 1));
     break;
   case '+':
+    player->addPoint(BigNum(point + 1));
+    break;
   case '-':
-    player->addPoint(atoi(point));
+    player->addPoint(BigNum(point));
     break;
   default:
     break;
