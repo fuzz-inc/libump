@@ -54,7 +54,7 @@ Job* Job::update(const std::chrono::milliseconds& deltaTime) {
 	@brief 
 ***************************************************************************/
 void Job::sleep(float sec) const {
-  int msec = getConfig().getSpeed() * sec * 1000;
+  int msec = getConfig()->getSpeed() * sec * 1000;
   getGame().getThread()->sleep(msec);
   //std::this_thread::sleep_for(std::chrono::milliseconds(msec));
 }
@@ -68,7 +68,7 @@ Job::Job(Game& game)
 /***********************************************************************//**
 	@copydoc Game::getConfig
 ***************************************************************************/
-const Config& Job::getConfig() const {
+std::shared_ptr<const Config> Job::getConfig() const {
   return getGame().getConfig();
 }
 /***********************************************************************//**
@@ -107,7 +107,7 @@ void Job::sendAll(const Command& command) const {
 void Job::sayAll(const Command& command) const {
   assert(command.getType() == Command::TYPE_SAY);
   sendAll(command);
-  sleep(getConfig().getSayWait());
+  sleep(getConfig()->getSayWait());
 }
 /***********************************************************************//**
 	@brief 終了フラグを立てる

@@ -52,7 +52,7 @@ Game::Game(std::shared_ptr<const Config> config,
     yama_(*config)
 {
   setId(createId());
-  if(!getConfig().getLogPrefix().empty()) {
+  if(!getConfig()->getLogPrefix().empty()) {
     openLogFile(getLogPath(getId()));
   }
 }
@@ -65,8 +65,8 @@ Game::~Game() {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-const Config& Game::getConfig() const {
-  return static_cast<const Config&>(super::getConfig());
+std::shared_ptr<const Config> Game::getConfig() const {
+  return std::static_pointer_cast<const Config>(super::getConfig());
 }
 /***********************************************************************//**
 	@brief プレイヤーを追加する
@@ -109,7 +109,7 @@ bool Game::canStart() const {
 void Game::start() {
   assert(!thread_);
   for(auto player : getPlayers()) {
-    player->setPoint(getConfig().getPoint());
+    player->setPoint(getConfig()->getPoint());
   }
   beginJob(new JobGame(*this));
   thread_.reset(new thread::Thread());
@@ -207,14 +207,14 @@ size_t Game::getRest() const {
 	@return オーラスのとき真
 ***************************************************************************/
 bool Game::isLastKyoku() const {
-  return getRound() + 1 >= getConfig().getRoundMax() && 
+  return getRound() + 1 >= getConfig()->getRoundMax() && 
     getOya() + 1 >= countPlayer();
 }
 /***********************************************************************//**
         @brief 実行
 ***************************************************************************/
 void Game::operator()() {
-  auto& deltaTime = getConfig().getDeltaTime();
+  auto& deltaTime = getConfig()->getDeltaTime();
   do {
     updateJob(std::chrono::milliseconds(deltaTime));
   } while(thread_->sleep(deltaTime));
@@ -329,7 +329,7 @@ std::string Game::createId() const {
 	@return ログ出力パス
 ***************************************************************************/
 std::string Game::getLogPath(const std::string& id) const {
-  return getConfig().getLogPrefix() + id + ".log";
+  return getConfig()->getLogPrefix() + id + ".log";
 }
 /***********************************************************************//**
 	@brief ドラを追加する

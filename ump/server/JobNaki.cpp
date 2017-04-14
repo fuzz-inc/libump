@@ -90,7 +90,7 @@ void JobNaki::onBegin() {
 Job* JobNaki::onUpdate() {
   auto& game = getGame();
   if(!players_.empty()) {
-    if(!isOverTime(getConfig().getNakiWait())) {
+    if(!isOverTime(getConfig()->getNakiWait())) {
       for(auto player : players_) {
         if(!player->getReply().isExist()) {
           return this;
@@ -116,7 +116,7 @@ Job* JobNaki::onUpdate() {
 ***************************************************************************/
 void JobNaki::onEnd() {
   if(richier_) {
-    auto richiPoint = getConfig().getRichiPoint();
+    auto richiPoint = getConfig()->getRichiPoint();
     addPoint(richier_->getSeat(), -richiPoint, Command::TYPE_RICHI);
     getGame().addKyotaku(richiPoint);
   }

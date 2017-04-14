@@ -49,7 +49,7 @@ JobTsumo::JobTsumo(Game& game)
 	@copydoc Job::onUpdate
 ***************************************************************************/
 Job* JobTsumo::onUpdate() {
-  auto& config = getConfig();
+  auto config = getConfig();
   auto& game = getGame();
   auto player = game.getTurnPlayer();
   auto hai = game.tsumo();
@@ -58,7 +58,7 @@ Job* JobTsumo::onUpdate() {
     Command command(Command::TYPE_TSUMO);
     command.append(player->getSeatString());
     command.append(rest);
-    if(i == game.getTurn() || config.isOpen()) {
+    if(i == game.getTurn() || config->isOpen()) {
       command.append(hai->toString());
     }
     else {

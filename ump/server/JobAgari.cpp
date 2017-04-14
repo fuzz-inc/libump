@@ -83,18 +83,18 @@ void JobAgari::say() {
 ***************************************************************************/
 void JobAgari::agari() {
   super::openHand(player_);
-  sleep(getConfig().getAgariWait());
+  sleep(getConfig()->getAgariWait());
   auto& game = getGame();
   auto player = getPlayer(player_);
   auto& agari = player->getAgari();
   if(player->isRichi()) {
     game.uraDora();
     agari.update(*player);
-    sleep(getConfig().getUraDoraWait());
+    sleep(getConfig()->getUraDoraWait());
   }
   auto point = agari.getPoint();
   auto text = agari.getText();
-  if(getConfig().isAotenjo() && !agari.isYakuman()) {
+  if(getConfig()->isAotenjo() && !agari.isYakuman()) {
     point = agari.getFu();
     for(size_t i = 0, n = 4 + agari.getHan(); i < n; i++) {
       //point *= 2;
@@ -129,7 +129,7 @@ void JobAgari::agari() {
   }
   auto playerNum = countPlayer();
   if(playerNum > 1) {
-    auto renchanPoint = game.getRenchan() * getConfig().getRenchanPoint();
+    auto renchanPoint = game.getRenchan() * getConfig()->getRenchanPoint();
     if(player_ == game.getOya()) {
       playerNum--;
     }

@@ -68,9 +68,7 @@ class Game
   Game(std::shared_ptr<const Config> config);
   virtual ~Game();
 
-  const Config& getConfig() const {
-    return *config_;
-  }
+  UMP_GETTER(Config, config_);
 
   /**
    * 乱数生成器を取得する

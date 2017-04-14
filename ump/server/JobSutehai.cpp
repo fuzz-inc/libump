@@ -84,7 +84,7 @@ Job* JobSutehai::onUpdate() {
   auto& game = getGame();
   auto player = game.getTurnPlayer();
   Command reply = player->getReply();
-  if(!isOverTime(getConfig().getSutehaiWait()) && !reply.isExist()) {
+  if(!isOverTime(getConfig()->getSutehaiWait()) && !reply.isExist()) {
     return this;
   }
   auto type = reply.getType();

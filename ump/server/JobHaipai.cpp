@@ -50,19 +50,19 @@ JobHaipai::JobHaipai(Game& game)
 	@copydoc Job::onBegin
 ***************************************************************************/
 void JobHaipai::onBegin() {
-  num_ = getConfig().getHaipaiNum();
+  num_ = getConfig()->getHaipaiNum();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 Job* JobHaipai::onUpdate() {
   auto& game = getGame();
-  auto& config = getConfig();
+  auto config = getConfig();
   if(num_ > 0) {
     size_t num = std::min<size_t>(num_, 4);
     for(size_t i = 0, n = countPlayer(); i < n; i++) {
       drawHaipai(game.getTurn(), game.drawHaipai(num));
-      sleep(config.getHaipaiWait());
+      sleep(config->getHaipaiWait());
       game.nextTurn();
     }
     num_ -= num;
@@ -74,7 +74,7 @@ Job* JobHaipai::onUpdate() {
 	@brief 
 ***************************************************************************/
 void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
-  auto& config = getConfig();
+  auto config = getConfig();
   mj::HaiArray fusehai;
   for(size_t i = 0, n = hais.size(); i < n; i++) {
     fusehai.append(mj::Hai::GetUnknown());
@@ -82,7 +82,7 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     Command command(Command::TYPE_HAIPAI);
     command.append(Command::SeatToString(seat));
-    if(i == seat || config.isOpen()) {
+    if(i == seat || config->isOpen()) {
       command.append(hais.toString());
     }
     else {

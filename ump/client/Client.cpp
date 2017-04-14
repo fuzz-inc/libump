@@ -270,7 +270,7 @@ void Client::beginKyoku() {
   super::beginKyoku();
   rest_ = 0;
   hideHaiNums_.clear();
-  for(auto iter : getConfig().getHaiNums()) {
+  for(auto iter : getConfig()->getHaiNums()) {
     hideHaiNums_[iter.first->getNormal()] = iter.second;
   }
 }

@@ -68,7 +68,7 @@ class Job {
     return game_;
   }
 
-  const Config& getConfig() const;
+  std::shared_ptr<const Config> getConfig() const;
 
   UMP_GETTER(Time, time_);
   bool isOverTime(const std::chrono::milliseconds& time) const;

@@ -126,13 +126,13 @@ void JobKyoku::sendDice() {
     append(dice(random)).
     append(dice(random));
   sendAll(command);
-  sleep(getConfig().getDiceWait());
+  sleep(getConfig()->getDiceWait());
 }
 /***********************************************************************//**
 	@brief ドラを送る
 ***************************************************************************/
 void JobKyoku::sendDora() {
-  for(size_t i = 0, n = getConfig().getDoraNum(); i < n; i++) {
+  for(size_t i = 0, n = getConfig()->getDoraNum(); i < n; i++) {
     getGame().appendDora();
   }
 }

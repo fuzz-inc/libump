@@ -59,7 +59,7 @@ class Game
        std::shared_ptr<Server> server);
   ~Game() override;
 
-  const Config& getConfig() const;
+  std::shared_ptr<const Config> getConfig() const;
 
   std::shared_ptr<Server> getServer() const {
     return server_.lock();

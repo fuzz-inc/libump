@@ -81,7 +81,7 @@ void JobRyukyoku::onEnd() {
     }
   }
   if(tenpaiNum > 0 && notenNum > 0) {
-    auto notenBappu = getGame().getConfig().getNotenBappu();
+    auto notenBappu = getConfig()->getNotenBappu();
     auto add = notenBappu / tenpaiNum;
     auto sub = notenBappu / notenNum;
     for(size_t i = 0, n = countPlayer(); i < n; i++) {
@@ -121,7 +121,7 @@ bool JobRyukyoku::waitTenpai() {
     }
     return true;
   }
-  return isOverTime(getConfig().getTenpaiWait());
+  return isOverTime(getConfig()->getTenpaiWait());
 }
 /***********************************************************************//**
 	@brief 

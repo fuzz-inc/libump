@@ -69,7 +69,7 @@ Job* JobGame::onUpdate() {
 ***************************************************************************/
 void JobGame::onEnd() {
   auto players = getRanking();
-  const auto& uma = getConfig().getUma();
+  const auto& uma = getConfig()->getUma();
   Command command(Command::TYPE_GAMEEND);
   for(size_t i = 0, n = players.size(); i < n; i++) {
     auto& player = players.at(i);
@@ -92,22 +92,22 @@ void JobGame::onEnd() {
 ***************************************************************************/
 bool JobGame::isNextKyoku() const {
   const auto& game = getGame();
-  const auto& config = game.getConfig();
-  if(!config.isHakoshita()) {
+  auto config = getConfig();
+  if(!config->isHakoshita()) {
     for(auto player : game.getPlayers()) {
       if(player->getPoint() < 0) {
         return false;
       }
     }
   }
-  if(config.isAgariyame()) {
+  if(config->isAgariyame()) {
     if(game.isLastKyoku() && 
        game.isRenchan() && 
        getRanking().at(0) == game.getPlayer(game.getOya())) {
       return false;
     }
   }
-  return game.getRound() < config.getRoundMax();
+  return game.getRound() < config->getRoundMax();
 }
 /***********************************************************************//**
 	@brief 

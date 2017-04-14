@@ -115,9 +115,9 @@ bool Player::canRichi() const {
   if(!super::canRichi()) {
     return false;
   }
-  auto& config = getGame()->getConfig();
-  return config.isHakoshita() ||
-    getPoint() >= config.getRichiPoint();
+  auto config = getGame()->getConfig();
+  return config->isHakoshita() ||
+    getPoint() >= config->getRichiPoint();
 }
 /***********************************************************************//**
 	@brief スレッド処理
