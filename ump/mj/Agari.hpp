@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/BigNum.hpp"
 #include "ump/mj/Mentsu.hpp"
 
 namespace ump {
@@ -126,7 +127,7 @@ class Agari {
   int han_;			/**< 総翻数(役満数) */
   int fu_;			/**< 符 */
   int dora_;			/**< ドラの数 */
-  int point_;			/**< 点数 */
+  BigNum point_;		/**< 点数 */
   std::string text_;
 
   static const YakuTable YakuTable_[YAKU_MAX];
@@ -148,7 +149,7 @@ class Agari {
   int getFu() const;
   int getYakuman() const;
   UMP_GETTER(Dora, dora_);
-  int getPoint() const;
+  UMP_GETTER(Point, point_);
   UMP_GETTER(Text, text_);
 
   bool isExist() const;
@@ -163,7 +164,17 @@ class Agari {
   std::string toString() const;
 
   static const char* GetYakuName(int yaku);
-  static int Ceil(int value, int base);
+
+  /**
+   * @brief 数値を切り上げる
+   * @param[in] value 値
+   * @param[in] base 基数
+   * @return 切り上げた値
+   */
+  template <class T>
+  static T Ceil(const T& value, int base) {
+    return (value + base - 1) / base * base;
+  }
 
  private:
   void clearYaku();

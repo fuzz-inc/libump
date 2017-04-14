@@ -220,11 +220,16 @@ BigNum BigNum::getAbs() const {
 }
 /***********************************************************************//**
 	@brief 文字列に変換する
+	@param[in] showpos 正のときに+を付ける
 	@return 数値を表す文字列
 ***************************************************************************/
-std::string BigNum::toString() const {
+std::string BigNum::toString(bool showpos) const {
+  std::string result;
+  if(showpos && !BN_is_negative(bigNum_)) {
+    result = "+";
+  }
   auto pt = BN_bn2dec(bigNum_);
-  std::string result(pt);
+  result.append(pt);
   OPENSSL_free(pt);
   return result;
 }

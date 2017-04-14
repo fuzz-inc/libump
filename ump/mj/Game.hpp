@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/BigNum.hpp"
 #include "ump/mj/Hai.hpp"
 #include "ump/mj/HaiArray.hpp"
 
@@ -57,7 +58,7 @@ class Game
   size_t oya_;
   size_t round_;
   int renchan_;
-  int kyotaku_;
+  BigNum kyotaku_;
   HaiArray dora_;
   size_t turn_;
   Sutehai* lastSutehai_;
@@ -91,8 +92,8 @@ class Game
   UMP_GETTER(Renchan, renchan_);
 
   UMP_GETTER(Kyotaku, kyotaku_);
-  Game& addKyotaku(int value);
-  int resetKyotaku();
+  Game& addKyotaku(const BigNum& value);
+  BigNum resetKyotaku();
 
   Game& setTurn(size_t turn);
   UMP_GETTER(Turn, turn_);

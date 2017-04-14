@@ -95,7 +95,7 @@ void JobKyoku::sendStart() {
       append(getGame().getRound()).
       append(Command::SeatToString(getGame().getOya())).
       append(getGame().getRenchan()).
-      append(getGame().getKyotaku()).
+      append(getGame().getKyotaku().toString()).
       append(player->getBakaze()->toString());
     for(size_t i = 0; i < n; i++) {
       command.append(getPlayer(i)->getZikaze()->toString());

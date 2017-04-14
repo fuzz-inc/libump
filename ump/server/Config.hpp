@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/BigNum.hpp"
 #include "ump/mj/Config.hpp"
 
 namespace ump {
@@ -54,11 +55,11 @@ class Config
 
  private:
   std::bitset<FLAG_MAX> flag_;
-  int point_;
-  int notenBappu_;
+  BigNum point_;
+  BigNum notenBappu_;
   size_t roundMax_;
   size_t doraNum_;
-  std::vector<int> uma_;
+  std::vector<BigNum> uma_;
   int deltaTime_;
   float speed_;
   float diceWait_;

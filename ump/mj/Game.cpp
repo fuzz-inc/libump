@@ -96,7 +96,7 @@ std::shared_ptr<Player> Game::getPlayer(const char* seat) const {
 	@param[in] value 加算する値
 	@return 自分自身
 ***************************************************************************/
-Game& Game::addKyotaku(int value) {
+Game& Game::addKyotaku(const BigNum& value) {
   kyotaku_ += value;
   return *this;
 }
@@ -104,7 +104,7 @@ Game& Game::addKyotaku(int value) {
 	@brief 供託をリセットする
 	@return 供託されていた点数
 ***************************************************************************/
-int Game::resetKyotaku() {
+BigNum Game::resetKyotaku() {
   auto kyotaku = getKyotaku();
   kyotaku_ = 0;
   return kyotaku;

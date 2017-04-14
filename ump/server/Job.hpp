@@ -89,7 +89,7 @@ class Job {
                   const mj::HaiArray& hais, 
                   const mj::Hai* hai = nullptr);
 
-  void addPoint(size_t sheet, int value, 
+  void addPoint(size_t sheet, const BigNum& value, 
                 Command::Type = Command::TYPE_POINT);
 
   virtual Job* onUpdate() = 0;

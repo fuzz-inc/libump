@@ -50,7 +50,7 @@ class BigNum {
   BigNum& abs();
   BigNum getAbs() const;
 
-  std::string toString() const;
+  std::string toString(bool showpos = false) const;
 };
 /***********************************************************************//**
 	@brief 

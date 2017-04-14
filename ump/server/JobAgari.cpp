@@ -100,7 +100,7 @@ void JobAgari::agari() {
     Command command(Command::TYPE_AGARI);
     command.append(player->getSeatString());
     if(agari.getText().empty()) {
-      command.append(mj::Agari::Ceil(point, 100));
+      command.append(mj::Agari::Ceil(point, 100).toString());
     }
     else {
       command.append(agari.getText());
@@ -126,10 +126,10 @@ void JobAgari::agari() {
     }
     if(game.getTurn() == player_) {
       point /= playerNum;
-      int add = game.resetKyotaku();
+      auto add = game.resetKyotaku();
       for(size_t i = 0, n = countPlayer(); i < n; i++) {
         if(i != player_) {
-          int sub = (i == game.getOya()) ? point * 2 : point;
+          auto sub = (i == game.getOya()) ? point * 2 : point;
           sub = mj::Agari::Ceil(sub, 100) + renchanPoint;
           addPoint(i, -sub);
           add += sub;

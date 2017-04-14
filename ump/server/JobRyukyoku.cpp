@@ -82,8 +82,8 @@ void JobRyukyoku::onEnd() {
   }
   if(tenpaiNum > 0 && notenNum > 0) {
     auto notenBappu = getGame().getConfig().getNotenBappu();
-    int add = notenBappu / tenpaiNum;
-    int sub = notenBappu / notenNum;
+    auto add = notenBappu / tenpaiNum;
+    auto sub = notenBappu / notenNum;
     for(size_t i = 0, n = countPlayer(); i < n; i++) {
       addPoint(i, getPlayer(i)->isSayTenpai() ? add : -sub);
     }

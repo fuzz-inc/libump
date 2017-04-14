@@ -175,13 +175,11 @@ void Job::openMentsu(std::shared_ptr<Player> player,
 	@param[in] value 加減算する値
 	@param[in] type コマンド種別
 ***************************************************************************/
-void Job::addPoint(size_t seat, int value, Command::Type type) {
+void Job::addPoint(size_t seat, const BigNum& value, Command::Type type) {
   assert(value != 0);
   Command command(type);
   command.append(Command::SeatToString(seat));
-  std::ostringstream arg;
-  arg << std::showpos << value;
-  command.append(arg.str());
+  command.append(value.toString(true));
   sendAll(command);
   getPlayer(seat)->addPoint(value);
 }    
