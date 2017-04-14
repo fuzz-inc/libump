@@ -12,5 +12,5 @@ rm -rf $DSTDIR
 cd $SRCDIR
 ./Configure --prefix=$DSTDIR darwin64-x86_64-cc
 make clean
-make MACOSX_DEPLOYMENT_TARGET=10.10
+make MACOSX_DEPLOYMENT_TARGET=10.9
 make install_sw

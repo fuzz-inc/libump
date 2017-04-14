@@ -121,8 +121,8 @@ extern "C" {
 
 #if !(defined(VMS) || defined(__VMS)) /* VMS uses logical names instead */
 #if defined(HEADER_CRYPTLIB_H) && !defined(OPENSSLDIR)
-#define ENGINESDIR "/Users/kentarow/fuzz/wxump/libump/external/mac/openssl/lib/engines"
-#define OPENSSLDIR "/Users/kentarow/fuzz/wxump/libump/external/mac/openssl/ssl"
+#define ENGINESDIR "/Users/yasui/fuzz/fjon/libump/external/mac/openssl/lib/engines"
+#define OPENSSLDIR "/Users/yasui/fuzz/fjon/libump/external/mac/openssl/ssl"
 #endif
 #endif
 
