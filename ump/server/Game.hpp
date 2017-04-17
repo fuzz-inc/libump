@@ -81,7 +81,7 @@ class Game
   void appendDora();
   void uraDora();
   mj::HaiArray drawHaipai(size_t num);
-  const mj::Hai* tsumo();
+  const mj::Hai* tsumo(bool rinshan);
 
   size_t getRest() const override;
 

@@ -49,7 +49,7 @@ Game::Game(std::shared_ptr<const Config> config,
            std::shared_ptr<Server> server)
   : super(config), 
     server_(server), 
-    yama_(*config)
+    yama_(config)
 {
   setId(createId());
   if(!getConfig()->getLogPrefix().empty()) {
@@ -153,8 +153,7 @@ std::shared_ptr<Player> Game::getTurnPlayer() const {
 ***************************************************************************/
 void Game::beginKyoku() {
   super::beginKyoku();
-  yama_.shuffle(getRandom(), 
-                14 + 30 * (4 - std::min<size_t>(countPlayer(), 4)));
+  yama_.shuffle(getRandom());
   const mj::Hai* kaze = mj::Hai::Get("1z");
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     auto player = getTurnPlayer();
@@ -188,11 +187,12 @@ mj::HaiArray Game::drawHaipai(size_t num) {
 }
 /***********************************************************************//**
 	@brief ツモ
+	@param[in] rinshan 嶺上牌のとき真
 	@return ツモった牌
 ***************************************************************************/
-const mj::Hai* Game::tsumo() {
+const mj::Hai* Game::tsumo(bool rinshan) {
   const mj::Hai* hai = yama_.tsumo();
-  getTurnPlayer()->tsumo(hai);
+  getTurnPlayer()->tsumo(hai, rinshan);
   return hai;
 }
 /***********************************************************************//**

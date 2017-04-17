@@ -55,6 +55,7 @@ class Player
     FLAG_SAY_TENPAI, 
     FLAG_AGARI, 
     FLAG_FURITEN, 
+    FLAG_RINSHAN, 
     FLAG_MAX
   };
 
@@ -95,6 +96,8 @@ class Player
   Player& setFuriten(bool value);
   bool isFuriten() const;
 
+  UMP_BIT_ACCESSOR(Rinshan, flag_, FLAG_RINSHAN);
+
   void onOpen();
 
   UMP_ACCESSOR(Name, name_);
@@ -110,7 +113,7 @@ class Player
   UMP_ACCESSOR(Bakaze, bakaze_);
   UMP_ACCESSOR(Zikaze, zikaze_);
 
-  virtual void tsumo(const Hai* hai);
+  virtual void tsumo(const Hai* hai, bool rinshan);
   const Hai* getTsumoHai() const;
 
   bool updateAgari(const Hai* ron = nullptr);

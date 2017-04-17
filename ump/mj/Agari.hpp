@@ -45,6 +45,7 @@ class Agari {
   enum {
     YAKU_RICHI, 		/**< リーチ */
     YAKU_IPPATSU, 		/**< 一発 */
+    YAKU_RINSHAN, 		/**< 嶺上開花 */
     YAKU_HAITEI, 		/**< ハイテイ */
     YAKU_TANYAO, 		/**< タンヤオ */
     YAKU_PINFU, 		/**< 平和 */

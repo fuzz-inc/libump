@@ -369,7 +369,8 @@ void Client::execTsumo(const Command& command) {
   auto player = getPlayer(seat);
   rest_ = std::atoi(command.getArg(1).c_str());
   player->tsumo((command.countArg() > 2)
-                ? mj::Hai::Get(command.getArg(2)) : 0);
+                ? mj::Hai::Get(command.getArg(2)) : nullptr, 
+                command.hasArg(Command::TYPE_RINSHAN));
 }
 /***********************************************************************//**
 	捨て牌.

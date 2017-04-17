@@ -39,8 +39,10 @@ namespace mj {
 	@brief コンストラクタ
 	@param[in] config 設定
 ***************************************************************************/
-Yama::Yama(const Config& config) {
-  for(auto iter : config.getHaiNums()) {
+Yama::Yama(std::shared_ptr<const Config> config)
+  : config_(config)
+{
+  for(auto iter : config->getHaiNums()) {
     for(size_t i = 0, n = iter.second; i < n; i++) {
       append(iter.first);
     }
@@ -49,16 +51,15 @@ Yama::Yama(const Config& config) {
 /***********************************************************************//**
 	@brief 洗牌
 	@param[in] random 乱数生成器
-	@param[in] wanpaiNum 王牌の数
 ***************************************************************************/
-void Yama::shuffle(std::default_random_engine& random, 
-                   size_t wanpaiNum) {
+void Yama::shuffle(std::default_random_engine& random) {
   super::shuffle(random);
   pt_ = 0;
-  restNum_ = size() - wanpaiNum;
+  restNum_ = size() - config_->getWanpaiNum();
 }
 /***********************************************************************//**
 	@brief 配牌を取る
+	@param[in] num 枚数
 	@return 配牌
 ***************************************************************************/
 HaiArray Yama::getHaipai(size_t num) {

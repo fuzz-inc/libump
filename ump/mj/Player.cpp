@@ -189,8 +189,9 @@ bool Player::isOya() const {
 /***********************************************************************//**
 	@brief 牌を自摸る
 	@param[in] hai ツモった牌
+	@param[in] rinshan 嶺上牌のとき真
 ***************************************************************************/
-void Player::tsumo(const Hai* hai) {
+void Player::tsumo(const Hai* hai, bool rinshan) {
   super::sort();
   tsumoHai_ = hai;
   append(hai);
@@ -199,6 +200,7 @@ void Player::tsumo(const Hai* hai) {
   if(!isRichi()) {
     setFuriten(false);
   }
+  setRinshan(rinshan);
 }
 /***********************************************************************//**
 	@brief ツモった牌を取得する
@@ -388,6 +390,7 @@ Sutehai* Player::sutehai(const Sutehai& sutehai) {
   else {
     flag_.reset(FLAG_IPPATSU);
   }
+  setRinshan(false);
   sutehai_ = super::sutehai(sutehai);
   tsumoHai_ = nullptr;
   super::sort();

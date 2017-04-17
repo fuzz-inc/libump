@@ -45,16 +45,16 @@ class Yama
   typedef HaiArray super;
 
  private:
+  std::shared_ptr<const Config> config_;
   size_t pt_;
   size_t restNum_;
 
  public:
-  Yama(const Config& config);
+  Yama(std::shared_ptr<const Config> config);
   ~Yama() = default;
 
-  void shuffle(std::default_random_engine& random, 
-               size_t wanpaiNum = 14);
-  HaiArray getHaipai(size_t num = 13);
+  void shuffle(std::default_random_engine& random);
+  HaiArray getHaipai(size_t num);
   const Hai* tsumo();
   const Hai* rinshan();
   const Hai* dora();

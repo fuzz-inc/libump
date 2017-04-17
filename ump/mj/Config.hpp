@@ -42,6 +42,7 @@ class Config {
   std::map<const Hai*, size_t> haiNums_;
   size_t playerNum_;
   size_t haipaiNum_;
+  size_t wanpaiNum_;
   int richiPoint_;
   int renchanPoint_;
 
@@ -58,6 +59,7 @@ class Config {
 
   UMP_ACCESSOR(PlayerNum, playerNum_);
   UMP_ACCESSOR(HaipaiNum, haipaiNum_);
+  UMP_ACCESSOR(WanpaiNum, wanpaiNum_);
   UMP_ACCESSOR(RichiPoint, richiPoint_);
   UMP_ACCESSOR(RenchanPoint, renchanPoint_);
 };

@@ -101,7 +101,10 @@ class Config
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);
   UMP_ACCESSOR(RoundMax, roundMax_);
-  UMP_ACCESSOR(DoraNum, doraNum_);
+
+  Config& setDoraNum(size_t num);
+  UMP_GETTER(DoraNum, doraNum_);
+
   UMP_ACCESSOR(Uma, uma_);
 
   UMP_ACCESSOR(DeltaTime, deltaTime_);

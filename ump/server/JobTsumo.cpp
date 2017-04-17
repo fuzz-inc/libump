@@ -41,11 +41,11 @@ namespace server {
 /***********************************************************************//**
 	@brief コンストラクタ
 	@param[in] game ゲーム
-	@param[in] flag フラグ
+	@param[in] rinshan 嶺上牌のとき真
 ***************************************************************************/
-JobTsumo::JobTsumo(Game& game, unsigned int flag)
+JobTsumo::JobTsumo(Game& game, bool rinshan)
   : super(game), 
-    flag_(flag)
+    rinshan_(rinshan)
 {}
 /***********************************************************************//**
 	@copydoc Job::onUpdate
@@ -54,7 +54,7 @@ Job* JobTsumo::onUpdate() {
   auto config = getConfig();
   auto& game = getGame();
   auto player = game.getTurnPlayer();
-  auto hai = game.tsumo();
+  auto hai = game.tsumo(rinshan_);
   auto rest = game.getRest();
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     Command command(Command::TYPE_TSUMO);
@@ -66,7 +66,7 @@ Job* JobTsumo::onUpdate() {
     else {
       command.append(mj::Hai::GetUnknown()->toString());
     }
-    if(isRinshan()) {
+    if(rinshan_) {
       command.append(Command::TYPE_RINSHAN);
     }
     game.getPlayer(i)->send(command);

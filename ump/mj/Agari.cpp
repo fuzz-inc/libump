@@ -39,6 +39,7 @@ namespace mj {
 const Agari::YakuTable Agari::YakuTable_[YAKU_MAX] = {
   { 1, 0, "リーチ" }, 
   { 1, 0, "一発" }, 
+  { 1, 1, "嶺上開花" }, 
   { 1, 1, "ハイテイ" }, 
   { 1, 1, "タンヤオ" }, 
   { 1, 0, "平和" }, 
@@ -136,6 +137,9 @@ void Agari::update(const Player& player) {
     if(player.isIppatsu()) {
       appendYaku(YAKU_IPPATSU);
     }
+  }
+  if(player.isRinshan()) {
+    appendYaku(YAKU_RINSHAN);
   }
   if(isMenzen() && !isRon()) {
     appendYaku(YAKU_TSUMO);

@@ -67,7 +67,7 @@ Job* JobKyoku::onUpdate() {
     return nullptr;
   }
   if(getGame().getRest() > 0) {
-    getGame().beginJob(new JobTsumo(getGame()));
+    getGame().beginJob(new JobTsumo(getGame(), false));
   }
   else {
     getGame().beginJob(new JobRyukyoku(getGame()));
