@@ -60,6 +60,7 @@ const char* Command::TYPE_TABLE[] = {
   "ryukyoku", 
   "tenpai?", 
 
+  "rinshan", 
   "tsumogiri", 
   "richi", 
   "ankan", 

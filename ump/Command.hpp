@@ -68,6 +68,7 @@ class Command {
     TYPE_RYUKYOKU, 
     TYPE_TENPAI_Q, 
 
+    TYPE_RINSHAN, 
     TYPE_TSUMOGIRI, 
     TYPE_RICHI, 
     TYPE_ANKAN, 

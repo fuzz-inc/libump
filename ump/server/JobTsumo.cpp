@@ -41,9 +41,11 @@ namespace server {
 /***********************************************************************//**
 	@brief コンストラクタ
 	@param[in] game ゲーム
+	@param[in] flag フラグ
 ***************************************************************************/
-JobTsumo::JobTsumo(Game& game)
-  : super(game)
+JobTsumo::JobTsumo(Game& game, unsigned int flag)
+  : super(game), 
+    flag_(flag)
 {}
 /***********************************************************************//**
 	@copydoc Job::onUpdate
@@ -63,6 +65,9 @@ Job* JobTsumo::onUpdate() {
     }
     else {
       command.append(mj::Hai::GetUnknown()->toString());
+    }
+    if(isRinshan()) {
+      command.append(Command::TYPE_RINSHAN);
     }
     game.getPlayer(i)->send(command);
   }

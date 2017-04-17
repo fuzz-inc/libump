@@ -45,11 +45,24 @@ class JobTsumo
   typedef Job super;
 
  public:
-  JobTsumo(Game& game);
+  enum {
+    FLAG_RINSHAN	= 1 << 0
+  };
+
+ private:
+  unsigned int flag_;
+
+ public:
+  JobTsumo(Game& game, unsigned int flag = 0);
   ~JobTsumo() override = default;
 
  protected:
   Job* onUpdate() override;
+
+ private:
+  bool isRinshan() const {
+    return (flag_ & FLAG_RINSHAN) != 0;
+  }
 };
 /***********************************************************************//**
 	$Id$

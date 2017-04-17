@@ -147,7 +147,7 @@ Job* JobNaki::doReply(std::shared_ptr<Player> player) {
         game.setTurn(player->getSeat());
         if(type == Command::TYPE_KAN) {
           game.appendDora();
-          return new JobTsumo(game);
+          return new JobTsumo(game, JobTsumo::FLAG_RINSHAN);
         }
         else {
           return new JobSutehai(game);

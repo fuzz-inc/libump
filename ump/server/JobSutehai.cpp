@@ -101,7 +101,7 @@ Job* JobSutehai::onUpdate() {
         if(player->canAnkan(hais)) {
           openMentsu(player, type, hais);
           game.appendDora();
-          return new JobTsumo(game);
+          return new JobTsumo(game, JobTsumo::FLAG_RINSHAN);
         }
       }
       break;
@@ -111,7 +111,7 @@ Job* JobSutehai::onUpdate() {
           if(auto mentsu = player->findKakanMentsu(hai)) {
             openMentsu(player, type, *mentsu, hai);
             game.appendDora();
-            return new JobTsumo(game);
+            return new JobTsumo(game, JobTsumo::FLAG_RINSHAN);
           }
         }
       }
