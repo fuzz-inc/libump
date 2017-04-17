@@ -96,6 +96,18 @@ Config& Config::setDoraHaiNum(const Hai* hai, size_t num) {
   return *this;
 }
 /***********************************************************************//**
+	@brief ドラ牌の枚数をセットする
+	@param[in] num 枚数
+	@param[in] number 数種
+	@return 自分自身
+***************************************************************************/
+Config& Config::setDoraHaiNum(size_t num, int number) {
+  setDoraHaiNum(Hai::Get(Hai::COLOR_MANZU, number), num);
+  setDoraHaiNum(Hai::Get(Hai::COLOR_PINZU, number), num);
+  setDoraHaiNum(Hai::Get(Hai::COLOR_SOUZU, number), num);
+  return *this;
+}
+/***********************************************************************//**
 	@brief すべての牌を数える
 	@return すべての牌の数
 ***************************************************************************/

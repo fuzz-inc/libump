@@ -53,6 +53,7 @@ class Config {
   UMP_GETTER(HaiNums, haiNums_);
   size_t getHaiNum(const Hai* hai) const;
   Config& setDoraHaiNum(const Hai* hai, size_t num);
+  Config& setDoraHaiNum(size_t num, int number = 5);
   size_t getHaiNum() const;
 
   UMP_ACCESSOR(PlayerNum, playerNum_);
