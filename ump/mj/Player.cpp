@@ -316,9 +316,11 @@ bool Player::canKakan() const {
 	@return 加槓できる面子
 ***************************************************************************/
 std::shared_ptr<Mentsu> Player::findKakanMentsu(const Hai* hai) const {
-  for(auto& mentsu : getMentsus()) {
-    if(mentsu->isKotsu() && mentsu->at(0)->isSame(hai)) {
-      return mentsu;
+  if(getMenzen().hasEqual(hai)) {
+    for(auto& mentsu : getMentsus()) {
+      if(mentsu->isKotsu() && mentsu->at(0)->isSame(hai)) {
+        return mentsu;
+      }
     }
   }
   return nullptr;
