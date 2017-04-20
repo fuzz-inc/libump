@@ -43,7 +43,6 @@ namespace mj {
 Game::Game(std::shared_ptr<const Config> config)
   : config_(config), 
     random_(new std::default_random_engine(std::random_device()())), 
-    players_(config->getPlayerNum()), 
     oya_(0), 
     round_(0), 
     renchan_(0), 
@@ -63,9 +62,11 @@ Game::~Game() {
 	@param[in] player 追加するプレイヤー
 ***************************************************************************/
 void Game::setPlayer(size_t seat, std::shared_ptr<Player> player) {
-  assert(!players_.at(seat));
   player->setGame(shared_from_this());
   player->setSeat(seat);
+  if(players_.size() <= seat) {
+    players_.resize(seat + 1);
+  }
   players_[seat] = player;
 }
 /***********************************************************************//**
@@ -81,7 +82,7 @@ size_t Game::countPlayer() const {
 	@return プレイヤー
 ***************************************************************************/
 std::shared_ptr<Player> Game::getPlayer(size_t seat) const {
-  return players_.at(seat);
+  return (seat < players_.size()) ? players_.at(seat) : nullptr;
 }
 /***********************************************************************//**
 	@brief プレイヤーを取得する

@@ -96,8 +96,8 @@ void Game::appendPlayer(std::shared_ptr<Player> player) {
 	@return プレイヤーが揃っているとき真
 ***************************************************************************/
 bool Game::canStart() const {
-  for(auto& player : getPlayers()) {
-    if(!player) {
+  for(size_t i = 0, n = getConfig()->getPlayerNum(); i < n; i++) {
+    if(!getPlayer(i)) {
       return false;
     }
   }
@@ -253,7 +253,7 @@ void Game::onRecvCommand(std::shared_ptr<Player> player,
 ***************************************************************************/
 size_t Game::findSeat() const {
   std::vector<size_t> seats;
-  for(size_t i = 0, n = countPlayer(); i < n; i++) {
+  for(size_t i = 0, n = getConfig()->getPlayerNum(); i < n; i++) {
     if(!getPlayer(i)) {
       seats.push_back(i);
     }
