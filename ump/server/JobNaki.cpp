@@ -74,7 +74,7 @@ void JobNaki::onBegin() {
     if(player->canPon(hai)) {
       command.append(Command::TYPE_PON);
     }
-    if(i == 1 && player->canChi(hai)) {
+    if(getConfig()->canChi() && i == 1 && player->canChi(hai)) {
       command.append(Command::TYPE_CHI);
     }
     if(command.countArg() > 1) {
@@ -142,7 +142,8 @@ Job* JobNaki::doReply(std::shared_ptr<Player> player) {
       mj::HaiArray hais(reply.getArg(0).c_str());
       if((type == Command::TYPE_KAN && player->canKan(hais, hai)) || 
          (type == Command::TYPE_PON && player->canPon(hais, hai)) || 
-         (type == Command::TYPE_CHI && player->canChi(hais, hai))) {
+         (getConfig()->canChi() && 
+          type == Command::TYPE_CHI && player->canChi(hais, hai))) {
         openMentsu(player, type, hais, hai);
         game.setTurn(player->getSeat());
         if(type == Command::TYPE_KAN) {

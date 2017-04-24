@@ -56,6 +56,7 @@ Config::Config()
     uraDoraWait_(1)
 {
   setAgariyame(true);
+  setCanChi(true);
 }
 /***********************************************************************//**
 	@brief 

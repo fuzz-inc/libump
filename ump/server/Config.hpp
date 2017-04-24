@@ -51,6 +51,7 @@ class Config
     FLAG_HAKOSHITA, 
     FLAG_AGARIYAME, 
     FLAG_AOTENJO, 
+    FLAG_CHI, 
     FLAG_MAX
   };
 
@@ -97,6 +98,11 @@ class Config
    * 青天井
    */
   UMP_BIT_ACCESSOR(Aotenjo, flag_, FLAG_AOTENJO);
+
+  /**
+   * チー可能
+   */
+  UMP_CAN_ACCESSOR(Chi, flag_, FLAG_CHI);
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);

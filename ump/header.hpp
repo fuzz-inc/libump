@@ -161,6 +161,21 @@ class Thread;
 #define UMP_BIT_ACCESSOR(name, var, flag)       \
   UMP_BIT_SETTER(name, var, flag);              \
   UMP_BIT_GETTER(name, var, flag)
+
+#define UMP_CAN_SETTER(name, var, flag)                         \
+  auto setCan##name(bool value = true) -> decltype(*this)& {    \
+    var.set(flag, value);                                       \
+    return *this;                                               \
+  }
+
+#define UMP_CAN_GETTER(name, var, flag)         \
+  bool can##name() const {                      \
+    return var.test(flag);                      \
+  }
+
+#define UMP_CAN_ACCESSOR(name, var, flag)       \
+  UMP_CAN_SETTER(name, var, flag);              \
+  UMP_CAN_GETTER(name, var, flag)
 /***********************************************************************//**
 	$Id$
 ***************************************************************************/
