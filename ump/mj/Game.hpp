@@ -128,6 +128,8 @@ class Game
   virtual void onShowHai(const Hai* hai) {}
 
  protected:
+  UMP_SETTER(Config, config_);
+
   void clearPlayer();
 
   Game& setOya(size_t oya);
