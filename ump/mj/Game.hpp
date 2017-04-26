@@ -107,6 +107,7 @@ class Game
 
   UMP_GETTER(Dora, dora_);
   void appendDora(const Hai* hai);
+  const Hai* getDora(const Hai* hai) const;
 
   void beginKyoku();
   void endKyoku();

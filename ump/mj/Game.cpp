@@ -159,6 +159,21 @@ void Game::appendDora(const Hai* hai) {
   onShowHai(hai);
 }
 /***********************************************************************//**
+	@brief ドラを取得する
+	@param[in] hai ドラ表示牌
+	@return ドラ
+***************************************************************************/
+const Hai* Game::getDora(const Hai* hai) const {
+  for(const Hai* dora = hai->rotate(1);
+      dora != hai;
+      dora = dora->rotate(1)) {
+    if(getConfig()->getHaiNum(dora) > 0) {
+      return dora;
+    }
+  }
+  return nullptr;
+}
+/***********************************************************************//**
 	@brief 局を開始する
 ***************************************************************************/
 void Game::beginKyoku() {

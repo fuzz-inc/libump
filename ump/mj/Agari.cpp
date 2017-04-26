@@ -394,8 +394,10 @@ void Agari::updateKind(Info& info, const Mentsu& mentsu) const {
 void Agari::updateDora(const Player& player) {
   dora_ = 0;
   auto game = player.getGame();
-  for(auto dora : game->getDora()) {
-    dora_ += countHai(dora->rotate(1));
+  for(auto hai : game->getDora()) {
+    if(auto dora = game->getDora(hai)) {
+      dora_ += countHai(dora);
+    }
   }
   for(auto& mentsu : mentsus_) {
     for(auto hai : mentsu) {
