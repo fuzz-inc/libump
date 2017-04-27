@@ -97,8 +97,7 @@ void JobAgari::agari() {
   if(getConfig()->isAotenjo() && !agari.isYakuman()) {
     point = agari.getFu() * 32;
     for(size_t i = 1, n = agari.getHan(); i < n; i++) {
-      //point *= 2;
-      point *= 1024;
+      point *= 2;
     }
     text.clear();
   }
