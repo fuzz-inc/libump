@@ -167,6 +167,9 @@ void Job::openMentsu(std::shared_ptr<Player> player,
     }
     player->openMentsu(hais, hai);
   }
+  for(auto player : getGame().getPlayers()) {
+    player->onOpen();
+  }
   sendAll(command);
 }
 /***********************************************************************//**
