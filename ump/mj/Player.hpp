@@ -51,6 +51,7 @@ class Player
   enum {
     FLAG_FIRST, 
     FLAG_RICHI, 
+    FLAG_DOUBLE_RICHI, 
     FLAG_IPPATSU, 
     FLAG_SAY_TENPAI, 
     FLAG_AGARI, 
@@ -84,8 +85,9 @@ class Player
   Player& resetFirst();
   bool isFirst() const;
 
-  bool isRichi() const;
-  bool isIppatsu() const;
+  UMP_BIT_GETTER(Richi, flag_, FLAG_RICHI);
+  UMP_BIT_GETTER(DoubleRichi, flag_, FLAG_DOUBLE_RICHI);
+  UMP_BIT_GETTER(Ippatsu, flag_, FLAG_IPPATSU);
 
   void sayTenpai();
   bool isSayTenpai() const;

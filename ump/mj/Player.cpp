@@ -90,20 +90,6 @@ bool Player::isFirst() const {
   return flag_.test(FLAG_FIRST);
 }
 /***********************************************************************//**
-	@brief リーチがかかっているか調べる
-	@return リーチがかかっているとき真
-***************************************************************************/
-bool Player::isRichi() const {
-  return flag_.test(FLAG_RICHI);
-}
-/***********************************************************************//**
-	@brief リーチ一発が有効か調べる
-	@return リーチ一発が有効なとき真
-***************************************************************************/
-bool Player::isIppatsu() const {
-  return flag_.test(FLAG_IPPATSU);
-}
-/***********************************************************************//**
 	@brief テンパイ宣言
 ***************************************************************************/
 void Player::sayTenpai() {
@@ -382,14 +368,17 @@ bool Player::canChi(const HaiArray& hais, const Hai* hai) const {
 ***************************************************************************/
 Sutehai* Player::sutehai(const Sutehai& sutehai) {
   assert(!sutehai.isNaki() && !sutehai.isRon());
-  flag_.reset(FLAG_FIRST);
   if(sutehai.isRichi()) {
     flag_.set(FLAG_RICHI);
     flag_.set(FLAG_IPPATSU);
+    if(isFirst()) {
+      flag_.set(FLAG_DOUBLE_RICHI);
+    }
   }
   else {
     flag_.reset(FLAG_IPPATSU);
   }
+  flag_.reset(FLAG_FIRST);
   setRinshan(false);
   sutehai_ = super::sutehai(sutehai);
   tsumoHai_ = nullptr;

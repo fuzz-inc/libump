@@ -38,6 +38,7 @@ namespace ump {
 namespace mj {
 const Agari::YakuTable Agari::YakuTable_[YAKU_MAX] = {
   { 1, 0, "リーチ" }, 
+  { 2, 0, "ダブルリーチ" }, 
   { 1, 0, "一発" }, 
   { 1, 1, "嶺上開花" }, 
   { 1, 1, "ハイテイ" }, 
@@ -133,7 +134,7 @@ void Agari::update(const Player& player) {
     }
   }
   if(player.isRichi()) {
-    appendYaku(YAKU_RICHI);
+    appendYaku(player.isDoubleRichi() ? YAKU_DOUBLE_RICHI : YAKU_RICHI);
     if(player.isIppatsu()) {
       appendYaku(YAKU_IPPATSU);
     }

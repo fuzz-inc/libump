@@ -44,6 +44,7 @@ class Agari {
  public:
   enum {
     YAKU_RICHI, 		/**< リーチ */
+    YAKU_DOUBLE_RICHI, 		/**< ダブルリーチ */
     YAKU_IPPATSU, 		/**< 一発 */
     YAKU_RINSHAN, 		/**< 嶺上開花 */
     YAKU_HAITEI, 		/**< ハイテイ */
