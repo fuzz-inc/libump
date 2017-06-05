@@ -1,4 +1,4 @@
-include Makefile.def
+include $(abspath $(dir $(lastword $(MAKEFILE_LIST))))/Makefile.def
 
 CFLAGS	+= -I$(SRCDIR) -pthread
 LDFLAGS	+= -pthread
@@ -6,12 +6,17 @@ LDFLAGS	+= -pthread
 LIBUMP	= $(LIBDIR)/libump$(LIBEXT)
 
 #
-$(BINDIR)/umpserver: $(OBJDIR)/server/main$(OBJEXT) $(LIBUMP)
-
 #
-.PHONY: $(LIBUMP)
+#
+.PHONY: libump $(LIBUMP)
+
+libump: $(LIBUMP)
+
 $(LIBUMP):
 	$(MAKE) -f libump.makefile
+
+#
+$(BINDIR)/umpserver: $(OBJDIR)/server/main$(OBJEXT) $(LIBUMP)
 
 #
 .PHONY: test

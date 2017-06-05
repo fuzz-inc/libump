@@ -52,6 +52,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <algorithm>
 #include <bitset>
+#include <condition_variable>
 #include <fstream>
 #include <functional>
 #include <iostream>
