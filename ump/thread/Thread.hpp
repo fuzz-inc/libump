@@ -23,6 +23,7 @@ class Thread {
   void stop();
   bool isStop() const;
   bool sleep(int ms);
+  void sleep();
 };
 /***********************************************************************//**
 	$Id$

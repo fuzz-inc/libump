@@ -63,6 +63,7 @@ class Server
 
   void start();
   void stop();
+  void sleep();
 
   void onEndGame(Game* game);
 
