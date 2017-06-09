@@ -40,11 +40,12 @@ namespace client {
 /***********************************************************************//**
 	@brief コンストラクタ
 ***************************************************************************/
-Bot::Bot(std::shared_ptr<const mj::Config> config, 
-         std::shared_ptr<socket::Socket> socket)
-  : super(config, socket), 
+Bot::Bot(std::shared_ptr<socket::Socket> socket, 
+         std::shared_ptr<const mj::Config> config)
+  : super(socket), 
     wait_(0)
 {
+  setConfig(config);
 }
 /***********************************************************************//**
 	@copydoc Client::onRecvCommand

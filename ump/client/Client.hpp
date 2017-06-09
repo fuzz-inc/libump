@@ -68,8 +68,7 @@ class Client
   std::map<const mj::Hai*, size_t> hideHaiNums_;
 
  public:
-  Client(std::shared_ptr<const mj::Config> config, 
-         std::shared_ptr<socket::Socket> socket);
+  Client(std::shared_ptr<socket::Socket> socket);
   virtual ~Client();
 
   bool open(const char* host, int port);

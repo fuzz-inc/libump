@@ -40,13 +40,10 @@ namespace ump {
 namespace client {
 /***********************************************************************//**
 	@brief デフォルトコンストラクタ
-	@param[in] config 設定
 	@param[in] socket ソケット
 ***************************************************************************/
-Client::Client(std::shared_ptr<const mj::Config> config, 
-               std::shared_ptr<socket::Socket> socket)
-  : super(config), 
-    socket_(socket), 
+Client::Client(std::shared_ptr<socket::Socket> socket)
+  : socket_(socket), 
     hello_(Command::TYPE_HELLO), 
     state_(STATE_NULL), 
     seat_(0), 
@@ -267,6 +264,7 @@ void Client::onReplyCommand(const Command& command) {
 	@copydoc Game::beginKyoku
 ***************************************************************************/
 void Client::beginKyoku() {
+  assert(getConfig());
   super::beginKyoku();
   rest_ = 0;
   hideHaiNums_.clear();

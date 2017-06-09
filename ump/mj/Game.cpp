@@ -40,9 +40,8 @@ namespace mj {
 /***********************************************************************//**
         @brief デフォルトコンストラクタ
 ***************************************************************************/
-Game::Game(std::shared_ptr<const Config> config)
-  : config_(config), 
-    random_(new std::default_random_engine(std::random_device()())), 
+Game::Game()
+  : random_(new std::default_random_engine(std::random_device()())), 
     oya_(0), 
     round_(0), 
     renchan_(0), 
@@ -164,6 +163,7 @@ void Game::appendDora(const Hai* hai) {
 	@return ドラ
 ***************************************************************************/
 const Hai* Game::getDora(const Hai* hai) const {
+  assert(getConfig());
   for(const Hai* dora = hai->rotate(1);
       dora != hai;
       dora = dora->rotate(1)) {

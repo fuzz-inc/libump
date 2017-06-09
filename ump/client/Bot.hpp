@@ -48,8 +48,8 @@ class Bot
   std::chrono::milliseconds wait_;
 
  public:
-  Bot(std::shared_ptr<const mj::Config> config, 
-      std::shared_ptr<socket::Socket> socket);
+  Bot(std::shared_ptr<socket::Socket> socket, 
+      std::shared_ptr<const mj::Config> config);
   ~Bot() override = default;
 
   UMP_ACCESSOR(Wait, wait_);

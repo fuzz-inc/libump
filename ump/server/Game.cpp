@@ -47,10 +47,10 @@ namespace server {
 ***************************************************************************/
 Game::Game(std::shared_ptr<const Config> config, 
            std::shared_ptr<Server> server)
-  : super(config), 
-    server_(server), 
+  : server_(server), 
     yama_(config)
 {
+  setConfig(config);
   setId(createId());
   if(!getConfig()->getLogPrefix().empty()) {
     openLogFile(getLogPath(getId()));

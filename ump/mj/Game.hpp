@@ -65,10 +65,10 @@ class Game
   std::bitset<FLAG_MAX> flag_;
 
  public:
-  Game(std::shared_ptr<const Config> config);
+  Game();
   virtual ~Game();
 
-  UMP_GETTER(Config, config_);
+  UMP_ACCESSOR(Config, config_);
 
   /**
    * 乱数生成器を取得する
@@ -129,8 +129,6 @@ class Game
   virtual void onShowHai(const Hai* hai) {}
 
  protected:
-  UMP_SETTER(Config, config_);
-
   void clearPlayer();
 
   Game& setOya(size_t oya);
