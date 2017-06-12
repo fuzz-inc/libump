@@ -135,7 +135,7 @@ void Player::operator()(std::shared_ptr<Player> self) {
         game->onRecvCommand(shared_from_this(), command);
       }
       else {
-        getServer()->onRecvCommand(shared_from_this(), command);
+        getServer()->recvCommand(shared_from_this(), command);
       }
     }
   }

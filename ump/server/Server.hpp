@@ -69,16 +69,22 @@ class Server
 
   void operator()();
 
-  void onRecvCommand(std::shared_ptr<Player> player, 
-                     const Command& command);
+  void recvCommand(std::shared_ptr<Player> player, 
+                   const Command& command);
 
  protected:
   std::mutex& getMutex() {
     return mutex_;
   }
 
+  virtual std::shared_ptr<Player>
+  createPlayer(std::shared_ptr<socket::Socket> socket);
+
   virtual std::shared_ptr<Game> createGame();
   void startGame(std::shared_ptr<Game> game);
+
+  virtual void onRecvCommand(std::shared_ptr<Player> player, 
+                             const Command& command);
 
   virtual void onConnectPlayer(std::shared_ptr<Player> player, 
                                const Command& command);

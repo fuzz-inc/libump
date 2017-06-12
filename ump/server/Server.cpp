@@ -120,17 +120,20 @@ void Server::operator()() {
   }
 }
 /***********************************************************************//**
-	@copydoc Receiver::onReceive
+	@brief UMPコマンド受信処理
 ***************************************************************************/
-void Server::onRecvCommand(std::shared_ptr<Player> player, 
-                           const Command& command) {
+void Server::recvCommand(std::shared_ptr<Player> player, 
+                         const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
-  if(command.getType() == Command::TYPE_HELLO) {
-    if(command.hasOption("name")) {
-      player->setName(command.getOption("name"));
-    }
-    onConnectPlayer(player, command);
-  }
+  onRecvCommand(player, command);
+}
+/***********************************************************************//**
+	@brief プレイヤーを生成する
+	@param[in] socket ソケット
+***************************************************************************/
+std::shared_ptr<Player>
+Server::createPlayer(std::shared_ptr<socket::Socket> socket) {
+  return std::make_shared<Player>(shared_from_this(), socket);
 }
 /***********************************************************************//**
 	@brief 
@@ -144,6 +147,18 @@ std::shared_ptr<Game> Server::createGame() {
 void Server::startGame(std::shared_ptr<Game> game) {
   games_.push_back(game);
   game->start();
+}
+/***********************************************************************//**
+	@brief UMPコマンド受信処理
+***************************************************************************/
+void Server::onRecvCommand(std::shared_ptr<Player> player, 
+                           const Command& command) {
+  if(command.getType() == Command::TYPE_HELLO) {
+    if(command.hasOption("name")) {
+      player->setName(command.getOption("name"));
+    }
+    onConnectPlayer(player, command);
+  }
 }
 /***********************************************************************//**
 	@brief 
