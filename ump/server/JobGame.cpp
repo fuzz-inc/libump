@@ -85,6 +85,7 @@ void JobGame::onEnd() {
       append(point.toString());
   }
   sendAll(command);
+  getGame().onEnd(players);
 }
 /***********************************************************************//**
 	@brief 次の局に進むか調べる
@@ -112,7 +113,7 @@ bool JobGame::isNextKyoku() const {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-std::vector<std::shared_ptr<mj::Player>> JobGame::getRanking() const {
+mj::Players JobGame::getRanking() const {
   auto players(getGame().getPlayers());
   std::stable_sort(players.begin(), players.end(), 
                    [](const std::shared_ptr<mj::Player>& a, 

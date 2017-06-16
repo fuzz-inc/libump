@@ -112,7 +112,7 @@ void Server::onEndGame(Game* game) {
 void Server::operator()() {
   while(socket_->isOpen()) {
     if(auto socket = socket_->accept(getTimeout())) {
-      auto player = std::make_shared<Player>(shared_from_this(), socket);
+      auto player = createPlayer(socket);
       player->send(Command(Command::TYPE_HELLO).
                    setOption("ump", Version::Get().toString()));
       player->start();

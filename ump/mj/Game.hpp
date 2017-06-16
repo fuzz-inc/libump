@@ -54,7 +54,7 @@ class Game
   std::shared_ptr<const Config> config_;
   std::unique_ptr<std::default_random_engine> random_;
   std::string id_;
-  std::vector<std::shared_ptr<Player>> players_;
+  Players players_;
   size_t oya_;
   size_t round_;
   int renchan_;
@@ -127,6 +127,12 @@ class Game
    * @param[in] hai 見えた牌
    */
   virtual void onShowHai(const Hai* hai) {}
+
+  /**
+   * 終了時の処理
+   * @param[in] players 着順
+   */
+  virtual void onEnd(const Players& players) {}
 
  protected:
   void clearPlayer();

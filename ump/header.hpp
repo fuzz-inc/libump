@@ -98,6 +98,8 @@ class Player;
 class Shanten;
 class Sutehai;
 class Yama;
+
+typedef std::vector<std::shared_ptr<Player>> Players;
 }
 
 namespace server {

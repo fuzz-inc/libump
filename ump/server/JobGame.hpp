@@ -54,7 +54,7 @@ class JobGame
 
  private:
   bool isNextKyoku() const;
-  std::vector<std::shared_ptr<mj::Player>> getRanking() const;
+  mj::Players getRanking() const;
 };
 /***********************************************************************//**
 	$Id$
