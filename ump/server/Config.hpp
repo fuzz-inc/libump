@@ -52,6 +52,7 @@ class Config
     FLAG_AGARIYAME, 
     FLAG_AOTENJO, 
     FLAG_CHI, 
+    FLAG_SINGLE, 
     FLAG_MAX
   };
 
@@ -103,6 +104,11 @@ class Config
    * チー可能
    */
   UMP_CAN_ACCESSOR(Chi, flag_, FLAG_CHI);
+
+  /**
+   * 1局精算
+   */
+  UMP_BIT_ACCESSOR(Single, flag_, FLAG_SINGLE);
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);

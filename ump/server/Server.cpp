@@ -113,8 +113,10 @@ void Server::operator()() {
   while(socket_->isOpen()) {
     if(auto socket = socket_->accept(getTimeout())) {
       auto player = createPlayer(socket);
+      /*
       player->send(Command(Command::TYPE_HELLO).
                    setOption("ump", Version::Get().toString()));
+      */
       player->start();
     }
   }

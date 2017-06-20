@@ -44,6 +44,9 @@ class JobGame
 {
   typedef Job super;
 
+ private:
+  int kyokuNum_;
+
  public:
   JobGame(Game& game);
   ~JobGame() override = default;

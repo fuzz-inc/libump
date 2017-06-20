@@ -42,7 +42,8 @@ namespace server {
 	@brief コンストラクタ
 ***************************************************************************/
 JobGame::JobGame(Game& game)
-  : super(game)
+  : super(game), 
+    kyokuNum_(0)
 {}
 /***********************************************************************//**
 	@brief 開始
@@ -60,6 +61,7 @@ void JobGame::onBegin() {
 Job* JobGame::onUpdate() {
   if(isNextKyoku()) {
     getGame().beginJob(new JobKyoku(getGame()));
+    kyokuNum_++;
     return this;
   }
   return nullptr;
@@ -80,6 +82,7 @@ void JobGame::onEnd() {
     if(i < uma.size()) {
       point += uma.at(i);
     }
+    player->setPoint(point);
     command.
       append(player->getSeatString()).
       append(point.toString());
@@ -94,6 +97,9 @@ void JobGame::onEnd() {
 bool JobGame::isNextKyoku() const {
   const auto& game = getGame();
   auto config = getConfig();
+  if(config->isSingle() && kyokuNum_ > 0) {
+    return false;
+  }
   if(!config->isHakoshita()) {
     for(auto player : game.getPlayers()) {
       if(player->getPoint() < 0) {

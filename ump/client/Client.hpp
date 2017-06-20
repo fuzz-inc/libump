@@ -102,6 +102,7 @@ class Client
   UMP_GETTER(ChiPattern, chiPattern_);
   UMP_GETTER(KanPattern, kanPattern_);
 
+  bool sendHello();
   bool sendCommand(const Command& command);
   bool replyCommand(Command reply, const Command& command);
 
