@@ -132,7 +132,7 @@ class Game
    * 終了時の処理
    * @param[in] players 着順
    */
-  virtual void onEnd(const Players& players) {}
+  virtual void onEndGame(const Players& players) {}
 
  protected:
   void clearPlayer();

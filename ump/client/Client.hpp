@@ -116,7 +116,7 @@ class Client
   virtual void onReplyCommand(const Command& command);
 
   virtual void onGameStart() {}
-  virtual void onGameEnd() {}
+  virtual void onEndGame(const mj::Players& players);
 
   UMP_GETTER(Socket, socket_);
 

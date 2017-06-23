@@ -88,7 +88,7 @@ void JobGame::onEnd() {
       append(point.toString());
   }
   sendAll(command);
-  getGame().onEnd(players);
+  getGame().onEndGame(players);
 }
 /***********************************************************************//**
 	@brief 次の局に進むか調べる

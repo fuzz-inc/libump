@@ -267,6 +267,13 @@ bool Client::onRecvCommand(const Command& command) {
 void Client::onReplyCommand(const Command& command) {
 }
 /***********************************************************************//**
+	@copydoc Game::onEndGame
+***************************************************************************/
+void Client::onEndGame(const mj::Players& players) {
+  state_ = STATE_END;
+  socket_->close();
+}
+/***********************************************************************//**
 	@copydoc Game::beginKyoku
 ***************************************************************************/
 void Client::beginKyoku() {
@@ -312,9 +319,13 @@ void Client::execGameStart(const Command& command) {
 	@param[in] command コマンド
 ***************************************************************************/
 void Client::execGameEnd(const Command& command) {
-  state_ = STATE_END;
-  socket_->close();
-  onGameEnd();
+  mj::Players players;
+  for(size_t i = 0, n = command.countArg(); i < n; i += 2) {
+    auto player = getPlayer(command.getArg(i).c_str());
+    player->setPoint(BigNum(command.getArg(i + 1)));
+    players.push_back(player);
+  }
+  onEndGame(players);
 }
 /***********************************************************************//**
 	@brief 局開始
