@@ -190,6 +190,20 @@ const std::string& Command::getOption(const std::string& name) const {
   return hasOption(name) ? options_.at(name) : EMPTY;
 }
 /***********************************************************************//**
+	@brief オプションの値を取得する
+	@param[in] name オプション名
+	@param[out] value オプションの値
+	@return オプションが存在するとき真
+***************************************************************************/
+bool Command::getOption(const std::string& name, 
+                        std::string& value) const {
+  if(hasOption(name)) {
+    value = getOption(name);
+    return true;
+  }
+  return false;
+}
+/***********************************************************************//**
 	@brief オプションが存在するか調べる
 	@param[in] name オプション名
 	@return 存在するとき真
