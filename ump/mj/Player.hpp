@@ -95,9 +95,7 @@ class Player
   Player& agari();
   bool isAgari() const;
 
-  Player& setFuriten(bool value);
-  bool isFuriten() const;
-
+  UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
   UMP_BIT_ACCESSOR(Rinshan, flag_, FLAG_RINSHAN);
 
   void onOpen();
