@@ -139,7 +139,7 @@ class Player
   bool canChi(const HaiArray& hais, const Hai* hai) const;
 
   virtual Sutehai* sutehai(const Sutehai& sutehai);
-  void updateFuriten(const Hai* hai);
+  void onDiscarded(const Player& player, const Hai* hai);
 
   int getShanten() const;
   bool isTenpai() const;
@@ -171,6 +171,7 @@ class Player
  private:
   void updateShanten();
   void updateFuriten();
+  void updateFuriten(const Hai* hai);
 };
 /***********************************************************************//**
 	$Id$

@@ -372,15 +372,16 @@ Sutehai* Player::sutehai(const Sutehai& sutehai) {
   return sutehai_;
 }
 /***********************************************************************//**
-	@brief フリテンを更新する
-	@param[in] hai 捨て牌
+	@brief 牌が捨てられたときの処理(鳴き処理後)
+	@param[in] player 牌を捨てたプレイヤー
+	@param[in] hai 捨てた牌
 ***************************************************************************/
-void Player::updateFuriten(const Hai* hai) {
-  if(!isFuriten()) {
-    Shanten shanten;
-    if(shanten.update(HaiArray(getMenzen()).append(hai), isMenzen()) < 0) {
-      setFuriten(true);
-    }
+void Player::onDiscarded(const Player& player, const Hai* hai) {
+  if(&player == this) {
+    updateFuriten();
+  }
+  else {
+    updateFuriten(hai);
   }
 }
 /***********************************************************************//**
@@ -431,6 +432,20 @@ void Player::updateShanten() {
 void Player::updateFuriten() {
   for(auto& sutehai : getKawa()) {
     updateFuriten(sutehai.getHai());
+  }
+}
+/***********************************************************************//**
+	@brief フリテンを更新する
+	@param[in] hai 捨て牌
+***************************************************************************/
+void Player::updateFuriten(const Hai* hai) {
+  if(!isFuriten()) {
+    Shanten shanten;
+    if(shanten.update(HaiArray(getMenzen()).append(hai), isMenzen()) < 0) {
+      std::cerr << "[furiten]" << getSeatString() << ":" << 
+        getMenzen().toString() << " " << hai->toString() << std::endl;
+      setFuriten(true);
+    }
   }
 }
 /***********************************************************************//**

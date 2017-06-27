@@ -50,7 +50,7 @@ JobNaki::JobNaki(Game& game, const mj::Sutehai* sutehai)
     sutehai_(sutehai)
 {
   if(sutehai->isRichi()) {
-    richier_ = game.getTurnPlayer();
+    richier_ = getPlayer();
   }
 }
 /***********************************************************************//**
@@ -115,15 +115,13 @@ Job* JobNaki::onUpdate() {
 	@copydoc Job::onEnd
 ***************************************************************************/
 void JobNaki::onEnd() {
+  auto& game = getGame();
   if(richier_) {
     auto richiPoint = getConfig()->getRichiPoint();
     addPoint(richier_->getSeat(), -richiPoint, Command::TYPE_RICHI);
-    getGame().addKyotaku(richiPoint);
+    game.addKyotaku(richiPoint);
   }
-  auto hai = sutehai_->getHai();
-  for(auto& player : getGame().getPlayers()) {
-    player->updateFuriten(hai);
-  }
+  game.onDiscarded(*getPlayer(), sutehai_->getHai());
 }
 /***********************************************************************//**
 	@brief 

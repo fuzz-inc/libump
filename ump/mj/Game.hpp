@@ -100,6 +100,7 @@ class Game
 
   Sutehai* sutehai(Player& player, const Sutehai& sutehai);
   UMP_GETTER(LastSutehai, lastSutehai_);
+  void onDiscarded(const Player& player, const Hai* hai);
 
   UMP_BIT_GETTER(Renchan, flag_, FLAG_RENCHAN);
 

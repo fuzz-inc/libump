@@ -48,6 +48,7 @@ class Job {
 
  private:
   Game& game_;
+  std::shared_ptr<Player> player_;
   std::bitset<FLAG_MAX> flag_;
   std::chrono::milliseconds time_;
 
@@ -74,7 +75,8 @@ class Job {
   bool isOverTime(const std::chrono::milliseconds& time) const;
 
   size_t countPlayer() const;
-  std::shared_ptr<Player> getPlayer(size_t sheet) const;
+  UMP_GETTER(Player, player_);
+  std::shared_ptr<Player> getPlayer(size_t seat) const;
 
   void sendAll(const Command& command) const;
   void sayAll(const Command& command) const;
