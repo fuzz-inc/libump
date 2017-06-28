@@ -45,10 +45,17 @@ class JobNaki
   typedef Job super;
 
  private:
+  enum {
+    FLAG_RON, 
+    FLAG_MAX
+  };
+
+ private:
   const mj::Sutehai* sutehai_;
   std::shared_ptr<Player> richier_;
   Command command_;
   std::vector<std::shared_ptr<Player>> players_;
+  std::bitset<FLAG_MAX> flag_;
 
  public:
   JobNaki(Game& game, const mj::Sutehai* sutehai);
@@ -60,6 +67,8 @@ class JobNaki
   void onEnd() override;
 
  private:
+  UMP_BIT_ACCESSOR(Ron, flag_, FLAG_RON);
+
   Job* doReply(std::shared_ptr<Player> player);
 };
 /***********************************************************************//**

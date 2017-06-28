@@ -167,9 +167,6 @@ void Player::tsumo(const Hai* hai, bool rinshan) {
   append(hai);
   updateShanten();
   updateAgari();
-  if(!isRichi()) {
-    setFuriten(false);
-  }
   setRinshan(rinshan);
 }
 /***********************************************************************//**
@@ -214,7 +211,7 @@ bool Player::canAgari() const {
 	@return ロンできるとき真
 ***************************************************************************/
 bool Player::canRon(const Hai* hai) {
-  return !isFuriten() && updateAgari(hai);
+  return updateAgari(hai);
 }
 /***********************************************************************//**
 	@brief リーチをかけることができるか調べる
@@ -372,19 +369,6 @@ Sutehai* Player::sutehai(const Sutehai& sutehai) {
   return sutehai_;
 }
 /***********************************************************************//**
-	@brief 牌が捨てられたときの処理(鳴き処理後)
-	@param[in] player 牌を捨てたプレイヤー
-	@param[in] hai 捨てた牌
-***************************************************************************/
-void Player::onDiscarded(const Player& player, const Hai* hai) {
-  if(&player == this) {
-    updateFuriten();
-  }
-  else {
-    updateFuriten(hai);
-  }
-}
-/***********************************************************************//**
 	@brief シャンテン数を取得する
 	@return シャンテン数
 ***************************************************************************/
@@ -424,28 +408,6 @@ void Player::onShowHai(const Hai* hai) {
 void Player::updateShanten() {
   if(!hasUnknown()) {
     shanten_.update(getMenzen(), isMenzen());
-  }
-}
-/***********************************************************************//**
-	@brief フリテンを更新する
-***************************************************************************/
-void Player::updateFuriten() {
-  for(auto& sutehai : getKawa()) {
-    updateFuriten(sutehai.getHai());
-  }
-}
-/***********************************************************************//**
-	@brief フリテンを更新する
-	@param[in] hai 捨て牌
-***************************************************************************/
-void Player::updateFuriten(const Hai* hai) {
-  if(!isFuriten()) {
-    Shanten shanten;
-    if(shanten.update(HaiArray(getMenzen()).append(hai), isMenzen()) < 0) {
-      std::cerr << "[furiten]" << getSeatString() << ":" << 
-        getMenzen().toString() << " " << hai->toString() << std::endl;
-      setFuriten(true);
-    }
   }
 }
 /***********************************************************************//**

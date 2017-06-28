@@ -143,16 +143,6 @@ Sutehai* Game::sutehai(Player& player, const Sutehai& sutehai) {
   return lastSutehai_;
 }
 /***********************************************************************//**
-	@brief 牌が捨てられたときの処理(鳴き処理後)
-	@param[in] player 牌を捨てたプレイヤー
-	@param[in] hai 捨てた牌
-***************************************************************************/
-void Game::onDiscarded(const Player& player, const Hai* hai) {
-  for(auto& iter : getPlayers()) {
-    iter->onDiscarded(player, hai);
-  }
-}
-/***********************************************************************//**
         @brief 場風を取得する
 	@return 場風
 ***************************************************************************/

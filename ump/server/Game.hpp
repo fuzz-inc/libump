@@ -82,6 +82,7 @@ class Game
   void uraDora();
   mj::HaiArray drawHaipai(size_t num);
   const mj::Hai* tsumo(bool rinshan);
+  void onDiscarded(const Player& player, const mj::Hai* hai);
 
   size_t getRest() const override;
 

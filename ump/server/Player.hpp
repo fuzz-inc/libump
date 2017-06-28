@@ -50,6 +50,11 @@ class Player
  private:
   class Thread;
 
+  enum {
+    FLAG_FURITEN, 
+    FLAG_MAX
+  };
+
  private:
   std::weak_ptr<Server> server_;
   std::shared_ptr<socket::Socket> socket_;
@@ -58,6 +63,7 @@ class Player
   Command command_;
   Command reply_;
   std::mutex mutex_;
+  std::bitset<FLAG_MAX> flag_;
 
  public:
   Player(std::shared_ptr<Server> server, 
@@ -77,7 +83,13 @@ class Player
   UMP_GETTER(Command, command_);
   UMP_GETTER(Reply, reply_);
 
+  void reset() override;
+  void tsumo(const mj::Hai* hai, bool rinshan) override;
+
+  void onDiscarded(const Player& player, const mj::Hai* hai);
+
   bool canRichi() const;
+  bool canRon(const mj::Hai* hai);
 
   void operator()(std::shared_ptr<Player> self);
 
@@ -87,6 +99,10 @@ class Player
  private:
   std::shared_ptr<Server> getServer() const;
   UMP_GETTER(Socket, socket_);
+
+  UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
+  void updateFuriten();
+  void updateFuriten(const mj::Hai* hai);
 
   void log(Logger::Level level, const std::string& message) const;
 };

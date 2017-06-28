@@ -108,6 +108,37 @@ bool Player::sendCommand(const Command& command) {
   return false;
 }
 /***********************************************************************//**
+	@copydoc mj::Player::reset
+***************************************************************************/
+void Player::reset() {
+  super::reset();
+  flag_.reset();
+}
+/***********************************************************************//**
+	@copydoc mj::Player::tsumo
+***************************************************************************/
+void Player::tsumo(const mj::Hai* hai, bool rinshan) {
+  super::tsumo(hai, rinshan);
+  if(!isRichi() && isFuriten()) {
+    log(Logger::LEVEL_DEBUG, 
+        std::string("[furiten-]") + getMenzen().toString());
+    setFuriten(false);
+  }
+}
+/***********************************************************************//**
+	@brief 牌が捨てられたときの処理(鳴き処理後)
+	@param[in] player 牌を捨てたプレイヤー
+	@param[in] hai 捨てた牌
+***************************************************************************/
+void Player::onDiscarded(const Player& player, const mj::Hai* hai) {
+  if(&player == this) {
+    updateFuriten();
+  }
+  else {
+    updateFuriten(hai);
+  }
+}
+/***********************************************************************//**
 	@copydoc ump::mj::Hand::canRichi
 ***************************************************************************/
 bool Player::canRichi() const {
@@ -117,6 +148,12 @@ bool Player::canRichi() const {
   auto config = getGame()->getConfig();
   return config->isHakoshita() ||
     getPoint() >= config->getRichiPoint();
+}
+/***********************************************************************//**
+	@copydoc mj::Player::canRon
+***************************************************************************/
+bool Player::canRon(const mj::Hai* hai) {
+  return !isFuriten() && super::canRon(hai);
 }
 /***********************************************************************//**
 	@brief スレッド処理
@@ -181,6 +218,29 @@ mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
 ***************************************************************************/
 std::shared_ptr<Server> Player::getServer() const {
   return server_.lock();
+}
+/***********************************************************************//**
+	@brief フリテンを更新する
+***************************************************************************/
+void Player::updateFuriten() {
+  for(auto& sutehai : getKawa()) {
+    updateFuriten(sutehai.getHai());
+  }
+}
+/***********************************************************************//**
+	@brief フリテンを更新する
+	@param[in] hai 捨て牌
+***************************************************************************/
+void Player::updateFuriten(const mj::Hai* hai) {
+  if(!isFuriten()) {
+    mj::Shanten shanten;
+    auto hais = mj::HaiArray(getMenzen()).append(hai);
+    if(shanten.update(hais, isMenzen()) < 0) {
+      log(Logger::LEVEL_DEBUG, 
+          std::string("[furiten+]") + hais.toString());
+      setFuriten(true);
+    }
+  }
 }
 /***********************************************************************//**
 	@brief ログ出力

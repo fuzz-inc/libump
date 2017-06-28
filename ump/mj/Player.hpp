@@ -55,7 +55,6 @@ class Player
     FLAG_IPPATSU, 
     FLAG_SAY_TENPAI, 
     FLAG_AGARI, 
-    FLAG_FURITEN, 
     FLAG_RINSHAN, 
     FLAG_MAX
   };
@@ -95,7 +94,6 @@ class Player
   Player& agari();
   bool isAgari() const;
 
-  UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
   UMP_BIT_ACCESSOR(Rinshan, flag_, FLAG_RINSHAN);
 
   void onOpen();
@@ -139,7 +137,6 @@ class Player
   bool canChi(const HaiArray& hais, const Hai* hai) const;
 
   virtual Sutehai* sutehai(const Sutehai& sutehai);
-  void onDiscarded(const Player& player, const Hai* hai);
 
   int getShanten() const;
   bool isTenpai() const;
@@ -170,8 +167,6 @@ class Player
 
  private:
   void updateShanten();
-  void updateFuriten();
-  void updateFuriten(const Hai* hai);
 };
 /***********************************************************************//**
 	$Id$

@@ -121,7 +121,9 @@ void JobNaki::onEnd() {
     addPoint(richier_->getSeat(), -richiPoint, Command::TYPE_RICHI);
     game.addKyotaku(richiPoint);
   }
-  game.onDiscarded(*getPlayer(), sutehai_->getHai());
+  if(!isRon()) {
+    game.onDiscarded(*getPlayer(), sutehai_->getHai());
+  }
 }
 /***********************************************************************//**
 	@brief 
@@ -134,6 +136,7 @@ Job* JobNaki::doReply(std::shared_ptr<Player> player) {
   if(player->getCommand().hasArg(type)) {
     if(type == Command::TYPE_RON && player->updateAgari(hai)) {
       richier_.reset();
+      setRon(true);
       return new JobAgari(game, player->getSeat());
     }
     else if(reply.countArg() > 0) {

@@ -196,6 +196,16 @@ const mj::Hai* Game::tsumo(bool rinshan) {
   return hai;
 }
 /***********************************************************************//**
+	@brief 牌が捨てられたときの処理(鳴き処理後)
+	@param[in] player 牌を捨てたプレイヤー
+	@param[in] hai 捨てた牌
+***************************************************************************/
+void Game::onDiscarded(const Player& player, const mj::Hai* hai) {
+  for(auto& iter : getPlayers()) {
+    std::static_pointer_cast<Player>(iter)->onDiscarded(player, hai);
+  }
+}
+/***********************************************************************//**
 	@brief 牌山の残り枚数を取得する
 	@return 牌山の残り枚数
 ***************************************************************************/
