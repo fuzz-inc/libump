@@ -80,15 +80,19 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
     fusehai.append(mj::Hai::GetUnknown());
   }
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
+    bool isTurn = (i == seat);
     Command command(Command::TYPE_HAIPAI);
     command.append(Command::SeatToString(seat));
-    if(i == seat || config->isOpen()) {
+    if(isTurn || config->isOpen()) {
       command.append(hais.toString());
     }
     else {
       command.append(fusehai.toString());
     }
     getPlayer(i)->send(command);
+    if(isTurn) {
+      log(Logger::LEVEL_INFO, command.toString(false));
+    }
   }
   getPlayer(seat)->drawHaipai(hais);
 }

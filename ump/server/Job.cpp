@@ -102,13 +102,27 @@ void Job::sendAll(const Command& command) const {
   getGame().sendAll(command);
 }
 /***********************************************************************//**
+	@brief すべてのプレイヤーにコマンドを送りログを取る
+	@param[in] command 送るコマンド
+***************************************************************************/
+void Job::sendAllLog(const Command& command) const {
+  sendAll(command);
+  log(Logger::LEVEL_INFO, command.toString(false));
+}
+/***********************************************************************//**
 	@brief 発声コマンドをすべてのプレイヤーに送る
 	@param[in] command 発声コマンド
 ***************************************************************************/
 void Job::sayAll(const Command& command) const {
   assert(command.getType() == Command::TYPE_SAY);
-  sendAll(command);
+  sendAllLog(command);
   sleep(getConfig()->getSayWait());
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Job::log(Logger::Level level, const std::string& message) const {
+  getGame().log(level, message);
 }
 /***********************************************************************//**
 	@brief 終了フラグを立てる
@@ -132,7 +146,7 @@ void Job::openHand(size_t seat) {
   command.
     append(Command::SeatToString(seat)).
     append(getPlayer(seat)->getMenzen().toString());
-  sendAll(command);
+  sendAllLog(command);
 }
 /***********************************************************************//**
 	@brief 面子を晒す
@@ -171,7 +185,7 @@ void Job::openMentsu(std::shared_ptr<Player> player,
   for(auto player : getGame().getPlayers()) {
     player->onOpen();
   }
-  sendAll(command);
+  sendAllLog(command);
 }
 /***********************************************************************//**
 	@brief 点数を加減算する
@@ -184,7 +198,7 @@ void Job::addPoint(size_t seat, const BigNum& value, Command::Type type) {
   Command command(type);
   command.append(Command::SeatToString(seat));
   command.append(value.toString(true));
-  sendAll(command);
+  sendAllLog(command);
   getPlayer(seat)->addPoint(value);
 }    
 /***********************************************************************//**

@@ -102,7 +102,6 @@ bool Player::send(const Command& command) {
 bool Player::sendCommand(const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
   if(isOpen() && socket_->sendCommand(command)) {
-    log(Logger::LEVEL_DEBUG, std::string(" <- ") + command.toString(false));
     return true;
   }
   log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
@@ -127,8 +126,6 @@ void Player::operator()(std::shared_ptr<Player> self) {
     Command command;
     if(socket_->recvCommand(command)) {
       if(command.getSerial() == serial_) {
-        log(Logger::LEVEL_DEBUG, 
-            std::string(" -> ") + command.toString(true));
         reply_ = command;
       }
       if(auto game = getGame()) {

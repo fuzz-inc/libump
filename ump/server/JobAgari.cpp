@@ -124,7 +124,7 @@ void JobAgari::agari() {
     if(dora > 0) {
       command.append("ドラ").append(dora);
     }
-    sendAll(command);
+    sendAllLog(command);
   }
   auto playerNum = countPlayer();
   if(playerNum > 1) {

@@ -79,8 +79,7 @@ Job* JobKyoku::onUpdate() {
 	@brief 終了
 ***************************************************************************/
 void JobKyoku::onEnd() {
-  Command command(Command::TYPE_KYOKUEND);
-  sendAll(command);
+  sendAllLog(Command(Command::TYPE_KYOKUEND));
   getGame().endKyoku();
   sleep(0.5f);
 }
@@ -88,20 +87,17 @@ void JobKyoku::onEnd() {
 	@brief 
 ***************************************************************************/
 void JobKyoku::sendStart() {
+  Command command(Command::TYPE_KYOKUSTART);
+  command.
+    append(getGame().getRound()).
+    append(Command::SeatToString(getGame().getOya())).
+    append(getGame().getRenchan()).
+    append(getGame().getKyotaku().toString()).
+    append(getGame().getBakaze()->toString());
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
-    auto player = getPlayer(i);
-    Command command(Command::TYPE_KYOKUSTART);
-    command.
-      append(getGame().getRound()).
-      append(Command::SeatToString(getGame().getOya())).
-      append(getGame().getRenchan()).
-      append(getGame().getKyotaku().toString()).
-      append(player->getBakaze()->toString());
-    for(size_t i = 0; i < n; i++) {
-      command.append(getPlayer(i)->getZikaze()->toString());
-    }
-    player->send(command);
+    command.append(getPlayer(i)->getZikaze()->toString());
   }
+  sendAllLog(command);
 }
 /***********************************************************************//**
 	@brief 
@@ -125,7 +121,7 @@ void JobKyoku::sendDice() {
   command.
     append(dice(random)).
     append(dice(random));
-  sendAll(command);
+  sendAllLog(command);
   sleep(getConfig()->getDiceWait());
 }
 /***********************************************************************//**

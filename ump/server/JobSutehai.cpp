@@ -151,7 +151,7 @@ Job* JobSutehai::sutehai(const Command& reply) {
   if(sutehai->isRichi()) {
     command.append(Command::TYPE_RICHI);
   }
-  sendAll(command);
+  sendAllLog(command);
   return new JobNaki(game, sutehai);
 }
 /***********************************************************************//**

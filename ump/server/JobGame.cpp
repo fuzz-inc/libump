@@ -49,11 +49,9 @@ JobGame::JobGame(Game& game)
 	@brief 開始
 ***************************************************************************/
 void JobGame::onBegin() {
-  for(size_t i = 0, n = countPlayer(); i < n; i++) {
-    auto player = getPlayer(i);
-    player->send(Command(Command::TYPE_GAMESTART).
-                 setOption("id", getGame().getId()));
-  }
+  Command command(Command::TYPE_GAMESTART);
+  command.setOption("id", getGame().getId());
+  sendAllLog(command);
 }
 /***********************************************************************//**
 	@brief 
@@ -87,7 +85,7 @@ void JobGame::onEnd() {
       append(player->getSeatString()).
       append(point.toString());
   }
-  sendAll(command);
+  sendAllLog(command);
   getGame().onEndGame(players);
 }
 /***********************************************************************//**

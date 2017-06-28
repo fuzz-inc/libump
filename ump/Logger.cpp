@@ -38,7 +38,8 @@ namespace ump {
 	@brief デフォルトコンストラクタ
 ***************************************************************************/
 Logger::Logger()
-  : out_(nullptr)
+  : level_(LEVEL_DEBUG), 
+    out_(nullptr)
 {
 }
 /***********************************************************************//**
@@ -61,15 +62,17 @@ void Logger::log(Level level, const std::string& message) {
     "ERROR", 
     "FATAL"
   };
-  auto now = std::time(nullptr);
-  auto time = *std::localtime(&now);
-  char buff[256];
-  std::strftime(buff, sizeof(buff), "%F %T", &time);
-  {
-    std::lock_guard<std::mutex> lock(mutex_);
-    getOut() << buff
-             << " " << LEVELS[level] << " | "
-             << message << std::endl;
+  if(level >= level_) {
+    auto now = std::time(nullptr);
+    auto time = *std::localtime(&now);
+    char buff[256];
+    std::strftime(buff, sizeof(buff), "%F %T", &time);
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      getOut() << buff
+               << " " << LEVELS[level] << " | "
+               << message << std::endl;
+    }
   }
 }
 /***********************************************************************//**

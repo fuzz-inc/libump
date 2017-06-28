@@ -47,6 +47,7 @@ class Logger {
   };
 
  private:
+  Level level_;
   std::unique_ptr<std::ostream> out_;
   std::mutex mutex_;
 

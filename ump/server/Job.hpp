@@ -33,6 +33,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
 #include "ump/Command.hpp"
+#include "ump/Logger.hpp"
 
 namespace ump {
 namespace server {
@@ -79,7 +80,9 @@ class Job {
   std::shared_ptr<Player> getPlayer(size_t seat) const;
 
   void sendAll(const Command& command) const;
+  void sendAllLog(const Command& command) const;
   void sayAll(const Command& command) const;
+  void log(Logger::Level level, const std::string& message) const;
 
   void end();
   bool isEnd() const;
