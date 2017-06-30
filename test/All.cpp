@@ -30,8 +30,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
-#include "All.hpp"
 #include "AgariTest.hpp"
+#include "All.hpp"
+#include "AnkanTest.hpp"
 #include "BigNumTest.hpp"
 #include "CommandTest.hpp"
 #include "PatternTest.hpp"
@@ -41,6 +42,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 void All::onRun() {
   TEST_ADD(AgariTest);
+  TEST_ADD(AnkanTest);
   TEST_ADD(BigNumTest);
   TEST_ADD(CommandTest);
   TEST_ADD(PatternTest);

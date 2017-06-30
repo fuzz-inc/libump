@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26C273661F065D4300510A8D /* AnkanTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26C273641F065D4300510A8D /* AnkanTest.cpp */; };
 		DAA09F191E02922000DA374E /* BigNumTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAA09F171E02922000DA374E /* BigNumTest.cpp */; };
 		DAA697971DED496900569DA9 /* PatternTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAA697951DED496900569DA9 /* PatternTest.cpp */; };
 		DAB278371DB0D8C400D56ED2 /* AgariTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAB278281DB0D8C400D56ED2 /* AgariTest.cpp */; };
@@ -31,6 +32,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		26C273641F065D4300510A8D /* AnkanTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnkanTest.cpp; sourceTree = "<group>"; };
+		26C273651F065D4300510A8D /* AnkanTest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AnkanTest.hpp; sourceTree = "<group>"; };
 		DAA09F171E02922000DA374E /* BigNumTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigNumTest.cpp; sourceTree = "<group>"; };
 		DAA09F181E02922000DA374E /* BigNumTest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BigNumTest.hpp; sourceTree = "<group>"; };
 		DAA697951DED496900569DA9 /* PatternTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PatternTest.cpp; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 				DAB278291DB0D8C400D56ED2 /* AgariTest.hpp */,
 				DAB2782A1DB0D8C400D56ED2 /* All.cpp */,
 				DAB2782B1DB0D8C400D56ED2 /* All.hpp */,
+				26C273641F065D4300510A8D /* AnkanTest.cpp */,
+				26C273651F065D4300510A8D /* AnkanTest.hpp */,
 				DAA09F171E02922000DA374E /* BigNumTest.cpp */,
 				DAA09F181E02922000DA374E /* BigNumTest.hpp */,
 				DAB2782F1DB0D8C400D56ED2 /* CommandTest.cpp */,
@@ -174,6 +179,7 @@
 				DAB2783D1DB0D8C400D56ED2 /* Test.cpp in Sources */,
 				DAB278381DB0D8C400D56ED2 /* All.cpp in Sources */,
 				DAB2783C1DB0D8C400D56ED2 /* ShantenTest.cpp in Sources */,
+				26C273661F065D4300510A8D /* AnkanTest.cpp in Sources */,
 				DAB2783B1DB0D8C400D56ED2 /* main.cpp in Sources */,
 				DAB2783A1DB0D8C400D56ED2 /* CommandTest.cpp in Sources */,
 			);

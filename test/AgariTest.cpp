@@ -57,15 +57,18 @@ void AgariTest::onRun() {
     { "1m2m3m2p3p4p3s4s5s7s8s4z4z9s", 2, 1 }, 	// 平和
     { "1m2m3m2p3p4p3s4s5s7s8s1z1z9s", 1, 0 }, 	// 平和ではない
     { "1m2m3m2p3p4p3s4s5s9s9s1z1z1z", 3, 2 }, 	// ダブ東
+    { "1m1m2m2m4m5m6m7m7m7m9m9m9m2m", 9, 6 }
   };
   for(auto& table : TABLES) {
     {
       auto& agari = parse(table.hais, false);
-      TEST_MESSAGE(agari.getHan() == table.tsumoHan, table.hais);
+      TEST_MESSAGE(agari.getHan() == table.tsumoHan, 
+                   Format("%s(%d)", table.hais, agari.getHan()));
     }
     {
       auto& agari = parse(table.hais, true);
-      TEST_MESSAGE(agari.getHan() == table.ronHan, table.hais);
+      TEST_MESSAGE(agari.getHan() == table.ronHan, 
+                   Format("%s(%d)", table.hais, agari.getHan()));
     }
   }
 }
@@ -81,6 +84,11 @@ const ump::mj::Agari& AgariTest::parse(const char* str, bool isRon) {
   player_->drawHaipai(hais);
   player_->resetFirst();
   if(isRon) {
+    /*
+    TEST_MESSAGE(player_->canRon(hai), 
+                 Format("%s %s", player_->toString().c_str(), 
+                        hai->toString()));
+    */
     return parser_.parse(hai);
   }
   player_->tsumo(hai, false);

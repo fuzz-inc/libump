@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2016 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
@@ -30,51 +30,30 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
-#pragma once
-
-#include "ump/mj/Divider.hpp"
-
-namespace ump {
-namespace mj {
+#include "AnkanTest.hpp"
 /***********************************************************************//**
-	@brief シャンテン数を求める
+	@brief 
 ***************************************************************************/
-class Shanten
-  : public Divider
-{
-  typedef Divider super;
-
- private:
-  size_t mentsuMax_;
-  int shanten_;
-  HaiArray richi_;
-  HaiArray kanables_;
-
- public:
-  Shanten();
-  virtual ~Shanten();
-
-  int update(const HaiArray& hais, bool isMenzen);
-  int getShanten() const;
-  const HaiArray& getRichi() const;
-
-  UMP_GETTER(Kanables, kanables_);
-
- protected:
-  virtual void onHead();
-  virtual void onMentsu();
-  virtual void onTatsu();
-
- private:
-  void updateShanten(int shanten);
-  void checkKokushi();
-  void checkChitoi();
-  void updateKanables();
-  bool isKotsu(const Hai* hai) const;
-  void dump() const;
-};
+void AnkanTest::onRun() {
+  const struct {
+    const char* hais;
+    const char* kanables;
+  } TABLES[] = {
+    { "1m2m3m4p5p6p7s8s1z1z1z2z2z", "1z" }, 
+    { "2m2m2m3m3m4m4m4m5p6p7p2s2s", "" }, 
+    { "2m2m2m3m3m5m5m5m5p6p7p2s2s", "2m5m" }, 
+    { "1m2m7m7m2p3p4p4p4p4p1s2s3s", "4p" }, 
+    { "1m1m1m2m3m4m4m4m1p2p3p1s2s", "" }, 
+    { "1m1m1m3m4m4m5m6m7m8m9m9m9m", "1m" }, 
+    { "2m2m2m3m4m4m5m5m6m6m9m9m9m", "9m" }
+  };
+  for(auto& table : TABLES) {
+    shanten_.update(table.hais, true);
+    TEST_MESSAGE(shanten_.getKanables().toString() == table.kanables, 
+                 Format("%s => %s(%s)", table.hais, table.kanables, 
+                        shanten_.getKanables().toString().c_str()));
+  }
+}
 /***********************************************************************//**
 	$Id$
 ***************************************************************************/
-}
-}

@@ -249,10 +249,17 @@ bool Player::canKan(const HaiArray& hais, const Hai* hai) const {
 	@return 暗槓できるとき真
 ***************************************************************************/
 bool Player::canAnkan() const {
-  auto& menzen = getMenzen();
-  for(auto hai : menzen) {
-    if(menzen.countSame(hai) >= 4) {
-      return true;
+  if(isRichi()) {
+    if(auto hai = getTsumoHai()) {
+      return shanten_.getKanables().hasSame(hai);
+    }
+  }
+  else {
+    auto& menzen = getMenzen();
+    for(auto hai : menzen) {
+      if(menzen.countSame(hai) >= 4) {
+        return true;
+      }
     }
   }
   return false;
@@ -264,8 +271,18 @@ bool Player::canAnkan() const {
 ***************************************************************************/
 bool Player::canAnkan(const HaiArray& hais) const {
   assert(hais.size() == 4 && hais.getUnique().size() == 1);
-  return getGame()->canKan() && 
-    getMenzen().hasEqual(hais);
+  if(getGame()->canKan() && getMenzen().hasEqual(hais)) {
+    if(isRichi()) {
+      if(auto hai = getTsumoHai()) {
+        return hais.at(0)->isSame(hai) && 
+          shanten_.getKanables().hasSame(hai);
+      }
+    }
+    else {
+      return true;
+    }
+  }
+  return false;
 }
 /***********************************************************************//**
 	@brief 加槓できるか調べる
@@ -349,6 +366,10 @@ bool Player::canChi(const HaiArray& hais, const Hai* hai) const {
 ***************************************************************************/
 Sutehai* Player::sutehai(const Sutehai& sutehai) {
   assert(!sutehai.isNaki() && !sutehai.isRon());
+  sutehai_ = super::sutehai(sutehai);
+  tsumoHai_ = nullptr;
+  super::sort();
+  updateShanten();
   if(sutehai.isRichi()) {
     flag_.set(FLAG_RICHI);
     flag_.set(FLAG_IPPATSU);
@@ -361,10 +382,6 @@ Sutehai* Player::sutehai(const Sutehai& sutehai) {
   }
   flag_.reset(FLAG_FIRST);
   setRinshan(false);
-  sutehai_ = super::sutehai(sutehai);
-  tsumoHai_ = nullptr;
-  super::sort();
-  updateShanten();
   onSutehai(sutehai_);
   return sutehai_;
 }
@@ -406,7 +423,7 @@ void Player::onShowHai(const Hai* hai) {
 	@brief シャンテン数を計算する
 ***************************************************************************/
 void Player::updateShanten() {
-  if(!hasUnknown()) {
+  if(!hasUnknown() && !isRichi()) {
     shanten_.update(getMenzen(), isMenzen());
   }
 }

@@ -91,9 +91,10 @@ Config& Config::setDoraHaiNum(const Hai* hai, size_t num) {
   hai = hai->getNormal();
   auto dora = hai->getDora();
   size_t sum = getHaiNum(hai) + getHaiNum(dora);
-  assert(num <= sum);
-  setHaiNum(hai, sum - num);
-  setHaiNum(dora, num);
+  if(num <= sum) {
+    setHaiNum(hai, sum - num);
+    setHaiNum(dora, num);
+  }
   return *this;
 }
 /***********************************************************************//**

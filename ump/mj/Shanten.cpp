@@ -57,6 +57,7 @@ int Shanten::update(const HaiArray& hais, bool isMenzen) {
   mentsuMax_ = hais.size() / 3;
   shanten_ = std::numeric_limits<int>::max();
   richi_.clear();
+  kanables_ = hais.getUnique();
   if(isMenzen) {
     checkKokushi();
     checkChitoi();
@@ -117,6 +118,7 @@ void Shanten::onTatsu() {
     else {
       richi_.append(getHais());
     }
+    updateKanables();
   }
 }
 /***********************************************************************//**
@@ -172,6 +174,33 @@ void Shanten::checkChitoi() {
     richi_.append(getHais());
   }
   super::pop(elem);
+}
+/***********************************************************************//**
+	@brief 暗槓可能牌を更新する
+***************************************************************************/
+void Shanten::updateKanables() {
+  for(auto iter = kanables_.begin(); iter != kanables_.end();) {
+    if(isKotsu(*iter)) {
+      iter++;
+    }
+    else {
+      //std::cerr << (*iter)->toString() << ":" << toString() << std::endl;
+      iter = kanables_.erase(iter);
+    }
+  }
+}
+/***********************************************************************//**
+	@brief 刻子か調べる
+	@param[in] hai 牌
+	@return 牌が刻子のとき真
+***************************************************************************/
+bool Shanten::isKotsu(const Hai* hai) const {
+  for(auto& mentsu : getMentsus()) {
+    if(mentsu.isKotsu() && mentsu.at(0)->isSame(hai)) {
+      return true;
+    }
+  }
+  return false;
 }
 /***********************************************************************//**
 	@brief 

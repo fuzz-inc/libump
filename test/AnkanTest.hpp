@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2016 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
@@ -31,50 +31,22 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	@file
 ***************************************************************************/
 #pragma once
-
-#include "ump/mj/Divider.hpp"
-
-namespace ump {
-namespace mj {
 /***********************************************************************//**
-	@brief シャンテン数を求める
+	@brief 
 ***************************************************************************/
-class Shanten
-  : public Divider
+class AnkanTest
+  : public Test
 {
-  typedef Divider super;
-
  private:
-  size_t mentsuMax_;
-  int shanten_;
-  HaiArray richi_;
-  HaiArray kanables_;
+  ump::mj::Shanten shanten_;
 
  public:
-  Shanten();
-  virtual ~Shanten();
-
-  int update(const HaiArray& hais, bool isMenzen);
-  int getShanten() const;
-  const HaiArray& getRichi() const;
-
-  UMP_GETTER(Kanables, kanables_);
+  AnkanTest() = default;
+  ~AnkanTest() override = default;
 
  protected:
-  virtual void onHead();
-  virtual void onMentsu();
-  virtual void onTatsu();
-
- private:
-  void updateShanten(int shanten);
-  void checkKokushi();
-  void checkChitoi();
-  void updateKanables();
-  bool isKotsu(const Hai* hai) const;
-  void dump() const;
+  void onRun() override;
 };
 /***********************************************************************//**
 	$Id$
 ***************************************************************************/
-}
-}
