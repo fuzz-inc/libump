@@ -100,7 +100,7 @@ void Shanten::onMentsu() {
 ***************************************************************************/
 void Shanten::onTatsu() {
   //dump();
-  auto mentsuNum = countMentsu();
+  auto mentsuNum = getMentsus().size();
   auto tatsuNum = countTatsu();
   if(mentsuNum + tatsuNum > mentsuMax_) {
     tatsuNum = mentsuMax_ - mentsuNum;
@@ -178,8 +178,8 @@ void Shanten::checkChitoi() {
 ***************************************************************************/
 void Shanten::dump() const {
   std::cout << "(" << getHead().toString() << ")";
-  for(size_t i = 0, n = countMentsu(); i < n; i++) {
-    std::cout << "(" << getMentsu(i).toString() << ")";
+  for(auto& mentsu : getMentsus()) {
+    std::cout << "(" << mentsu.toString() << ")";
   }
   for(size_t i = 0, n = countTatsu(); i < n; i++) {
     std::cout << "(" << getTatsu(i).toString() << ")";

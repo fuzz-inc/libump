@@ -36,10 +36,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 AgariTest::AgariTest()
   : config_(std::make_shared<ump::mj::Config>()), 
-    game_(std::make_shared<ump::mj::Game>(config_)), 
+    game_(std::make_shared<ump::mj::Game>()), 
     player_(std::make_shared<ump::mj::Player>()), 
     parser_(*player_)
 {
+  game_->setConfig(config_);
   game_->setPlayer(0, player_);
 }
 /***********************************************************************//**
@@ -82,7 +83,7 @@ const ump::mj::Agari& AgariTest::parse(const char* str, bool isRon) {
   if(isRon) {
     return parser_.parse(hai);
   }
-  player_->tsumo(hai);
+  player_->tsumo(hai, false);
   return parser_.parse(nullptr);
 }
 /***********************************************************************//**

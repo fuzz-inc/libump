@@ -67,6 +67,7 @@ class Mentsu
 
  public:
   Mentsu(const HaiArray& hais, bool isMenzen = true);
+  Mentsu(const Mentsu& src) = default;
   ~Mentsu() = default;
 
   int getFu() const;

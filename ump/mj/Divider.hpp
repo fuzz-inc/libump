@@ -32,7 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
-#include "ump/mj/HaiArray.hpp"
+#include "ump/mj/Mentsu.hpp"
 
 namespace ump {
 namespace mj {
@@ -50,7 +50,7 @@ class Divider {
   std::bitset<FLAG_MAX> flag_;
   HaiArray hais_;
   HaiArray head_;
-  std::vector<HaiArray> mentsus_;
+  std::vector<Mentsu> mentsus_;
   std::vector<HaiArray> tatsus_;
   size_t mentsuMax_;
 
@@ -72,8 +72,7 @@ class Divider {
 
   const HaiArray& getHead() const;
 
-  size_t countMentsu() const;
-  const HaiArray& getMentsu(size_t index) const;
+  UMP_GETTER(Mentsus, mentsus_);
 
   size_t countTatsu() const;
   const HaiArray& getTatsu(size_t index) const;

@@ -81,8 +81,8 @@ void AgariParser::onMentsu() {
     agari.appendMentsu(getPlayer().getMentsu(i));
   }
   agari.appendMentsu(Mentsu(getHead()));
-  for(size_t i = 0, n = countMentsu(); i < n; i++) {
-    agari.appendMentsu(Mentsu(getMentsu(i)));
+  for(auto& mentsu : getMentsus()) {
+    agari.appendMentsu(mentsu);
   }
   checkAgariHai(agari);
 }
