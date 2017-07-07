@@ -58,7 +58,7 @@ class Divider {
   Divider();
   virtual ~Divider();
 
-  void set(const HaiArray& hais);
+  Divider& set(const HaiArray& hais);
 
   void eachHead();
   void eachMentsu(size_t index = 0);
@@ -81,10 +81,9 @@ class Divider {
   void dump() const;
 
  protected:
-  UMP_ACCESSOR(Hais, hais_);
+  UMP_GETTER(Hais, hais_);
 
   void veto();
-  void pop(const HaiArray& elem);
 
   virtual void onHead();
   virtual void onMentsu();
@@ -94,6 +93,7 @@ class Divider {
   bool isVeto() const;
   void pushMentsu(const Hai* a, const Hai* b, const Hai* c, size_t index);
   void pushTatsu(const Hai* a, const Hai* b, size_t index);
+  void pop(const HaiArray& elem);
 };
 /***********************************************************************//**
 	$Id$

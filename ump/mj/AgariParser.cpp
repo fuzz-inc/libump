@@ -48,17 +48,18 @@ AgariParser::AgariParser(const Player& player)
 	@param[in] ron ロン和了牌(ツモ和了のときはnullptr)
 ***************************************************************************/
 const Agari& AgariParser::parse(const Hai* ron) {
-  super::set(getPlayer().getMenzen());
+  auto menzen = getPlayer().getMenzen();
   flag_.reset();
   if(ron) {
     flag_.set(FLAG_RON);
     agariHai_ = ron;
-    getHais().append(ron);
+    menzen.append(ron);
   }
   else {
     agariHai_ = getPlayer().getTsumoHai();
     assert(agariHai_);
   }
+  super::set(menzen);
   agari_.clear();
   update();
   return agari_;

@@ -84,7 +84,7 @@ class Player
   Player& resetFirst();
   bool isFirst() const;
 
-  UMP_BIT_GETTER(Richi, flag_, FLAG_RICHI);
+  UMP_BIT_ACCESSOR(Richi, flag_, FLAG_RICHI);
   UMP_BIT_GETTER(DoubleRichi, flag_, FLAG_DOUBLE_RICHI);
   UMP_BIT_GETTER(Ippatsu, flag_, FLAG_IPPATSU);
 

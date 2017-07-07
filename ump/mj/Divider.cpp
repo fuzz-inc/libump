@@ -49,7 +49,7 @@ Divider::~Divider() {
 	@brief 
 	@param[in] hais 牌の配列
 ***************************************************************************/
-void Divider::set(const HaiArray& hais) {
+Divider& Divider::set(const HaiArray& hais) {
   flag_.reset();
   hais_ = hais;
   hais_.sort();
@@ -57,6 +57,7 @@ void Divider::set(const HaiArray& hais) {
   mentsus_.clear();
   tatsus_.clear();
   mentsuMax_ = 0;
+  return *this;
 }
 /***********************************************************************//**
 	@brief 頭に分解する
@@ -226,14 +227,6 @@ void Divider::veto() {
   flag_.set(FLAG_VETO);
 }
 /***********************************************************************//**
-	@brief 外していた牌を戻す
-	@param[in] elem 戻す牌
-***************************************************************************/
-void Divider::pop(const HaiArray& elem) {
-  hais_.append(elem);
-  hais_.sort();
-}
-/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Divider::onHead() {
@@ -280,6 +273,14 @@ void Divider::pushTatsu(const Hai* a, const Hai* b, size_t index) {
   eachTatsu(index);
   tatsus_.pop_back();
   pop(elem);
+}
+/***********************************************************************//**
+	@brief 外していた牌を戻す
+	@param[in] elem 戻す牌
+***************************************************************************/
+void Divider::pop(const HaiArray& elem) {
+  hais_.append(elem);
+  hais_.sort();
 }
 /***********************************************************************//**
 	$Id$

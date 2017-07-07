@@ -57,7 +57,8 @@ void AgariTest::onRun() {
     { "1m2m3m2p3p4p3s4s5s7s8s4z4z9s", 2, 1 }, 	// 平和
     { "1m2m3m2p3p4p3s4s5s7s8s1z1z9s", 1, 0 }, 	// 平和ではない
     { "1m2m3m2p3p4p3s4s5s9s9s1z1z1z", 3, 2 }, 	// ダブ東
-    { "1m1m2m2m4m5m6m7m7m7m9m9m9m2m", 9, 6 }
+    { "1m1m2m2m4m5m6m7m7m7m9m9m9m2m", 9, 6 }, 
+    { "2m3m4m1p1p3p4p5p6p7p3s4s5s2p", 2, 1 }
   };
   for(auto& table : TABLES) {
     {
@@ -83,6 +84,7 @@ const ump::mj::Agari& AgariTest::parse(const char* str, bool isRon) {
   player_->setZikaze(ump::mj::Hai::Get("1z"));
   player_->drawHaipai(hais);
   player_->resetFirst();
+  //player_->setRichi(true);
   if(isRon) {
     /*
     TEST_MESSAGE(player_->canRon(hai), 

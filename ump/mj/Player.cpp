@@ -390,7 +390,7 @@ Sutehai* Player::sutehai(const Sutehai& sutehai) {
 	@return シャンテン数
 ***************************************************************************/
 int Player::getShanten() const {
-  return shanten_.getShanten();
+  return isRichi() ? 0 : shanten_.getShanten();
 }
 /***********************************************************************//**
 	@brief テンパイ形か調べる

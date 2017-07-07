@@ -133,35 +133,36 @@ void Shanten::updateShanten(int shanten) {
 	@brief 国士無双のチェック
 ***************************************************************************/
 void Shanten::checkKokushi() {
+  auto hais(getHais());
   HaiArray elem;
   for(size_t i = 0; i < HaiArray::YAOCHU.size(); i++) {
-    auto hai = getHais().removeSame(HaiArray::YAOCHU[i]);
+    auto hai = hais.removeSame(HaiArray::YAOCHU[i]);
     if(hai) {
       elem.append(hai);
     }
   }
   int shanten = 13 - int(elem.size());
-  if(getHais().isIncludeYaochu()) {
+  if(hais.isIncludeYaochu()) {
     shanten--;
   }
   updateShanten(shanten);
   if(shanten == 0) {
-    richi_.append(getHais());
+    richi_.append(hais);
   }
-  super::pop(elem);
 }
 /***********************************************************************//**
 	@brief 七対子のチェック
 ***************************************************************************/
 void Shanten::checkChitoi() {
-  HaiArray uniq = getHais().getUnique();
+  auto hais = getHais();
+  auto uniq = hais.getUnique();
   HaiArray elem;
-  int shanten = (int(getHais().size()) - 1) / 2;
+  int shanten = (int(hais.size()) - 1) / 2;
   for(size_t i = 0; i < uniq.size(); i++) {
     const Hai* hai = uniq[i];
-    if(getHais().countSame(hai) >= 2) {
+    if(hais.countSame(hai) >= 2) {
       for(int j = 0; j < 2; j++) {
-        elem.append(getHais().removeSame(hai));
+        elem.append(hais.removeSame(hai));
       }
       shanten--;
     }
@@ -171,9 +172,8 @@ void Shanten::checkChitoi() {
   }
   updateShanten(shanten);
   if(shanten == 0) {
-    richi_.append(getHais());
+    richi_.append(hais);
   }
-  super::pop(elem);
 }
 /***********************************************************************//**
 	@brief 暗槓可能牌を更新する
