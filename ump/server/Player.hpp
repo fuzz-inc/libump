@@ -70,6 +70,7 @@ class Player
          std::shared_ptr<socket::Socket> socket);
   ~Player();
 
+  Player& setGame(std::shared_ptr<Game> game);
   std::shared_ptr<Game> getGame() const;
 
   void start();

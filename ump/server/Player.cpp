@@ -56,6 +56,14 @@ Player::~Player() {
   stop();
 }
 /***********************************************************************//**
+	@copydoc mj::Player::setGame
+***************************************************************************/
+Player& Player::setGame(std::shared_ptr<Game> game) {
+  std::lock_guard<std::mutex> lock(mutex_);
+  super::setGame(game);
+  return *this;
+}
+/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 std::shared_ptr<Game> Player::getGame() const {
