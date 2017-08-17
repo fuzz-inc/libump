@@ -263,7 +263,10 @@ bool Game::canChi() const {
 ***************************************************************************/
 void Game::clearPlayer() {
   for(auto& player : players_) {
-    player.reset();
+    if(player) {
+      player->setGame(nullptr);
+      player.reset();
+    }
   }
 }
 /***********************************************************************//**

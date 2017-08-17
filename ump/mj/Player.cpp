@@ -63,7 +63,7 @@ void Player::reset() {
 	@return 自分自身
 ***************************************************************************/
 Player& Player::setGame(std::shared_ptr<Game> game) {
-  assert(!game_.lock());
+  assert(!game || !game_.lock());
   game_ = game;
   return *this;
 }

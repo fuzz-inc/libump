@@ -78,7 +78,7 @@ class Player
 
   void reset() override;
 
-  Player& setGame(std::shared_ptr<Game> game);
+  virtual Player& setGame(std::shared_ptr<Game> game);
   std::shared_ptr<Game> getGame() const;
 
   Player& resetFirst();
