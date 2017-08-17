@@ -88,7 +88,7 @@ class Game
 
   bool isLastKyoku() const;
 
-  void operator()();
+  void operator()(std::shared_ptr<Game> self);
 
   void sendAll(const Command& command);
   virtual void sendCommand(std::shared_ptr<Player> player, 
@@ -100,7 +100,7 @@ class Game
  private:
   size_t findSeat() const;
 
-  void updateJob(const std::chrono::milliseconds& deltaTime);
+  bool updateJob(const std::chrono::milliseconds& deltaTime);
   void stopAllJob();
 
   void dump() const;

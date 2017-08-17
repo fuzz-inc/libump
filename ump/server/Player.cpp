@@ -72,20 +72,14 @@ std::shared_ptr<Game> Player::getGame() const {
 	@brief 
 ***************************************************************************/
 void Player::start() {
-  thread_.reset(new std::thread(std::ref(*this), shared_from_this()));
+  thread_.start(new std::thread(std::ref(*this), shared_from_this()));
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Player::stop() {
   std::lock_guard<std::mutex> lock(mutex_);
-  if(socket_) {
-    socket_->close();
-  }
-  while(thread_) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  }
-  socket_.reset();
+  thread_.stop();
 }
 /***********************************************************************//**
 	@brief 
@@ -166,7 +160,7 @@ bool Player::canRon(const mj::Hai* hai) {
 	@brief スレッド処理
 ***************************************************************************/
 void Player::operator()(std::shared_ptr<Player> self) {
-  while(isOpen()) {
+  do {
     Command command;
     if(socket_->recvCommand(command)) {
       if(command.getSerial() == serial_) {
@@ -179,8 +173,7 @@ void Player::operator()(std::shared_ptr<Player> self) {
         getServer()->recvCommand(shared_from_this(), command);
       }
     }
-  }
-  thread_.release()->detach();
+  } while(thread_.sleep(10));
 }
 /***********************************************************************//**
 	@brief 牌を河に捨てる

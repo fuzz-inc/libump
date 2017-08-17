@@ -113,7 +113,9 @@ void Game::start() {
   }
   beginJob(new JobGame(*this));
   thread_.reset(new thread::Thread());
-  thread_->start(new std::thread(std::ref(*this)));
+  thread_->start(new std::thread(std::ref(*this), 
+                                 std::static_pointer_cast<Game>
+                                 (shared_from_this())));
 }
 /***********************************************************************//**
 	@brief 
@@ -223,12 +225,15 @@ bool Game::isLastKyoku() const {
 /***********************************************************************//**
         @brief 実行
 ***************************************************************************/
-void Game::operator()() {
+void Game::operator()(std::shared_ptr<Game> self) {
   auto& deltaTime = getConfig()->getDeltaTime();
   do {
-    updateJob(std::chrono::milliseconds(deltaTime));
+    if(!updateJob(std::chrono::milliseconds(deltaTime))) {
+      break;
+    }
   } while(thread_->sleep(deltaTime));
   getServer()->onEndGame(this);
+  thread_->detach();
 }
 /***********************************************************************//**
 	@brief 全員にコマンドを送る
@@ -274,8 +279,10 @@ size_t Game::findSeat() const {
 }
 /***********************************************************************//**
 	@brief ジョブを実行する
+	@param[in] deltaTime デルタ時間
+	@return ジョブが存在するとき真
 ***************************************************************************/
-void Game::updateJob(const std::chrono::milliseconds& deltaTime) {
+bool Game::updateJob(const std::chrono::milliseconds& deltaTime) {
   if(!jobs_.empty()) {
     auto& job = jobs_.top();
     auto nextJob = job->update(deltaTime);
@@ -286,7 +293,9 @@ void Game::updateJob(const std::chrono::milliseconds& deltaTime) {
         beginJob(nextJob);
       }
     }
+    return true;
   }
+  return false;
 }
 /***********************************************************************//**
 	@brief 

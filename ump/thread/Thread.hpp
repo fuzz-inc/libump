@@ -24,6 +24,7 @@ class Thread {
   bool isStop() const;
   bool sleep(int ms);
   void sleep();
+  void detach();
 };
 /***********************************************************************//**
 	$Id$

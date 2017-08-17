@@ -35,6 +35,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/Command.hpp"
 #include "ump/Logger.hpp"
 #include "ump/mj/Player.hpp"
+#include "ump/thread/Thread.hpp"
 
 namespace ump {
 namespace server {
@@ -56,7 +57,7 @@ class Player
  private:
   std::weak_ptr<Server> server_;
   std::shared_ptr<socket::Socket> socket_;
-  std::unique_ptr<std::thread> thread_;
+  thread::Thread thread_;
   unsigned int serial_;
   Command command_;
   Command reply_;
