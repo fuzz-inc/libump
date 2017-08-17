@@ -48,8 +48,6 @@ class Player
   typedef mj::Player super;
 
  private:
-  class Thread;
-
   enum {
     FLAG_FURITEN, 
     FLAG_MAX
