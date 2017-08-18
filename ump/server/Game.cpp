@@ -233,7 +233,9 @@ void Game::operator()(std::shared_ptr<Game> self) {
     }
   } while(thread_->sleep(deltaTime));
   getServer()->onEndGame(this);
-  thread_->detach();
+  if(!thread_->isStop()) {
+    thread_->detach();
+  }
 }
 /***********************************************************************//**
 	@brief 全員にコマンドを送る
