@@ -25,6 +25,8 @@ class Thread {
   bool sleep(int ms);
   void sleep();
   void detach();
+
+  static void SetThreadName(const char* name);
 };
 /***********************************************************************//**
 	$Id$

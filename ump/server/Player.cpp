@@ -44,8 +44,8 @@ namespace server {
 ***************************************************************************/
 Player::Player(std::shared_ptr<Server> server, 
                std::shared_ptr<socket::Socket> socket)
-  : server_(server), 
-    socket_(socket), 
+  : thread::SocketThread(socket, "ump::server::Player"), 
+    server_(server), 
     serial_(0)
 {
 }
@@ -72,21 +72,23 @@ std::shared_ptr<Game> Player::getGame() const {
 	@brief 
 ***************************************************************************/
 void Player::start() {
-  thread_.start(new std::thread(std::ref(*this), shared_from_this()));
+  startThread(shared_from_this());
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Player::stop() {
   std::lock_guard<std::mutex> lock(mutex_);
-  socket_->close();
-  thread_.stop();
+  stopThread();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 bool Player::isOpen() const {
-  return socket_ && socket_->isOpen();
+  if(auto socket = getSocket()) {
+    return socket->isOpen();
+  }
+  return false;
 }
 /***********************************************************************//**
 	@brief コマンドを送る
@@ -103,10 +105,10 @@ bool Player::send(const Command& command) {
 ***************************************************************************/
 bool Player::sendCommand(const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
-  if(isOpen() && socket_->sendCommand(command)) {
+  if(isOpen() && getSocket()->sendCommand(command)) {
     return true;
   }
-  log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
+  //log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
   return false;
 }
 /***********************************************************************//**
@@ -158,25 +160,6 @@ bool Player::canRon(const mj::Hai* hai) {
   return !isFuriten() && super::canRon(hai);
 }
 /***********************************************************************//**
-	@brief スレッド処理
-***************************************************************************/
-void Player::operator()(std::shared_ptr<Player> self) {
-  do {
-    Command command;
-    if(socket_->recvCommand(command)) {
-      if(command.getSerial() == serial_) {
-        reply_ = command;
-      }
-      if(auto game = getGame()) {
-        game->onRecvCommand(shared_from_this(), command);
-      }
-      else {
-        getServer()->recvCommand(shared_from_this(), command);
-      }
-    }
-  } while(thread_.sleep(10));
-}
-/***********************************************************************//**
 	@brief 牌を河に捨てる
 	@param[in] sutehai 捨て牌
 	@return 河の捨て牌
@@ -213,6 +196,20 @@ mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
     }
   }
   return super::sutehai(sutehai);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Player::onRecvCommand(const Command& command) {
+  if(command.getSerial() == serial_) {
+    reply_ = command;
+  }
+  if(auto game = getGame()) {
+    game->onRecvCommand(shared_from_this(), command);
+  }
+  else {
+    getServer()->recvCommand(shared_from_this(), command);
+  }
 }
 /***********************************************************************//**
 	@brief 

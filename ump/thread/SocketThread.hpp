@@ -39,11 +39,13 @@ namespace thread {
 ***************************************************************************/
 class SocketThread {
  private:
-  std::unique_ptr<Thread> thread_;
   std::shared_ptr<socket::Socket> socket_;
+  std::string threadName_;
+  std::unique_ptr<Thread> thread_;
 
  public:
-  SocketThread() = default;
+  SocketThread(std::shared_ptr<socket::Socket> Socket, 
+               const std::string& threadName);
   virtual ~SocketThread();
 
   void operator()(std::shared_ptr<void> self);
@@ -51,8 +53,8 @@ class SocketThread {
  protected:
   UMP_ACCESSOR(Socket, socket_);
 
-  void start(std::shared_ptr<void> self);
-  void stop();
+  void startThread(std::shared_ptr<void> self);
+  void stopThread();
 
   virtual bool onUpdateThread();
   virtual void onEndThread() {}

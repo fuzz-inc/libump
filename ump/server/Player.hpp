@@ -35,7 +35,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/Command.hpp"
 #include "ump/Logger.hpp"
 #include "ump/mj/Player.hpp"
-#include "ump/thread/Thread.hpp"
+#include "ump/thread/SocketThread.hpp"
 
 namespace ump {
 namespace server {
@@ -44,6 +44,7 @@ namespace server {
 ***************************************************************************/
 class Player
   : public mj::Player, 
+    public thread::SocketThread, 
     public std::enable_shared_from_this<Player>
 {
   typedef mj::Player super;
@@ -56,8 +57,6 @@ class Player
 
  private:
   std::weak_ptr<Server> server_;
-  std::shared_ptr<socket::Socket> socket_;
-  thread::Thread thread_;
   unsigned int serial_;
   Command command_;
   Command reply_;
@@ -91,14 +90,13 @@ class Player
   bool canRichi() const;
   bool canRon(const mj::Hai* hai);
 
-  void operator()(std::shared_ptr<Player> self);
-
  protected:
   mj::Sutehai* sutehai(const mj::Sutehai& sutehai) override;
 
+  void onRecvCommand(const Command& command) override;
+
  private:
   std::shared_ptr<Server> getServer() const;
-  UMP_GETTER(Socket, socket_);
 
   UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
   void updateFuriten();

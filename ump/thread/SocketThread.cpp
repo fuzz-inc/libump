@@ -38,15 +38,26 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace ump {
 namespace thread {
 /***********************************************************************//**
+	@brief コンストラクタ
+	@param[in] socket ソケット
+***************************************************************************/
+SocketThread::SocketThread(std::shared_ptr<socket::Socket> socket, 
+                           const std::string& threadName)
+  : socket_(socket), 
+    threadName_(threadName)
+{
+}
+/***********************************************************************//**
 	@brief デストラクタ
 ***************************************************************************/
 SocketThread::~SocketThread() {
-  stop();
+  stopThread();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void SocketThread::operator()(std::shared_ptr<void> self) {
+  Thread::SetThreadName(threadName_.c_str());
   do {
     if(!onUpdateThread()) {
       break;
@@ -60,15 +71,15 @@ void SocketThread::operator()(std::shared_ptr<void> self) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void SocketThread::start(std::shared_ptr<void> self) {
-  stop();
+void SocketThread::startThread(std::shared_ptr<void> self) {
+  stopThread();
   thread_.reset(new Thread());
   thread_->start(new std::thread(std::ref(*this), self));
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void SocketThread::stop() {
+void SocketThread::stopThread() {
   if(thread_) {
     if(socket_) {
       socket_->close();
