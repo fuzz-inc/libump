@@ -42,8 +42,8 @@ namespace client {
 	@brief デフォルトコンストラクタ
 	@param[in] socket ソケット
 ***************************************************************************/
-Client::Client(std::shared_ptr<socket::Socket> socket)
-  : socket_(socket), 
+Client::Client(std::shared_ptr<Socket> socket)
+  : thread_(new SocketThread(this, socket, "ump::client::Client")), 
     hello_(Command::TYPE_HELLO), 
     state_(STATE_NULL), 
     seat_(0), 
@@ -55,7 +55,6 @@ Client::Client(std::shared_ptr<socket::Socket> socket)
 	@brief デストラクタ
 ***************************************************************************/
 Client::~Client() {
-  close();
 }
 /***********************************************************************//**
 	@brief サーバに接続する
@@ -64,46 +63,20 @@ Client::~Client() {
         @return 接続に成功したら真
 ***************************************************************************/
 bool Client::open(const char* host, int port) {
-  close();
-  if(socket_->connect(host, port)) {
-    thread_.reset(new std::thread(std::ref(*this), getThis()));
-    return true;
-  }
-  return false;
+  return getSocket().connect(host, port);
 }
 /***********************************************************************//**
 	@brief 接続を閉じる
 ***************************************************************************/
 void Client::close() {
   state_ = STATE_NULL;
-  socket_->close();
-  while(thread_) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  }
 }
 /***********************************************************************//**
 	@brief 接続中か調べる
 	@return	接続しているとき真
 ***************************************************************************/
 bool Client::isOpen() const {
-  return socket_->isOpen();
-}
-/***********************************************************************//**
-	@brief スレッド処理
-***************************************************************************/
-void Client::operator()(std::shared_ptr<Client> self) {
-  while(socket_->isOpen()) {
-    Command command;
-    if(socket_->recvCommand(command)) {
-      if(command.isExist()) {
-        onRecvCommand(command);
-      }
-    }
-    else {
-      socket_->close();
-    }
-  }
-  thread_.release()->detach();
+  return getSocket().isOpen();
 }
 /***********************************************************************//**
 	@brief 表示名をセットする
@@ -131,7 +104,7 @@ bool Client::sendHello() {
 	@param	command	送信するコマンド
 ***************************************************************************/
 bool Client::sendCommand(const Command& command) {
-  return socket_->sendCommand(command);
+  return getSocket().sendCommand(command);
 }
 /***********************************************************************//**
 	@brief 返答を送る
@@ -173,7 +146,7 @@ void Client::onSetPlayer(std::shared_ptr<mj::Player> player) {
 	@param[in] command 受信したコマンド
 	@return 中断するとき偽
 ***************************************************************************/
-bool Client::onRecvCommand(const Command& command) {
+void Client::onRecvCommand(const Command& command) {
   switch(command.getType()) {
   case Command::TYPE_HELLO:
     replyCommand(hello_, command);
@@ -258,7 +231,6 @@ bool Client::onRecvCommand(const Command& command) {
   default:
     break;
   }
-  return true;
 }
 /***********************************************************************//**
 	@brief コマンドを返信した
@@ -271,7 +243,6 @@ void Client::onReplyCommand(const Command& command) {
 ***************************************************************************/
 void Client::onEndGame(const mj::Players& players) {
   state_ = STATE_END;
-  socket_->close();
 }
 /***********************************************************************//**
 	@copydoc Game::beginKyoku
@@ -291,6 +262,12 @@ void Client::beginKyoku() {
 void Client::onShowHai(const mj::Hai* hai) {
   super::onShowHai(hai);
   hideHaiNums_[hai->getNormal()]--;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+Socket& Client::getSocket() const {
+  return thread_->getSocket();
 }
 /***********************************************************************//**
 	@brief playerコマンドを実行する

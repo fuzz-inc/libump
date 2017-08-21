@@ -32,33 +32,43 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/thread/Thread.hpp"
+
 namespace ump {
 namespace thread {
 /***********************************************************************//**
-	@brief ソケット通信スレッド基底クラス
+	@brief ソケット通信スレッド
 ***************************************************************************/
-class SocketThread {
+class SocketThread
+  : public Thread
+{
+ public:
+  class Listener;
+
  private:
-  std::shared_ptr<socket::Socket> socket_;
-  std::string threadName_;
-  std::unique_ptr<Thread> thread_;
+  Listener* listener_;
+  std::shared_ptr<Socket> socket_;
 
  public:
-  SocketThread(std::shared_ptr<socket::Socket> Socket, 
-               const std::string& threadName);
-  virtual ~SocketThread();
+  SocketThread(Listener* listener, 
+               std::shared_ptr<Socket> socket, 
+               const char* threadName);
+  ~SocketThread();
 
-  void operator()(std::shared_ptr<void> self);
+  Socket& getSocket() const;
 
- protected:
-  UMP_ACCESSOR(Socket, socket_);
+  void operator()(const char* threadName);
+};
+/***********************************************************************//**
+	@brief リスナー
+***************************************************************************/
+class SocketThread::Listener {
+ public:
+  Listener() = default;
+  virtual ~Listener() = default;
 
-  void startThread(std::shared_ptr<void> self);
-  void stopThread();
-
-  virtual bool onUpdateThread();
-  virtual void onEndThread() {}
   virtual void onRecvCommand(const Command& command) {}
+  virtual void onDisconnectSocket() {}
 };
 /***********************************************************************//**
 	$Id$

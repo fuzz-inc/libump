@@ -50,7 +50,7 @@ class Server
   int timeout_;
   std::vector<std::shared_ptr<Game>> games_;
   std::shared_ptr<Game> game_;
-  std::unique_ptr<thread::Thread> thread_;
+  std::unique_ptr<Thread> thread_;
   std::mutex mutex_;
 
  public:

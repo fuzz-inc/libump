@@ -36,6 +36,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/mj/Game.hpp"
 #include "ump/mj/HaiArray.hpp"
 #include "ump/mj/Pattern.hpp"
+#include "ump/thread/SocketThread.hpp"
 
 namespace ump {
 namespace client {
@@ -43,7 +44,8 @@ namespace client {
 	@brief UMPクライアント基底クラス
 ***************************************************************************/
 class Client
-  : public mj::Game
+  : public mj::Game, 
+    public SocketThread::Listener
 {
   typedef mj::Game super;
 
@@ -56,8 +58,7 @@ class Client
   };
 
  private:
-  std::shared_ptr<socket::Socket> socket_;
-  std::unique_ptr<std::thread> thread_;
+  std::unique_ptr<SocketThread> thread_;
   Command hello_;
   State state_;
   size_t seat_;
@@ -68,7 +69,7 @@ class Client
   std::map<const mj::Hai*, size_t> hideHaiNums_;
 
  public:
-  Client(std::shared_ptr<socket::Socket> socket);
+  Client(std::shared_ptr<Socket> socket);
   virtual ~Client();
 
   bool open(const char* host, int port);
@@ -112,13 +113,11 @@ class Client
   virtual std::shared_ptr<mj::Player> createPlayer();
   virtual void onSetPlayer(std::shared_ptr<mj::Player> player);
 
-  virtual bool onRecvCommand(const Command& command);
+  void onRecvCommand(const Command& command) override;
   virtual void onReplyCommand(const Command& command);
 
   virtual void onGameStart() {}
   virtual void onEndGame(const mj::Players& players);
-
-  UMP_GETTER(Socket, socket_);
 
   void beginKyoku();
   void onShowHai(const mj::Hai* hai) override;
@@ -128,7 +127,7 @@ class Client
     return std::static_pointer_cast<Client>(super::shared_from_this());
   }
 
-  void recv(const Command& command);
+  Socket& getSocket() const;
 
   void execPlayer(const Command& command);
   void execGameStart(const Command& command);

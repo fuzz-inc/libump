@@ -40,7 +40,7 @@ namespace client {
 /***********************************************************************//**
 	@brief コンストラクタ
 ***************************************************************************/
-Bot::Bot(std::shared_ptr<socket::Socket> socket, 
+Bot::Bot(std::shared_ptr<Socket> socket, 
          std::shared_ptr<const mj::Config> config)
   : super(socket), 
     wait_(0)
@@ -50,10 +50,7 @@ Bot::Bot(std::shared_ptr<socket::Socket> socket,
 /***********************************************************************//**
 	@copydoc Client::onRecvCommand
 ***************************************************************************/
-bool Bot::onRecvCommand(const Command& command) {
-  if(!super::onRecvCommand(command)) {
-    return false;
-  }
+void Bot::onRecvCommand(const Command& command) {
   switch(command.getType()) {
   case Command::TYPE_READY_Q:
     replyCommand(Command(Command::TYPE_YES), command);
@@ -68,9 +65,9 @@ bool Bot::onRecvCommand(const Command& command) {
     replySutehai(command);
     break;
   default:
+    super::onRecvCommand(command);
     break;
   }
-  return true;
 }
 /***********************************************************************//**
 	@brief 

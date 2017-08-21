@@ -44,7 +44,7 @@ namespace server {
 ***************************************************************************/
 class Player
   : public mj::Player, 
-    public thread::SocketThread, 
+    public SocketThread::Listener, 
     public std::enable_shared_from_this<Player>
 {
   typedef mj::Player super;
@@ -57,6 +57,7 @@ class Player
 
  private:
   std::weak_ptr<Server> server_;
+  std::unique_ptr<SocketThread> thread_;
   unsigned int serial_;
   Command command_;
   Command reply_;
@@ -65,14 +66,11 @@ class Player
 
  public:
   Player(std::shared_ptr<Server> server, 
-         std::shared_ptr<socket::Socket> socket);
+         std::shared_ptr<Socket> socket);
   ~Player();
 
   mj::Player& setGame(std::shared_ptr<mj::Game> game) override;
   std::shared_ptr<Game> getGame() const;
-
-  void start();
-  void stop();
 
   bool isOpen() const;
 
@@ -97,6 +95,8 @@ class Player
 
  private:
   std::shared_ptr<Server> getServer() const;
+
+  Socket& getSocket() const;
 
   UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
   void updateFuriten();

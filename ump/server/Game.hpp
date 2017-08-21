@@ -50,7 +50,7 @@ class Game
 
  private:
   std::weak_ptr<Server> server_;
-  std::unique_ptr<thread::Thread> thread_;
+  std::unique_ptr<Thread> thread_;
   mj::Yama yama_;
   std::stack<std::unique_ptr<Job>> jobs_;
 
@@ -88,7 +88,7 @@ class Game
 
   bool isLastKyoku() const;
 
-  void operator()(std::shared_ptr<Game> self);
+  void operator()();
 
   void sendAll(const Command& command);
   virtual void sendCommand(std::shared_ptr<Player> player, 

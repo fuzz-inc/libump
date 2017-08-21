@@ -16,17 +16,19 @@ class Thread {
   Condition cond_;
 
  public:
-  Thread() = default;
+  Thread(std::thread* thread);
   ~Thread();
 
-  void start(std::thread* thread);
-  void stop();
-  bool isStop() const;
   bool sleep(int ms);
   void sleep();
-  void detach();
 
   static void SetThreadName(const char* name);
+
+ protected:
+  Thread() = default;
+
+  void startThread(std::thread* thread);
+  void stopThread();
 };
 /***********************************************************************//**
 	$Id$

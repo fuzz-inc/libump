@@ -38,65 +38,45 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace ump {
 namespace thread {
 /***********************************************************************//**
-	@brief コンストラクタ
-	@param[in] socket ソケット
+	@brief 
 ***************************************************************************/
-SocketThread::SocketThread(std::shared_ptr<socket::Socket> socket, 
-                           const std::string& threadName)
-  : socket_(socket), 
-    threadName_(threadName)
+SocketThread::SocketThread(Listener* listener, 
+                           std::shared_ptr<Socket> socket, 
+                           const char* threadName)
+  : listener_(listener), 
+    socket_(socket)
 {
+  startThread(new std::thread(std::ref(*this), threadName));
 }
 /***********************************************************************//**
 	@brief デストラクタ
 ***************************************************************************/
 SocketThread::~SocketThread() {
+  socket_->close();
   stopThread();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void SocketThread::operator()(std::shared_ptr<void> self) {
-  Thread::SetThreadName(threadName_.c_str());
+Socket& SocketThread::getSocket() const {
+  return *socket_;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void SocketThread::operator()(const char* threadName) {
+  Thread::SetThreadName(threadName);
   do {
-    if(!onUpdateThread()) {
-      break;
+    if(socket_->isOpen()) {
+      Command command;
+      if(socket_->recvCommand(command)) {
+        listener_->onRecvCommand(command);
+      }
+      else {
+        listener_->onDisconnectSocket();
+      }
     }
-  } while(thread_->sleep(100));
-  if(!thread_->isStop()) {
-    thread_->detach();
-  }
-  onEndThread();
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void SocketThread::startThread(std::shared_ptr<void> self) {
-  stopThread();
-  thread_.reset(new Thread());
-  thread_->start(new std::thread(std::ref(*this), self));
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void SocketThread::stopThread() {
-  if(thread_) {
-    if(socket_) {
-      socket_->close();
-    }
-    thread_->stop();
-    thread_.reset();
-  }
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-bool SocketThread::onUpdateThread() {
-  Command command;
-  if(socket_ && socket_->recvCommand(command)) {
-    onRecvCommand(command);
-  }
-  return true;
+  } while(sleep(100));
 }
 /***********************************************************************//**
 	$Id$

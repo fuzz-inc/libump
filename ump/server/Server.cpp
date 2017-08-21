@@ -69,8 +69,7 @@ Server::~Server() {
 ***************************************************************************/
 void Server::start() {
   assert(!thread_);
-  thread_.reset(new thread::Thread());
-  thread_->start(new std::thread(std::ref(*this)));
+  thread_.reset(new Thread(new std::thread(std::ref(*this))));
 }
 /***********************************************************************//**
 	@brief 
@@ -82,8 +81,6 @@ void Server::stop() {
       game->stop();
     }
     socket_->close();
-    thread_->stop();
-    thread_.reset();
   }
 }
 /***********************************************************************//**
@@ -110,6 +107,7 @@ void Server::onEndGame(Game* game) {
 	@brief 
 ***************************************************************************/
 void Server::operator()() {
+  Thread::SetThreadName("ump::server::Server");
   while(socket_->isOpen()) {
     if(auto socket = socket_->accept(getTimeout())) {
       auto player = createPlayer(socket);
@@ -117,7 +115,7 @@ void Server::operator()() {
       player->send(Command(Command::TYPE_HELLO).
                    setOption("ump", Version::Get().toString()));
       */
-      player->start();
+      //player->start();
     }
   }
 }

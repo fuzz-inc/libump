@@ -123,11 +123,14 @@ class Socket;
 class SslSocket;
 class TcpSocket;
 }
+using namespace socket;
 
 namespace thread {
 class Condition;
+class SocketThread;
 class Thread;
 }
+using namespace thread;
 }
 /***********************************************************************//**
 	@brief 

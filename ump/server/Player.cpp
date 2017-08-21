@@ -43,9 +43,9 @@ namespace server {
 	@brief コンストラクタ
 ***************************************************************************/
 Player::Player(std::shared_ptr<Server> server, 
-               std::shared_ptr<socket::Socket> socket)
-  : thread::SocketThread(socket, "ump::server::Player"), 
-    server_(server), 
+               std::shared_ptr<Socket> socket)
+  : server_(server), 
+    thread_(new SocketThread(this, socket, "ump::server::Player")), 
     serial_(0)
 {
 }
@@ -53,7 +53,6 @@ Player::Player(std::shared_ptr<Server> server,
 	@brief デストラクタ
 ***************************************************************************/
 Player::~Player() {
-  stop();
 }
 /***********************************************************************//**
 	@copydoc mj::Player::setGame
@@ -71,24 +70,8 @@ std::shared_ptr<Game> Player::getGame() const {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void Player::start() {
-  startThread(shared_from_this());
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void Player::stop() {
-  std::lock_guard<std::mutex> lock(mutex_);
-  stopThread();
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
 bool Player::isOpen() const {
-  if(auto socket = getSocket()) {
-    return socket->isOpen();
-  }
-  return false;
+  return getSocket().isOpen();
 }
 /***********************************************************************//**
 	@brief コマンドを送る
@@ -105,7 +88,7 @@ bool Player::send(const Command& command) {
 ***************************************************************************/
 bool Player::sendCommand(const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
-  if(isOpen() && getSocket()->sendCommand(command)) {
+  if(isOpen() && getSocket().sendCommand(command)) {
     return true;
   }
   //log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
@@ -216,6 +199,12 @@ void Player::onRecvCommand(const Command& command) {
 ***************************************************************************/
 std::shared_ptr<Server> Player::getServer() const {
   return server_.lock();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+Socket& Player::getSocket() const {
+  return thread_->getSocket();
 }
 /***********************************************************************//**
 	@brief フリテンを更新する

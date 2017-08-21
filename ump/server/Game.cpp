@@ -112,20 +112,19 @@ void Game::start() {
     player->setPoint(getConfig()->getPoint());
   }
   beginJob(new JobGame(*this));
-  thread_.reset(new thread::Thread());
-  thread_->start(new std::thread(std::ref(*this), 
-                                 std::static_pointer_cast<Game>
-                                 (shared_from_this())));
+  thread_.reset(new Thread(new std::thread(std::ref(*this))));
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Game::stop() {
   if(thread_) {
+    /*
     for(auto player : getPlayers()) {
       std::static_pointer_cast<Player>(player)->stop();
     }
     thread_->stop();
+    */
     stopAllJob();
     thread_.reset();
   }
@@ -225,7 +224,7 @@ bool Game::isLastKyoku() const {
 /***********************************************************************//**
         @brief 実行
 ***************************************************************************/
-void Game::operator()(std::shared_ptr<Game> self) {
+void Game::operator()() {
   auto& deltaTime = getConfig()->getDeltaTime();
   do {
     if(!updateJob(std::chrono::milliseconds(deltaTime))) {
@@ -233,9 +232,6 @@ void Game::operator()(std::shared_ptr<Game> self) {
     }
   } while(thread_->sleep(deltaTime));
   getServer()->onEndGame(this);
-  if(!thread_->isStop()) {
-    thread_->detach();
-  }
 }
 /***********************************************************************//**
 	@brief 全員にコマンドを送る
