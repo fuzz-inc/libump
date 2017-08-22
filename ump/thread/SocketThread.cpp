@@ -75,6 +75,7 @@ void SocketThread::stop() {
 	@brief 
 ***************************************************************************/
 void SocketThread::operator()() {
+  static const int DELTA_TIME = 10;
   Thread::SetThreadName(threadName_.c_str());
   do {
     if(socket_->isOpen()) {
@@ -86,7 +87,7 @@ void SocketThread::operator()() {
         onDisconnectSocket();
       }
     }
-  } while(sleep(100));
+  } while(sleep(DELTA_TIME));
 }
 /***********************************************************************//**
 	$Id$
