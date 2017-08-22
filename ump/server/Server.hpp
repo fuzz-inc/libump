@@ -62,10 +62,9 @@ class Server
   UMP_ACCESSOR(Timeout, timeout_);
 
   void start();
-  void stop();
   void sleep();
 
-  void onEndGame(Game* game);
+  void onEndGame(std::shared_ptr<Game> game);
 
   void operator()();
 
@@ -88,6 +87,9 @@ class Server
 
   virtual void onConnectPlayer(std::shared_ptr<Player> player, 
                                const Command& command);
+
+ private:
+  void stop();
 };
 /***********************************************************************//**
 	$Id$

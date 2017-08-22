@@ -98,6 +98,8 @@ class Game
                              const Command& command);
 
  private:
+  std::shared_ptr<Game> getThis();
+
   size_t findSeat() const;
 
   bool updateJob(const std::chrono::milliseconds& deltaTime);

@@ -231,7 +231,7 @@ void Game::operator()() {
       break;
     }
   } while(thread_->sleep(deltaTime));
-  getServer()->onEndGame(this);
+  getServer()->onEndGame(getThis());
 }
 /***********************************************************************//**
 	@brief 全員にコマンドを送る
@@ -260,6 +260,12 @@ void Game::sendCommand(std::shared_ptr<Player> player,
 ***************************************************************************/
 void Game::onRecvCommand(std::shared_ptr<Player> player, 
                          const Command& command) {
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+std::shared_ptr<Game> Game::getThis() {
+  return std::static_pointer_cast<Game>(shared_from_this());
 }
 /***********************************************************************//**
 	@brief 空いている席をランダムで取得する

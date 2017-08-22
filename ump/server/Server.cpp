@@ -95,13 +95,10 @@ void Server::sleep() {
 	@brief ゲームが終了した
 	@param[in] game 終了したゲーム
 ***************************************************************************/
-void Server::onEndGame(Game* game) {
-  auto found = std::find_if(games_.begin(), games_.end(), 
-                            [game](const std::shared_ptr<Game>& iter) {
-                              return iter.get() == game;
-                            });
-  assert(found != games_.end());
-  games_.erase(found);
+void Server::onEndGame(std::shared_ptr<Game> game) {
+  auto iter = std::find(games_.begin(), games_.end(), game);
+  assert(iter != games_.end());
+  games_.erase(iter);
 }
 /***********************************************************************//**
 	@brief 
