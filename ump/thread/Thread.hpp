@@ -13,22 +13,20 @@ namespace thread {
 class Thread {
  private:
   std::unique_ptr<std::thread> thread_;
-  Condition cond_;
+  Condition stop_;
 
  public:
-  Thread(std::thread* thread);
+  Thread() = default;
   ~Thread();
+
+  void start(std::thread* thread);
+  void stop();
+  bool isStart() const;
 
   bool sleep(int ms);
   void sleep();
 
   static void SetThreadName(const char* name);
-
- protected:
-  Thread() = default;
-
-  void startThread(std::thread* thread);
-  void stopThread();
 };
 /***********************************************************************//**
 	$Id$

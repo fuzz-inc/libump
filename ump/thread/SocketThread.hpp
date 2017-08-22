@@ -42,31 +42,25 @@ namespace thread {
 class SocketThread
   : public Thread
 {
- public:
-  class Listener;
+  typedef Thread super;
 
  private:
-  Listener* listener_;
   std::shared_ptr<Socket> socket_;
+  std::string threadName_;
 
  public:
-  SocketThread(Listener* listener, 
-               std::shared_ptr<Socket> socket, 
+  SocketThread(std::shared_ptr<Socket> socket, 
                const char* threadName);
   ~SocketThread();
 
   Socket& getSocket() const;
 
-  void operator()(const char* threadName);
-};
-/***********************************************************************//**
-	@brief リスナー
-***************************************************************************/
-class SocketThread::Listener {
- public:
-  Listener() = default;
-  virtual ~Listener() = default;
+  void start();
+  void stop();
 
+  void operator()();
+
+ protected:
   virtual void onRecvCommand(const Command& command) {}
   virtual void onDisconnectSocket() {}
 };

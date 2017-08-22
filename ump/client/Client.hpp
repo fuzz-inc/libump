@@ -45,7 +45,7 @@ namespace client {
 ***************************************************************************/
 class Client
   : public mj::Game, 
-    public SocketThread::Listener
+    public SocketThread
 {
   typedef mj::Game super;
 
@@ -58,7 +58,6 @@ class Client
   };
 
  private:
-  std::unique_ptr<SocketThread> thread_;
   Command hello_;
   State state_;
   size_t seat_;
@@ -75,8 +74,6 @@ class Client
   bool open(const char* host, int port);
   void close();
   bool isOpen() const;
-
-  void operator()(std::shared_ptr<Client> self);
 
   UMP_ACCESSOR(Hello, hello_);
 
@@ -126,8 +123,6 @@ class Client
   std::shared_ptr<Client> getThis() {
     return std::static_pointer_cast<Client>(super::shared_from_this());
   }
-
-  Socket& getSocket() const;
 
   void execPlayer(const Command& command);
   void execGameStart(const Command& command);

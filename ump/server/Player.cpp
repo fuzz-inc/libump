@@ -44,8 +44,8 @@ namespace server {
 ***************************************************************************/
 Player::Player(std::shared_ptr<Server> server, 
                std::shared_ptr<Socket> socket)
-  : server_(server), 
-    thread_(new SocketThread(this, socket, "ump::server::Player")), 
+  : SocketThread(socket, "ump::server::Player"), 
+    server_(server), 
     serial_(0)
 {
 }
@@ -199,12 +199,6 @@ void Player::onRecvCommand(const Command& command) {
 ***************************************************************************/
 std::shared_ptr<Server> Player::getServer() const {
   return server_.lock();
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-Socket& Player::getSocket() const {
-  return thread_->getSocket();
 }
 /***********************************************************************//**
 	@brief フリテンを更新する

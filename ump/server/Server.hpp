@@ -32,13 +32,16 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/thread/Thread.hpp"
+
 namespace ump {
 namespace server {
 /***********************************************************************//**
 	@brief サーバー
 ***************************************************************************/
 class Server
-  : public std::enable_shared_from_this<Server>
+  : public Thread, 
+    public std::enable_shared_from_this<Server>
 {
  public:
   static const int DEFAULT_PORT = 1326;
@@ -50,7 +53,6 @@ class Server
   int timeout_;
   std::vector<std::shared_ptr<Game>> games_;
   std::shared_ptr<Game> game_;
-  std::unique_ptr<Thread> thread_;
   std::mutex mutex_;
 
  public:
@@ -62,7 +64,6 @@ class Server
   UMP_ACCESSOR(Timeout, timeout_);
 
   void start();
-  void sleep();
 
   void onEndGame(std::shared_ptr<Game> game);
 

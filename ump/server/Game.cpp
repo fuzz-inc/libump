@@ -107,27 +107,24 @@ bool Game::canStart() const {
 	@brief ゲームを開始する
 ***************************************************************************/
 void Game::start() {
-  assert(!thread_);
   for(auto player : getPlayers()) {
     player->setPoint(getConfig()->getPoint());
   }
   beginJob(new JobGame(*this));
-  thread_.reset(new Thread(new std::thread(std::ref(*this))));
+  Thread::start(new std::thread(std::ref(*this)));
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Game::stop() {
-  if(thread_) {
-    /*
+  /*
     for(auto player : getPlayers()) {
-      std::static_pointer_cast<Player>(player)->stop();
+    std::static_pointer_cast<Player>(player)->stop();
     }
     thread_->stop();
-    */
-    stopAllJob();
-    thread_.reset();
-  }
+  */
+  stopAllJob();
+  Thread::stop();
 }
 /***********************************************************************//**
 	@brief ジョブを開始する
@@ -230,7 +227,7 @@ void Game::operator()() {
     if(!updateJob(std::chrono::milliseconds(deltaTime))) {
       break;
     }
-  } while(thread_->sleep(deltaTime));
+  } while(sleep(deltaTime));
   getServer()->onEndGame(getThis());
 }
 /***********************************************************************//**

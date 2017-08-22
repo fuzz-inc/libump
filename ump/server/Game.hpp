@@ -36,6 +36,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/Logger.hpp"
 #include "ump/mj/Game.hpp"
 #include "ump/mj/Yama.hpp"
+#include "ump/thread/Thread.hpp"
 
 namespace ump {
 namespace server {
@@ -44,13 +45,13 @@ namespace server {
 ***************************************************************************/
 class Game
   : public mj::Game, 
+    public Thread, 
     public Logger
 {
   typedef mj::Game super;
 
  private:
   std::weak_ptr<Server> server_;
-  std::unique_ptr<Thread> thread_;
   mj::Yama yama_;
   std::stack<std::unique_ptr<Job>> jobs_;
 
@@ -64,8 +65,6 @@ class Game
   std::shared_ptr<Server> getServer() const {
     return server_.lock();
   }
-
-  UMP_GETTER(Thread, thread_);
 
   void appendPlayer(std::shared_ptr<Player> player);
   bool canStart() const;

@@ -43,7 +43,7 @@ namespace client {
 	@param[in] socket ソケット
 ***************************************************************************/
 Client::Client(std::shared_ptr<Socket> socket)
-  : thread_(new SocketThread(this, socket, "ump::client::Client")), 
+  : SocketThread(socket, "ump::client::Client"), 
     hello_(Command::TYPE_HELLO), 
     state_(STATE_NULL), 
     seat_(0), 
@@ -63,12 +63,17 @@ Client::~Client() {
         @return 接続に成功したら真
 ***************************************************************************/
 bool Client::open(const char* host, int port) {
-  return getSocket().connect(host, port);
+  if(getSocket().connect(host, port)) {
+    start();
+    return true;
+  }
+  return false;
 }
 /***********************************************************************//**
 	@brief 接続を閉じる
 ***************************************************************************/
 void Client::close() {
+  stop();
   state_ = STATE_NULL;
 }
 /***********************************************************************//**
@@ -262,12 +267,6 @@ void Client::beginKyoku() {
 void Client::onShowHai(const mj::Hai* hai) {
   super::onShowHai(hai);
   hideHaiNums_[hai->getNormal()]--;
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-Socket& Client::getSocket() const {
-  return thread_->getSocket();
 }
 /***********************************************************************//**
 	@brief playerコマンドを実行する

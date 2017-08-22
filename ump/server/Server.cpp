@@ -37,7 +37,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Player.hpp"
 #include "ump/server/Server.hpp"
 #include "ump/socket/Socket.hpp"
-#include "ump/thread/Thread.hpp"
 
 namespace ump {
 namespace server {
@@ -62,34 +61,24 @@ Server::Server(const std::shared_ptr<socket::Socket>& socket, int port)
 	@brief デストラクタ
 ***************************************************************************/
 Server::~Server() {
-  assert(!thread_);
+  stop();
 }
 /***********************************************************************//**
 	@brief 実行
 ***************************************************************************/
 void Server::start() {
-  assert(!thread_);
-  thread_.reset(new Thread(new std::thread(std::ref(*this))));
+  Thread::start(new std::thread(std::ref(*this)));
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Server::stop() {
-  if(thread_) {
-    auto games(games_);
-    for(auto& game : games) {
-      game->stop();
-    }
-    socket_->close();
+  auto games(games_);
+  for(auto& game : games) {
+    game->stop();
   }
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void Server::sleep() {
-  if(thread_) {
-    thread_->sleep();
-  }
+  socket_->close();
+  Thread::stop();
 }
 /***********************************************************************//**
 	@brief ゲームが終了した

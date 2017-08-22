@@ -40,20 +40,17 @@ namespace thread {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-SocketThread::SocketThread(Listener* listener, 
-                           std::shared_ptr<Socket> socket, 
+SocketThread::SocketThread(std::shared_ptr<Socket> socket, 
                            const char* threadName)
-  : listener_(listener), 
-    socket_(socket)
+  : socket_(socket), 
+    threadName_(threadName)
 {
-  startThread(new std::thread(std::ref(*this), threadName));
 }
 /***********************************************************************//**
 	@brief デストラクタ
 ***************************************************************************/
 SocketThread::~SocketThread() {
-  socket_->close();
-  stopThread();
+  stop();
 }
 /***********************************************************************//**
 	@brief 
@@ -64,16 +61,29 @@ Socket& SocketThread::getSocket() const {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void SocketThread::operator()(const char* threadName) {
-  Thread::SetThreadName(threadName);
+void SocketThread::start() {
+  super::start(new std::thread(std::ref(*this)));
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void SocketThread::stop() {
+  socket_->close();
+  super::stop();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void SocketThread::operator()() {
+  Thread::SetThreadName(threadName_.c_str());
   do {
     if(socket_->isOpen()) {
       Command command;
       if(socket_->recvCommand(command)) {
-        listener_->onRecvCommand(command);
+        onRecvCommand(command);
       }
       else {
-        listener_->onDisconnectSocket();
+        onDisconnectSocket();
       }
     }
   } while(sleep(100));

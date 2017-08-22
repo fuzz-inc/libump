@@ -34,7 +34,6 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Game.hpp"
 #include "ump/server/Job.hpp"
 #include "ump/server/Player.hpp"
-#include "ump/thread/Thread.hpp"
 
 namespace ump {
 namespace server {
@@ -55,8 +54,7 @@ Job* Job::update(const std::chrono::milliseconds& deltaTime) {
 ***************************************************************************/
 void Job::sleep(float sec) const {
   int msec = getConfig()->getSpeed() * sec * 1000;
-  getGame().getThread()->sleep(msec);
-  //std::this_thread::sleep_for(std::chrono::milliseconds(msec));
+  getGame().sleep(msec);
 }
 /***********************************************************************//**
 	@brief コンストラクタ
