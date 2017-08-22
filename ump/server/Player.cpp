@@ -197,6 +197,12 @@ void Player::onRecvCommand(const Command& command) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
+void Player::onDisconnectSocket() {
+  getServer()->onDisconnectPlayer(shared_from_this());
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
 std::shared_ptr<Server> Player::getServer() const {
   return server_.lock();
 }

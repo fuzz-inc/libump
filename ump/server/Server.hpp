@@ -72,6 +72,8 @@ class Server
   void recvCommand(std::shared_ptr<Player> player, 
                    const Command& command);
 
+  virtual void onDisconnectPlayer(std::shared_ptr<Player> player) {}
+
  protected:
   std::mutex& getMutex() {
     return mutex_;

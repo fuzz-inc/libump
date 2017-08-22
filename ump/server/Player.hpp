@@ -91,6 +91,7 @@ class Player
   mj::Sutehai* sutehai(const mj::Sutehai& sutehai) override;
 
   void onRecvCommand(const Command& command) override;
+  void onDisconnectSocket() override;
 
  private:
   std::shared_ptr<Server> getServer() const;
