@@ -225,10 +225,11 @@ void Game::operator()() {
   auto& deltaTime = getConfig()->getDeltaTime();
   do {
     if(!updateJob(std::chrono::milliseconds(deltaTime))) {
-      break;
+      detach();
+      getServer()->onEndGame(getThis());
+      return;
     }
   } while(sleep(deltaTime));
-  getServer()->onEndGame(getThis());
 }
 /***********************************************************************//**
 	@brief 全員にコマンドを送る

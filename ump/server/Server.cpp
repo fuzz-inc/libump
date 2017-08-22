@@ -96,12 +96,10 @@ void Server::operator()() {
   Thread::SetThreadName("ump::server::Server");
   while(socket_->isOpen()) {
     if(auto socket = socket_->accept(getTimeout())) {
-      auto player = createPlayer(socket);
-      /*
-      player->send(Command(Command::TYPE_HELLO).
-                   setOption("ump", Version::Get().toString()));
-      */
-      //player->start();
+      if(auto player = createPlayer(socket)) {
+        player->start();
+        onConnectPlayer(player);
+      }
     }
   }
 }
@@ -135,6 +133,19 @@ void Server::startGame(std::shared_ptr<Game> game) {
   game->start();
 }
 /***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Server::onConnectPlayer(std::shared_ptr<Player> player) {
+  if(!game_) {
+    game_ = createGame();
+  }
+  game_->appendPlayer(player);
+  if(game_->canStart()) {
+    startGame(game_);
+    game_.reset();
+  }
+}
+/***********************************************************************//**
 	@brief UMPコマンド受信処理
 ***************************************************************************/
 void Server::onRecvCommand(std::shared_ptr<Player> player, 
@@ -143,21 +154,6 @@ void Server::onRecvCommand(std::shared_ptr<Player> player,
     if(command.hasOption("name")) {
       player->setName(command.getOption("name"));
     }
-    onConnectPlayer(player, command);
-  }
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void Server::onConnectPlayer(std::shared_ptr<Player> player, 
-                             const Command& command) {
-  if(!game_) {
-    game_ = createGame();
-  }
-  game_->appendPlayer(player);
-  if(game_->canStart()) {
-    startGame(game_);
-    game_.reset();
   }
 }
 /***********************************************************************//**

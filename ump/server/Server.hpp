@@ -83,11 +83,9 @@ class Server
   virtual std::shared_ptr<Game> createGame();
   void startGame(std::shared_ptr<Game> game);
 
+  virtual void onConnectPlayer(std::shared_ptr<Player> player);
   virtual void onRecvCommand(std::shared_ptr<Player> player, 
                              const Command& command);
-
-  virtual void onConnectPlayer(std::shared_ptr<Player> player, 
-                               const Command& command);
 
  private:
   void stop();

@@ -23,6 +23,8 @@ class Thread {
   void stop();
   bool isStart() const;
 
+  void detach();
+
   bool sleep(int ms);
   void sleep();
 
