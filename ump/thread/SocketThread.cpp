@@ -33,17 +33,14 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/Command.hpp"
 #include "ump/socket/Socket.hpp"
 #include "ump/thread/SocketThread.hpp"
-#include "ump/thread/Thread.hpp"
 
 namespace ump {
 namespace thread {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-SocketThread::SocketThread(std::shared_ptr<Socket> socket, 
-                           const char* threadName)
-  : socket_(socket), 
-    threadName_(threadName)
+SocketThread::SocketThread(std::shared_ptr<Socket> socket)
+  : socket_(socket)
 {
 }
 /***********************************************************************//**
@@ -59,35 +56,38 @@ Socket& SocketThread::getSocket() const {
   return *socket_;
 }
 /***********************************************************************//**
-	@brief 
+	@brief スレッドを開始する
 ***************************************************************************/
 void SocketThread::start() {
-  super::start(new std::thread(std::ref(*this)));
+  assert(socket_->isOpen());
+  super::start();
 }
 /***********************************************************************//**
-	@brief 
+	@brief スレッドを停止する
 ***************************************************************************/
 void SocketThread::stop() {
   socket_->close();
   super::stop();
 }
 /***********************************************************************//**
-	@brief 
+	@brief スレッド処理
 ***************************************************************************/
 void SocketThread::operator()() {
-  static const int DELTA_TIME = 10;
-  Thread::SetThreadName(threadName_.c_str());
-  do {
-    if(socket_->isOpen()) {
-      Command command;
-      if(socket_->recvCommand(command)) {
-        onRecvCommand(command);
-      }
-      else {
-        onDisconnectSocket();
-      }
-    }
-  } while(sleep(DELTA_TIME));
+  super::operator()();
+  while(socket_->isOpen()) {
+    onThread();
+  }
+  detach();
+  onDisconnectSocket();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void SocketThread::onThread() {
+  Command command;
+  if(socket_->recvCommand(command)) {
+    onRecvCommand(command);
+  }
 }
 /***********************************************************************//**
 	$Id$

@@ -46,13 +46,13 @@ namespace server {
 	@param[in] port ポート番号
 ***************************************************************************/
 Server::Server(const std::shared_ptr<socket::Socket>& socket, int port)
-  : socket_(socket), 
+  : SocketThread(socket), 
     port_(port), 
     config_(std::make_shared<Config>()), 
     timeout_(1000)
 {
-  while(!socket_->listen(port_)) {
-    std::cerr << socket_->getError() << std::endl;
+  while(!getSocket().listen(port_)) {
+    std::cerr << getSocket().getError() << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }
   printf("open port %d\n", port);
@@ -61,24 +61,22 @@ Server::Server(const std::shared_ptr<socket::Socket>& socket, int port)
 	@brief デストラクタ
 ***************************************************************************/
 Server::~Server() {
-  stop();
+  assert(games_.empty());
 }
 /***********************************************************************//**
 	@brief 実行
 ***************************************************************************/
 void Server::start() {
-  Thread::start(new std::thread(std::ref(*this)));
+  SocketThread::start();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Server::stop() {
-  auto games(games_);
-  for(auto& game : games) {
-    game->stop();
+  SocketThread::stop();
+  while(!games_.empty()) {
+    games_.front()->stop();
   }
-  socket_->close();
-  Thread::stop();
 }
 /***********************************************************************//**
 	@brief ゲームが終了した
@@ -90,26 +88,23 @@ void Server::onEndGame(std::shared_ptr<Game> game) {
   games_.erase(iter);
 }
 /***********************************************************************//**
-	@brief 
-***************************************************************************/
-void Server::operator()() {
-  Thread::SetThreadName("ump::server::Server");
-  while(socket_->isOpen()) {
-    if(auto socket = socket_->accept(getTimeout())) {
-      if(auto player = createPlayer(socket)) {
-        player->start();
-        onConnectPlayer(player);
-      }
-    }
-  }
-}
-/***********************************************************************//**
 	@brief UMPコマンド受信処理
 ***************************************************************************/
 void Server::recvCommand(std::shared_ptr<Player> player, 
                          const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
   onRecvCommand(player, command);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Server::onThread() {
+  if(auto socket = getSocket().accept(getTimeout())) {
+    if(auto player = createPlayer(socket)) {
+      player->start();
+      onConnectPlayer(player);
+    }
+  }
 }
 /***********************************************************************//**
 	@brief プレイヤーを生成する

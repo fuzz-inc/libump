@@ -69,7 +69,7 @@ class Game
   void appendPlayer(std::shared_ptr<Player> player);
   bool canStart() const;
   void start();
-  void stop();
+  virtual void stop();
 
   void beginJob(Job* job);
 
@@ -87,7 +87,7 @@ class Game
 
   bool isLastKyoku() const;
 
-  void operator()();
+  void operator()() override;
 
   void sendAll(const Command& command);
   virtual void sendCommand(std::shared_ptr<Player> player, 

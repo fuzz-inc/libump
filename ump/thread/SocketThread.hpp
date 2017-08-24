@@ -46,21 +46,20 @@ class SocketThread
 
  private:
   std::shared_ptr<Socket> socket_;
-  std::string threadName_;
 
  public:
-  SocketThread(std::shared_ptr<Socket> socket, 
-               const char* threadName);
-  ~SocketThread();
+  SocketThread(std::shared_ptr<Socket> socket);
+  ~SocketThread() override;
 
   Socket& getSocket() const;
 
   void start();
   void stop();
 
-  void operator()();
-
  protected:
+  void operator()() override;
+
+  virtual void onThread();
   virtual void onRecvCommand(const Command& command) {}
   virtual void onDisconnectSocket() {}
 };

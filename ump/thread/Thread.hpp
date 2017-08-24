@@ -17,8 +17,9 @@ class Thread {
 
  public:
   Thread() = default;
-  ~Thread();
+  virtual ~Thread();
 
+  void start();
   void start(std::thread* thread);
   void stop();
   bool isStart() const;
@@ -28,7 +29,10 @@ class Thread {
   bool sleep(int ms);
   void sleep();
 
+  virtual void operator()();
+
   static void SetThreadName(const char* name);
+  static std::string GetDemangleName(const char* name);
 };
 /***********************************************************************//**
 	$Id$

@@ -12,22 +12,28 @@ Thread::~Thread() {
   stop();
 }
 /***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Thread::start() {
+  start(new std::thread(std::ref(*this)));
+}
+/***********************************************************************//**
 	@brief スレッドを開始する
 	@param[in] thread スレッド
 ***************************************************************************/
 void Thread::start(std::thread* thread) {
   stop();
+  stop_.reset();
   thread_.reset(thread);
 }
 /***********************************************************************//**
 	@brief スレッドを停止する
 ***************************************************************************/
 void Thread::stop() {
-  if(isStart()) {
+  if(auto thread = std::move(thread_)) {
+    assert(std::this_thread::get_id() != thread->get_id());
     stop_.notify();
-    thread_->join();
-    stop_.reset();
-    thread_.reset();
+    thread->join();
   }
 }
 /***********************************************************************//**
@@ -41,9 +47,8 @@ bool Thread::isStart() const {
 	@brief 
 ***************************************************************************/
 void Thread::detach() {
-  if(thread_) {
-    thread_->detach();
-    thread_.reset();
+  if(auto thread = std::move(thread_)) {
+    thread->detach();
   }
 }
 /***********************************************************************//**
@@ -61,10 +66,29 @@ void Thread::sleep() {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
+void Thread::operator()() {
+  SetThreadName(GetDemangleName(typeid(*this).name()).c_str());
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
 void Thread::SetThreadName(const char* name) {
 #if defined(UMP_PLATFORM_MAC)
   pthread_setname_np(name);
 #endif
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+std::string Thread::GetDemangleName(const char* name) {
+  int status;
+  auto demangle = abi::__cxa_demangle(name, nullptr, nullptr, &status);
+  if(demangle && status == 0) {
+    std::string result(demangle);
+    free(demangle);
+    return result;
+  }
+  return std::string(name);
 }
 /***********************************************************************//**
 	$Id$

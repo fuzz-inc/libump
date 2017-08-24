@@ -32,7 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
-#include "ump/thread/Thread.hpp"
+#include "ump/thread/SocketThread.hpp"
 
 namespace ump {
 namespace server {
@@ -40,14 +40,13 @@ namespace server {
 	@brief サーバー
 ***************************************************************************/
 class Server
-  : public Thread, 
+  : public SocketThread, 
     public std::enable_shared_from_this<Server>
 {
  public:
   static const int DEFAULT_PORT = 1326;
 
  private:
-  std::shared_ptr<socket::Socket> socket_;
   int port_;
   std::shared_ptr<const Config> config_;
   int timeout_;
@@ -64,10 +63,9 @@ class Server
   UMP_ACCESSOR(Timeout, timeout_);
 
   void start();
+  void stop();
 
   void onEndGame(std::shared_ptr<Game> game);
-
-  void operator()();
 
   void recvCommand(std::shared_ptr<Player> player, 
                    const Command& command);
@@ -79,6 +77,8 @@ class Server
     return mutex_;
   }
 
+  void onThread() override;
+
   virtual std::shared_ptr<Player>
   createPlayer(std::shared_ptr<socket::Socket> socket);
 
@@ -88,9 +88,6 @@ class Server
   virtual void onConnectPlayer(std::shared_ptr<Player> player);
   virtual void onRecvCommand(std::shared_ptr<Player> player, 
                              const Command& command);
-
- private:
-  void stop();
 };
 /***********************************************************************//**
 	$Id$

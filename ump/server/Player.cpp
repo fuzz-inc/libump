@@ -44,7 +44,7 @@ namespace server {
 ***************************************************************************/
 Player::Player(std::shared_ptr<Server> server, 
                std::shared_ptr<Socket> socket)
-  : SocketThread(socket, "ump::server::Player"), 
+  : SocketThread(socket), 
     server_(server), 
     serial_(0)
 {

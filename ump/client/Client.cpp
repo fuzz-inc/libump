@@ -43,7 +43,7 @@ namespace client {
 	@param[in] socket ソケット
 ***************************************************************************/
 Client::Client(std::shared_ptr<Socket> socket)
-  : SocketThread(socket, "ump::client::Client"), 
+  : SocketThread(socket), 
     hello_(Command::TYPE_HELLO), 
     state_(STATE_NULL), 
     seat_(0), 
