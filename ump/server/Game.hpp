@@ -68,7 +68,7 @@ class Game
 
   void appendPlayer(std::shared_ptr<Player> player);
   bool canStart() const;
-  void start();
+  virtual void start();
   virtual void stop();
 
   void beginJob(Job* job);
