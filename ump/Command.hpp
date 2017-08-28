@@ -129,6 +129,7 @@ class Command {
   }
 
   Command& setOption(const std::string& name, const std::string& value);
+  Command& deleteOption(const std::string& name);
   const std::string& getOption(const std::string& name) const;
   bool getOption(const std::string& name, std::string& value) const;
   bool hasOption(const std::string& name) const;

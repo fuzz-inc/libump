@@ -181,6 +181,15 @@ Command& Command::setOption(const std::string& name,
   return *this;
 }
 /***********************************************************************//**
+	@brief オプションを削除する
+	@param[in] name オプション名
+	@return 自分自身
+***************************************************************************/
+Command& Command::deleteOption(const std::string& name) {
+  options_.erase(name);
+  return *this;
+}
+/***********************************************************************//**
 	@brief オプションの値を取得する
 	@param[in] name オプション名
 	@return オプションの値
