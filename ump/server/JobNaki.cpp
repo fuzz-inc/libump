@@ -82,7 +82,7 @@ void JobNaki::onBegin() {
       players_.push_back(player);
     }
   }
-  sleep(0.5f);
+  sleep(0.25f);
 }
 /***********************************************************************//**
 	@copydoc Job::onUpdate

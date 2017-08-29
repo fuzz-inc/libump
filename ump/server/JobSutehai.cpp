@@ -152,6 +152,7 @@ Job* JobSutehai::sutehai(const Command& reply) {
     command.append(Command::TYPE_RICHI);
   }
   sendAllLog(command);
+  sleep(0.25f);
   return new JobNaki(game, sutehai);
 }
 /***********************************************************************//**
