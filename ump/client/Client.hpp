@@ -66,6 +66,7 @@ class Client
   mj::Pattern chiPattern_;
   mj::Pattern kanPattern_;
   std::map<const mj::Hai*, size_t> hideHaiNums_;
+  std::shared_ptr<Logger> logger_;
 
  public:
   Client(std::shared_ptr<Socket> socket);
@@ -103,6 +104,8 @@ class Client
   bool sendHello();
   bool sendCommand(const Command& command);
   bool replyCommand(Command reply, const Command& command);
+
+  UMP_ACCESSOR(Logger, logger_);
 
   void dump() const;
 

@@ -30,6 +30,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
+#include "ump/Logger.hpp"
 #include "ump/Version.hpp"
 #include "ump/client/Client.hpp"
 #include "ump/mj/Config.hpp"
@@ -109,6 +110,9 @@ bool Client::sendHello() {
 	@param	command	送信するコマンド
 ***************************************************************************/
 bool Client::sendCommand(const Command& command) {
+  if(auto logger = getLogger()) {
+    logger->log(Logger::LEVEL_DEBUG, command.toString(false));
+  }
   return getSocket().sendCommand(command);
 }
 /***********************************************************************//**
