@@ -159,17 +159,21 @@ void Shanten::checkKokushi() {
 	@brief 七対子のチェック
 ***************************************************************************/
 void Shanten::checkChitoi() {
-  auto hais = getHais();
+  const auto& hais = getHais();
   auto uniq = hais.getUnique();
-  HaiArray elem;
   int shanten = (int(hais.size()) - 1) / 2;
-  for(size_t i = 0; i < uniq.size(); i++) {
-    const Hai* hai = uniq[i];
-    if(hais.countSame(hai) >= 2) {
-      for(int j = 0; j < 2; j++) {
-        elem.append(hais.removeSame(hai));
-      }
+  HaiArray single;
+  HaiArray triple;
+  for(auto hai : uniq) {
+    auto num = hais.countSame(hai);
+    if(num < 2) {
+      single.push_back(hai);
+    }
+    else {
       shanten--;
+      if(num > 2) {
+        triple.push_back(hai);
+      }
     }
   }
   if(uniq.size() < 7) {
@@ -177,7 +181,12 @@ void Shanten::checkChitoi() {
   }
   updateShanten(shanten);
   if(shanten == 0) {
-    richi_.append(hais);
+    if(triple.empty()) {
+      richi_.append(single);
+    }
+    else {
+      richi_.append(triple);
+    }
   }
 }
 /***********************************************************************//**

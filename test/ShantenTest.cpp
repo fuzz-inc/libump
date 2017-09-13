@@ -53,14 +53,17 @@ void ShantenTest::onRun() {
 
     { "3m4m5m1p2p4s5s6s6s6s7s7s8s8s", 0, "1p2p" }, 
     { "8m3p4p4p5p5p5p6p6p7p4s6s7s8s", 0, "8m4s" },
-    { "2m3m4m6m7m8m4p5p6p3z3z3z6z7z", 0, "6z7z" }
+    { "2m3m4m6m7m8m4p5p6p3z3z3z6z7z", 0, "6z7z" }, 
+
+    { "6m6m7m7m7m8m8m9m9m2s2s4s4s7s", 0, "7m" }
   };
   for(auto& table : TABLES) {
     shanten_.update(table.hais, true);
     if(table.richi) {
       TEST_MESSAGE(shanten_.getShanten() == 0 && 
                    shanten_.getRichi().toString() == table.richi, 
-                   Format("%s => %s", table.hais, table.richi));
+                   Format("%s => %s(%s)", table.hais, table.richi, 
+                          shanten_.getRichi().toString().c_str()));
     }
     else {
       TEST_MESSAGE(shanten_.getShanten() == table.shanten, 
