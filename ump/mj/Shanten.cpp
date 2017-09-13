@@ -57,7 +57,12 @@ int Shanten::update(const HaiArray& hais, bool isMenzen) {
   mentsuMax_ = hais.size() / 3;
   shanten_ = std::numeric_limits<int>::max();
   richi_.clear();
-  kanables_ = hais.getUnique();
+  kanables_.clear();
+  for(auto hai : hais.getUnique()) {
+    if(hais.countSame(hai) >= 3) {
+      kanables_.push_back(hai);
+    }
+  }
   if(isMenzen) {
     checkKokushi();
     checkChitoi();

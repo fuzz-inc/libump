@@ -45,7 +45,8 @@ void AnkanTest::onRun() {
     { "1m2m7m7m2p3p4p4p4p4p1s2s3s", "4p" }, 
     { "1m1m1m2m3m4m4m4m1p2p3p1s2s", "" }, 
     { "1m1m1m3m4m4m5m6m7m8m9m9m9m", "1m" }, 
-    { "2m2m2m3m4m4m5m5m6m6m9m9m9m", "9m" }
+    { "2m2m2m3m4m4m5m5m6m6m9m9m9m", "9m" }, 
+    { "4m6m6m8m8m6p6p8p8p6s6s4z4z", "" }
   };
   for(auto& table : TABLES) {
     shanten_.update(table.hais, true);
