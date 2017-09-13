@@ -110,6 +110,7 @@ class Game
   std::string getLogPath(const std::string& id) const;
 
   void appendDora(Command::Type type);
+  const mj::Hai* getDora(const mj::Hai* hai) const;
 };
 /***********************************************************************//**
 	$Id$

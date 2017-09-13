@@ -154,24 +154,8 @@ const Hai* Game::getBakaze() const {
 	@param[in] hai ドラ表示牌
 ***************************************************************************/
 void Game::appendDora(const Hai* hai) {
-  dora_.push_back(hai);
+  doras_.push_back(hai);
   onShowHai(hai);
-}
-/***********************************************************************//**
-	@brief ドラを取得する
-	@param[in] hai ドラ表示牌
-	@return ドラ
-***************************************************************************/
-const Hai* Game::getDora(const Hai* hai) const {
-  assert(getConfig());
-  for(const Hai* dora = hai->rotate(1);
-      dora != hai;
-      dora = dora->rotate(1)) {
-    if(getConfig()->getHaiNum(dora) > 0) {
-      return dora;
-    }
-  }
-  return nullptr;
 }
 /***********************************************************************//**
 	@brief 局を開始する
@@ -180,7 +164,7 @@ void Game::beginKyoku() {
   for(auto& player : getPlayers()) {
     player->reset();
   }
-  dora_.clear();
+  doras_.clear();
   resetTurn();
 }
 /***********************************************************************//**

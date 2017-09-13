@@ -59,7 +59,7 @@ class Game
   size_t round_;
   int renchan_;
   BigNum kyotaku_;
-  HaiArray dora_;
+  HaiArray doras_;
   size_t turn_;
   Sutehai* lastSutehai_;
   std::bitset<FLAG_MAX> flag_;
@@ -105,9 +105,8 @@ class Game
 
   const Hai* getBakaze() const;
 
-  UMP_GETTER(Dora, dora_);
+  UMP_GETTER(Doras, doras_);
   void appendDora(const Hai* hai);
-  const Hai* getDora(const Hai* hai) const;
 
   void beginKyoku();
   void endKyoku();

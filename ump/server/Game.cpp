@@ -165,7 +165,7 @@ void Game::appendDora() {
 	@brief 裏ドラをめくる
 ***************************************************************************/
 void Game::uraDora() {
-  for(size_t i = 0, n = getDora().size(); i < n; i++) {
+  for(size_t i = 0, n = getDoras().size(); i < n; i++) {
     appendDora(Command::TYPE_URADORA);
   }
 }
@@ -353,11 +353,28 @@ std::string Game::getLogPath(const std::string& id) const {
 	@param[in] type コマンド
 ***************************************************************************/
 void Game::appendDora(Command::Type type) {
-  auto dora = yama_.dora();
+  auto hai = yama_.dora();
+  auto dora = getDora(hai);
   super::appendDora(dora);
-  Command command(type);
-  command.append(dora->toString());
-  sendAll(command);
+  sendAll(Command(type).
+          append(dora->toString()).
+          append(hai->toString()));
+}
+/***********************************************************************//**
+	@brief ドラを取得する
+	@param[in] hai ドラ表示牌
+	@return ドラ
+***************************************************************************/
+const mj::Hai* Game::getDora(const mj::Hai* hai) const {
+  assert(getConfig());
+  for(auto dora = hai->rotate(1);
+      dora != hai;
+      dora = dora->rotate(1)) {
+    if(getConfig()->getHaiNum(dora) > 0) {
+      return dora;
+    }
+  }
+  return nullptr;
 }
 /***********************************************************************//**
 	$Id$
