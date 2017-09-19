@@ -54,6 +54,7 @@ class Game
   std::weak_ptr<Server> server_;
   mj::Yama yama_;
   std::stack<std::unique_ptr<Job>> jobs_;
+  std::mutex mutex_;
 
  public:
   Game(std::shared_ptr<const Config> config, 

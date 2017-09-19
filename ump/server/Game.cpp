@@ -281,6 +281,7 @@ size_t Game::findSeat() const {
 	@return ジョブが存在するとき真
 ***************************************************************************/
 bool Game::updateJob(const std::chrono::milliseconds& deltaTime) {
+  std::lock_guard<std::mutex> lock(mutex_);
   if(!jobs_.empty()) {
     auto& job = jobs_.top();
     auto nextJob = job->update(deltaTime);
@@ -299,6 +300,7 @@ bool Game::updateJob(const std::chrono::milliseconds& deltaTime) {
 	@brief 
 ***************************************************************************/
 void Game::stopAllJob() {
+  std::lock_guard<std::mutex> lock(mutex_);
   while(!jobs_.empty()) {
     jobs_.pop();
   }
