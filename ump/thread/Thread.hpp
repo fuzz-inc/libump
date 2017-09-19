@@ -21,8 +21,10 @@ class Thread {
 
   void start();
   void start(std::thread* thread);
-  void stop();
   bool isStart() const;
+
+  void stop();
+  bool isStop() const;
 
   void detach();
 
