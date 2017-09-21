@@ -35,21 +35,27 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UMP_PLATFORM_MAC
 #define UMP_PLATFORM_APPLE
 #define UMP_PLATFORM_POSIX
+
+#elif defined(WIN32)
+#define UMP_PLATFORM "win32"
+#define UMP_PLATFORM_WINDOWS
+#define UMP_PLATFORM_WIN32
+#define STRICT
+#define NOMINMAX
+#define _CRT_SECURE_NO_WARNINGS
+#include <WinSock2.h>
+#include <Windows.h>
+
 #endif
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 #include <assert.h>
-#include <cxxabi.h>
 #include <math.h>
-#include <netdb.h>
-#include <poll.h>
 #include <stdarg.h>
 #include <string.h>
-#include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <unistd.h>
 
 #include <algorithm>
 #include <bitset>
@@ -65,6 +71,16 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <thread>
 #include <vector>
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+#if !defined(UMP_PLATFORM_WINDOWS)
+#include <cxxabi.h>
+#include <netdb.h>
+#include <poll.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#endif
 /***********************************************************************//**
 	@brief OpenSSL
 ***************************************************************************/

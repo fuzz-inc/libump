@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2016 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
@@ -307,8 +307,8 @@ Command::Type Command::GetType(const std::string& string) {
 ***************************************************************************/
 std::string Command::SeatToString(size_t seat) {
   std::string string;
-  string.append(1, 'A' + seat % ('Z' - 'A' + 1));
-  string.append(1, '0' + seat / ('Z' - 'A' + 1));
+  string.append(1, char('A' + seat % ('Z' - 'A' + 1)));
+  string.append(1, char('0' + seat / ('Z' - 'A' + 1)));
   return string;
 }
 /***********************************************************************//**

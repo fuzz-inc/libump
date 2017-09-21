@@ -87,6 +87,7 @@ void Thread::SetThreadName(const char* name) {
 	@brief 
 ***************************************************************************/
 std::string Thread::GetDemangleName(const char* name) {
+#if !defined(UMP_PLATFORM_WINDOWS)
   int status;
   auto demangle = abi::__cxa_demangle(name, nullptr, nullptr, &status);
   if(demangle && status == 0) {
@@ -94,6 +95,7 @@ std::string Thread::GetDemangleName(const char* name) {
     free(demangle);
     return result;
   }
+#endif
   return std::string(name);
 }
 /***********************************************************************//**

@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2016 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 

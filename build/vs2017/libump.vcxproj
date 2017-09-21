@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{1817B0F6-5105-493F-90E4-7C09AA9E791A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="libump.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ump\BigNum.cpp" />
+    <ClCompile Include="..\..\ump\client\Bot.cpp" />
+    <ClCompile Include="..\..\ump\client\Client.cpp" />
+    <ClCompile Include="..\..\ump\Command.cpp" />
+    <ClCompile Include="..\..\ump\Logger.cpp" />
+    <ClCompile Include="..\..\ump\mj\Agari.cpp" />
+    <ClCompile Include="..\..\ump\mj\AgariParser.cpp" />
+    <ClCompile Include="..\..\ump\mj\Config.cpp" />
+    <ClCompile Include="..\..\ump\mj\Divider.cpp" />
+    <ClCompile Include="..\..\ump\mj\Game.cpp" />
+    <ClCompile Include="..\..\ump\mj\Hai.cpp" />
+    <ClCompile Include="..\..\ump\mj\HaiArray.cpp" />
+    <ClCompile Include="..\..\ump\mj\Hand.cpp" />
+    <ClCompile Include="..\..\ump\mj\Kawa.cpp" />
+    <ClCompile Include="..\..\ump\mj\Mentsu.cpp" />
+    <ClCompile Include="..\..\ump\mj\Pattern.cpp" />
+    <ClCompile Include="..\..\ump\mj\Player.cpp" />
+    <ClCompile Include="..\..\ump\mj\Shanten.cpp" />
+    <ClCompile Include="..\..\ump\mj\Sutehai.cpp" />
+    <ClCompile Include="..\..\ump\mj\Yama.cpp" />
+    <ClCompile Include="..\..\ump\server\Config.cpp" />
+    <ClCompile Include="..\..\ump\server\Game.cpp" />
+    <ClCompile Include="..\..\ump\server\Job.cpp" />
+    <ClCompile Include="..\..\ump\server\JobAgari.cpp" />
+    <ClCompile Include="..\..\ump\server\JobGame.cpp" />
+    <ClCompile Include="..\..\ump\server\JobHaipai.cpp" />
+    <ClCompile Include="..\..\ump\server\JobKyoku.cpp" />
+    <ClCompile Include="..\..\ump\server\JobNaki.cpp" />
+    <ClCompile Include="..\..\ump\server\JobReady.cpp" />
+    <ClCompile Include="..\..\ump\server\JobRyukyoku.cpp" />
+    <ClCompile Include="..\..\ump\server\JobSutehai.cpp" />
+    <ClCompile Include="..\..\ump\server\JobTsumo.cpp" />
+    <ClCompile Include="..\..\ump\server\Player.cpp" />
+    <ClCompile Include="..\..\ump\server\Server.cpp" />
+    <ClCompile Include="..\..\ump\socket\Socket.cpp" />
+    <ClCompile Include="..\..\ump\socket\SslSocket.cpp" />
+    <ClCompile Include="..\..\ump\socket\TcpSocket.cpp" />
+    <ClCompile Include="..\..\ump\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\thread\Condition.cpp" />
+    <ClCompile Include="..\..\ump\thread\SocketThread.cpp" />
+    <ClCompile Include="..\..\ump\thread\Thread.cpp" />
+    <ClCompile Include="..\..\ump\Version.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ump\BigNum.hpp" />
+    <ClInclude Include="..\..\ump\client\Bot.hpp" />
+    <ClInclude Include="..\..\ump\client\Client.hpp" />
+    <ClInclude Include="..\..\ump\Command.hpp" />
+    <ClInclude Include="..\..\ump\Logger.hpp" />
+    <ClInclude Include="..\..\ump\mj\Agari.hpp" />
+    <ClInclude Include="..\..\ump\mj\AgariParser.hpp" />
+    <ClInclude Include="..\..\ump\mj\Config.hpp" />
+    <ClInclude Include="..\..\ump\mj\Divider.hpp" />
+    <ClInclude Include="..\..\ump\mj\Game.hpp" />
+    <ClInclude Include="..\..\ump\mj\Hai.hpp" />
+    <ClInclude Include="..\..\ump\mj\HaiArray.hpp" />
+    <ClInclude Include="..\..\ump\mj\Hand.hpp" />
+    <ClInclude Include="..\..\ump\mj\Kawa.hpp" />
+    <ClInclude Include="..\..\ump\mj\Mentsu.hpp" />
+    <ClInclude Include="..\..\ump\mj\Pattern.hpp" />
+    <ClInclude Include="..\..\ump\mj\Player.hpp" />
+    <ClInclude Include="..\..\ump\mj\Shanten.hpp" />
+    <ClInclude Include="..\..\ump\mj\Sutehai.hpp" />
+    <ClInclude Include="..\..\ump\mj\Yama.hpp" />
+    <ClInclude Include="..\..\ump\server\Config.hpp" />
+    <ClInclude Include="..\..\ump\server\Game.hpp" />
+    <ClInclude Include="..\..\ump\server\Job.hpp" />
+    <ClInclude Include="..\..\ump\server\JobAgari.hpp" />
+    <ClInclude Include="..\..\ump\server\JobGame.hpp" />
+    <ClInclude Include="..\..\ump\server\JobHaipai.hpp" />
+    <ClInclude Include="..\..\ump\server\JobKyoku.hpp" />
+    <ClInclude Include="..\..\ump\server\JobNaki.hpp" />
+    <ClInclude Include="..\..\ump\server\JobReady.hpp" />
+    <ClInclude Include="..\..\ump\server\JobRyukyoku.hpp" />
+    <ClInclude Include="..\..\ump\server\JobSutehai.hpp" />
+    <ClInclude Include="..\..\ump\server\JobTsumo.hpp" />
+    <ClInclude Include="..\..\ump\server\Player.hpp" />
+    <ClInclude Include="..\..\ump\server\Server.hpp" />
+    <ClInclude Include="..\..\ump\socket\Socket.hpp" />
+    <ClInclude Include="..\..\ump\socket\SslSocket.hpp" />
+    <ClInclude Include="..\..\ump\socket\TcpSocket.hpp" />
+    <ClInclude Include="..\..\ump\stdafx.hpp" />
+    <ClInclude Include="..\..\ump\thread\Condition.hpp" />
+    <ClInclude Include="..\..\ump\thread\SocketThread.hpp" />
+    <ClInclude Include="..\..\ump\thread\Thread.hpp" />
+    <ClInclude Include="..\..\ump\ump.hpp" />
+    <ClInclude Include="..\..\ump\Version.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

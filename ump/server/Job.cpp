@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2016 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
@@ -53,7 +53,7 @@ Job* Job::update(const std::chrono::milliseconds& deltaTime) {
 	@brief 
 ***************************************************************************/
 void Job::sleep(float sec) const {
-  int msec = getConfig()->getSpeed() * sec * 1000;
+  auto msec = int(getConfig()->getSpeed() * sec * 1000);
   getGame().sleep(msec);
 }
 /***********************************************************************//**

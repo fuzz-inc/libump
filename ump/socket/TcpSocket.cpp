@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright 2016 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
@@ -31,6 +31,11 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	@file
 ***************************************************************************/
 #include "ump/socket/TcpSocket.hpp"
+
+#if defined(UMP_PLATFORM_WINDOWS)
+typedef int socklen_t;
+#define poll WSAPoll
+#endif
 
 namespace ump {
 namespace socket {
@@ -98,9 +103,15 @@ bool TcpSocket::onListen(int port) {
   address.sin_addr.s_addr = htonl(INADDR_ANY);
   open();
   {
+#if defined(UMP_PLATFORM_WINDOWS)
+    const char on = 1;
+#else
     const int on = 1;
+#endif
     ::setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+#if defined(SO_REUSEPORT)
     ::setsockopt(fd_, SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on));
+#endif
   }
   int result = bind(fd_, reinterpret_cast<struct sockaddr *>(&address), 
                     sizeof(address));
@@ -188,7 +199,11 @@ bool TcpSocket::onRecv(char* buff, size_t size) {
 	@brief 
 ***************************************************************************/
 void TcpSocket::onClose() {
+#if defined(UMP_PLATFORM_WINDOWS)
+  closesocket(fd_);
+#else
   ::close(fd_);
+#endif
   fd_ = INVALID_FD;
   port_ = 0;
 }

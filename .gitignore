@@ -9,3 +9,7 @@ external/build/mac/work/
 build/linux/bin/
 build/linux/lib/
 build/linux/obj/
+
+# Windows
+.vs/
+/build/vs2017/Debug/

@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ump">
+      <UniqueIdentifier>{bf7a6bca-4d7d-4156-bbc1-a31dc3e8ecaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ump\client">
+      <UniqueIdentifier>{15d549f7-312f-493b-a88d-7f15f22c83c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ump\mj">
+      <UniqueIdentifier>{1476f2e9-ccf2-4bb0-a91d-d250553c179b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ump\server">
+      <UniqueIdentifier>{95d93bd4-8d45-4e2a-8b55-6f4fde1db4df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ump\thread">
+      <UniqueIdentifier>{5ab437ba-d69f-4400-bfd3-3b0949b3715c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ump\socket">
+      <UniqueIdentifier>{1b109749-91dc-4213-bd7b-90acce98da32}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ump\BigNum.cpp">
+      <Filter>ump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\Command.cpp">
+      <Filter>ump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\Logger.cpp">
+      <Filter>ump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\Version.cpp">
+      <Filter>ump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\stdafx.cpp">
+      <Filter>ump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\client\Bot.cpp">
+      <Filter>ump\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\client\Client.cpp">
+      <Filter>ump\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Agari.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\AgariParser.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Config.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Divider.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Game.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Hai.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\HaiArray.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Hand.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Kawa.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Mentsu.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Pattern.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Player.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Shanten.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Sutehai.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Yama.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\Config.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\Game.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\Job.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobAgari.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobGame.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobHaipai.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobKyoku.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobNaki.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobReady.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobRyukyoku.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobSutehai.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobTsumo.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\Player.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\server\Server.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\thread\Condition.cpp">
+      <Filter>ump\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\thread\SocketThread.cpp">
+      <Filter>ump\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\thread\Thread.cpp">
+      <Filter>ump\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\socket\Socket.cpp">
+      <Filter>ump\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\socket\SslSocket.cpp">
+      <Filter>ump\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ump\socket\TcpSocket.cpp">
+      <Filter>ump\socket</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ump\BigNum.hpp">
+      <Filter>ump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\Command.hpp">
+      <Filter>ump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\Logger.hpp">
+      <Filter>ump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\ump.hpp">
+      <Filter>ump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\Version.hpp">
+      <Filter>ump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\stdafx.hpp">
+      <Filter>ump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\client\Bot.hpp">
+      <Filter>ump\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\client\Client.hpp">
+      <Filter>ump\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Agari.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\AgariParser.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Config.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Divider.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Game.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Hai.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\HaiArray.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Hand.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Kawa.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Mentsu.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Pattern.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Player.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Shanten.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Sutehai.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Yama.hpp">
+      <Filter>ump\mj</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\Config.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\Game.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\Job.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobAgari.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobGame.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobHaipai.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobKyoku.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobNaki.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobReady.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobRyukyoku.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobSutehai.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobTsumo.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\Player.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\Server.hpp">
+      <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\thread\Condition.hpp">
+      <Filter>ump\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\thread\SocketThread.hpp">
+      <Filter>ump\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\thread\Thread.hpp">
+      <Filter>ump\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\socket\Socket.hpp">
+      <Filter>ump\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\socket\SslSocket.hpp">
+      <Filter>ump\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\socket\TcpSocket.hpp">
+      <Filter>ump\socket</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
