@@ -34,7 +34,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-#include "ump/header.hpp"
+#include "ump/stdafx.hpp"
 #include "ump/BigNum.hpp"
 #include "ump/Command.hpp"
 #include "ump/Logger.hpp"
