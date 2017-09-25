@@ -58,21 +58,17 @@ HaiArray::HaiArray(const HaiArray& src)
 /***********************************************************************//**
 	@brief 牌を追加する
 	@param[in] hai 追加する牌
-	@return 追加したあとの自分自身
 ***************************************************************************/
-HaiArray& HaiArray::append(const Hai* hai) {
+void HaiArray::append(const Hai* hai) {
   assert(hai);
   push_back(hai);
-  return *this;
 }
 /***********************************************************************//**
 	@brief 配列を連結する.
 	@param[in] src 連結する配列
-	@return 連結したあとの自分自身
 ***************************************************************************/
-HaiArray& HaiArray::append(const HaiArray& src) {
+void HaiArray::append(const HaiArray& src) {
   insert(end(), src.begin(), src.end());
-  return *this;
 }
 /***********************************************************************//**
 	@brief 完全にユニークな牌を数える

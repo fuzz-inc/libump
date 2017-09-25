@@ -58,7 +58,7 @@ class Divider {
   Divider();
   virtual ~Divider();
 
-  Divider& set(const HaiArray& hais);
+  void set(const HaiArray& hais);
 
   void eachHead();
   void eachMentsu(size_t index = 0);

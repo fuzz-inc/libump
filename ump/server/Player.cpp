@@ -57,9 +57,9 @@ Player::~Player() {
 /***********************************************************************//**
 	@copydoc mj::Player::setGame
 ***************************************************************************/
-mj::Player& Player::setGame(std::shared_ptr<mj::Game> game) {
+void Player::setGame(std::shared_ptr<mj::Game> game) {
   std::lock_guard<std::mutex> lock(mutex_);
-  return super::setGame(game);
+  super::setGame(game);
 }
 /***********************************************************************//**
 	@brief 
@@ -150,16 +150,14 @@ bool Player::canRon(const mj::Hai* hai) {
 mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
   auto sutehai(_sutehai);
   if(isRichi() || !sutehai.getHai()) {
-    sutehai.
-      setHai(getTsumoHai()).
-      setTsumogiri(true);
+    sutehai.setHai(getTsumoHai());
+    sutehai.setTsumogiri(true);
   }
   else {
     auto num = getMenzen().countEqual(sutehai.getHai());
     if(num == 0) {
-      sutehai.
-        setHai(getTsumoHai()).
-        setTsumogiri(true);
+      sutehai.setHai(getTsumoHai());
+      sutehai.setTsumogiri(true);
     }
     else if(sutehai.isTsumogiri()) {
       if(!sutehai.getHai()->isEqual(getTsumoHai())) {
@@ -221,7 +219,8 @@ void Player::updateFuriten() {
 void Player::updateFuriten(const mj::Hai* hai) {
   if(!isFuriten()) {
     mj::Shanten shanten;
-    auto hais = mj::HaiArray(getMenzen()).append(hai);
+    auto hais(getMenzen());
+    hais.append(hai);
     if(shanten.update(hais, isMenzen()) < 0) {
       log(Logger::LEVEL_DEBUG, 
           std::string("[furiten+]") + hais.toString());

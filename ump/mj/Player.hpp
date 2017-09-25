@@ -78,10 +78,10 @@ class Player
 
   void reset() override;
 
-  virtual Player& setGame(std::shared_ptr<Game> game);
+  virtual void setGame(std::shared_ptr<Game> game);
   std::shared_ptr<Game> getGame() const;
 
-  Player& resetFirst();
+  void resetFirst();
   bool isFirst() const;
 
   UMP_BIT_ACCESSOR(Richi, flag_, FLAG_RICHI);
@@ -91,7 +91,7 @@ class Player
   void sayTenpai();
   bool isSayTenpai() const;
 
-  Player& agari();
+  void agari();
   bool isAgari() const;
 
   UMP_BIT_ACCESSOR(Rinshan, flag_, FLAG_RINSHAN);
@@ -100,8 +100,8 @@ class Player
 
   UMP_ACCESSOR(Name, name_);
 
-  Player& setPoint(const BigNum& value);
-  Player& addPoint(const BigNum& value);
+  void setPoint(const BigNum& value);
+  void addPoint(const BigNum& value);
   UMP_GETTER(Point, point_);
 
   UMP_ACCESSOR(Seat, seat_);

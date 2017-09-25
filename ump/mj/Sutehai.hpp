@@ -60,7 +60,7 @@ class Sutehai {
   ~Sutehai() = default;
 
   UMP_GETTER(Hai, hai_);
-  Sutehai& setHai(const Hai* hai);
+  void setHai(const Hai* hai);
 
   UMP_BIT_ACCESSOR(Tsumogiri, flag_, FLAG_TSUMOGIRI);
   UMP_BIT_ACCESSOR(Richi, flag_, FLAG_RICHI);

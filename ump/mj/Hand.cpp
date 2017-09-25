@@ -165,7 +165,9 @@ void Hand::openMentsu(const HaiArray& hais, const Hai* hai) {
   drop(hais);
   std::shared_ptr<Mentsu> mentsu;
   if(hai) {
-    mentsu = std::make_shared<Mentsu>(HaiArray(hais).append(hai), false);
+    auto _hais(hais);
+    _hais.append(hai);
+    mentsu = std::make_shared<Mentsu>(_hais, false);
   }
   else {
     mentsu = std::make_shared<Mentsu>(hais, true);
@@ -229,7 +231,10 @@ Pattern Hand::getPonPattern(const Hai* hai) const {
   if(n >= 2) {
     for(size_t i = 0; i < n - 1; i++) {
       for(size_t j = i + 1; j < n; j++) {
-        pattern.append(HaiArray().append(hais.at(i)).append(hais.at(j)));
+        HaiArray _hais;
+        _hais.append(hais.at(i));
+        _hais.append(hais.at(j));
+        pattern.append(_hais);
       }
     }
   }
@@ -255,7 +260,8 @@ Pattern Hand::getChiPattern(const Hai* hai) const {
     for(size_t i = 0; i < n - 1; i++) {
       for(size_t j = i + 1; j < n; j++) {
         HaiArray tatsu;
-        tatsu.append(hais.at(i)).append(hais.at(j));
+        tatsu.append(hais.at(i));
+        tatsu.append(hais.at(j));
         if(Mentsu(tatsu + hai).isShuntsu()) {
           pattern.append(tatsu);
         }
@@ -284,7 +290,9 @@ Pattern Hand::getKanPattern() const {
     for(size_t i = 0, n = countMentsu(); i < n; i++) {
       auto& mentsu = getMentsu(i);
       if(mentsu.isKotsu() && mentsu.at(0)->isSame(hai)) {
-        pattern.append(HaiArray().append(hai));
+        HaiArray hais;
+        hais.append(hai);
+        pattern.append(hais);
       }
     }
   }

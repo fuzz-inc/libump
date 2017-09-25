@@ -49,7 +49,7 @@ Divider::~Divider() {
 	@brief 
 	@param[in] hais 牌の配列
 ***************************************************************************/
-Divider& Divider::set(const HaiArray& hais) {
+void Divider::set(const HaiArray& hais) {
   flag_.reset();
   hais_ = hais;
   hais_.sort();
@@ -57,7 +57,6 @@ Divider& Divider::set(const HaiArray& hais) {
   mentsus_.clear();
   tatsus_.clear();
   mentsuMax_ = 0;
-  return *this;
 }
 /***********************************************************************//**
 	@brief 頭に分解する

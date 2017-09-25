@@ -152,10 +152,9 @@ using namespace thread;
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-#define UMP_SETTER(name, var)                                           \
-  auto set##name(const decltype(var)& value) -> decltype(*this)& {      \
-    var = value;                                                        \
-    return *this;                                                       \
+#define UMP_SETTER(name, var)                   \
+  void set##name(const decltype(var)& value) {  \
+    var = value;                                \
   }
 
 #define UMP_GETTER(name, var)                   \
@@ -170,10 +169,9 @@ using namespace thread;
     return var;                                 \
   }
 
-#define UMP_BIT_SETTER(name, var, flag)                         \
-  auto set##name(bool value = true) -> decltype(*this)& {       \
-    var.set(flag, value);                                       \
-    return *this;                                               \
+#define UMP_BIT_SETTER(name, var, flag)         \
+  void set##name(bool value = true) {           \
+    var.set(flag, value);                       \
   }
 
 #define UMP_BIT_GETTER(name, var, flag)         \
@@ -185,10 +183,9 @@ using namespace thread;
   UMP_BIT_SETTER(name, var, flag);              \
   UMP_BIT_GETTER(name, var, flag)
 
-#define UMP_CAN_SETTER(name, var, flag)                         \
-  auto setCan##name(bool value = true) -> decltype(*this)& {    \
-    var.set(flag, value);                                       \
-    return *this;                                               \
+#define UMP_CAN_SETTER(name, var, flag)         \
+  void setCan##name(bool value = true) {        \
+    var.set(flag, value);                       \
   }
 
 #define UMP_CAN_GETTER(name, var, flag)         \

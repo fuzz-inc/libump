@@ -117,12 +117,14 @@ void JobAgari::agari() {
     for(int i = 0; i < mj::Agari::YAKU_MAX; i++) {
       int han = agari.getHan(i);
       if(han > 0) {
-        command.append(mj::Agari::GetYakuName(i)).append(han);
+        command.append(mj::Agari::GetYakuName(i));
+        command.append(han);
       }
     }
     size_t dora = agari.getDora();
     if(dora > 0) {
-      command.append("ドラ").append(dora);
+      command.append(u8"ドラ");
+      command.append(dora);
     }
     sendAllLog(command);
   }

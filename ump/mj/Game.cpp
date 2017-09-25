@@ -96,9 +96,8 @@ std::shared_ptr<Player> Game::getPlayer(const char* seat) const {
 	@param[in] value 加算する値
 	@return 自分自身
 ***************************************************************************/
-Game& Game::addKyotaku(const BigNum& value) {
+void Game::addKyotaku(const BigNum& value) {
   kyotaku_ += value;
-  return *this;
 }
 /***********************************************************************//**
 	@brief 供託をリセットする
@@ -113,10 +112,9 @@ BigNum Game::resetKyotaku() {
 	@brief 手番を変更する
 	@param[in] turn 手番
 ***************************************************************************/
-Game& Game::setTurn(size_t turn) {
+void Game::setTurn(size_t turn) {
   assert(turn < countPlayer());
   turn_ = turn;
-  return *this;
 }
 /***********************************************************************//**
 	@brief 手番を親に戻す
@@ -257,10 +255,9 @@ void Game::clearPlayer() {
 	@brief 親を変更する
 	@param[in] oya 親
 ***************************************************************************/
-Game& Game::setOya(size_t oya) {
+void Game::setOya(size_t oya) {
   assert(oya < countPlayer());
   oya_ = oya;
-  return *this;
 }
 /***********************************************************************//**
         $Id$

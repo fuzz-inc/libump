@@ -68,7 +68,7 @@ class Player
          std::shared_ptr<Socket> socket);
   ~Player();
 
-  mj::Player& setGame(std::shared_ptr<mj::Game> game) override;
+  void setGame(std::shared_ptr<mj::Game> game) override;
   std::shared_ptr<Game> getGame() const;
 
   bool isOpen() const;

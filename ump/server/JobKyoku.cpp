@@ -88,12 +88,11 @@ void JobKyoku::onEnd() {
 ***************************************************************************/
 void JobKyoku::sendStart() {
   Command command(Command::TYPE_KYOKUSTART);
-  command.
-    append(getGame().getRound()).
-    append(Command::SeatToString(getGame().getOya())).
-    append(getGame().getRenchan()).
-    append(getGame().getKyotaku().toString()).
-    append(getGame().getBakaze()->toString());
+  command.append(getGame().getRound());
+  command.append(Command::SeatToString(getGame().getOya()));
+  command.append(getGame().getRenchan());
+  command.append(getGame().getKyotaku().toString());
+  command.append(getGame().getBakaze()->toString());
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     command.append(getPlayer(i)->getZikaze()->toString());
   }
@@ -107,7 +106,8 @@ void JobKyoku::sendPoint() {
     Command command(Command::TYPE_POINT);
     std::ostringstream buff;
     buff << "=" << getPlayer(i)->getPoint().toString();
-    command.append(Command::SeatToString(i)).append(buff.str());
+    command.append(Command::SeatToString(i));
+    command.append(buff.str());
     sendAll(command);
   }
 }
@@ -118,9 +118,8 @@ void JobKyoku::sendDice() {
   Command command(Command::TYPE_DICE);
   std::default_random_engine random((std::random_device())());
   std::uniform_int_distribution<int> dice(1, 6);
-  command.
-    append(dice(random)).
-    append(dice(random));
+  command.append(dice(random));
+  command.append(dice(random));
   sendAllLog(command);
   sleep(getConfig()->getDiceWait());
 }

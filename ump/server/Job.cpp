@@ -141,9 +141,8 @@ bool Job::isEnd() const {
 ***************************************************************************/
 void Job::openHand(size_t seat) {
   Command command(Command::TYPE_OPEN);
-  command.
-    append(Command::SeatToString(seat)).
-    append(getPlayer(seat)->getMenzen().toString());
+  command.append(Command::SeatToString(seat));
+  command.append(getPlayer(seat)->getMenzen().toString());
   sendAllLog(command);
 }
 /***********************************************************************//**
@@ -157,26 +156,26 @@ void Job::openMentsu(std::shared_ptr<Player> player,
                      Command::Type type, 
                      const mj::HaiArray& hais, 
                      const mj::Hai* hai) {
-  sayAll(Command(Command::TYPE_SAY).
-         append(player->getSeatString()).
-         append(type));
+  {
+    Command command(Command::TYPE_SAY);
+    command.append(player->getSeatString());
+    command.append(type);
+    sayAll(command);
+  }
   Command command(Command::TYPE_OPEN);
   command.append(player->getSeatString());
   if(type == Command::TYPE_KAKAN) {
-    command.
-      append(std::string("[") + hais.toString() + "]").
-      append(hai->toString());
+    command.append(std::string("[") + hais.toString() + "]");
+    command.append(hai->toString());
     player->kakan(hais, hai);
   }
   else {
     if(hai) {
-      command.
-        append(std::string("<") + hais.toString() + ">").
-        append(hai->toString());
+      command.append(std::string("<") + hais.toString() + ">");
+      command.append(hai->toString());
     }
     else {
-      command.
-        append(std::string("(") + hais.toString() + ")");
+      command.append(std::string("(") + hais.toString() + ")");
     }
     player->openMentsu(hais, hai);
   }

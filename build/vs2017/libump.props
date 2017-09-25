@@ -3,7 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>c:\OpenSSL-Win32\include\;$(ProjectDir)..\..\;$(IncludePath)</IncludePath>
+    <IncludePath>C:\OpenSSL-Win32\include\;$(ProjectDir)..\..\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

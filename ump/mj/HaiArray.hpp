@@ -52,12 +52,14 @@ class HaiArray
   HaiArray(const char* str);
   HaiArray(const HaiArray& src);
 
-  HaiArray& append(const Hai* hai);
-  HaiArray& append(const HaiArray& other);
+  void append(const Hai* hai);
+  void append(const HaiArray& other);
 
   template <class T>
   HaiArray operator+(const T& rhs) const {
-    return HaiArray(*this).append(rhs);
+    auto result(*this);
+    result.append(rhs);
+    return result;
   }
 
   const Hai* removeSame(const Hai* hai) {

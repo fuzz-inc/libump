@@ -90,10 +90,10 @@ class Game
   UMP_GETTER(Renchan, renchan_);
 
   UMP_GETTER(Kyotaku, kyotaku_);
-  Game& addKyotaku(const BigNum& value);
+  void addKyotaku(const BigNum& value);
   BigNum resetKyotaku();
 
-  Game& setTurn(size_t turn);
+  void setTurn(size_t turn);
   UMP_GETTER(Turn, turn_);
   void resetTurn();
   size_t nextTurn();
@@ -136,7 +136,7 @@ class Game
  protected:
   void clearPlayer();
 
-  Game& setOya(size_t oya);
+  void setOya(size_t oya);
   UMP_SETTER(Round, round_);
   UMP_SETTER(Renchan, renchan_);
   UMP_SETTER(Kyotaku, kyotaku_);

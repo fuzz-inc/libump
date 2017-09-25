@@ -81,9 +81,8 @@ void JobGame::onEnd() {
       point += uma.at(i);
     }
     player->setPoint(point);
-    command.
-      append(player->getSeatString()).
-      append(point.toString());
+    command.append(player->getSeatString());
+    command.append(point.toString());
   }
   sendAllLog(command);
   getGame().onEndGame(players);

@@ -132,19 +132,18 @@ Job* JobSutehai::sutehai(const Command& reply) {
   if(reply.countArg() > 0) {
     request.setHai(mj::Hai::Get(reply.getArg(0)));
   }
-  request.
-    setTsumogiri(reply.hasArg(Command::TYPE_TSUMOGIRI)).
-    setRichi(reply.hasArg(Command::TYPE_RICHI));
+  request.setTsumogiri(reply.hasArg(Command::TYPE_TSUMOGIRI));
+  request.setRichi(reply.hasArg(Command::TYPE_RICHI));
   auto sutehai = game.sutehai(*player, request);
   if(sutehai->isRichi()) {
-    sayAll(Command(Command::TYPE_SAY).
-           append(player->getSeatString()).
-           append(Command::TYPE_RICHI));
+    Command command(Command::TYPE_SAY);
+    command.append(player->getSeatString());
+    command.append(Command::TYPE_RICHI);
+    sayAll(command);
   }
   Command command(Command::TYPE_SUTEHAI);
-  command.
-    append(player->getSeatString()).
-    append(sutehai->getHai()->toString());
+  command.append(player->getSeatString());
+  command.append(sutehai->getHai()->toString());
   if(sutehai->isTsumogiri()) {
     command.append(Command::TYPE_TSUMOGIRI);
   }

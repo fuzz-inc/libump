@@ -74,22 +74,27 @@ std::shared_ptr<const Config> Game::getConfig() const {
 ***************************************************************************/
 void Game::appendPlayer(std::shared_ptr<Player> player) {
   auto seat = findSeat();
-  sendCommand(player, 
-              Command(Command::TYPE_SEAT).
-              append(Command::SeatToString(seat)).
-              setOption(Command::OPTION_GAMEID, getId()));
+  {
+    Command command(Command::TYPE_SEAT);
+    command.append(Command::SeatToString(seat));
+    command.setOption(Command::OPTION_GAMEID, getId());
+    sendCommand(player, command);
+  }
   for(auto& iter : getPlayers()) {
     if(iter) {
-      sendCommand(player, 
-                  Command(Command::TYPE_PLAYER).
-                  append(Command::SeatToString(iter->getSeat())).
-                  append(iter->getName()));
+      Command command(Command::TYPE_PLAYER);
+      command.append(Command::SeatToString(iter->getSeat()));
+      command.append(iter->getName());
+      sendCommand(player, command);
     }
   }
   super::setPlayer(seat, player);
-  sendAll(Command(Command::TYPE_PLAYER).
-          append(Command::SeatToString(seat)).
-          append(player->getName()));
+  {
+    Command command(Command::TYPE_PLAYER);
+    command.append(Command::SeatToString(seat));
+    command.append(player->getName());
+    sendAll(command);
+  }
 }
 /***********************************************************************//**
 	@brief プレイヤーが揃っているか調べる
@@ -334,10 +339,17 @@ std::string Game::createId() const {
     buff << id;
     idStr = buff.str();
     auto path = getLogPath(idStr);
+#if defined(UMP_PLATFORM_WINDOWS)
+    struct __stat64 status;
+    if(__stat64(path.c_str(), &status) != 0) {
+      break;
+    }
+#else
     struct stat status;
     if(stat(path.c_str(), &status) != 0) {
       break;
     }
+#endif
     id++;
   }
   return idStr;
@@ -358,9 +370,10 @@ void Game::appendDora(Command::Type type) {
   auto hai = yama_.dora();
   auto dora = getDora(hai);
   super::appendDora(dora);
-  sendAll(Command(type).
-          append(dora->toString()).
-          append(hai->toString()));
+  Command command(type);
+  command.append(dora->toString());
+  command.append(hai->toString());
+  sendAll(command);
 }
 /***********************************************************************//**
 	@brief ドラを取得する

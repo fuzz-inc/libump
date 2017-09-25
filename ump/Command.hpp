@@ -120,21 +120,21 @@ class Command {
   bool hasArg(const std::string& value) const;
   bool hasArg(Type type) const;
 
-  Command& append(const char* value);
-  Command& append(const std::string& value);
+  void append(const char* value);
+  void append(const std::string& value);
 
   template <class T>
-  Command& append(const T& value) {
-    return append(ToString(value));
+  void append(const T& value) {
+    append(ToString(value));
   }
 
-  Command& setOption(const std::string& name, const std::string& value);
-  Command& deleteOption(const std::string& name);
+  void setOption(const std::string& name, const std::string& value);
+  void deleteOption(const std::string& name);
   const std::string& getOption(const std::string& name) const;
   bool getOption(const std::string& name, std::string& value) const;
   bool hasOption(const std::string& name) const;
 
-  Command& setData(std::shared_ptr<const std::vector<char>> data);
+  void setData(std::shared_ptr<const std::vector<char>> data);
   UMP_GETTER(Data, data_);
   size_t getDataSize() const;
 

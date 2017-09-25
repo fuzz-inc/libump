@@ -87,11 +87,9 @@ bool Client::isOpen() const {
 /***********************************************************************//**
 	@brief 表示名をセットする
 	@param[in] name 表示名
-	@return 自分自身
 ***************************************************************************/
-Client& Client::setName(const std::string& name) {
+void Client::setName(const std::string& name) {
   hello_.setOption("name", name);
-  return *this;
 }
 /***********************************************************************//**
 	@brief 
@@ -371,10 +369,10 @@ void Client::execTsumo(const Command& command) {
 	捨て牌.
 ***************************************************************************/
 void Client::execSutehai(const Command& command) {
-  super::sutehai(*getPlayer(command.getArg(0).c_str()), 
-                 mj::Sutehai(mj::Hai::Get(command.getArg(1))).
-                 setTsumogiri(command.hasArg(Command::TYPE_TSUMOGIRI)).
-                 setRichi(command.hasArg(Command::TYPE_RICHI)));
+  mj::Sutehai sutehai(mj::Hai::Get(command.getArg(1)));
+  sutehai.setTsumogiri(command.hasArg(Command::TYPE_TSUMOGIRI));
+  sutehai.setRichi(command.hasArg(Command::TYPE_RICHI));
+  super::sutehai(*getPlayer(command.getArg(0).c_str()), sutehai);
 }
 /***********************************************************************//**
 	手牌を晒す.

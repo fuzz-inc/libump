@@ -60,12 +60,10 @@ void Player::reset() {
 /***********************************************************************//**
 	@brief ゲームをセットする
 	@param[in] game ゲーム
-	@return 自分自身
 ***************************************************************************/
-Player& Player::setGame(std::shared_ptr<Game> game) {
+void Player::setGame(std::shared_ptr<Game> game) {
   assert(!game || !game_.lock());
   game_ = game;
-  return *this;
 }
 /***********************************************************************//**
 	@brief ゲームを取得する
@@ -78,9 +76,8 @@ std::shared_ptr<Game> Player::getGame() const {
 	@brief 純粋な一巡目(天和/地和/人和可能)を無効にする
 	@return 自分自身
 ***************************************************************************/
-Player& Player::resetFirst() {
+void Player::resetFirst() {
   flag_.reset(FLAG_FIRST);
-  return *this;
 }
 /***********************************************************************//**
 	@brief 純粋な一巡目(天和/地和/人和可能)か調べる
@@ -105,9 +102,8 @@ bool Player::isSayTenpai() const {
 /***********************************************************************//**
 	@brief 和了った
 ***************************************************************************/
-Player& Player::agari() {
+void Player::agari() {
   flag_.set(FLAG_AGARI);
-  return *this;
 }
 /***********************************************************************//**
 	@brief 和了ったか調べる
@@ -128,20 +124,18 @@ void Player::onOpen() {
 	@param[in] value 点数
 	@return 自分自身
 ***************************************************************************/
-Player& Player::setPoint(const BigNum& value) {
+void Player::setPoint(const BigNum& value) {
   point_ = value;
   onSetPoint(value);
-  return *this;
 }
 /***********************************************************************//**
 	@brief 点数を加減算する
 	@param[in] value 加減算する値
 	@return 自分自身
 ***************************************************************************/
-Player& Player::addPoint(const BigNum& value) {
+void Player::addPoint(const BigNum& value) {
   point_ += value;
   onAddPoint(value);
-  return *this;
 }
 /***********************************************************************//**
 	@brief 席の文字列を取得する

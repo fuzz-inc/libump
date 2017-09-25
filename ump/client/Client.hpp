@@ -80,7 +80,7 @@ class Client
 
   UMP_GETTER(State, state_);
 
-  Client& setName(const std::string& name);
+  void setName(const std::string& name);
 
   UMP_GETTER(Seat, seat_);
   std::shared_ptr<mj::Player> getPlayer() const;

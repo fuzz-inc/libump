@@ -66,11 +66,9 @@ Config::Config()
 	@brief 牌の数をセットする
 	@param[in] hai 牌
 	@param[in] num 牌の数
-	@return 自分自身
 ***************************************************************************/
-Config& Config::setHaiNum(const Hai* hai, size_t num) {
+void Config::setHaiNum(const Hai* hai, size_t num) {
   haiNums_[hai] = num;
-  return *this;
 }
 /***********************************************************************//**
 	@brief 牌の数を取得する
@@ -87,7 +85,7 @@ size_t Config::getHaiNum(const Hai* hai) const {
 	@param[in] num 枚数
 	@return 自分自身
 ***************************************************************************/
-Config& Config::setDoraHaiNum(const Hai* hai, size_t num) {
+void Config::setDoraHaiNum(const Hai* hai, size_t num) {
   hai = hai->getNormal();
   auto dora = hai->getDora();
   size_t sum = getHaiNum(hai) + getHaiNum(dora);
@@ -95,19 +93,16 @@ Config& Config::setDoraHaiNum(const Hai* hai, size_t num) {
     setHaiNum(hai, sum - num);
     setHaiNum(dora, num);
   }
-  return *this;
 }
 /***********************************************************************//**
 	@brief ドラ牌の枚数をセットする
 	@param[in] num 枚数
 	@param[in] number 数種
-	@return 自分自身
 ***************************************************************************/
-Config& Config::setDoraHaiNum(size_t num, int number) {
+void Config::setDoraHaiNum(size_t num, int number) {
   setDoraHaiNum(Hai::Get(Hai::COLOR_MANZU, number), num);
   setDoraHaiNum(Hai::Get(Hai::COLOR_PINZU, number), num);
   setDoraHaiNum(Hai::Get(Hai::COLOR_SOUZU, number), num);
-  return *this;
 }
 /***********************************************************************//**
 	@brief すべての牌を数える

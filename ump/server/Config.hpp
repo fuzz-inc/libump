@@ -114,7 +114,7 @@ class Config
   UMP_ACCESSOR(NotenBappu, notenBappu_);
   UMP_ACCESSOR(RoundMax, roundMax_);
 
-  Config& setDoraNum(size_t num);
+  void setDoraNum(size_t num);
   UMP_GETTER(DoraNum, doraNum_);
 
   UMP_ACCESSOR(Uma, uma_);

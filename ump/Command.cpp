@@ -156,18 +156,17 @@ bool Command::hasArg(Type type) const {
 	@param[in] value 追加する引数
 	@return 自分自身
 ***************************************************************************/
-Command& Command::append(const char* value) {
-  return append(std::string(value));
+void Command::append(const char* value) {
+  append(std::string(value));
 }
 /***********************************************************************//**
 	@brief 引数を追加する
 	@param[in] value 追加する引数
 	@return 自分自身
 ***************************************************************************/
-Command& Command::append(const std::string& value) {
+void Command::append(const std::string& value) {
   assert(!value.empty());
   args_.push_back(value);
-  return *this;
 }
 /***********************************************************************//**
 	@brief オプションをセットする
@@ -175,19 +174,17 @@ Command& Command::append(const std::string& value) {
 	@param[in] value 値
 	@return 自分自身
 ***************************************************************************/
-Command& Command::setOption(const std::string& name, 
-                            const std::string& value) {
+void Command::setOption(const std::string& name, 
+                        const std::string& value) {
   options_[name] = value;
-  return *this;
 }
 /***********************************************************************//**
 	@brief オプションを削除する
 	@param[in] name オプション名
 	@return 自分自身
 ***************************************************************************/
-Command& Command::deleteOption(const std::string& name) {
+void Command::deleteOption(const std::string& name) {
   options_.erase(name);
-  return *this;
 }
 /***********************************************************************//**
 	@brief オプションの値を取得する
@@ -223,10 +220,9 @@ bool Command::hasOption(const std::string& name) const {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-Command& Command::setData(std::shared_ptr<const std::vector<char>> data) {
+void Command::setData(std::shared_ptr<const std::vector<char>> data) {
   data_ = data;
   setOption(OPTION_DATASIZE, std::to_string(data->size()));
-  return *this;
 }
 /***********************************************************************//**
 	@brief 
