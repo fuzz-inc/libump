@@ -34,6 +34,7 @@
 		DAA597551DF0142B007BE749 /* JobHaipai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAA597531DF0142B007BE749 /* JobHaipai.cpp */; };
 		DAC7FF191D9939E300559942 /* JobSutehai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC7FF171D9939E300559942 /* JobSutehai.cpp */; };
 		DAC7FF1A1D9939E300559942 /* JobSutehai.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAC7FF181D9939E300559942 /* JobSutehai.hpp */; };
+		DAF407B11F79142B00495341 /* stdafx.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAF407B01F79142B00495341 /* stdafx.hpp */; };
 		DAFCE7A31D7D78FF0016A137 /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE75E1D7D78FF0016A137 /* Client.cpp */; };
 		DAFCE7A41D7D78FF0016A137 /* Client.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DAFCE75F1D7D78FF0016A137 /* Client.hpp */; };
 		DAFCE7A51D7D78FF0016A137 /* Command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAFCE7601D7D78FF0016A137 /* Command.cpp */; };
@@ -120,6 +121,7 @@
 		DAA597541DF0142B007BE749 /* JobHaipai.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobHaipai.hpp; sourceTree = "<group>"; };
 		DAC7FF171D9939E300559942 /* JobSutehai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobSutehai.cpp; sourceTree = "<group>"; };
 		DAC7FF181D9939E300559942 /* JobSutehai.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobSutehai.hpp; sourceTree = "<group>"; };
+		DAF407B01F79142B00495341 /* stdafx.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stdafx.hpp; sourceTree = "<group>"; };
 		DAFCE6C21D7D72A60016A137 /* libump.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libump.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFCE75E1D7D78FF0016A137 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
 		DAFCE75F1D7D78FF0016A137 /* Client.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Client.hpp; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				DAFCE7641D7D78FF0016A137 /* mj */,
 				DAFCE7801D7D78FF0016A137 /* server */,
 				DA1BD8CE1DA50D2500334BB7 /* socket */,
+				DAF407B01F79142B00495341 /* stdafx.hpp */,
 				DA440D9B1E68029700C7A320 /* thread */,
 				DAFCE7A01D7D78FF0016A137 /* ump.hpp */,
 				DAFCE7A11D7D78FF0016A137 /* Version.cpp */,
@@ -352,6 +355,7 @@
 				DAFCE7CD1D7D78FF0016A137 /* JobGame.hpp in Headers */,
 				DA15CB811DA656DA00843135 /* SslSocket.hpp in Headers */,
 				DAFCE7B21D7D78FF0016A137 /* HaiArray.hpp in Headers */,
+				DAF407B11F79142B00495341 /* stdafx.hpp in Headers */,
 				DA8D01011D9BE99D00F1F5D2 /* Logger.hpp in Headers */,
 				DAFCE7B61D7D78FF0016A137 /* Kawa.hpp in Headers */,
 				DAFCE7B41D7D78FF0016A137 /* Hand.hpp in Headers */,
@@ -508,7 +512,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../ump/header.hpp";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../ump/stdafx.hpp";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -554,7 +558,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../ump/header.hpp";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../../../ump/stdafx.hpp";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
