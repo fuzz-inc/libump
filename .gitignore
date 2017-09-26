@@ -11,5 +11,7 @@ build/linux/lib/
 build/linux/obj/
 
 # Windows
+*.vcxproj.user
 .vs/
 /build/vs2017/Debug/
+/build/vs2017/Release/
