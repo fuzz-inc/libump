@@ -1,9 +1,11 @@
+/external/opt/
+
 # Xcode
+*.xcscmblueprint
+/external/build/mac/work/
 DerivedData/
 project.xcworkspace/
 xcuserdata/
-*.xcscmblueprint
-external/build/mac/work/
 
 # Linux
 build/linux/bin/
