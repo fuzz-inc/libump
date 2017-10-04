@@ -1,6 +1,6 @@
 include $(abspath $(dir $(lastword $(MAKEFILE_LIST))))/Makefile.def
 
-PCH	:= $(SRCDIR)/ump/header.hpp
+PCH	:= $(SRCDIR)/ump/stdafx.hpp
 CFLAGS	+= -I$(SRCDIR) -include $(PCH) -pthread 
 LDFLAGS	+= -pthread
 
