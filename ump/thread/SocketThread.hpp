@@ -52,6 +52,7 @@ class SocketThread
   ~SocketThread() override;
 
   Socket& getSocket() const;
+  bool isConnect() const;
 
   void start();
   void stop();
