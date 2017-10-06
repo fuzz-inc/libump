@@ -43,9 +43,6 @@ class Server
   : public SocketThread, 
     public std::enable_shared_from_this<Server>
 {
- public:
-  static const int DEFAULT_PORT = 1326;
-
  private:
   int port_;
   std::shared_ptr<const Config> config_;
