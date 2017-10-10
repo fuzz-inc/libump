@@ -44,22 +44,16 @@ class Bot
 {
   typedef Client super;
 
- private:
-  std::chrono::milliseconds wait_;
-
  public:
   Bot(std::shared_ptr<Socket> socket, 
       std::shared_ptr<const mj::Config> config);
   ~Bot() override = default;
 
-  UMP_ACCESSOR(Wait, wait_);
-
  protected:
   void onRecvCommand(const Command& command) override;
 
- private:
-  void replySutehai(const Command& command);
-  void replyNaki(const Command& command);
+  virtual void onRecvSutehai(const Command& command);
+  virtual void onRecvNaki(const Command& command);
 };
 /***********************************************************************//**
 	$Id$

@@ -42,8 +42,7 @@ namespace client {
 ***************************************************************************/
 Bot::Bot(std::shared_ptr<Socket> socket, 
          std::shared_ptr<const mj::Config> config)
-  : super(socket), 
-    wait_(0)
+  : super(socket)
 {
   setConfig(config);
 }
@@ -59,10 +58,10 @@ void Bot::onRecvCommand(const Command& command) {
     replyCommand(Command(Command::TYPE_TENPAI), command);
     break;
   case Command::TYPE_NAKI_Q:
-    replyNaki(command);
+    onRecvNaki(command);
     break;
   case Command::TYPE_SUTEHAI_Q:
-    replySutehai(command);
+    onRecvSutehai(command);
     break;
   default:
     super::onRecvCommand(command);
@@ -72,8 +71,7 @@ void Bot::onRecvCommand(const Command& command) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void Bot::replySutehai(const Command& command) {
-  std::this_thread::sleep_for(wait_);
+void Bot::onRecvSutehai(const Command& command) {
   if(command.hasArg(Command::TYPE_TSUMO)) {
     replyCommand(Command(Command::TYPE_TSUMO), command);
   }
@@ -103,7 +101,7 @@ void Bot::replySutehai(const Command& command) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-void Bot::replyNaki(const Command& command) {
+void Bot::onRecvNaki(const Command& command) {
   if(command.hasArg(Command::TYPE_RON)) {
     replyCommand(Command(Command::TYPE_RON), command);
   }
