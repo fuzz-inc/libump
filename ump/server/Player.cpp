@@ -193,10 +193,14 @@ void Player::onRecvCommand(const Command& command) {
   }
 }
 /***********************************************************************//**
-	@brief 
+	@copydoc SocketThread::onDisconnectSocket
 ***************************************************************************/
 void Player::onDisconnectSocket() {
-  getServer()->onDisconnectPlayer(shared_from_this());
+  auto self = shared_from_this();
+  if(auto game = getGame()) {
+    game->onDisconnectPlayer(self);
+  }
+  getServer()->onDisconnectPlayer(self);
 }
 /***********************************************************************//**
 	@brief 

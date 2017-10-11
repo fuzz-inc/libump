@@ -97,6 +97,8 @@ class Game
   virtual void onRecvCommand(std::shared_ptr<Player> player, 
                              const Command& command);
 
+  virtual void onDisconnectPlayer(std::shared_ptr<Player> player);
+
  private:
   std::shared_ptr<Game> getThis();
 
