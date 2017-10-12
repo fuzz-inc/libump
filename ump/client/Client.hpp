@@ -72,7 +72,7 @@ class Client
   Client(std::shared_ptr<Socket> socket);
   virtual ~Client();
 
-  bool open(const char* host, int port);
+  bool open(const char* host, int port = DEFAULT_PORT);
   void close();
   bool isOpen() const;
 

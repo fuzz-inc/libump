@@ -52,6 +52,7 @@ class Player
  private:
   enum {
     FLAG_FURITEN, 
+    FLAG_DISCONNECT, 
     FLAG_MAX
   };
 
@@ -87,6 +88,9 @@ class Player
   bool canRichi() const;
   bool canRon(const mj::Hai* hai);
 
+  std::shared_ptr<Socket> resetSocket();
+  void resetSocket(std::shared_ptr<Socket> socket);
+
  protected:
   mj::Sutehai* sutehai(const mj::Sutehai& sutehai) override;
 
@@ -99,6 +103,8 @@ class Player
   UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
   void updateFuriten();
   void updateFuriten(const mj::Hai* hai);
+
+  UMP_BIT_ACCESSOR(Disconnect, flag_, FLAG_DISCONNECT);
 
   void log(Logger::Level level, const std::string& message) const;
 };

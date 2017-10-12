@@ -74,17 +74,32 @@ bool Player::isOpen() const {
   return getSocket().isOpen();
 }
 /***********************************************************************//**
-	@brief コマンドを送る
-	@param[in] command 送信するコマンド
+	@brief UMPコマンドを送信する(同期)
+	@param[in] command UMPコマンド
+	@return 送信に成功したとき真
 ***************************************************************************/
 bool Player::send(const Command& command) {
+  if(isDisconnect() && isConnect()) {
+    switch(command.getType()) {
+    case Command::TYPE_KYOKUSTART:
+      setDisconnect(false);
+      break;
+    case Command::TYPE_SEAT:
+    case Command::TYPE_PLAYER:
+      break;
+    default:
+      return false;
+    }
+  }
   command_ = command;
   command_.setSerial(++serial_);
   reply_.clear();
   return sendCommand(command_);
 }
 /***********************************************************************//**
-	@brief 
+	@brief UMPコマンドを送信する(非同期)
+	@param[in] command UMPコマンド
+	@return 送信に成功したとき真
 ***************************************************************************/
 bool Player::sendCommand(const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
@@ -143,6 +158,23 @@ bool Player::canRon(const mj::Hai* hai) {
   return !isFuriten() && super::canRon(hai);
 }
 /***********************************************************************//**
+	@brief 再接続
+	@param[in] socket ソケット
+***************************************************************************/
+std::shared_ptr<Socket> Player::resetSocket() {
+  return SocketThread::resetSocket(nullptr);
+}
+/***********************************************************************//**
+	@brief 再接続
+	@param[in] socket ソケット
+***************************************************************************/
+void Player::resetSocket(std::shared_ptr<Socket> socket) {
+  SocketThread::resetSocket(socket);
+  if(auto game = getGame()) {
+    game->onAppendPlayer(getSeat(), shared_from_this());
+  }
+}
+/***********************************************************************//**
 	@brief 牌を河に捨てる
 	@param[in] sutehai 捨て牌
 	@return 河の捨て牌
@@ -196,6 +228,7 @@ void Player::onRecvCommand(const Command& command) {
 	@copydoc SocketThread::onDisconnectSocket
 ***************************************************************************/
 void Player::onDisconnectSocket() {
+  setDisconnect(true);
   auto self = shared_from_this();
   if(auto game = getGame()) {
     game->onDisconnectPlayer(self);

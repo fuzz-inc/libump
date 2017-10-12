@@ -50,9 +50,23 @@ SocketThread::~SocketThread() {
   stop();
 }
 /***********************************************************************//**
+	@brief ソケットを再設定する
+	@param[in] socket ソケット
+***************************************************************************/
+std::shared_ptr<Socket>
+SocketThread::resetSocket(std::shared_ptr<Socket> socket) {
+  decltype(socket_) oldSocket;
+  socket_.swap(oldSocket);
+  stop();
+  socket_ = socket;
+  start();
+  return oldSocket;
+}
+/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 Socket& SocketThread::getSocket() const {
+  assert(socket_);
   return *socket_;
 }
 /***********************************************************************//**
@@ -60,20 +74,22 @@ Socket& SocketThread::getSocket() const {
 	@return 接続しているとき真
 ***************************************************************************/
 bool SocketThread::isConnect() const {
-  return socket_->isOpen();
+  return socket_ && socket_->isOpen();
 }
 /***********************************************************************//**
 	@brief スレッドを開始する
 ***************************************************************************/
 void SocketThread::start() {
-  assert(socket_->isOpen());
+  assert(isConnect());
   super::start();
 }
 /***********************************************************************//**
 	@brief スレッドを停止する
 ***************************************************************************/
 void SocketThread::stop() {
-  socket_->close();
+  if(socket_) {
+    socket_->close();
+  }
   super::stop();
 }
 /***********************************************************************//**
@@ -81,7 +97,7 @@ void SocketThread::stop() {
 ***************************************************************************/
 void SocketThread::operator()() {
   super::operator()();
-  while(socket_->isOpen()) {
+  while(isConnect()) {
     onThread();
   }
   detach();
@@ -92,7 +108,7 @@ void SocketThread::operator()() {
 ***************************************************************************/
 void SocketThread::onThread() {
   Command command;
-  if(socket_->recvCommand(command)) {
+  if(socket_ && socket_->recvCommand(command)) {
     onRecvCommand(command);
   }
 }

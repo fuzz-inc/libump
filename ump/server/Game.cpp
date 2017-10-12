@@ -74,6 +74,19 @@ std::shared_ptr<const Config> Game::getConfig() const {
 ***************************************************************************/
 void Game::appendPlayer(std::shared_ptr<Player> player) {
   auto seat = findSeat();
+  onAppendPlayer(seat, player);
+  super::setPlayer(seat, player);
+  {
+    Command command(Command::TYPE_PLAYER);
+    command.append(Command::SeatToString(seat));
+    command.append(player->getName());
+    sendAll(command);
+  }
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Game::onAppendPlayer(size_t seat, std::shared_ptr<Player> player) {
   {
     Command command(Command::TYPE_SEAT);
     command.append(Command::SeatToString(seat));
@@ -81,19 +94,12 @@ void Game::appendPlayer(std::shared_ptr<Player> player) {
     sendCommand(player, command);
   }
   for(auto& iter : getPlayers()) {
-    if(iter) {
+    if(iter && iter != player) {
       Command command(Command::TYPE_PLAYER);
       command.append(Command::SeatToString(iter->getSeat()));
       command.append(iter->getName());
       sendCommand(player, command);
     }
-  }
-  super::setPlayer(seat, player);
-  {
-    Command command(Command::TYPE_PLAYER);
-    command.append(Command::SeatToString(seat));
-    command.append(player->getName());
-    sendAll(command);
   }
 }
 /***********************************************************************//**
