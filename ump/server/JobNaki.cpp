@@ -63,23 +63,25 @@ void JobNaki::onBegin() {
   for(size_t i = 1; i < playerNum; i++) {
     auto index = (game.getTurn() + i) % playerNum;
     auto player = game.getPlayer(index);
-    Command command(Command::TYPE_NAKI_Q);
-    command.append(hai->toString());
-    if(player->canRon(hai)) {
-      command.append(Command::TYPE_RON);
-    }
-    if(player->canKan(hai)) {
-      command.append(Command::TYPE_KAN);
-    }
-    if(player->canPon(hai)) {
-      command.append(Command::TYPE_PON);
-    }
-    if(getConfig()->canChi() && i == 1 && player->canChi(hai)) {
-      command.append(Command::TYPE_CHI);
-    }
-    if(command.countArg() > 1) {
-      player->send(command);
-      players_.push_back(player);
+    if(player->isConnect()) {
+      Command command(Command::TYPE_NAKI_Q);
+      command.append(hai->toString());
+      if(player->canRon(hai)) {
+        command.append(Command::TYPE_RON);
+      }
+      if(player->canKan(hai)) {
+        command.append(Command::TYPE_KAN);
+      }
+      if(player->canPon(hai)) {
+        command.append(Command::TYPE_PON);
+      }
+      if(getConfig()->canChi() && i == 1 && player->canChi(hai)) {
+        command.append(Command::TYPE_CHI);
+      }
+      if(command.countArg() > 1) {
+        player->send(command);
+        players_.push_back(player);
+      }
     }
   }
   sleep(0.25f);

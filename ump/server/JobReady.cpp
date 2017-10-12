@@ -55,7 +55,9 @@ void JobReady::onBegin() {
 Job* JobReady::onUpdate() {
   if(!isOverTime(getConfig()->getReadyWait())) {
     for(size_t i = 0, n = countPlayer(); i < n; i++) {
-      if(getPlayer(i)->getReply().getType() != Command::TYPE_YES) {
+      auto player = getPlayer(i);
+      if(player->isConnect() && 
+         player->getReply().getType() != Command::TYPE_YES) {
         return this;
       }
     }
