@@ -37,7 +37,9 @@ bool Thread::isStart() const {
 	@brief スレッドを停止する
 ***************************************************************************/
 void Thread::stop() {
-  if(auto thread = std::move(thread_)) {
+  decltype(thread_) thread;
+  thread_.swap(thread);
+  if(thread) {
     assert(std::this_thread::get_id() != thread->get_id());
     stop_.notify();
     thread->join();
