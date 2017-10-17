@@ -79,6 +79,7 @@ class Server
   virtual std::shared_ptr<Player>
   createPlayer(std::shared_ptr<socket::Socket> socket);
 
+  UMP_GETTER(Games, games_);
   virtual std::shared_ptr<Game> createGame();
   void startGame(std::shared_ptr<Game> game);
 

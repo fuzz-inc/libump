@@ -51,6 +51,7 @@ class SocketThread
   SocketThread(std::shared_ptr<Socket> socket);
   ~SocketThread() override;
 
+  std::shared_ptr<Socket> resetSocket();
   std::shared_ptr<Socket> resetSocket(std::shared_ptr<Socket> socket);
   Socket& getSocket() const;
   bool isConnect() const;

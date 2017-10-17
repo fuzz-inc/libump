@@ -162,7 +162,7 @@ bool Player::canRon(const mj::Hai* hai) {
 	@param[in] socket ソケット
 ***************************************************************************/
 std::shared_ptr<Socket> Player::resetSocket() {
-  return SocketThread::resetSocket(nullptr);
+  return SocketThread::resetSocket();
 }
 /***********************************************************************//**
 	@brief 再接続
@@ -172,6 +172,12 @@ void Player::resetSocket(std::shared_ptr<Socket> socket) {
   SocketThread::resetSocket(socket);
   if(auto game = getGame()) {
     game->onAppendPlayer(getSeat(), shared_from_this());
+    {
+      Command command(Command::TYPE_PLAYER);
+      command.append(Command::SeatToString(getSeat()));
+      command.append(getName());
+      sendCommand(command);
+    }
   }
 }
 /***********************************************************************//**
