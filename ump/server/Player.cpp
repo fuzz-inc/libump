@@ -178,6 +178,11 @@ void Player::resetSocket(std::shared_ptr<Socket> socket) {
       command.append(getName());
       sendCommand(command);
     }
+    {
+      Command command(Command::TYPE_GAMESTART);
+      command.setOption("id", game->getId());
+      sendCommand(command);
+    }
   }
 }
 /***********************************************************************//**
