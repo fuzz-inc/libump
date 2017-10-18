@@ -86,6 +86,7 @@ bool Player::send(const Command& command) {
       break;
     case Command::TYPE_SEAT:
     case Command::TYPE_PLAYER:
+    case Command::TYPE_GAMESTART:
       break;
     default:
       return false;
@@ -171,17 +172,18 @@ std::shared_ptr<Socket> Player::resetSocket() {
 void Player::resetSocket(std::shared_ptr<Socket> socket) {
   SocketThread::resetSocket(socket);
   if(auto game = getGame()) {
+    auto self = shared_from_this();
     game->onAppendPlayer(getSeat(), shared_from_this());
     {
       Command command(Command::TYPE_PLAYER);
       command.append(Command::SeatToString(getSeat()));
       command.append(getName());
-      sendCommand(command);
+      game->sendCommand(self, command);
     }
     {
       Command command(Command::TYPE_GAMESTART);
       command.setOption("id", game->getId());
-      sendCommand(command);
+      game->sendCommand(self, command);
     }
   }
 }
