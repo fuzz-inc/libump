@@ -380,6 +380,22 @@ Sutehai* Player::sutehai(const Sutehai& sutehai) {
   return sutehai_;
 }
 /***********************************************************************//**
+	@brief 適当な牌を捨てる
+	@param[out] sutehai 捨て牌
+***************************************************************************/
+void Player::discardAnyHai(Sutehai& sutehai) const {
+  if(auto hai = getTsumoHai()) {
+    sutehai.setHai(hai);
+    sutehai.setTsumogiri(true);
+  }
+  else {
+    hai = getMenzen().back();
+    assert(hai);
+    sutehai.setHai(hai);
+    sutehai.setTsumogiri(false);
+  }
+}
+/***********************************************************************//**
 	@brief シャンテン数を取得する
 	@return シャンテン数
 ***************************************************************************/

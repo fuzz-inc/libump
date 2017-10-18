@@ -195,14 +195,12 @@ void Player::resetSocket(std::shared_ptr<Socket> socket) {
 mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
   auto sutehai(_sutehai);
   if(isRichi() || !sutehai.getHai()) {
-    sutehai.setHai(getTsumoHai());
-    sutehai.setTsumogiri(true);
+    discardAnyHai(sutehai);
   }
   else {
     auto num = getMenzen().countEqual(sutehai.getHai());
     if(num == 0) {
-      sutehai.setHai(getTsumoHai());
-      sutehai.setTsumogiri(true);
+      discardAnyHai(sutehai);
     }
     else if(sutehai.isTsumogiri()) {
       if(!sutehai.getHai()->isEqual(getTsumoHai())) {

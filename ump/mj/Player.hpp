@@ -137,6 +137,7 @@ class Player
   bool canChi(const HaiArray& hais, const Hai* hai) const;
 
   virtual Sutehai* sutehai(const Sutehai& sutehai);
+  void discardAnyHai(Sutehai& sutehai) const;
 
   int getShanten() const;
   bool isTenpai() const;
