@@ -180,7 +180,7 @@ void Player::resetSocket(std::shared_ptr<Socket> socket) {
       command.append(getName());
       game->sendCommand(self, command);
     }
-    {
+    if(game->isStart()) {
       Command command(Command::TYPE_GAMESTART);
       command.setOption("id", game->getId());
       game->sendCommand(self, command);
