@@ -117,7 +117,7 @@ class Client
   virtual void onReplyCommand(const Command& command);
 
   virtual void onGameStart() {}
-  virtual void onEndGame(const mj::Players& players);
+  void onEndGame(const mj::Players& players) override;
 
   void beginKyoku();
   void onShowHai(const mj::Hai* hai) override;
