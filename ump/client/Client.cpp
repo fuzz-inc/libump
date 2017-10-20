@@ -159,6 +159,7 @@ void Client::onRecvCommand(const Command& command) {
     replyCommand(hello_, command);
     break;
   case Command::TYPE_SEAT:
+    clearPlayer();
     seat_ = Command::StringToSeat(command.getArg(0).c_str());
     if(command.hasOption(Command::OPTION_GAMEID)) {
       setId(command.getOption(Command::OPTION_GAMEID));
@@ -250,6 +251,7 @@ void Client::onReplyCommand(const Command& command) {
 ***************************************************************************/
 void Client::onEndGame(const mj::Players& players) {
   state_ = STATE_END;
+  super::onEndGame(players);
 }
 /***********************************************************************//**
 	@copydoc Game::beginKyoku

@@ -127,11 +127,7 @@ class Game
    */
   virtual void onShowHai(const Hai* hai) {}
 
-  /**
-   * 終了時の処理
-   * @param[in] players 着順
-   */
-  virtual void onEndGame(const Players& players) {}
+  virtual void onEndGame(const Players& players);
 
  protected:
   void clearPlayer();
