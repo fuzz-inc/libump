@@ -52,6 +52,9 @@ class AgariTest
 
  private:
   const ump::mj::Agari& parse(const char* hais, bool isRon);
+
+  void resetHand(const char* hais);
+  void openMentsu(const char* str, const char* hai = nullptr);
 };
 /***********************************************************************//**
 	$Id$

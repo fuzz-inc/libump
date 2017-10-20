@@ -72,6 +72,15 @@ void AgariTest::onRun() {
                    Format("%s(%d)", table.hais, agari.getHan()));
     }
   }
+  {
+    resetHand("1p1p1p3p4p2s2s8s8s7z7z7z");
+    openMentsu("8s8s", "8s");
+    openMentsu("1p1p1p", "1p");
+    openMentsu("7z7z7z", "7z");
+    player_->tsumo(ump::mj::Hai::Get("2p"), true);
+    auto& agari = player_->getAgari();
+    TEST(agari.isInclude(ump::mj::Agari::YAKU_RINSHAN));
+  }
 }
 /***********************************************************************//**
 	@brief 
@@ -95,6 +104,22 @@ const ump::mj::Agari& AgariTest::parse(const char* str, bool isRon) {
   }
   player_->tsumo(hai, false);
   return parser_.parse(nullptr);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void AgariTest::resetHand(const char* hais) {
+  player_->reset();
+  player_->setBakaze(ump::mj::Hai::Get("1z"));
+  player_->setZikaze(ump::mj::Hai::Get("1z"));
+  player_->drawHaipai(ump::mj::HaiArray(hais));
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void AgariTest::openMentsu(const char* hais, const char* hai) {
+  player_->openMentsu(ump::mj::HaiArray(hais), 
+                      hai ? ump::mj::Hai::Get(hai) : nullptr);
 }
 /***********************************************************************//**
 	$Id$

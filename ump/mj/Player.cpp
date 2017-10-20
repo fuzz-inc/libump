@@ -160,8 +160,8 @@ void Player::tsumo(const Hai* hai, bool rinshan) {
   tsumoHai_ = hai;
   append(hai);
   updateShanten();
-  updateAgari();
   setRinshan(rinshan);
+  updateAgari();
 }
 /***********************************************************************//**
 	@brief ツモった牌を取得する
