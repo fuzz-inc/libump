@@ -152,7 +152,16 @@ void Shanten::checkKokushi() {
   }
   updateShanten(shanten);
   if(shanten == 0) {
-    richi_.append(hais);
+    for(auto hai : hais) {
+      if(hai->isYaochu()) {
+        richi_.append(hai);
+      }
+      else {
+        richi_.clear();
+        richi_.append(hai);
+        break;
+      }
+    }
   }
 }
 /***********************************************************************//**
