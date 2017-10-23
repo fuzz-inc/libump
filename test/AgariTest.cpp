@@ -102,11 +102,12 @@ void AgariTest::testYakuman() {
     { "1z1z1z2z2z4z4z4z5z5z5z7z7z", "2z", Agari::YAKUMAN_TSUISOU }, 
     { "2s2s3s3s4s4s6s6s8s8s8s6z6z", "6s", Agari::YAKUMAN_RYUISOU }, 
     { "1m1m1m2m3m4m5m6m7m8m9m9m9m", "2m", Agari::YAKUMAN_CHUREN }, 
-    { "1m1m2m2m2m3m3m3m4m4m4m7m7m", "1m", Agari::YAKUMAN_SUANKO }
+    { "1m1m2m2m2m3m3m3m4m4m4m7m7m", "1m", Agari::YAKUMAN_SUANKO }, 
+    { "1m9m1p9p1s9s1z3z4z4z5z6z7z", "+2z", Agari::YAKUMAN_KOKUSHI }
   };
   for(auto& table : TABLES) {
     resetHand(table.hand);
-    auto& agari = tsumo(table.tsumo);
+    auto& agari = getAgari(table.tsumo);
     TEST_MESSAGE(agari.isInclude(table.yakuman), agari.toString());
   }
 }
@@ -153,8 +154,13 @@ void AgariTest::openMentsu(const char* hais, const char* hai) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-const ump::mj::Agari& AgariTest::tsumo(const char* hai, bool rinshan) {
-  player_->tsumo(ump::mj::Hai::Get(hai), rinshan);
+const ump::mj::Agari& AgariTest::getAgari(const char* hai, bool rinshan) {
+  if(hai[0] == '+') {
+    player_->updateAgari(ump::mj::Hai::Get(hai + 1));
+  }
+  else {
+    player_->tsumo(ump::mj::Hai::Get(hai), rinshan);
+  }
   return player_->getAgari();
 }
 /***********************************************************************//**

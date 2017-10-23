@@ -112,7 +112,7 @@ void AgariParser::update() {
 	@return 国士無双のとき真
 ***************************************************************************/
 bool AgariParser::isKokushi() const {
-  HaiArray uniq = getPlayer().getMenzen().getUnique();
+  HaiArray uniq = getHais().getUnique();
   if(uniq.size() != 13) {
     return false;
   }

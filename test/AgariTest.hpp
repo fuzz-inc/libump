@@ -57,7 +57,7 @@ class AgariTest
 
   void resetHand(const char* hais);
   void openMentsu(const char* str, const char* hai = nullptr);
-  const ump::mj::Agari& tsumo(const char* hai, bool rinshan = false);
+  const ump::mj::Agari& getAgari(const char* hai, bool rinshan = false);
 };
 /***********************************************************************//**
 	$Id$
