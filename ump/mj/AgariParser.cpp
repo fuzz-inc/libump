@@ -100,7 +100,7 @@ bool AgariParser::isRon() const {
 void AgariParser::update() {
   if(getPlayer().isMenzen()) {
     if(isKokushi()) {
-      agari_.appendYaku(Agari::YAKUMAN_KOKUSHI);
+      agari_.update(getPlayer());
       return;
     }
     checkChitoi();

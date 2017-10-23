@@ -133,38 +133,43 @@ void Agari::update(const Player& player) {
       appendYaku(YAKUMAN_CHIHO);
     }
   }
-  if(player.isRichi()) {
-    appendYaku(player.isDoubleRichi() ? YAKU_DOUBLE_RICHI : YAKU_RICHI);
-    if(player.isIppatsu()) {
-      appendYaku(YAKU_IPPATSU);
+  if(mentsus_.empty()) {
+    appendYaku(YAKUMAN_KOKUSHI);
+  }
+  else {
+    if(player.isRichi()) {
+      appendYaku(player.isDoubleRichi() ? YAKU_DOUBLE_RICHI : YAKU_RICHI);
+      if(player.isIppatsu()) {
+        appendYaku(YAKU_IPPATSU);
+      }
     }
-  }
-  if(player.isRinshan()) {
-    appendYaku(YAKU_RINSHAN);
-  }
-  if(isMenzen() && !isRon()) {
-    appendYaku(YAKU_TSUMO);
-  }
-  if(player.isHaitei()) {
-    appendYaku(YAKU_HAITEI);
-  }
-  Info info;
-  updateInfo(info, player);
-  checkYakuhai(info, player);
-  checkKind(info);
-  checkKotsu(info);
-  checkIpeikou(info);
-  checkSanshoku(info);
-  checkItsu(info);
-  checkColor(info);
-  checkSangen(info);
-  checkSushiho(info);
-  /* 緑一色*/
-  if(info.kind & KIND_ALL_GREEN) {
-    appendYaku(YAKUMAN_RYUISOU);
-  }
-  if(han_ > 0) {
-    updateDora(player);
+    if(player.isRinshan()) {
+      appendYaku(YAKU_RINSHAN);
+    }
+    if(isMenzen() && !isRon()) {
+      appendYaku(YAKU_TSUMO);
+    }
+    if(player.isHaitei()) {
+      appendYaku(YAKU_HAITEI);
+    }
+    Info info;
+    updateInfo(info, player);
+    checkYakuhai(info, player);
+    checkKind(info);
+    checkKotsu(info);
+    checkIpeikou(info);
+    checkSanshoku(info);
+    checkItsu(info);
+    checkColor(info);
+    checkSangen(info);
+    checkSushiho(info);
+    /* 緑一色*/
+    if(info.kind & KIND_ALL_GREEN) {
+      appendYaku(YAKUMAN_RYUISOU);
+    }
+    if(han_ > 0) {
+      updateDora(player);
+    }
   }
   updatePoint();
 }
@@ -267,9 +272,20 @@ void Agari::appendYaku(int yaku) {
 	@param[in] other 比較対象
 	@return 自身の方が低いとき真
 ***************************************************************************/
-bool Agari::operator<(const Agari& other) {
-  return (getYakuman() < other.getYakuman() ||
-          getHan() < other.getHan());
+bool Agari::operator<(const Agari& rhs) const {
+  if(getYakuman() < rhs.getYakuman()) {
+    return true;
+  }
+  if(getYakuman() > rhs.getYakuman()) {
+    return false;
+  }
+  if(getHan() < rhs.getHan()) {
+    return true;
+  }
+  if(getHan() > rhs.getHan()) {
+    return false;
+  }
+  return getFu() < rhs.getFu();
 }
 /***********************************************************************//**
 	@brief 和了を文字列に変換する
@@ -277,19 +293,25 @@ bool Agari::operator<(const Agari& other) {
 ***************************************************************************/
 std::string Agari::toString() const {
   std::ostringstream str;
-  for(auto& mentsu : mentsus_) {
-    str << mentsu.toString() << "[" << mentsu.getFu() << "]";
-  }
   for(int i = 0; i < YAKU_MAX; i++) {
     auto han = getHan(i);
     if(han > 0) {
-      str << " " << GetYakuName(i) << " " << han;
+      str << GetYakuName(i) << " " << han << " ";
     }
   }
-  str << " " << 
-    getFu() << "符" << 
-    getHan() << "翻" << 
-    getPoint().toString() << "点";
+  if(isYakuman()) {
+    str << getText() << " " << getPoint().toString() << "点";
+  }
+  else {
+    for(auto& mentsu : mentsus_) {
+      str << mentsu.toString() << "[" << mentsu.getFu() << "]";
+    }
+    str << " " << 
+      getFu() << "符" << 
+      getHan() << "翻" << 
+      getText() << 
+      getPoint().toString() << "点";
+  }
   return str.str();
 }
 /***********************************************************************//**

@@ -51,10 +51,13 @@ class AgariTest
   void onRun() override;
 
  private:
+  void testYakuman();
+
   const ump::mj::Agari& parse(const char* hais, bool isRon);
 
   void resetHand(const char* hais);
   void openMentsu(const char* str, const char* hai = nullptr);
+  const ump::mj::Agari& tsumo(const char* hai, bool rinshan = false);
 };
 /***********************************************************************//**
 	$Id$

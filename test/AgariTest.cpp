@@ -81,6 +81,34 @@ void AgariTest::onRun() {
     auto& agari = player_->getAgari();
     TEST(agari.isInclude(ump::mj::Agari::YAKU_RINSHAN));
   }
+  testYakuman();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void AgariTest::testYakuman() {
+  using Agari = ump::mj::Agari;
+  static const struct {
+    const char* hand;
+    const char* tsumo;
+    int yakuman;
+  } TABLES[] = {
+    { "1m9m1p9p1s9s1z2z3z4z5z6z7z", "4z", Agari::YAKUMAN_KOKUSHI }, 
+    { "4m5m6m2p2p5z5z5z6z6z7z7z7z", "6z", Agari::YAKUMAN_DAISANGEN }, 
+    { "1m1m9m9m9m1p1p1p1s1s9s9s9s", "1s", Agari::YAKUMAN_CHINROUTOU }, 
+    { "5m5m5m7p7p9p9p1s1s1s3s3s3s", "7p", Agari::YAKUMAN_SUANKO }, 
+    { "2m3m4m1z1z1z2z2z2z3z3z3z4z", "4z", Agari::YAKUMAN_SHOSUSHI }, 
+    { "3m3m1z1z1z2z2z2z3z3z3z4z4z", "4z", Agari::YAKUMAN_DAISUSHI }, 
+    { "1z1z1z2z2z4z4z4z5z5z5z7z7z", "2z", Agari::YAKUMAN_TSUISOU }, 
+    { "2s2s3s3s4s4s6s6s8s8s8s6z6z", "6s", Agari::YAKUMAN_RYUISOU }, 
+    { "1m1m1m2m3m4m5m6m7m8m9m9m9m", "2m", Agari::YAKUMAN_CHUREN }, 
+    { "1m1m2m2m2m3m3m3m4m4m4m7m7m", "1m", Agari::YAKUMAN_SUANKO }
+  };
+  for(auto& table : TABLES) {
+    resetHand(table.hand);
+    auto& agari = tsumo(table.tsumo);
+    TEST_MESSAGE(agari.isInclude(table.yakuman), agari.toString());
+  }
 }
 /***********************************************************************//**
 	@brief 
@@ -113,6 +141,7 @@ void AgariTest::resetHand(const char* hais) {
   player_->setBakaze(ump::mj::Hai::Get("1z"));
   player_->setZikaze(ump::mj::Hai::Get("1z"));
   player_->drawHaipai(ump::mj::HaiArray(hais));
+  player_->resetFirst();
 }
 /***********************************************************************//**
 	@brief 
@@ -120,6 +149,13 @@ void AgariTest::resetHand(const char* hais) {
 void AgariTest::openMentsu(const char* hais, const char* hai) {
   player_->openMentsu(ump::mj::HaiArray(hais), 
                       hai ? ump::mj::Hai::Get(hai) : nullptr);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+const ump::mj::Agari& AgariTest::tsumo(const char* hai, bool rinshan) {
+  player_->tsumo(ump::mj::Hai::Get(hai), rinshan);
+  return player_->getAgari();
 }
 /***********************************************************************//**
 	$Id$

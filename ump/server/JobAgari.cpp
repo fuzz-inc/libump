@@ -121,10 +121,12 @@ void JobAgari::agari() {
         command.append(han);
       }
     }
-    size_t dora = agari.getDora();
-    if(dora > 0) {
-      command.append(u8"ドラ");
-      command.append(dora);
+    if(!agari.isYakuman()) {
+      size_t dora = agari.getDora();
+      if(dora > 0) {
+        command.append(u8"ドラ");
+        command.append(dora);
+      }
     }
     sendAllLog(command);
   }

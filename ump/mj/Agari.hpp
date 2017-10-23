@@ -136,6 +136,7 @@ class Agari {
 
  public:
   Agari();
+  Agari(const Agari& src) = default;
   ~Agari() = default;
 
   void clear();
@@ -161,7 +162,7 @@ class Agari {
 
   void appendYaku(int yaku);
 
-  bool operator<(const Agari& other);
+  bool operator<(const Agari& rhs) const;
 
   std::string toString() const;
 
