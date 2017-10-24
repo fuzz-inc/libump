@@ -214,7 +214,7 @@ mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
     }
     if(sutehai.isRichi()) {
       if(!canRichi() || 
-         !getRichiableHai().hasEqual(sutehai.getHai())) {
+         !getRichiableHai().hasSame(sutehai.getHai())) {
         sutehai.setRichi(false);
       }
     }

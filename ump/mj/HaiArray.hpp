@@ -116,6 +116,8 @@ class HaiArray
   HaiArray getUnique() const;
   HaiArray& uniqueEqual();
 
+  HaiArray getNormal() const;
+
   const char* parseString(const char* pt);
   std::string toString() const;
 

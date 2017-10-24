@@ -59,7 +59,9 @@ void ShantenTest::onRun() {
     { "1m1m1m5m5m3p3p8p8p9s9s6z6z6z", 1, nullptr }, 
 
     { "1m9m1p9p1s7s9s1z2z3z4z4z5z6z", 0, "7s" }, 
-    { "1m9m1p9p1s9s9s1z2z3z4z4z5z6z", 0, "9s4z" }
+    { "1m9m1p9p1s9s9s1z2z3z4z4z5z6z", 0, "9s4z" }, 
+
+    { "4m4m4m5M5m7m5p6p7p4s5s6s7z7z", 0, "5m7m" }
   };
   for(auto& table : TABLES) {
     shanten_.update(table.hais, true);

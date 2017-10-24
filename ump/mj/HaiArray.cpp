@@ -199,6 +199,17 @@ HaiArray& HaiArray::uniqueEqual() {
   return *this;
 }
 /***********************************************************************//**
+	@brief 自身を標準化した牌列を返す
+	@return 自身を標準化した牌列
+***************************************************************************/
+HaiArray HaiArray::getNormal() const {
+  HaiArray hais;
+  for(auto hai : *this) {
+    hais.append(hai->getNormal());
+  }
+  return hais;
+}
+/***********************************************************************//**
 	@brief 牌を削除する.
 	@param[in] hai 削除する牌
 	@return 削除した牌(またはnullptr)

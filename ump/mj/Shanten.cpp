@@ -53,7 +53,7 @@ Shanten::~Shanten() {
 	@return シャンテン数
 ***************************************************************************/
 int Shanten::update(const HaiArray& hais, bool isMenzen) {
-  super::set(hais);
+  super::set(hais.getNormal());
   mentsuMax_ = hais.size() / 3;
   shanten_ = std::numeric_limits<int>::max();
   richi_.clear();
