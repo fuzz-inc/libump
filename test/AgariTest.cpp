@@ -81,6 +81,14 @@ void AgariTest::onRun() {
     auto& agari = player_->getAgari();
     TEST(agari.isInclude(ump::mj::Agari::YAKU_RINSHAN));
   }
+  {
+    resetHand("2z2z6p6p2s2s3z3z9m");
+    openMentsu("2z2z", "2z");
+    openMentsu("6p6p", "6p");
+    openMentsu("2s2s", "2s");
+    openMentsu("3z3z", "3z");
+    TEST(player_->canRon(ump::mj::Hai::Get("9m")));
+  }
   testYakuman();
 }
 /***********************************************************************//**
