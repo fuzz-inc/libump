@@ -159,7 +159,15 @@ void Job::openMentsu(std::shared_ptr<Player> player,
   {
     Command command(Command::TYPE_SAY);
     command.append(player->getSeatString());
-    command.append(type);
+    switch(type) {
+    case Command::TYPE_ANKAN:
+    case Command::TYPE_KAKAN:
+      command.append(Command::TYPE_KAN);
+      break;
+    default:
+      command.append(type);
+      break;
+    }
     sayAll(command);
   }
   Command command(Command::TYPE_OPEN);
