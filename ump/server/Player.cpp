@@ -107,7 +107,7 @@ bool Player::sendCommand(const Command& command) {
   if(isOpen() && getSocket().sendCommand(command)) {
     return true;
   }
-  //log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
+  log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
   return false;
 }
 /***********************************************************************//**
