@@ -89,6 +89,18 @@ void AgariTest::onRun() {
     openMentsu("3z3z", "3z");
     TEST(player_->canRon(ump::mj::Hai::Get("9m")));
   }
+  {
+    resetHand("7m7m3p4p6p7p8p6s6s7s7s7s");
+    openMentsu("6s6s", "6s");
+    auto& agari = parser_.parse(ump::mj::Hai::Get("5p"));
+    TEST(agari.getFu() == 30);
+  }
+  {
+    resetHand("3m4m5m2p3p4p5s5s6s6s6s7s");
+    openMentsu("6s6s", "6s");
+    auto& agari = parser_.parse(ump::mj::Hai::Get("8s"));
+    TEST(agari.getFu() == 30);
+  }
   testYakuman();
 }
 /***********************************************************************//**

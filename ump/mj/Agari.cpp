@@ -478,7 +478,10 @@ void Agari::updateFu() {
       fu_ = isRon() ? 30 : 20;
     }
     else {
-      fu_ = isRon() ? 30 : (20 + 2);
+      fu_ = (isMenzen() && isRon()) ? 30 : 20;
+      if(!isRon()) {
+        fu_ += 2;
+      }
       for(auto& mentsu : mentsus_) {
         fu_ += mentsu.getFu();
       }
