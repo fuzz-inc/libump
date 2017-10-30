@@ -48,7 +48,8 @@ namespace server {
 Game::Game(std::shared_ptr<const Config> config, 
            std::shared_ptr<Server> server)
   : server_(server), 
-    yama_(config)
+    yama_(config), 
+    kanNum_(0)
 {
   setConfig(config);
   setId(createId());
@@ -172,6 +173,7 @@ void Game::beginKyoku() {
     kaze = kaze->rotate(1);
     nextTurn();
   }
+  kanNum_ = 0;
 }
 /***********************************************************************//**
 	@brief ドラを追加する
@@ -214,6 +216,24 @@ void Game::onDiscarded(const Player& player, const mj::Hai* hai) {
   for(auto& iter : getPlayers()) {
     std::static_pointer_cast<Player>(iter)->onDiscarded(player, hai);
   }
+}
+/***********************************************************************//**
+	@brief 牌を晒したときの処理
+	@param[in] player 晒したプレイヤー
+	@param[in] mentsu 晒した面子
+***************************************************************************/
+void Game::onOpenMentsu(std::shared_ptr<Player> player, 
+                        std::shared_ptr<const mj::Mentsu> mentsu) {
+  if(mentsu->isKantsu()) {
+    kanNum_++;
+  }
+}
+/***********************************************************************//**
+	@brief 槓することができるか調べる
+	@return 槓できるとき真
+***************************************************************************/
+bool Game::canKan() const {
+  return getRest() >= 2 && kanNum_ < 4;
 }
 /***********************************************************************//**
 	@brief 牌山の残り枚数を取得する

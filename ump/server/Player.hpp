@@ -97,6 +97,8 @@ class Player
   void onRecvCommand(const Command& command) override;
   void onDisconnectSocket() override;
 
+  void onOpenMentsu(std::shared_ptr<const mj::Mentsu> mentsu) override;
+
  private:
   std::shared_ptr<Server> getServer() const;
 

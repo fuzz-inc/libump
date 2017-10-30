@@ -223,9 +223,7 @@ bool Player::canRichi() const {
 	@return 大明槓できるとき真
 ***************************************************************************/
 bool Player::canKan(const Hai* hai) const {
-  return getGame()->canKan() && 
-    !isRichi() &&
-    getMenzen().countSame(hai) >= 3;
+  return !isRichi() && getMenzen().countSame(hai) >= 3;
 }
 /***********************************************************************//**
 	@brief 大明槓できるか調べる
@@ -234,9 +232,7 @@ bool Player::canKan(const Hai* hai) const {
 	@return 大明槓できるとき真
 ***************************************************************************/
 bool Player::canKan(const HaiArray& hais, const Hai* hai) const {
-  return canKan(hai) && 
-    getMenzen().hasEqual(hais) &&
-    Mentsu(hais + hai).isKantsu();
+  return getMenzen().hasEqual(hais) && Mentsu(hais + hai).isKantsu();
 }
 /***********************************************************************//**
 	@brief 暗槓できるか調べる
@@ -265,7 +261,7 @@ bool Player::canAnkan() const {
 ***************************************************************************/
 bool Player::canAnkan(const HaiArray& hais) const {
   assert(hais.size() == 4 && hais.getUnique().size() == 1);
-  if(getGame()->canKan() && getMenzen().hasEqual(hais)) {
+  if(getMenzen().hasEqual(hais)) {
     if(isRichi()) {
       if(auto hai = getTsumoHai()) {
         return hais.at(0)->isSame(hai) && 

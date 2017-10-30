@@ -69,7 +69,7 @@ void JobNaki::onBegin() {
       if(player->canRon(hai)) {
         command.append(Command::TYPE_RON);
       }
-      if(player->canKan(hai)) {
+      if(game.canKan() && player->canKan(hai)) {
         command.append(Command::TYPE_KAN);
       }
       if(player->canPon(hai)) {
@@ -143,7 +143,8 @@ Job* JobNaki::doReply(std::shared_ptr<Player> player) {
     }
     else if(reply.countArg() > 0) {
       mj::HaiArray hais(reply.getArg(0).c_str());
-      if((type == Command::TYPE_KAN && player->canKan(hais, hai)) || 
+      if((type == Command::TYPE_KAN &&
+          game.canKan() && player->canKan(hais, hai)) || 
          (type == Command::TYPE_PON && player->canPon(hais, hai)) || 
          (getConfig()->canChi() && 
           type == Command::TYPE_CHI && player->canChi(hais, hai))) {

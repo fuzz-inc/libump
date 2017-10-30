@@ -55,6 +55,7 @@ class Game
   mj::Yama yama_;
   std::stack<std::unique_ptr<Job>> jobs_;
   std::mutex mutex_;
+  int kanNum_;
 
  public:
   Game(std::shared_ptr<const Config> config, 
@@ -85,6 +86,11 @@ class Game
   mj::HaiArray drawHaipai(size_t num);
   const mj::Hai* tsumo(bool rinshan);
   void onDiscarded(const Player& player, const mj::Hai* hai);
+
+  void onOpenMentsu(std::shared_ptr<Player> player, 
+                    std::shared_ptr<const mj::Mentsu> mentsu);
+
+  bool canKan() const;
 
   size_t getRest() const override;
 

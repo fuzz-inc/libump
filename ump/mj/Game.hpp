@@ -117,7 +117,6 @@ class Game
   virtual size_t getRest() const;
 
   bool canRichi() const;
-  bool canKan() const;
   bool canPon() const;
   bool canChi() const;
 

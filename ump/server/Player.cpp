@@ -247,6 +247,12 @@ void Player::onDisconnectSocket() {
   getServer()->onDisconnectPlayer(self);
 }
 /***********************************************************************//**
+	@copydoc mj::Hand::onOpenMentsu
+***************************************************************************/
+void Player::onOpenMentsu(std::shared_ptr<const mj::Mentsu> mentsu) {
+  getGame()->onOpenMentsu(shared_from_this(), mentsu);
+}
+/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 std::shared_ptr<Server> Player::getServer() const {
