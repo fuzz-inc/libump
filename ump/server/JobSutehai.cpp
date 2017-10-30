@@ -101,9 +101,7 @@ Job* JobSutehai::onUpdate() {
       if(reply.countArg() > 0) {
         mj::HaiArray hais(reply.getArg(0).c_str());
         if(player->canAnkan(hais)) {
-          openMentsu(player, type, hais);
-          game.appendDora();
-          return new JobTsumo(game, true);
+          return kan(type, hais);
         }
       }
       break;
@@ -111,9 +109,7 @@ Job* JobSutehai::onUpdate() {
       if(reply.countArg() > 0) {
         if(auto hai = mj::Hai::Get(reply.getArg(0))) {
           if(auto mentsu = player->findKakanMentsu(hai)) {
-            openMentsu(player, type, *mentsu, hai);
-            game.appendDora();
-            return new JobTsumo(game, true);
+            return kan(type, *mentsu, hai);
           }
         }
       }
@@ -155,6 +151,21 @@ Job* JobSutehai::sutehai(const Command& reply) {
   sendAllLog(command);
   sleep(0.25f);
   return new JobNaki(game, sutehai);
+}
+/***********************************************************************//**
+	@brief 槓
+	@param[in] type 種別
+	@param[in] hais 晒す牌
+	@param[in] hai 鳴いた牌
+	@return 次のジョブ
+***************************************************************************/
+Job* JobSutehai::kan(Command::Type type, 
+                     const mj::HaiArray& hais, 
+                     const mj::Hai* hai) {
+  auto& game = getGame();
+  openMentsu(game.getTurnPlayer(), type, hais, hai);
+  game.appendDora();
+  return new JobTsumo(game, true);
 }
 /***********************************************************************//**
 	$Id$

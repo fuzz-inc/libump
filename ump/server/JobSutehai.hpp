@@ -58,6 +58,10 @@ class JobSutehai
 
  private:
   Job* sutehai(const Command& reply);
+
+  Job* kan(Command::Type type, 
+           const mj::HaiArray& hais, 
+           const mj::Hai* hai = nullptr);
 };
 /***********************************************************************//**
 	$Id$
