@@ -91,12 +91,8 @@ class Hand {
   /**
    * 牌を晒したときの処理
    * @param[in] mentsu 晒したメンツ
-   * @param[in] hais 晒す牌
-   * @param[in] hai 鳴いた牌
    */
-  virtual void onOpenMentsu(std::shared_ptr<const Mentsu> mentsu, 
-                            const HaiArray& hais, 
-                            const Hai* hai) {}
+  virtual void onOpenMentsu(std::shared_ptr<const Mentsu> mentsu) {}
 
   /**
    * 加槓したときの処理

@@ -167,13 +167,13 @@ void Hand::openMentsu(const HaiArray& hais, const Hai* hai) {
   if(hai) {
     auto _hais(hais);
     _hais.append(hai);
-    mentsu = std::make_shared<Mentsu>(_hais, false);
+    mentsu = std::make_shared<Mentsu>(_hais, hai);
   }
   else {
-    mentsu = std::make_shared<Mentsu>(hais, true);
+    mentsu = std::make_shared<Mentsu>(hais);
   }
   mentsus_.push_back(mentsu);
-  onOpenMentsu(mentsu, hais, hai);
+  onOpenMentsu(mentsu);
 }
 /***********************************************************************//**
 	@brief 加槓

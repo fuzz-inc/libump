@@ -37,16 +37,16 @@ namespace mj {
 /***********************************************************************//**
 	@brief コンストラクタ
 	@param[in] hais 牌の配列
-	@param[in] isMenzen 面前のとき真
+	@param[in] claimHai 鳴いた牌
 ***************************************************************************/
-Mentsu::Mentsu(const HaiArray& hais, bool isMenzen)
+Mentsu::Mentsu(const HaiArray& hais, const Hai* claimHai)
   : super(hais), 
     type_(TYPE_NULL), 
+    claimHai_(claimHai), 
     fu_(0), 
     machiFu_(0)
 {
   sort();
-  flag_.set(FLAG_MENZEN, isMenzen);
   switch(size()) {
   case 2:
     if(at(1)->isSame(at(0))) {
@@ -87,7 +87,7 @@ int Mentsu::getFu() const {
 	@return 面前のとき真
 ***************************************************************************/
 bool Mentsu::isMenzen() const {
-    return flag_.test(FLAG_MENZEN);
+  return !getClaimHai();
 }
 /***********************************************************************//**
 	@brief ロン和了か調べる

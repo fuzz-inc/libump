@@ -54,21 +54,23 @@ class Mentsu
     TYPE_MAX
   };
   enum {
-    FLAG_MENZEN, 		/**< 面前 */
     FLAG_RON, 			/**< ロン和了 */
     FLAG_MAX
   };
 
  private:
   Type type_;			/**< 種別 */
+  const Hai* claimHai_;		/**< 鳴いた牌 */
   int fu_;			/**< 基本符 */
   int machiFu_;			/**< 待ちの形に付く符 */
   std::bitset<FLAG_MAX> flag_;
 
  public:
-  Mentsu(const HaiArray& hais, bool isMenzen = true);
+  Mentsu(const HaiArray& hais, const Hai* claimHai = nullptr);
   Mentsu(const Mentsu& src) = default;
   ~Mentsu() = default;
+
+  UMP_GETTER(ClaimHai, claimHai_);
 
   int getFu() const;
 
