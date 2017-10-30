@@ -58,8 +58,10 @@ void JobGame::onBegin() {
 ***************************************************************************/
 Job* JobGame::onUpdate() {
   if(isNextKyoku()) {
-    getGame().beginJob(new JobKyoku(getGame()));
+    auto& game = getGame();
+    game.beginJob(new JobKyoku(game));
     kyokuNum_++;
+    flag_.set(FLAG_LAST_KYOKU, game.isLastKyoku());
     return this;
   }
   return nullptr;
@@ -105,7 +107,7 @@ bool JobGame::isNextKyoku() const {
     }
   }
   if(config->isAgariyame()) {
-    if(game.isLastKyoku() && 
+    if(flag_.test(FLAG_LAST_KYOKU) && 
        game.isRenchan() && 
        getRanking().at(0) == game.getPlayer(game.getOya())) {
       return false;
