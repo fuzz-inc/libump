@@ -72,7 +72,6 @@ Job* JobGame::onUpdate() {
 void JobGame::onEnd() {
   auto players = getRanking();
   const auto& uma = getConfig()->getUma();
-  Command command(Command::TYPE_GAMEEND);
   for(size_t i = 0, n = players.size(); i < n; i++) {
     auto& player = players.at(i);
     auto point = player->getPoint();
@@ -83,11 +82,16 @@ void JobGame::onEnd() {
       point += uma.at(i);
     }
     player->setPoint(point);
-    command.append(player->getSeatString());
-    command.append(point.toString());
   }
-  sendAllLog(command);
   getGame().onEndGame(players);
+  {
+    Command command(Command::TYPE_GAMEEND);
+    for(auto& player : players) {
+      command.append(player->getSeatString());
+      command.append(player->getPoint().toString());
+    }
+    sendAllLog(command);
+  }
 }
 /***********************************************************************//**
 	@brief 次の局に進むか調べる
