@@ -52,7 +52,7 @@ Game::Game(std::shared_ptr<const Config> config,
     kanNum_(0)
 {
   setConfig(config);
-  setId(createId());
+  setId(server->createGameId());
   if(!getConfig()->getLogPrefix().empty()) {
     openLogFile(getLogPath(getId()));
   }

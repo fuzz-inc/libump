@@ -50,6 +50,7 @@ class Server
   std::vector<std::shared_ptr<Game>> games_;
   std::shared_ptr<Game> game_;
   std::mutex mutex_;
+  int gameId_ = 0;
 
  public:
   Server(const std::shared_ptr<socket::Socket>& socket, 
@@ -62,10 +63,12 @@ class Server
   void start();
   void stop();
 
-  void onEndGame(std::shared_ptr<Game> game);
+  virtual void onEndGame(std::shared_ptr<Game> game);
 
   void recvCommand(std::shared_ptr<Player> player, 
                    const Command& command);
+
+  virtual std::string createGameId();
 
   virtual void onDisconnectPlayer(std::shared_ptr<Player> player) {}
 
@@ -81,7 +84,9 @@ class Server
 
   UMP_GETTER(Games, games_);
   virtual std::shared_ptr<Game> createGame();
+
   void startGame(std::shared_ptr<Game> game);
+  virtual void onBeginGame(std::shared_ptr<Game> game) {}
 
   virtual void onConnectPlayer(std::shared_ptr<Player> player);
   virtual void onRecvCommand(std::shared_ptr<Player> player, 
