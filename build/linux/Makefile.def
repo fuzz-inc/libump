@@ -41,13 +41,16 @@ $(OBJDIR)/%$(OBJEXT): $(SRCDIR)/%.cpp
 	@$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
 
 $(LIBDIR)/%$(LIBEXT):
+	@echo $@
 	@$(MKDIR) $(dir $@)
-	$(AR) $(ARFLAGS) $@ $+
+	@$(AR) $(ARFLAGS) $@ $+
 
 $(BINDIR)/%$(BINEXT):
+	@echo $@
 	@$(MKDIR) $(dir $@)
-	$(LD) -o $@ $+ $(LDFLAGS)
+	@$(LD) -o $@ $+ $(LDFLAGS)
 
 $(OBJDIR)/%.h.gch:
+	@echo $@
 	@$(MKDIR) $(dir $@)
-	$(CXX) $(CXXFLAGS) -MD -o $@ $<
+	@$(CXX) $(CXXFLAGS) -MD -o $@ $<
