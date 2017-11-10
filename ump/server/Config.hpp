@@ -74,7 +74,6 @@ class Config
   float sayWait_;
   float agariWait_;
   float uraDoraWait_;
-  std::string logPrefix_;
 
  public:
   Config();
@@ -131,8 +130,6 @@ class Config
   UMP_ACCESSOR(SayWait, sayWait_);
   UMP_ACCESSOR(AgariWait, agariWait_);
   UMP_ACCESSOR(UraDoraWait, uraDoraWait_);
-
-  UMP_ACCESSOR(LogPrefix, logPrefix_);
 };
 /***********************************************************************//**
 	$Id$

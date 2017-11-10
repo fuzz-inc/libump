@@ -52,10 +52,6 @@ Game::Game(std::shared_ptr<const Config> config,
     kanNum_(0)
 {
   setConfig(config);
-  setId(server->createGameId());
-  if(!getConfig()->getLogPrefix().empty()) {
-    openLogFile(getLogPath(getId()));
-  }
 }
 /***********************************************************************//**
 	@brief デストラクタ
@@ -357,49 +353,6 @@ void Game::dump() const {
     printf("[%s] %s\n", Command::SeatToString(i).c_str(), 
            getPlayer(i)->toString().c_str());
   }
-}
-/***********************************************************************//**
-	@brief ゲームIDを生成する
-	@return ゲームID
-***************************************************************************/
-std::string Game::createId() const {
-  uint64_t id;
-  auto now = time(nullptr);
-  struct tm* tm = localtime(&now);
-  id = (1900 + tm->tm_year) * 10000000000UL + 
-    (tm->tm_mon + 1) * 100000000UL + 
-    tm->tm_mday * 1000000UL + 
-    tm->tm_hour * 10000UL + 
-    tm->tm_min * 100UL + 
-    tm->tm_sec;
-  std::string idStr;
-  while(true) {
-    std::stringstream buff;
-    buff << id;
-    idStr = buff.str();
-    auto path = getLogPath(idStr);
-#if defined(UMP_PLATFORM_WINDOWS)
-    struct __stat64 status;
-    if(__stat64(path.c_str(), &status) != 0) {
-      break;
-    }
-#else
-    struct stat status;
-    if(stat(path.c_str(), &status) != 0) {
-      break;
-    }
-#endif
-    id++;
-  }
-  return idStr;
-}
-/***********************************************************************//**
-	@brief ログ出力パスを取得する
-	@param[in] id ゲームID
-	@return ログ出力パス
-***************************************************************************/
-std::string Game::getLogPath(const std::string& id) const {
-  return getConfig()->getLogPrefix() + id + ".log";
 }
 /***********************************************************************//**
 	@brief ドラを追加する

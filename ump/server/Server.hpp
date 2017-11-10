@@ -68,8 +68,6 @@ class Server
   void recvCommand(std::shared_ptr<Player> player, 
                    const Command& command);
 
-  virtual std::string createGameId();
-
   virtual void onDisconnectPlayer(std::shared_ptr<Player> player) {}
 
  protected:

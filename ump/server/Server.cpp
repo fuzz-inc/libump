@@ -96,12 +96,6 @@ void Server::recvCommand(std::shared_ptr<Player> player,
   onRecvCommand(player, command);
 }
 /***********************************************************************//**
-	@brief ゲームIDを生成する
-***************************************************************************/
-std::string Server::createGameId() {
-  return std::to_string(++gameId_);
-}
-/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void Server::onThread() {
@@ -124,7 +118,9 @@ Server::createPlayer(std::shared_ptr<socket::Socket> socket) {
 	@brief 
 ***************************************************************************/
 std::shared_ptr<Game> Server::createGame() {
-  return std::make_shared<Game>(getConfig(), shared_from_this());
+  auto game = std::make_shared<Game>(getConfig(), shared_from_this());
+  game->setId(std::to_string(++gameId_));
+  return game;
 }
 /***********************************************************************//**
 	@brief ゲームを開始する

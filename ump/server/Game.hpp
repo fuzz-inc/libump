@@ -117,9 +117,6 @@ class Game
 
   void dump() const;
 
-  std::string createId() const;
-  std::string getLogPath(const std::string& id) const;
-
   void appendDora(Command::Type type);
   const mj::Hai* getDora(const mj::Hai* hai) const;
 };
