@@ -68,12 +68,6 @@ std::shared_ptr<Game> Player::getGame() const {
   return std::static_pointer_cast<Game>(super::getGame());
 }
 /***********************************************************************//**
-	@brief 
-***************************************************************************/
-bool Player::isOpen() const {
-  return getSocket().isOpen();
-}
-/***********************************************************************//**
 	@brief UMPコマンドを送信する(同期)
 	@param[in] command UMPコマンド
 	@return 送信に成功したとき真
@@ -104,7 +98,7 @@ bool Player::send(const Command& command) {
 ***************************************************************************/
 bool Player::sendCommand(const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
-  if(isOpen() && getSocket().sendCommand(command)) {
+  if(isConnect() && getSocket().sendCommand(command)) {
     return true;
   }
   log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));

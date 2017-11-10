@@ -72,8 +72,6 @@ class Player
   void setGame(std::shared_ptr<mj::Game> game) override;
   std::shared_ptr<Game> getGame() const;
 
-  bool isOpen() const;
-
   bool send(const Command& command);
   bool sendCommand(const Command& command);
 
