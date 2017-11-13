@@ -62,6 +62,8 @@ class Player
   Command reply_;
   std::mutex mutex_;
   std::bitset<FLAG_MAX> flag_;
+  std::vector<Command> gameLog_;
+  std::vector<Command> kyokuLog_;
 
  public:
   Player(std::shared_ptr<Server> server, 

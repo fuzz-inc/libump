@@ -93,6 +93,7 @@ class Command {
 
  private:
   static const std::string OPTION_DATASIZE;
+  static const std::string OPTION_RECONNECT;
 
  private:
   Type type_;
@@ -137,6 +138,9 @@ class Command {
   void setData(std::shared_ptr<const std::vector<char>> data);
   UMP_GETTER(Data, data_);
   size_t getDataSize() const;
+
+  Command& setReconnect();
+  bool isReconnect() const;
 
   bool parse(const char* command);
 

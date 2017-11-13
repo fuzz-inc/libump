@@ -73,6 +73,33 @@ std::shared_ptr<Game> Player::getGame() const {
 ***************************************************************************/
 bool Player::sendCommand(const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
+  if(!command.isReconnect()) {
+    switch(command.getType()) {
+    case Command::TYPE_SEAT:
+    case Command::TYPE_PLAYER:
+    case Command::TYPE_GAMESTART:
+      gameLog_.emplace_back(command);
+      break;
+    case Command::TYPE_KYOKUSTART:
+      kyokuLog_.clear();
+      /* break */
+    case Command::TYPE_POINT:
+    case Command::TYPE_RICHI:
+    case Command::TYPE_DICE:
+    case Command::TYPE_HAIPAI:
+    case Command::TYPE_OPEN:
+    case Command::TYPE_DORA:
+    case Command::TYPE_URADORA:
+    case Command::TYPE_TSUMO:
+    case Command::TYPE_SUTEHAI:
+    case Command::TYPE_AGARI:
+    case Command::TYPE_RYUKYOKU:
+      kyokuLog_.emplace_back(command);
+      break;
+    default:
+      break;
+    }
+  }
   if(command.getSerial() != 0) {
     command_ = command;
     reply_.clear();
@@ -144,20 +171,11 @@ std::shared_ptr<Socket> Player::resetSocket() {
 ***************************************************************************/
 void Player::resetSocket(std::shared_ptr<Socket> socket) {
   SocketThread::resetSocket(socket);
-  if(auto game = getGame()) {
-    auto self = shared_from_this();
-    game->onAppendPlayer(getSeat(), shared_from_this());
-    {
-      Command command(Command::TYPE_PLAYER);
-      command.append(Command::SeatToString(getSeat()));
-      command.append(getName());
-      game->sendCommand(self, command);
-    }
-    if(game->isStart()) {
-      Command command(Command::TYPE_GAMESTART);
-      command.setOption("id", game->getId());
-      game->sendCommand(self, command);
-    }
+  for(auto& command : gameLog_) {
+    sendCommand(Command(command).setReconnect());
+  }
+  for(auto& command : kyokuLog_) {
+    sendCommand(Command(command).setReconnect());
   }
 }
 /***********************************************************************//**

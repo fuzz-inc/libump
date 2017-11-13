@@ -83,6 +83,7 @@ const char* Command::TYPE_TABLE[] = {
 
 const std::string Command::OPTION_GAMEID("gameid");
 const std::string Command::OPTION_DATASIZE("datasize");
+const std::string Command::OPTION_RECONNECT("reconnect");
 /***********************************************************************//**
 	@brief コンストラクタ
         @param[in] type 種別
@@ -231,6 +232,21 @@ size_t Command::getDataSize() const {
   return hasOption(OPTION_DATASIZE)
     ? std::stoul(getOption(OPTION_DATASIZE))
     : 0;
+}
+/***********************************************************************//**
+	@brief 再接続フラグを立てる
+	@return 自分自身
+***************************************************************************/
+Command& Command::setReconnect() {
+  setOption(OPTION_RECONNECT, "1");
+  return *this;
+}
+/***********************************************************************//**
+	@brief 再接続フラグが立っているか調べる
+	@return 再接続フラグが立っているとき真
+***************************************************************************/
+bool Command::isReconnect() const {
+  return hasOption(OPTION_RECONNECT);
 }
 /***********************************************************************//**
 	@brief 文字列を解析する
