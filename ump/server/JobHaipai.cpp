@@ -84,7 +84,11 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
     bool isTurn = (i == seat);
     auto command = game.createCommand(Command::TYPE_HAIPAI);
     command.append(Command::SeatToString(seat));
-    if(isTurn || config->isOpen()) {
+    if(isTurn) {
+      command.append(hais.toString());
+      getPlayer(i)->drawHaipai(hais, command);
+    }
+    else if(config->isOpen()) {
       command.append(hais.toString());
     }
     else {
@@ -92,7 +96,6 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
     }
     game.sendCommand(getPlayer(i), command);
   }
-  getPlayer(seat)->drawHaipai(hais);
 }
 /***********************************************************************//**
 	$Id$

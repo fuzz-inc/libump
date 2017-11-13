@@ -145,6 +145,9 @@ class Player
 
   bool isHaitei() const;
 
+  virtual void drawHaipai(const HaiArray& haipai, 
+                          const Command& command);
+
  protected:
   /**
    * 点数がセットされたときの処理

@@ -51,7 +51,7 @@ class Hand {
   Hand() = default;
   virtual ~Hand() = default;
 
-  virtual void drawHaipai(const HaiArray& haipai);
+  void drawHaipai(const HaiArray& haipai);
   UMP_GETTER(Menzen, menzen_);
   Hand& sort();
 

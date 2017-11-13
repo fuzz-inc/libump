@@ -420,6 +420,15 @@ bool Player::isHaitei() const {
   return getGame()->getRest() == 0;
 }
 /***********************************************************************//**
+	@brief 配牌を取る
+	@param[in] haipai 配牌
+	@param[in] command コマンド
+***************************************************************************/
+void Player::drawHaipai(const HaiArray& haipai, 
+                        const Command& command) {
+  super::drawHaipai(haipai);
+}
+/***********************************************************************//**
 	@copydoc Hand::onShowHai
 ***************************************************************************/
 void Player::onShowHai(const Hai* hai) {
