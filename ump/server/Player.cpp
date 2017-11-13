@@ -120,8 +120,10 @@ void Player::reset() {
 /***********************************************************************//**
 	@copydoc mj::Player::tsumo
 ***************************************************************************/
-void Player::tsumo(const mj::Hai* hai, bool rinshan) {
-  super::tsumo(hai, rinshan);
+void Player::tsumo(const Command& command, 
+                   const mj::Hai* hai, 
+                   bool rinshan) {
+  super::tsumo(command, hai, rinshan);
   if(!isRichi() && isFuriten()) {
     log(Logger::LEVEL_DEBUG, 
         std::string("[furiten-]") + getMenzen().toString());

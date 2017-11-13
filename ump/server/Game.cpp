@@ -194,14 +194,11 @@ mj::HaiArray Game::drawHaipai(size_t num) {
   return yama_.getHaipai(num);
 }
 /***********************************************************************//**
-	@brief ツモ
-	@param[in] rinshan 嶺上牌のとき真
-	@return ツモった牌
+	@brief 牌山から1枚引く
+	@return 引いた牌
 ***************************************************************************/
-const mj::Hai* Game::tsumo(bool rinshan) {
-  const mj::Hai* hai = yama_.tsumo();
-  getTurnPlayer()->tsumo(hai, rinshan);
-  return hai;
+const mj::Hai* Game::drawHai() {
+  return yama_.tsumo();
 }
 /***********************************************************************//**
 	@brief 牌が捨てられたときの処理(鳴き処理後)

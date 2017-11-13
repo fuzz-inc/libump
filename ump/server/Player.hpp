@@ -79,7 +79,9 @@ class Player
   UMP_GETTER(Reply, reply_);
 
   void reset() override;
-  void tsumo(const mj::Hai* hai, bool rinshan) override;
+  void tsumo(const Command& command, 
+             const mj::Hai* hai, 
+             bool rinshan) override;
 
   void onDiscarded(const Player& player, const mj::Hai* hai);
 

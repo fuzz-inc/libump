@@ -363,7 +363,8 @@ void Client::execTsumo(const Command& command) {
   setTurn(seat);
   auto player = getPlayer(seat);
   rest_ = std::atoi(command.getArg(1).c_str());
-  player->tsumo((command.countArg() > 2)
+  player->tsumo(command, 
+                (command.countArg() > 2)
                 ? mj::Hai::Get(command.getArg(2)) : nullptr, 
                 command.hasArg(Command::TYPE_RINSHAN));
 }

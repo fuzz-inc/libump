@@ -85,7 +85,7 @@ class Game
   void appendDora();
   void uraDora();
   mj::HaiArray drawHaipai(size_t num);
-  const mj::Hai* tsumo(bool rinshan);
+  const mj::Hai* drawHai();
   void onDiscarded(const Player& player, const mj::Hai* hai);
 
   void onOpenMentsu(std::shared_ptr<Player> player, 

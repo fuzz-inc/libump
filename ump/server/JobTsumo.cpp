@@ -54,14 +54,18 @@ Job* JobTsumo::onUpdate() {
   auto config = getConfig();
   auto& game = getGame();
   auto player = game.getTurnPlayer();
-  auto hai = game.tsumo(rinshan_);
+  auto hai = game.drawHai();
   auto rest = game.getRest();
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     bool isTurn = (i == game.getTurn());
     auto command = game.createCommand(Command::TYPE_TSUMO);
     command.append(player->getSeatString());
     command.append(rest);
-    if(isTurn || config->isOpen()) {
+    if(isTurn) {
+      command.append(hai->toString());
+      game.getPlayer(i)->tsumo(command, hai, rinshan_);
+    }
+    else if(config->isOpen()) {
       command.append(hai->toString());
     }
     else {

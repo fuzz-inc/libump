@@ -152,10 +152,11 @@ bool Player::isOya() const {
 }
 /***********************************************************************//**
 	@brief 牌を自摸る
+	@param[in] command UMPコマンド
 	@param[in] hai ツモった牌
 	@param[in] rinshan 嶺上牌のとき真
 ***************************************************************************/
-void Player::tsumo(const Hai* hai, bool rinshan) {
+void Player::tsumo(const Command& command, const Hai* hai, bool rinshan) {
   super::sort();
   tsumoHai_ = hai;
   append(hai);

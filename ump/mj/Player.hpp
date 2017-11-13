@@ -111,7 +111,9 @@ class Player
   UMP_ACCESSOR(Bakaze, bakaze_);
   UMP_ACCESSOR(Zikaze, zikaze_);
 
-  virtual void tsumo(const Hai* hai, bool rinshan);
+  virtual void tsumo(const Command& command, 
+                     const Hai* hai, 
+                     bool rinshan);
   const Hai* getTsumoHai() const;
 
   bool updateAgari(const Hai* ron = nullptr);
