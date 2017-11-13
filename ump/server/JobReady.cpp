@@ -31,6 +31,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	@file
 ***************************************************************************/
 #include "ump/server/Config.hpp"
+#include "ump/server/Game.hpp"
 #include "ump/server/JobReady.hpp"
 #include "ump/server/Player.hpp"
 
@@ -41,13 +42,14 @@ namespace server {
 ***************************************************************************/
 JobReady::JobReady(Game& game)
   : super(game)
-{}
+{
+}
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void JobReady::onBegin() {
-  Command command(Command::TYPE_READY_Q);
-  sendAll(command);
+  auto& game = getGame();
+  game.sendAll(game.createCommand(Command::TYPE_READY_Q));
 }
 /***********************************************************************//**
 	@brief 

@@ -64,7 +64,7 @@ void JobNaki::onBegin() {
     auto index = (game.getTurn() + i) % playerNum;
     auto player = game.getPlayer(index);
     if(player->isConnect()) {
-      Command command(Command::TYPE_NAKI_Q);
+      auto command = game.createCommand(Command::TYPE_NAKI_Q);
       command.append(hai->toString());
       if(player->canRon(hai)) {
         command.append(Command::TYPE_RON);
@@ -79,7 +79,7 @@ void JobNaki::onBegin() {
         command.append(Command::TYPE_CHI);
       }
       if(command.countArg() > 1) {
-        player->send(command);
+        game.sendCommand(player, command);
         players_.push_back(player);
       }
     }

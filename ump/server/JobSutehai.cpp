@@ -48,7 +48,7 @@ namespace server {
 JobSutehai::JobSutehai(Game& game, const mj::Hai* tsumoHai)
   : super(game), 
     tsumoHai_(tsumoHai), 
-    command_(Command::TYPE_SUTEHAI_Q)
+    command_(game.createCommand(Command::TYPE_SUTEHAI_Q))
 {
 }
 /***********************************************************************//**
@@ -74,7 +74,7 @@ void JobSutehai::onBegin() {
       }
     }
   }
-  player->send(command_);
+  game.sendCommand(player, command_);
   sleep(0.5f);
 }
 /***********************************************************************//**
@@ -134,12 +134,12 @@ Job* JobSutehai::sutehai(const Command& reply) {
   request.setRichi(reply.hasArg(Command::TYPE_RICHI));
   auto sutehai = game.sutehai(*player, request);
   if(sutehai->isRichi()) {
-    Command command(Command::TYPE_SAY);
+    auto command = game.createCommand(Command::TYPE_SAY);
     command.append(player->getSeatString());
     command.append(Command::TYPE_RICHI);
     sayAll(command);
   }
-  Command command(Command::TYPE_SUTEHAI);
+  auto command = game.createCommand(Command::TYPE_SUTEHAI);
   command.append(player->getSeatString());
   command.append(sutehai->getHai()->toString());
   if(sutehai->isTsumogiri()) {
@@ -148,7 +148,7 @@ Job* JobSutehai::sutehai(const Command& reply) {
   if(sutehai->isRichi()) {
     command.append(Command::TYPE_RICHI);
   }
-  sendAllLog(command);
+  game.sendAll(command);
   sleep(0.25f);
   return new JobNaki(game, sutehai);
 }

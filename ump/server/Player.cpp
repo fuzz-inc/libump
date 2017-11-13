@@ -45,8 +45,7 @@ namespace server {
 Player::Player(std::shared_ptr<Server> server, 
                std::shared_ptr<Socket> socket)
   : SocketThread(socket), 
-    server_(server), 
-    serial_(0)
+    server_(server)
 {
 }
 /***********************************************************************//**
@@ -68,36 +67,16 @@ std::shared_ptr<Game> Player::getGame() const {
   return std::static_pointer_cast<Game>(super::getGame());
 }
 /***********************************************************************//**
-	@brief UMPコマンドを送信する(同期)
-	@param[in] command UMPコマンド
-	@return 送信に成功したとき真
-***************************************************************************/
-bool Player::send(const Command& command) {
-  if(isDisconnect() && isConnect()) {
-    switch(command.getType()) {
-    case Command::TYPE_KYOKUSTART:
-      setDisconnect(false);
-      break;
-    case Command::TYPE_SEAT:
-    case Command::TYPE_PLAYER:
-    case Command::TYPE_GAMESTART:
-      break;
-    default:
-      return false;
-    }
-  }
-  command_ = command;
-  command_.setSerial(++serial_);
-  reply_.clear();
-  return sendCommand(command_);
-}
-/***********************************************************************//**
-	@brief UMPコマンドを送信する(非同期)
+	@brief UMPコマンドを送信する
 	@param[in] command UMPコマンド
 	@return 送信に成功したとき真
 ***************************************************************************/
 bool Player::sendCommand(const Command& command) {
   std::lock_guard<std::mutex> lock(mutex_);
+  if(command.getSerial() != 0) {
+    command_ = command;
+    reply_.clear();
+  }
   if(isConnect() && getSocket().sendCommand(command)) {
     return true;
   }
@@ -219,7 +198,7 @@ mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
 	@brief 
 ***************************************************************************/
 void Player::onRecvCommand(const Command& command) {
-  if(command.getSerial() == serial_) {
+  if(command.getSerial() == command_.getSerial()) {
     reply_ = command;
   }
   if(auto game = getGame()) {

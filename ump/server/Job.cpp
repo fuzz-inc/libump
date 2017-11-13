@@ -93,27 +93,12 @@ std::shared_ptr<Player> Job::getPlayer(size_t seat) const {
   return getGame().getPlayer(seat);
 }
 /***********************************************************************//**
-	@brief すべてのプレイヤーにコマンドを送る
-	@param[in] command 送るコマンド
-***************************************************************************/
-void Job::sendAll(const Command& command) const {
-  getGame().sendAll(command);
-}
-/***********************************************************************//**
-	@brief すべてのプレイヤーにコマンドを送りログを取る
-	@param[in] command 送るコマンド
-***************************************************************************/
-void Job::sendAllLog(const Command& command) const {
-  sendAll(command);
-  log(Logger::LEVEL_INFO, command.toString(false));
-}
-/***********************************************************************//**
 	@brief 発声コマンドをすべてのプレイヤーに送る
 	@param[in] command 発声コマンド
 ***************************************************************************/
 void Job::sayAll(const Command& command) const {
   assert(command.getType() == Command::TYPE_SAY);
-  sendAllLog(command);
+  getGame().sendAll(command);
   sleep(getConfig()->getSayWait());
 }
 /***********************************************************************//**
@@ -140,10 +125,11 @@ bool Job::isEnd() const {
 	@param[in] seat 公開する席
 ***************************************************************************/
 void Job::openHand(size_t seat) {
-  Command command(Command::TYPE_OPEN);
+  auto& game = getGame();
+  auto command = game.createCommand(Command::TYPE_OPEN);
   command.append(Command::SeatToString(seat));
   command.append(getPlayer(seat)->getMenzen().toString());
-  sendAllLog(command);
+  game.sendAll(command);
 }
 /***********************************************************************//**
 	@brief 面子を晒す
@@ -156,8 +142,9 @@ void Job::openMentsu(std::shared_ptr<Player> player,
                      Command::Type type, 
                      const mj::HaiArray& hais, 
                      const mj::Hai* hai) {
+  auto& game = getGame();
   {
-    Command command(Command::TYPE_SAY);
+    auto command = game.createCommand(Command::TYPE_SAY);
     command.append(player->getSeatString());
     switch(type) {
     case Command::TYPE_ANKAN:
@@ -170,7 +157,7 @@ void Job::openMentsu(std::shared_ptr<Player> player,
     }
     sayAll(command);
   }
-  Command command(Command::TYPE_OPEN);
+  auto command = game.createCommand(Command::TYPE_OPEN);
   command.append(player->getSeatString());
   if(type == Command::TYPE_KAKAN) {
     command.append(std::string("[") + hais.toString() + "]");
@@ -190,7 +177,7 @@ void Job::openMentsu(std::shared_ptr<Player> player,
   for(auto player : getGame().getPlayers()) {
     player->onOpen();
   }
-  sendAllLog(command);
+  game.sendAll(command);
 }
 /***********************************************************************//**
 	@brief 点数を加減算する
@@ -200,10 +187,11 @@ void Job::openMentsu(std::shared_ptr<Player> player,
 ***************************************************************************/
 void Job::addPoint(size_t seat, const BigNum& value, Command::Type type) {
   assert(value != 0);
-  Command command(type);
+  auto& game = getGame();
+  auto command = game.createCommand(type);
   command.append(Command::SeatToString(seat));
   command.append(value.toString(true));
-  sendAllLog(command);
+  game.sendAll(command);
   getPlayer(seat)->addPoint(value);
 }    
 /***********************************************************************//**

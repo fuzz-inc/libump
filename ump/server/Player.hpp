@@ -58,7 +58,6 @@ class Player
 
  private:
   std::weak_ptr<Server> server_;
-  unsigned int serial_;
   Command command_;
   Command reply_;
   std::mutex mutex_;
@@ -72,7 +71,6 @@ class Player
   void setGame(std::shared_ptr<mj::Game> game) override;
   std::shared_ptr<Game> getGame() const;
 
-  bool send(const Command& command);
   bool sendCommand(const Command& command);
 
   UMP_GETTER(Command, command_);

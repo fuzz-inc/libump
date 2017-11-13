@@ -74,6 +74,7 @@ Job* JobHaipai::onUpdate() {
 	@brief 
 ***************************************************************************/
 void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
+  auto& game = getGame();
   auto config = getConfig();
   mj::HaiArray fusehai;
   for(size_t i = 0, n = hais.size(); i < n; i++) {
@@ -81,7 +82,7 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
   }
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     bool isTurn = (i == seat);
-    Command command(Command::TYPE_HAIPAI);
+    auto command = game.createCommand(Command::TYPE_HAIPAI);
     command.append(Command::SeatToString(seat));
     if(isTurn || config->isOpen()) {
       command.append(hais.toString());
@@ -89,10 +90,7 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
     else {
       command.append(fusehai.toString());
     }
-    getPlayer(i)->send(command);
-    if(isTurn) {
-      log(Logger::LEVEL_INFO, command.toString(false));
-    }
+    game.sendCommand(getPlayer(i), command);
   }
   getPlayer(seat)->drawHaipai(hais);
 }

@@ -49,9 +49,10 @@ JobGame::JobGame(Game& game)
 	@brief 開始
 ***************************************************************************/
 void JobGame::onBegin() {
-  Command command(Command::TYPE_GAMESTART);
-  command.setOption("id", getGame().getId());
-  sendAllLog(command);
+  auto& game = getGame();
+  auto command = game.createCommand(Command::TYPE_GAMESTART);
+  command.setOption("id", game.getId());
+  game.sendAll(command);
 }
 /***********************************************************************//**
 	@brief 
@@ -70,27 +71,28 @@ Job* JobGame::onUpdate() {
 	@brief 
 ***************************************************************************/
 void JobGame::onEnd() {
+  auto& game = getGame();
   auto players = getRanking();
   const auto& uma = getConfig()->getUma();
   for(size_t i = 0, n = players.size(); i < n; i++) {
     auto& player = players.at(i);
     auto point = player->getPoint();
     if(i == 0) {
-      point += getGame().resetKyotaku();
+      point += game.resetKyotaku();
     }
     if(i < uma.size()) {
       point += uma.at(i);
     }
     player->setPoint(point);
   }
-  getGame().onEndGame(players);
+  game.onEndGame(players);
   {
-    Command command(Command::TYPE_GAMEEND);
+    auto command = game.createCommand(Command::TYPE_GAMEEND);
     for(auto& player : players) {
       command.append(player->getSeatString());
       command.append(player->getPoint().toString());
     }
-    sendAllLog(command);
+    game.sendAll(command);
   }
 }
 /***********************************************************************//**

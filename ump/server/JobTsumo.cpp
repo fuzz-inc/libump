@@ -58,7 +58,7 @@ Job* JobTsumo::onUpdate() {
   auto rest = game.getRest();
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     bool isTurn = (i == game.getTurn());
-    Command command(Command::TYPE_TSUMO);
+    auto command = game.createCommand(Command::TYPE_TSUMO);
     command.append(player->getSeatString());
     command.append(rest);
     if(isTurn || config->isOpen()) {
@@ -70,10 +70,7 @@ Job* JobTsumo::onUpdate() {
     if(rinshan_) {
       command.append(Command::TYPE_RINSHAN);
     }
-    game.getPlayer(i)->send(command);
-    if(isTurn) {
-      log(Logger::LEVEL_INFO, command.toString(false));
-    }
+    game.sendCommand(game.getPlayer(i), command);
   }
   return new JobSutehai(game, hai);
 }

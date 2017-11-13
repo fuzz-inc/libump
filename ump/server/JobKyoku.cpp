@@ -79,48 +79,50 @@ Job* JobKyoku::onUpdate() {
 	@brief 終了
 ***************************************************************************/
 void JobKyoku::onEnd() {
-  sendAllLog(Command(Command::TYPE_KYOKUEND));
-  getGame().endKyoku();
+  auto& game = getGame();
+  game.sendAll(game.createCommand(Command::TYPE_KYOKUEND));
+  game.endKyoku();
   sleep(0.5f);
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void JobKyoku::sendStart() {
-  Command command(Command::TYPE_KYOKUSTART);
-  command.append(getGame().getRound());
-  command.append(Command::SeatToString(getGame().getOya()));
-  command.append(getGame().getRenchan());
-  command.append(getGame().getKyotaku().toString());
-  command.append(getGame().getBakaze()->toString());
+  auto& game = getGame();
+  auto command = game.createCommand(Command::TYPE_KYOKUSTART);
+  command.append(game.getRound());
+  command.append(Command::SeatToString(game.getOya()));
+  command.append(game.getRenchan());
+  command.append(game.getKyotaku().toString());
+  command.append(game.getBakaze()->toString());
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
     command.append(getPlayer(i)->getZikaze()->toString());
   }
-  sendAllLog(command);
+  game.sendAll(command);
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void JobKyoku::sendPoint() {
+  auto& game = getGame();
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
-    Command command(Command::TYPE_POINT);
-    std::ostringstream buff;
-    buff << "=" << getPlayer(i)->getPoint().toString();
+    auto command = game.createCommand(Command::TYPE_POINT);
     command.append(Command::SeatToString(i));
-    command.append(buff.str());
-    sendAll(command);
+    command.append(std::string("=") + getPlayer(i)->getPoint().toString());
+    game.sendAll(command);
   }
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void JobKyoku::sendDice() {
-  Command command(Command::TYPE_DICE);
+  auto& game = getGame();
+  auto command = game.createCommand(Command::TYPE_DICE);
   std::default_random_engine random((std::random_device())());
   std::uniform_int_distribution<int> dice(1, 6);
   command.append(dice(random));
   command.append(dice(random));
-  sendAllLog(command);
+  game.sendAll(command);
   sleep(getConfig()->getDiceWait());
 }
 /***********************************************************************//**

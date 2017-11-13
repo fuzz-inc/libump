@@ -67,7 +67,8 @@ void JobAgari::onEnd() {
 	@brief 発声
 ***************************************************************************/
 void JobAgari::say() {
-  Command command(Command::TYPE_SAY);
+  auto& game =getGame();
+  auto command = game.createCommand(Command::TYPE_SAY);
   command.append(Command::SeatToString(player_));
   auto player = getPlayer(player_);
   if(player->getAgari().isRon()) {
@@ -105,7 +106,7 @@ void JobAgari::agari() {
     point += point / 2;
   }
   {
-    Command command(Command::TYPE_AGARI);
+    auto command = game.createCommand(Command::TYPE_AGARI);
     command.append(player->getSeatString());
     if(text.empty()) {
       command.append(mj::Agari::Ceil(point, 100).toString());
@@ -128,7 +129,7 @@ void JobAgari::agari() {
         command.append(dora);
       }
     }
-    sendAllLog(command);
+    game.sendAll(command);
   }
   auto playerNum = countPlayer();
   if(playerNum > 1) {

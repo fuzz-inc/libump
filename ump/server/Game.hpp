@@ -56,6 +56,7 @@ class Game
   std::stack<std::unique_ptr<Job>> jobs_;
   std::mutex mutex_;
   int kanNum_;
+  int serial_ = 0;
 
  public:
   Game(std::shared_ptr<const Config> config, 
@@ -91,6 +92,8 @@ class Game
                     std::shared_ptr<const mj::Mentsu> mentsu);
 
   bool canKan() const;
+
+  Command createCommand(Command::Type type);
 
   size_t getRest() const override;
 

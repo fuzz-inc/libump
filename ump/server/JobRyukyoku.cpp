@@ -69,7 +69,8 @@ Job* JobRyukyoku::onUpdate() {
 	@brief 
 ***************************************************************************/
 void JobRyukyoku::onEnd() {
-  sendAllLog(Command(Command::TYPE_RYUKYOKU));
+  auto& game = getGame();
+  game.sendAll(game.createCommand(Command::TYPE_RYUKYOKU));
   int tenpaiNum = 0;
   int notenNum = 0;
   for(size_t i = 0, n = countPlayer(); i < n; i++) {
@@ -93,11 +94,11 @@ void JobRyukyoku::onEnd() {
 	@brief 
 ***************************************************************************/
 void JobRyukyoku::askTenpai() {
+  auto& game = getGame();
   while(num_ > 0) {
-    auto player = getGame().getTurnPlayer();
+    auto player = game.getTurnPlayer();
     if(player->isTenpai() && !player->isRichi()) {
-      Command command(Command::TYPE_TENPAI_Q);
-      player->send(command);
+      game.sendCommand(player, game.createCommand(Command::TYPE_TENPAI_Q));
       return;
     }
     else {
@@ -128,7 +129,7 @@ bool JobRyukyoku::waitTenpai() {
 ***************************************************************************/
 void JobRyukyoku::sayTenpai() {
   auto& game = getGame();
-  Command command(Command::TYPE_SAY);
+  auto command = game.createCommand(Command::TYPE_SAY);
   command.append(Command::SeatToString(game.getTurn()));
   if(game.getTurnPlayer()->isSayTenpai()) {
     openHand(game.getTurn());

@@ -232,6 +232,14 @@ bool Game::canKan() const {
   return getRest() >= 2 && kanNum_ < 4;
 }
 /***********************************************************************//**
+	@brief コマンドを生成する
+	@param[in] type タイプ
+	@return 生成したコマンド
+***************************************************************************/
+Command Game::createCommand(Command::Type type) {
+  return Command(type, ++serial_);
+}
+/***********************************************************************//**
 	@brief 牌山の残り枚数を取得する
 	@return 牌山の残り枚数
 ***************************************************************************/
@@ -279,7 +287,7 @@ void Game::sendAll(const Command& command) {
 ***************************************************************************/
 void Game::sendCommand(std::shared_ptr<Player> player, 
                        const Command& command) {
-  player->send(command);
+  player->sendCommand(command);
 }
 /***********************************************************************//**
 	@brief コマンドを受信した
