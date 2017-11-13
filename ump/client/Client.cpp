@@ -352,7 +352,7 @@ void Client::execPoint(const Command& command) {
 void Client::execHaipai(const Command& command) {
   auto player = getPlayer(command.getArg(0).c_str());
   if(command.countArg() > 1) {
-    player->drawHaipai(mj::HaiArray(command.getArg(1).c_str()), command);
+    player->drawHaipai(command, mj::HaiArray(command.getArg(1).c_str()));
   }
 }
 /***********************************************************************//**

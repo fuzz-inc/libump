@@ -145,8 +145,8 @@ class Player
 
   bool isHaitei() const;
 
-  virtual void drawHaipai(const HaiArray& haipai, 
-                          const Command& command);
+  virtual void drawHaipai(const Command& command, 
+                          const HaiArray& haipai);
 
  protected:
   /**

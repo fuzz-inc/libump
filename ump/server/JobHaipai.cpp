@@ -86,7 +86,7 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
     command.append(Command::SeatToString(seat));
     if(isTurn) {
       command.append(hais.toString());
-      getPlayer(i)->drawHaipai(hais, command);
+      getPlayer(i)->drawHaipai(command, hais);
     }
     else if(config->isOpen()) {
       command.append(hais.toString());

@@ -421,11 +421,11 @@ bool Player::isHaitei() const {
 }
 /***********************************************************************//**
 	@brief 配牌を取る
-	@param[in] haipai 配牌
 	@param[in] command コマンド
+	@param[in] haipai 配牌
 ***************************************************************************/
-void Player::drawHaipai(const HaiArray& haipai, 
-                        const Command& command) {
+void Player::drawHaipai(const Command& command, 
+                        const HaiArray& haipai) {
   super::drawHaipai(haipai);
 }
 /***********************************************************************//**
