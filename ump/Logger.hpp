@@ -41,6 +41,7 @@ class Logger {
   enum Level {
     LEVEL_DEBUG, 
     LEVEL_INFO, 
+    LEVEL_UMP, 
     LEVEL_WARN, 
     LEVEL_ERROR, 
     LEVEL_FATAL

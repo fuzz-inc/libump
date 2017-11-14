@@ -74,7 +74,7 @@ Job* JobTsumo::onUpdate() {
     if(rinshan_) {
       command.append(Command::TYPE_RINSHAN);
     }
-    game.sendCommand(game.getPlayer(i), command);
+    game.sendCommand(game.getPlayer(i), command, isTurn);
   }
   return new JobSutehai(game, hai);
 }

@@ -58,6 +58,7 @@ void Logger::log(Level level, const std::string& message) {
   static const char* LEVELS[] = {
     "DEBUG", 
     "INFO", 
+    "UMP", 
     "WARN", 
     "ERROR", 
     "FATAL"

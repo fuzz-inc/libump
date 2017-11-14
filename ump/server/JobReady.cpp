@@ -49,7 +49,7 @@ JobReady::JobReady(Game& game)
 ***************************************************************************/
 void JobReady::onBegin() {
   auto& game = getGame();
-  game.sendAll(game.createCommand(Command::TYPE_READY_Q));
+  game.sendAll(game.createCommand(Command::TYPE_READY_Q), false);
 }
 /***********************************************************************//**
 	@brief 

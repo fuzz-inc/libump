@@ -101,9 +101,10 @@ class Game
 
   void operator()() override;
 
-  void sendAll(const Command& command);
+  void sendAll(const Command& command, bool isLog = true);
   virtual void sendCommand(std::shared_ptr<Player> player, 
-                           const Command& command);
+                           const Command& command, 
+                           bool isLog = false);
 
   virtual void onRecvCommand(std::shared_ptr<Player> player, 
                              const Command& command);

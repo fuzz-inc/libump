@@ -94,7 +94,7 @@ void JobHaipai::drawHaipai(size_t seat, const mj::HaiArray& hais) {
     else {
       command.append(fusehai.toString());
     }
-    game.sendCommand(getPlayer(i), command);
+    game.sendCommand(getPlayer(i), command, isTurn);
   }
 }
 /***********************************************************************//**

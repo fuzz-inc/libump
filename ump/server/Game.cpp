@@ -74,7 +74,7 @@ void Game::appendPlayer(std::shared_ptr<Player> player) {
   onAppendPlayer(seat, player);
   super::setPlayer(seat, player);
   {
-    Command command(Command::TYPE_PLAYER);
+    auto command = createCommand(Command::TYPE_PLAYER);
     command.append(Command::SeatToString(seat));
     command.append(player->getName());
     sendAll(command);
@@ -85,14 +85,14 @@ void Game::appendPlayer(std::shared_ptr<Player> player) {
 ***************************************************************************/
 void Game::onAppendPlayer(size_t seat, std::shared_ptr<Player> player) {
   {
-    Command command(Command::TYPE_SEAT);
+    auto command = createCommand(Command::TYPE_SEAT);
     command.append(Command::SeatToString(seat));
     command.setOption(Command::OPTION_GAMEID, getId());
     sendCommand(player, command);
   }
   for(auto& iter : getPlayers()) {
     if(iter && iter != player) {
-      Command command(Command::TYPE_PLAYER);
+      auto command = createCommand(Command::TYPE_PLAYER);
       command.append(Command::SeatToString(iter->getSeat()));
       command.append(iter->getName());
       sendCommand(player, command);
@@ -269,8 +269,12 @@ void Game::operator()() {
 /***********************************************************************//**
 	@brief 全員にコマンドを送る
 	@param[in] command コマンド
+	@param[in] isLog ログに残すとき真
 ***************************************************************************/
-void Game::sendAll(const Command& command) {
+void Game::sendAll(const Command& command, bool isLog) {
+  if(isLog) {
+    log(LEVEL_UMP, command.toString(false));
+  }
   for(auto& player : getPlayers()) {
     if(player) {
       sendCommand(std::static_pointer_cast<Player>(player), command);
@@ -281,9 +285,14 @@ void Game::sendAll(const Command& command) {
 	@brief コマンドを送る
 	@param[in] player 送信先のプレイヤー
 	@param[in] command 送信するコマンド
+	@param[in] isLog ログに残すとき真
 ***************************************************************************/
 void Game::sendCommand(std::shared_ptr<Player> player, 
-                       const Command& command) {
+                       const Command& command, 
+                       bool isLog) {
+  if(isLog) {
+    log(LEVEL_UMP, command.toString(false));
+  }
   player->sendCommand(command);
 }
 /***********************************************************************//**
@@ -367,7 +376,7 @@ void Game::appendDora(Command::Type type) {
   auto hai = yama_.dora();
   auto dora = getDora(hai);
   super::appendDora(dora);
-  Command command(type);
+  auto command = createCommand(type);
   command.append(dora->toString());
   command.append(hai->toString());
   sendAll(command);
