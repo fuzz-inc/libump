@@ -152,11 +152,10 @@ bool Player::isOya() const {
 }
 /***********************************************************************//**
 	@brief 牌を自摸る
-	@param[in] command UMPコマンド
 	@param[in] hai ツモった牌
 	@param[in] rinshan 嶺上牌のとき真
 ***************************************************************************/
-void Player::tsumo(const Command& command, const Hai* hai, bool rinshan) {
+void Player::tsumo(const Hai* hai, bool rinshan) {
   super::sort();
   tsumoHai_ = hai;
   append(hai);
@@ -419,15 +418,6 @@ const HaiArray& Player::getRichiableHai() const {
 ***************************************************************************/
 bool Player::isHaitei() const {
   return getGame()->getRest() == 0;
-}
-/***********************************************************************//**
-	@brief 配牌を取る
-	@param[in] command コマンド
-	@param[in] haipai 配牌
-***************************************************************************/
-void Player::drawHaipai(const Command& command, 
-                        const HaiArray& haipai) {
-  super::drawHaipai(haipai);
 }
 /***********************************************************************//**
 	@copydoc Hand::onShowHai

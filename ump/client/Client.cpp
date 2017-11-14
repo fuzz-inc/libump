@@ -154,6 +154,9 @@ void Client::onSetPlayer(std::shared_ptr<mj::Player> player) {
 	@return 中断するとき偽
 ***************************************************************************/
 void Client::onRecvCommand(const Command& command) {
+  if(command.getSerial() != 0) {
+    setReconnect(command.isReconnect());
+  }
   switch(command.getType()) {
   case Command::TYPE_HELLO:
     replyCommand(hello_, command);
@@ -350,9 +353,9 @@ void Client::execPoint(const Command& command) {
 	@brief 配牌
 ***************************************************************************/
 void Client::execHaipai(const Command& command) {
-  auto player = getPlayer(command.getArg(0).c_str());
   if(command.countArg() > 1) {
-    player->drawHaipai(command, mj::HaiArray(command.getArg(1).c_str()));
+    auto player = getPlayer(command.getArg(0).c_str());
+    player->drawHaipai(mj::HaiArray(command.getArg(1).c_str()));
   }
 }
 /***********************************************************************//**
@@ -363,8 +366,7 @@ void Client::execTsumo(const Command& command) {
   setTurn(seat);
   auto player = getPlayer(seat);
   rest_ = std::atoi(command.getArg(1).c_str());
-  player->tsumo(command, 
-                (command.countArg() > 2)
+  player->tsumo((command.countArg() > 2)
                 ? mj::Hai::Get(command.getArg(2)) : nullptr, 
                 command.hasArg(Command::TYPE_RINSHAN));
 }

@@ -63,7 +63,7 @@ Job* JobTsumo::onUpdate() {
     command.append(rest);
     if(isTurn) {
       command.append(hai->toString());
-      game.getPlayer(i)->tsumo(command, hai, rinshan_);
+      game.getPlayer(i)->tsumo(hai, rinshan_);
     }
     else if(config->isOpen()) {
       command.append(hai->toString());

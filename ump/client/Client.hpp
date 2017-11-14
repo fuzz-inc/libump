@@ -58,6 +58,12 @@ class Client
   };
 
  private:
+  enum Flag {
+    FLAG_RECONNECT, 	/**< 再接続中 */
+    FLAG_MAX
+  };
+
+ private:
   Command hello_;
   State state_;
   size_t seat_;
@@ -66,6 +72,7 @@ class Client
   mj::Pattern chiPattern_;
   mj::Pattern kanPattern_;
   std::map<const mj::Hai*, size_t> hideHaiNums_;
+  std::bitset<FLAG_MAX> flag_;
   std::shared_ptr<Logger> logger_;
 
  public:
@@ -75,6 +82,7 @@ class Client
   bool open(const char* host, int port = DEFAULT_PORT);
   void close();
   bool isOpen() const;
+  UMP_BIT_GETTER(Reconnect, flag_, FLAG_RECONNECT);
 
   UMP_ACCESSOR(Hello, hello_);
 
@@ -139,6 +147,8 @@ class Client
   void execSay(const Command& command);
   void execAgari(const Command& command);
   void execRyukyoku(const Command& command);
+
+  UMP_BIT_SETTER(Reconnect, flag_, FLAG_RECONNECT);
 };
 /***********************************************************************//**
 	$Id$
