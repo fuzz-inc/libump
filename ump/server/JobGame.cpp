@@ -34,6 +34,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Game.hpp"
 #include "ump/server/JobGame.hpp"
 #include "ump/server/JobKyoku.hpp"
+#include "ump/server/JobReady.hpp"
 #include "ump/server/Player.hpp"
 
 namespace ump {
@@ -53,6 +54,7 @@ void JobGame::onBegin() {
   auto command = game.createCommand(Command::TYPE_GAMESTART);
   command.setOption("id", game.getId());
   game.sendAll(command);
+  game.beginJob(new JobReady(game));
 }
 /***********************************************************************//**
 	@brief 
