@@ -102,7 +102,7 @@ class Game
   void operator()() override;
 
   void sendAll(const Command& command, bool isLog = true);
-  virtual void sendCommand(std::shared_ptr<Player> player, 
+  virtual bool sendCommand(std::shared_ptr<Player> player, 
                            const Command& command, 
                            bool isLog = false);
 

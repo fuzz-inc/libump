@@ -44,6 +44,9 @@ class JobReady
 {
   typedef Job super;
 
+ private:
+  std::vector<std::shared_ptr<Player>> players_;
+
  public:
   JobReady(Game& game);
   ~JobReady() override = default;
@@ -51,7 +54,6 @@ class JobReady
  protected:
   void onBegin() override;
   Job* onUpdate() override;
-  void onEnd() override;
 };
 /***********************************************************************//**
 	$Id$

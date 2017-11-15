@@ -287,13 +287,13 @@ void Game::sendAll(const Command& command, bool isLog) {
 	@param[in] command 送信するコマンド
 	@param[in] isLog ログに残すとき真
 ***************************************************************************/
-void Game::sendCommand(std::shared_ptr<Player> player, 
+bool Game::sendCommand(std::shared_ptr<Player> player, 
                        const Command& command, 
                        bool isLog) {
   if(isLog) {
     log(LEVEL_UMP, command.toString(false));
   }
-  player->sendCommand(command);
+  return player->sendCommand(command);
 }
 /***********************************************************************//**
 	@brief コマンドを受信した

@@ -49,27 +49,30 @@ JobReady::JobReady(Game& game)
 ***************************************************************************/
 void JobReady::onBegin() {
   auto& game = getGame();
-  game.sendAll(game.createCommand(Command::TYPE_READY_Q), false);
+  auto command = game.createCommand(Command::TYPE_READY_Q);
+  for(auto iter : game.getPlayers()) {
+    auto player = std::static_pointer_cast<Player>(iter);
+    if(game.sendCommand(player, command)) {
+      players_.push_back(player);
+    }
+  }
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 Job* JobReady::onUpdate() {
-  if(!isOverTime(getConfig()->getReadyWait())) {
-    for(size_t i = 0, n = countPlayer(); i < n; i++) {
-      auto player = getPlayer(i);
-      if(player->isConnect() && 
-         player->getReply().getType() != Command::TYPE_YES) {
-        return this;
+  if(!players_.empty() && !isOverTime(getConfig()->getReadyWait())) {
+    for(auto iter = players_.begin(); iter != players_.end();) {
+      if((*iter)->getReply().getType() == Command::TYPE_YES) {
+        iter = players_.erase(iter);
+      }
+      else {
+        iter++;
       }
     }
+    return this;
   }
   return nullptr;
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void JobReady::onEnd() {
 }
 /***********************************************************************//**
 	$Id$
