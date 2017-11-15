@@ -128,7 +128,8 @@ class Agari {
   std::vector<Mentsu> mentsus_;	/**< 構成面子 */
   int yakuHan_[YAKU_MAX];	/**< 役ごとの翻数 */
   int han_;			/**< 総翻数(役満数) */
-  int fu_;			/**< 符 */
+  int fu_;			/**< 符(切り上げ後) */
+  int srcFu_;			/**< 符(切り上げ前) */
   int dora_;			/**< ドラの数 */
   BigNum point_;		/**< 点数 */
   std::string text_;
@@ -150,7 +151,8 @@ class Agari {
 
   int getHan() const;
   int getHan(int yaku) const;
-  int getFu() const;
+  UMP_GETTER(Fu, fu_);
+  UMP_GETTER(SrcFu, srcFu_);
   int getYakuman() const;
   UMP_GETTER(Dora, dora_);
   UMP_GETTER(Point, point_);

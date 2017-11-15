@@ -196,13 +196,6 @@ int Agari::getHan(int yaku) const {
   return yakuHan_[yaku];
 }
 /***********************************************************************//**
-        @brief 和了の符を取得する
-        @return	符
-***************************************************************************/
-int Agari::getFu() const {
-  return fu_;
-}
-/***********************************************************************//**
         @brief 役満数を取得する
 	@return 役満数(ダブル=2, トリプル=3, ...)
 ***************************************************************************/
@@ -336,6 +329,7 @@ void Agari::clearYaku() {
   dora_ = 0;
   han_ = 0;
   fu_ = 0;
+  srcFu_ = 0;
   point_ = 0;
 }
 /***********************************************************************//**
@@ -435,6 +429,7 @@ void Agari::updateDora(const Player& player) {
 void Agari::updatePoint() {
   if(isYakuman()) {
     fu_ = 0;
+    srcFu_ = 0;
     point_ = 32000 * getYakuman();
     text_.assign("役満");
   }
@@ -471,21 +466,21 @@ void Agari::updatePoint() {
 ***************************************************************************/
 void Agari::updateFu() {
   if(isInclude(YAKU_CHITOI)) {
-    fu_ = 25;
+    fu_ = srcFu_ = 25;
   }
   else {
     if(isInclude(YAKU_PINFU)) {
-      fu_ = isRon() ? 30 : 20;
+      fu_ = srcFu_ = isRon() ? 30 : 20;
     }
     else {
-      fu_ = (isMenzen() && isRon()) ? 30 : 20;
+      srcFu_ = (isMenzen() && isRon()) ? 30 : 20;
       if(!isRon()) {
-        fu_ += 2;
+        srcFu_ += 2;
       }
       for(auto& mentsu : mentsus_) {
-        fu_ += mentsu.getFu();
+        srcFu_ += mentsu.getFu();
       }
-      fu_ = Ceil(fu_, 10);
+      fu_ = Ceil(srcFu_, 10);
     }
   }
 }

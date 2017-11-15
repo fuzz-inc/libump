@@ -114,7 +114,7 @@ void JobAgari::agari() {
     else {
       command.append(text);
     }
-    command.append(agari.getFu());
+    command.append(agari.getSrcFu());
     for(int i = 0; i < mj::Agari::YAKU_MAX; i++) {
       int han = agari.getHan(i);
       if(han > 0) {
