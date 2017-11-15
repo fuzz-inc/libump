@@ -491,7 +491,12 @@ void Agari::updateFu(const Player& player) {
           srcFu_ += mentsu.getFu();
         }
       }
-      fu_ = Ceil(srcFu_, 10);
+      if(srcFu_ > 30) {
+        fu_ = Ceil(srcFu_, 10);
+      }
+      else {
+        fu_ = 30;
+      }
     }
   }
 }
