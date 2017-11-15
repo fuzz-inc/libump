@@ -190,8 +190,8 @@ class Agari {
   void updateInfo(Info& info, const Player& player);
   void updateKind(Info& info, const Mentsu& mentsu) const;
   void updateDora(const Player& player);
-  void updatePoint();
-  void updateFu();
+  void updatePoint(const Player& player);
+  void updateFu(const Player& player);
 
   void checkYakuhai(Info& info, const Player& player);
   void checkKotsu(const Info& info);

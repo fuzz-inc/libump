@@ -172,7 +172,7 @@ void Agari::update(const Player& player) {
       updateDora(player);
     }
   }
-  updatePoint();
+  updatePoint(player);
 }
 /***********************************************************************//**
         @brief 和了の総翻数を取得する
@@ -426,7 +426,7 @@ void Agari::updateDora(const Player& player) {
 /***********************************************************************//**
 	@brief 点数を更新する
 ***************************************************************************/
-void Agari::updatePoint() {
+void Agari::updatePoint(const Player& player) {
   if(isYakuman()) {
     fu_ = 0;
     srcFu_ = 0;
@@ -434,7 +434,7 @@ void Agari::updatePoint() {
     text_.assign("役満");
   }
   else {
-    updateFu();
+    updateFu(player);
     auto han = getHan();
     if(han >= 13) {
       point_ = 32000;
@@ -464,7 +464,7 @@ void Agari::updatePoint() {
 /***********************************************************************//**
 	@brief 符を更新する
 ***************************************************************************/
-void Agari::updateFu() {
+void Agari::updateFu(const Player& player) {
   if(isInclude(YAKU_CHITOI)) {
     fu_ = srcFu_ = 25;
   }
@@ -477,8 +477,19 @@ void Agari::updateFu() {
       if(!isRon()) {
         srcFu_ += 2;
       }
+      auto yakuhais = GetYakuhais(player);
       for(auto& mentsu : mentsus_) {
-        srcFu_ += mentsu.getFu();
+        if(mentsu.isToitsu()) {
+          auto hai = mentsu.at(0);
+          for(auto iter : yakuhais) {
+            if(hai->isSame(iter)) {
+              srcFu_ += 2;
+            }
+          }
+        }
+        else {
+          srcFu_ += mentsu.getFu();
+        }
       }
       fu_ = Ceil(srcFu_, 10);
     }

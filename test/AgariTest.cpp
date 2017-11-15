@@ -101,6 +101,11 @@ void AgariTest::onRun() {
     auto& agari = parser_.parse(ump::mj::Hai::Get("8s"));
     TEST(agari.getFu() == 30);
   }
+  {
+    resetHand("2p3p7p8p9p2s3s4s6s7s8s5z5z");
+    auto& agari = parser_.parse(ump::mj::Hai::Get("1p"));
+    TEST(agari.getSrcFu() == 32);
+  }
   testYakuman();
 }
 /***********************************************************************//**
