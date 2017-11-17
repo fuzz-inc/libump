@@ -1,11 +1,12 @@
 set CURDIR=%~dp0
+set OPTDIR=%CURDIR%..\..\opt\windows
 
 pushd "%CURDIR%..\..\openssl"
 
-call ppm install dmake
-perl Configure VC-WIN32 --prefix="%CURDIR%..\..\opt\windows\openssl" --openssldir="%CURDIR%..\..\opt\ssl"
-nmake
-nmake test
+perl Configure VC-WIN32 --prefix="%OPTDIR%\openssl" --openssldir="%OPTDIR%\ssl"
+nmake clean
+nmake 
+rem nmake test
 nmake install
 
 popd
