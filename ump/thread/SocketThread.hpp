@@ -44,25 +44,36 @@ class SocketThread
 {
   typedef Thread super;
 
+ public:
+  class Listener;
+
  private:
   std::shared_ptr<Socket> socket_;
+  Listener* listener_;
 
  public:
-  SocketThread(std::shared_ptr<Socket> socket);
+  SocketThread(std::shared_ptr<Socket> socket, 
+               Listener* listener);
   ~SocketThread() override;
 
-  std::shared_ptr<Socket> resetSocket();
-  std::shared_ptr<Socket> resetSocket(std::shared_ptr<Socket> socket);
   Socket& getSocket() const;
-  bool isConnect() const;
+  bool isOpen() const;
 
   void start();
   void stop();
+
+  void resetListener(Listener* listener);
 
  protected:
   void operator()() override;
 
   virtual void onThread();
+};
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+class SocketThread::Listener {
+ public:
   virtual void onRecvCommand(const Command& command) {}
   virtual void onDisconnectSocket() {}
 };

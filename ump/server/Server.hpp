@@ -41,6 +41,7 @@ namespace server {
 ***************************************************************************/
 class Server
   : public SocketThread, 
+    public SocketThread::Listener, 
     public std::enable_shared_from_this<Server>
 {
  private:

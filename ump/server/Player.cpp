@@ -44,8 +44,8 @@ namespace server {
 ***************************************************************************/
 Player::Player(std::shared_ptr<Server> server, 
                std::shared_ptr<Socket> socket)
-  : SocketThread(socket), 
-    server_(server)
+  : server_(server), 
+    socket_(new SocketThread(socket, this))
 {
 }
 /***********************************************************************//**
@@ -65,6 +65,12 @@ void Player::setGame(std::shared_ptr<mj::Game> game) {
 ***************************************************************************/
 std::shared_ptr<Game> Player::getGame() const {
   return std::static_pointer_cast<Game>(super::getGame());
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool Player::isConnect() const {
+  return socket_ && socket_->isOpen();
 }
 /***********************************************************************//**
 	@brief UMPコマンドを送信する
@@ -104,11 +110,19 @@ bool Player::sendCommand(const Command& command) {
     command_ = command;
     reply_.clear();
   }
-  if(isConnect() && getSocket().sendCommand(command)) {
+  if(isConnect() && socket_->getSocket().sendCommand(command)) {
     return true;
   }
-  log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
+  //log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
   return false;
+}
+/***********************************************************************//**
+	@brief ソケットを閉じる
+***************************************************************************/
+void Player::closeSocket() {
+  if(isConnect()) {
+    socket_->getSocket().close();
+  }
 }
 /***********************************************************************//**
 	@copydoc mj::Player::reset
@@ -159,24 +173,36 @@ bool Player::canRon(const mj::Hai* hai) {
   return !isFuriten() && super::canRon(hai);
 }
 /***********************************************************************//**
-	@brief 再接続
-	@param[in] socket ソケット
+	@brief 他のプレイヤーとソケットを交換する
+	@param[in] player 入れ替えるプレイヤー
 ***************************************************************************/
-std::shared_ptr<Socket> Player::resetSocket() {
-  return SocketThread::resetSocket();
+void Player::swapSocket(Player& player) {
+  socket_.swap(player.socket_);
+  socket_->resetListener(this);
+  player.socket_->resetListener(&player);
 }
 /***********************************************************************//**
-	@brief 再接続
-	@param[in] socket ソケット
+	@brief 再接続したときの処理
 ***************************************************************************/
-void Player::resetSocket(std::shared_ptr<Socket> socket) {
-  SocketThread::resetSocket(socket);
+void Player::onReconnect() {
   for(auto& command : gameLog_) {
     sendCommand(Command(command).setReconnect());
   }
   for(auto& command : kyokuLog_) {
     sendCommand(Command(command).setReconnect());
   }
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Player::start() {
+  socket_->start();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Player::stop() {
+  socket_->stop();
 }
 /***********************************************************************//**
 	@brief 牌を河に捨てる

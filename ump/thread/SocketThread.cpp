@@ -39,8 +39,10 @@ namespace thread {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-SocketThread::SocketThread(std::shared_ptr<Socket> socket)
-  : socket_(socket)
+SocketThread::SocketThread(std::shared_ptr<Socket> socket, 
+                           Listener* listener)
+  : socket_(socket), 
+    listener_(listener)
 {
 }
 /***********************************************************************//**
@@ -48,27 +50,6 @@ SocketThread::SocketThread(std::shared_ptr<Socket> socket)
 ***************************************************************************/
 SocketThread::~SocketThread() {
   stop();
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-std::shared_ptr<Socket> SocketThread::resetSocket() {
-  decltype(socket_) socket;
-  socket_.swap(socket);
-  return socket;
-}
-/***********************************************************************//**
-	@brief ソケットを再設定する
-	@param[in] socket ソケット
-***************************************************************************/
-std::shared_ptr<Socket>
-SocketThread::resetSocket(std::shared_ptr<Socket> socket) {
-  decltype(socket_) oldSocket;
-  socket_.swap(oldSocket);
-  stop();
-  socket_ = socket;
-  start();
-  return oldSocket;
 }
 /***********************************************************************//**
 	@brief 
@@ -81,14 +62,14 @@ Socket& SocketThread::getSocket() const {
 	@brief 接続している？
 	@return 接続しているとき真
 ***************************************************************************/
-bool SocketThread::isConnect() const {
+bool SocketThread::isOpen() const {
   return socket_ && socket_->isOpen();
 }
 /***********************************************************************//**
 	@brief スレッドを開始する
 ***************************************************************************/
 void SocketThread::start() {
-  assert(isConnect());
+  assert(isOpen());
   super::start();
 }
 /***********************************************************************//**
@@ -101,23 +82,29 @@ void SocketThread::stop() {
   super::stop();
 }
 /***********************************************************************//**
+	@brief 
+***************************************************************************/
+void SocketThread::resetListener(Listener* listener) {
+  listener_ = listener;
+}
+/***********************************************************************//**
 	@brief スレッド処理
 ***************************************************************************/
 void SocketThread::operator()() {
   super::operator()();
-  while(isConnect()) {
+  while(isOpen()) {
     onThread();
   }
   detach();
-  onDisconnectSocket();
+  listener_->onDisconnectSocket();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void SocketThread::onThread() {
   Command command;
-  if(socket_ && socket_->recvCommand(command)) {
-    onRecvCommand(command);
+  if(getSocket().recvCommand(command)) {
+    listener_->onRecvCommand(command);
   }
 }
 /***********************************************************************//**

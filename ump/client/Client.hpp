@@ -45,7 +45,8 @@ namespace client {
 ***************************************************************************/
 class Client
   : public mj::Game, 
-    public SocketThread
+    public SocketThread, 
+    public SocketThread::Listener
 {
   typedef mj::Game super;
 
@@ -81,7 +82,6 @@ class Client
 
   bool open(const char* host, int port = DEFAULT_PORT);
   void close();
-  bool isOpen() const;
   UMP_BIT_GETTER(Reconnect, flag_, FLAG_RECONNECT);
 
   UMP_ACCESSOR(Hello, hello_);

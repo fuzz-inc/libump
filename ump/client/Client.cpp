@@ -44,7 +44,7 @@ namespace client {
 	@param[in] socket ソケット
 ***************************************************************************/
 Client::Client(std::shared_ptr<Socket> socket)
-  : SocketThread(socket), 
+  : SocketThread(socket, this), 
     hello_(Command::TYPE_HELLO), 
     state_(STATE_NULL), 
     seat_(0), 
@@ -76,13 +76,6 @@ bool Client::open(const char* host, int port) {
 void Client::close() {
   stop();
   state_ = STATE_NULL;
-}
-/***********************************************************************//**
-	@brief 接続中か調べる
-	@return	接続しているとき真
-***************************************************************************/
-bool Client::isOpen() const {
-  return getSocket().isOpen();
 }
 /***********************************************************************//**
 	@brief 表示名をセットする

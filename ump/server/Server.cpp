@@ -46,7 +46,7 @@ namespace server {
 	@param[in] port ポート番号
 ***************************************************************************/
 Server::Server(const std::shared_ptr<socket::Socket>& socket, int port)
-  : SocketThread(socket), 
+  : SocketThread(socket, this), 
     port_(port), 
     config_(std::make_shared<Config>()), 
     timeout_(1000)

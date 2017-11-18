@@ -44,7 +44,7 @@ namespace server {
 ***************************************************************************/
 class Player
   : public mj::Player, 
-    public SocketThread, 
+    public SocketThread::Listener, 
     public std::enable_shared_from_this<Player>
 {
   typedef mj::Player super;
@@ -64,6 +64,7 @@ class Player
   std::bitset<FLAG_MAX> flag_;
   std::vector<Command> gameLog_;
   std::vector<Command> kyokuLog_;
+  std::unique_ptr<SocketThread> socket_;
 
  public:
   Player(std::shared_ptr<Server> server, 
@@ -73,7 +74,9 @@ class Player
   void setGame(std::shared_ptr<mj::Game> game) override;
   std::shared_ptr<Game> getGame() const;
 
+  bool isConnect() const;
   bool sendCommand(const Command& command);
+  void closeSocket();
 
   UMP_GETTER(Command, command_);
   UMP_GETTER(Reply, reply_);
@@ -86,8 +89,11 @@ class Player
   bool canRichi() const;
   bool canRon(const mj::Hai* hai);
 
-  std::shared_ptr<Socket> resetSocket();
-  void resetSocket(std::shared_ptr<Socket> socket);
+  void swapSocket(Player& player);
+  void onReconnect();
+
+  void start();
+  void stop();
 
  protected:
   mj::Sutehai* sutehai(const mj::Sutehai& sutehai) override;
