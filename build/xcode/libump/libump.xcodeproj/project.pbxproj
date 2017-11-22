@@ -30,6 +30,8 @@
 		DA81C6FC1DC0B861004470DA /* Config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA81C6FA1DC0B861004470DA /* Config.hpp */; };
 		DA8D01001D9BE99D00F1F5D2 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA8D00FE1D9BE99D00F1F5D2 /* Logger.cpp */; };
 		DA8D01011D9BE99D00F1F5D2 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA8D00FF1D9BE99D00F1F5D2 /* Logger.hpp */; };
+		DA914D401FC55C0800AEDEEB /* JobTenpai.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA914D3E1FC55C0700AEDEEB /* JobTenpai.hpp */; };
+		DA914D411FC55C0800AEDEEB /* JobTenpai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA914D3F1FC55C0700AEDEEB /* JobTenpai.cpp */; };
 		DAA09F151E02895C00DA374E /* BigNum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAA09F131E02895C00DA374E /* BigNum.cpp */; };
 		DAA597551DF0142B007BE749 /* JobHaipai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAA597531DF0142B007BE749 /* JobHaipai.cpp */; };
 		DAC7FF191D9939E300559942 /* JobSutehai.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAC7FF171D9939E300559942 /* JobSutehai.cpp */; };
@@ -115,6 +117,8 @@
 		DA81C6FA1DC0B861004470DA /* Config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hpp; sourceTree = "<group>"; };
 		DA8D00FE1D9BE99D00F1F5D2 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		DA8D00FF1D9BE99D00F1F5D2 /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		DA914D3E1FC55C0700AEDEEB /* JobTenpai.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobTenpai.hpp; sourceTree = "<group>"; };
+		DA914D3F1FC55C0700AEDEEB /* JobTenpai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobTenpai.cpp; sourceTree = "<group>"; };
 		DAA09F131E02895C00DA374E /* BigNum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigNum.cpp; sourceTree = "<group>"; };
 		DAA09F141E02895C00DA374E /* BigNum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BigNum.hpp; sourceTree = "<group>"; };
 		DAA597531DF0142B007BE749 /* JobHaipai.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobHaipai.cpp; sourceTree = "<group>"; };
@@ -324,6 +328,8 @@
 				DAFCE7921D7D78FF0016A137 /* JobRyukyoku.hpp */,
 				DAC7FF171D9939E300559942 /* JobSutehai.cpp */,
 				DAC7FF181D9939E300559942 /* JobSutehai.hpp */,
+				DA914D3F1FC55C0700AEDEEB /* JobTenpai.cpp */,
+				DA914D3E1FC55C0700AEDEEB /* JobTenpai.hpp */,
 				DAFCE7931D7D78FF0016A137 /* JobTsumo.cpp */,
 				DAFCE7941D7D78FF0016A137 /* JobTsumo.hpp */,
 				DAFCE7971D7D78FF0016A137 /* Player.cpp */,
@@ -346,6 +352,7 @@
 				DAFCE7B01D7D78FF0016A137 /* Hai.hpp in Headers */,
 				DAFCE7C91D7D78FF0016A137 /* Job.hpp in Headers */,
 				DAFCE7E51D7D78FF0016A137 /* Version.hpp in Headers */,
+				DA914D401FC55C0800AEDEEB /* JobTenpai.hpp in Headers */,
 				DA1BD8DA1DA50D2500334BB7 /* TcpSocket.hpp in Headers */,
 				DAFCE7B81D7D78FF0016A137 /* Mentsu.hpp in Headers */,
 				DAFCE7A61D7D78FF0016A137 /* Command.hpp in Headers */,
@@ -469,6 +476,7 @@
 				26560BB61DE8A5FB002753D7 /* Pattern.cpp in Sources */,
 				DAFCE7D61D7D78FF0016A137 /* JobTsumo.cpp in Sources */,
 				DA47AC411D8A645700533933 /* Server.cpp in Sources */,
+				DA914D411FC55C0800AEDEEB /* JobTenpai.cpp in Sources */,
 				DAFCE7B11D7D78FF0016A137 /* HaiArray.cpp in Sources */,
 				DAFCE7CE1D7D78FF0016A137 /* JobKyoku.cpp in Sources */,
 				DA8D01001D9BE99D00F1F5D2 /* Logger.cpp in Sources */,

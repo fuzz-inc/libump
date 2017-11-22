@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2017 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -30,32 +30,76 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
-#pragma once
-
-#include "ump/server/Job.hpp"
+#include "ump/server/Config.hpp"
+#include "ump/server/Game.hpp"
+#include "ump/server/JobTenpai.hpp"
+#include "ump/server/Player.hpp"
 
 namespace ump {
 namespace server {
 /***********************************************************************//**
-	@brief 流局
+	@brief 
 ***************************************************************************/
-class JobRyukyoku
-  : public Job
+JobTenpai::JobTenpai(Game& game)
+  : super(game), 
+    state_(STATE_NULL)
 {
-  typedef Job super;
-
- private:
-  size_t num_;
-
- public:
-  JobRyukyoku(Game& game);
-  ~JobRyukyoku() override = default;
-
- protected:
-  void onBegin() override;
-  Job* onUpdate() override;
-  void onEnd() override;
-};
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void JobTenpai::onBegin() {
+  auto& game = getGame();
+  auto player = game.getTurnPlayer();
+  if(player->isRichi()) {
+    state_ = STATE_TENPAI;
+  }
+  else if(player->isTenpai()) {
+    game.sendCommand(player, game.createCommand(Command::TYPE_TENPAI_Q));
+  }
+  else {
+    state_ = STATE_NOTEN;
+  }
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+Job* JobTenpai::onUpdate() {
+  auto& game = getGame();
+  auto player = game.getTurnPlayer();
+  if(state_ == STATE_NULL) {
+    auto& reply = player->getReply();
+    if(reply.isExist()) {
+      state_ = (reply.getType() == Command::TYPE_TENPAI)
+        ? STATE_TENPAI
+        : STATE_NOTEN;
+    }
+    else if(isOverTime(getConfig()->getTenpaiWait())) {
+      state_ = STATE_NOTEN;
+    }
+    else {
+      return this;
+    }
+  }
+  return nullptr;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void JobTenpai::onEnd() {
+  auto& game = getGame();
+  auto command = game.createCommand(Command::TYPE_SAY);
+  command.append(Command::SeatToString(game.getTurn()));
+  if(state_ == STATE_TENPAI) {
+    openHand(game.getTurn());
+    command.append(Command::TYPE_TENPAI);
+  }
+  else {
+    command.append(Command::TYPE_NOTEN);
+  }
+  sayAll(command);
+  game.nextTurn();
+}
 /***********************************************************************//**
 	$Id$
 ***************************************************************************/

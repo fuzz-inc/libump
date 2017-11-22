@@ -34,6 +34,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Game.hpp"
 #include "ump/server/JobReady.hpp"
 #include "ump/server/JobRyukyoku.hpp"
+#include "ump/server/JobTenpai.hpp"
 #include "ump/server/Player.hpp"
 
 namespace ump {
@@ -50,20 +51,18 @@ JobRyukyoku::JobRyukyoku(Game& game)
 ***************************************************************************/
 void JobRyukyoku::onBegin() {
   getGame().resetTurn();
-  askTenpai();
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 Job* JobRyukyoku::onUpdate() {
-  if(isEnd()) {
-    return new JobReady(getGame());
+  auto& game = getGame();
+  if(num_ > 0) {
+    game.beginJob(new JobTenpai(game));
+    num_--;
+    return this;
   }
-  if(waitTenpai()) {
-    sayTenpai();
-    askTenpai();
-  }
-  return this;
+  return new JobReady(game);
 }
 /***********************************************************************//**
 	@brief 
@@ -89,58 +88,6 @@ void JobRyukyoku::onEnd() {
       addPoint(i, getPlayer(i)->isSayTenpai() ? add : -sub);
     }
   }
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void JobRyukyoku::askTenpai() {
-  auto& game = getGame();
-  while(num_ > 0) {
-    auto player = game.getTurnPlayer();
-    if(player->isTenpai() && !player->isRichi()) {
-      game.sendCommand(player, game.createCommand(Command::TYPE_TENPAI_Q));
-      return;
-    }
-    else {
-      if(player->isRichi()) {
-        player->sayTenpai();
-      }
-      sayTenpai();
-    }
-  }
-  end();
-}
-/***********************************************************************//**
-	@brief テンパイ宣言を待つ
-***************************************************************************/
-bool JobRyukyoku::waitTenpai() {
-  auto player = getGame().getTurnPlayer();
-  const Command reply = player->getReply();
-  if(reply.isExist()) {
-    if(reply.getType() == Command::TYPE_TENPAI) {
-      player->sayTenpai();
-    }
-    return true;
-  }
-  return isOverTime(getConfig()->getTenpaiWait());
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void JobRyukyoku::sayTenpai() {
-  auto& game = getGame();
-  auto command = game.createCommand(Command::TYPE_SAY);
-  command.append(Command::SeatToString(game.getTurn()));
-  if(game.getTurnPlayer()->isSayTenpai()) {
-    openHand(game.getTurn());
-    command.append(Command::TYPE_TENPAI);
-  }
-  else {
-    command.append(Command::TYPE_NOTEN);
-  }
-  sayAll(command);
-  game.nextTurn();
-  num_--;
 }
 /***********************************************************************//**
 	$Id$

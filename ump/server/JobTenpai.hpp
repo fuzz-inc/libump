@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2017 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -37,19 +37,26 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace ump {
 namespace server {
 /***********************************************************************//**
-	@brief 流局
+	@brief テンパイ確認
 ***************************************************************************/
-class JobRyukyoku
+class JobTenpai
   : public Job
 {
   typedef Job super;
 
  private:
-  size_t num_;
+  enum State {
+    STATE_NULL, 
+    STATE_TENPAI, 
+    STATE_NOTEN
+  };
+
+ private:
+  State state_;
 
  public:
-  JobRyukyoku(Game& game);
-  ~JobRyukyoku() override = default;
+  JobTenpai(Game& game);
+  ~JobTenpai() override = default;
 
  protected:
   void onBegin() override;
