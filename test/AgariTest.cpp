@@ -108,9 +108,9 @@ void AgariTest::onRun() {
   }
   {
     resetHand("4m5m8m8m4p5p6p4s5s6s7s8s");
-    openMentsu("4s5s", "4s");
+    openMentsu("4s5s", "3s");
     auto& agari = parser_.parse(ump::mj::Hai::Get("3m"));
-    TEST(agari.getSrcFu() == 20 && agari.getFu() == 30);
+    TEST(agari.getSrcFu() == 30 && agari.getFu() == 30);
   }
   {
     resetHand("3m4m5m5m6m7m2p3p4p7p3s4s5s");

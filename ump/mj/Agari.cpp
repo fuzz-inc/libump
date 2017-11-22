@@ -489,11 +489,11 @@ void Agari::updateFu(const Player& player) {
           }
         }
       }
-      if(srcFu_ > 30) {
-        fu_ = Ceil(srcFu_, 10);
+      if(srcFu_ <= 20) {
+        fu_ = srcFu_ = 30;
       }
       else {
-        fu_ = 30;
+        fu_ = Ceil(srcFu_, 10);
       }
     }
   }
