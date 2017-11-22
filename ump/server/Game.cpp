@@ -391,7 +391,8 @@ const mj::Hai* Game::getDora(const mj::Hai* hai) const {
   for(auto dora = hai->rotate(1);
       dora != hai;
       dora = dora->rotate(1)) {
-    if(getConfig()->getHaiNum(dora) > 0) {
+    if(getConfig()->getHaiNum(dora) > 0 ||
+       getConfig()->getHaiNum(dora->getDora()) > 0) {
       return dora;
     }
   }
