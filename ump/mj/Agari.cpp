@@ -479,6 +479,7 @@ void Agari::updateFu(const Player& player) {
       }
       auto yakuhais = GetYakuhais(player);
       for(auto& mentsu : mentsus_) {
+        srcFu_ += mentsu.getFu();
         if(mentsu.isToitsu()) {
           auto hai = mentsu.at(0);
           for(auto iter : yakuhais) {
@@ -486,9 +487,6 @@ void Agari::updateFu(const Player& player) {
               srcFu_ += 2;
             }
           }
-        }
-        else {
-          srcFu_ += mentsu.getFu();
         }
       }
       if(srcFu_ > 30) {
