@@ -147,6 +147,9 @@
     <ClCompile Include="..\..\ump\socket\TcpSocket.cpp">
       <Filter>ump\socket</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ump\server\JobTenpai.cpp">
+      <Filter>ump\server</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ump\BigNum.hpp">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ump\socket\TcpSocket.hpp">
       <Filter>ump\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\server\JobTenpai.hpp">
+      <Filter>ump\server</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
