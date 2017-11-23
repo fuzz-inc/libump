@@ -97,7 +97,7 @@ std::shared_ptr<Socket> SslSocket::onAccept(int timeout) {
 ***************************************************************************/
 bool SslSocket::onSend(const char* buff, size_t size) {
   while(size > 0) {
-    auto sendSize = BIO_write(bio_, buff, size);
+    auto sendSize = BIO_write(bio_, buff, int(size));
     if(sendSize > 0) {
       buff += sendSize;
       size -= sendSize;
@@ -114,7 +114,7 @@ bool SslSocket::onSend(const char* buff, size_t size) {
 ***************************************************************************/
 bool SslSocket::onRecv(char* buff, size_t size) {
   while(size > 0) {
-    auto readSize = BIO_read(bio_, buff, size);
+    auto readSize = BIO_read(bio_, buff, int(size));
     if(readSize > 0) {
       buff += readSize;
       size -= readSize;
@@ -210,9 +210,23 @@ SSL_CTX* SslSocket::Context::getServerCtx() {
 	@brief 証明書のセットアップ
 ***************************************************************************/
 void SslSocket::Context::setupCertificate() {
+  BIGNUM* bn = BN_new();
+  {
+    auto ret = BN_set_word(bn, RSA_F4);
+    assert(ret == 1);
+  }
+  rsa_ = RSA_new();
+  {
+    auto ret = RSA_generate_key_ex(rsa_, 2048, bn, nullptr);
+    assert(ret == 1);
+  }
   pkey_ = EVP_PKEY_new();
-  rsa_ = RSA_generate_key(2048, RSA_F4, nullptr, nullptr);
-  EVP_PKEY_assign_RSA(pkey_, rsa_);
+  {
+    auto ret = EVP_PKEY_set1_RSA(pkey_, rsa_);
+    assert(ret == 1);
+  }
+  BN_free(bn);
+
   x509_ = X509_new();
   X509_gmtime_adj(X509_get_notBefore(x509_), 0);
   X509_gmtime_adj(X509_get_notAfter(x509_), 60 * 60 * 24);

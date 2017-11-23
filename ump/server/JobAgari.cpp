@@ -138,7 +138,7 @@ void JobAgari::agari() {
       playerNum--;
     }
     if(game.getTurn() == player_) {
-      point /= playerNum;
+      point /= int(playerNum);
       auto add = game.resetKyotaku();
       for(size_t i = 0, n = countPlayer(); i < n; i++) {
         if(i != player_) {
@@ -152,7 +152,7 @@ void JobAgari::agari() {
     }
     else {
       point = mj::Agari::Ceil(point, 100) + 
-        renchanPoint * (countPlayer() - 1);
+        renchanPoint * (int(countPlayer()) - 1);
       addPoint(game.getTurn(), -point);
       addPoint(player_, point + game.resetKyotaku());
     }
