@@ -100,6 +100,7 @@ bool Player::sendCommand(const Command& command) {
     case Command::TYPE_SUTEHAI:
     case Command::TYPE_AGARI:
     case Command::TYPE_RYUKYOKU:
+    case Command::TYPE_KYOKUEND:
       kyokuLog_.emplace_back(command);
       break;
     default:
