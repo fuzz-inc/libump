@@ -93,6 +93,7 @@ void JobTenpai::onEnd() {
   if(state_ == STATE_TENPAI) {
     openHand(game.getTurn());
     command.append(Command::TYPE_TENPAI);
+    game.getTurnPlayer()->sayTenpai();
   }
   else {
     command.append(Command::TYPE_NOTEN);
