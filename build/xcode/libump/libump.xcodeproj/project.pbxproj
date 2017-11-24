@@ -25,6 +25,7 @@
 		DA440DA21E68065900C7A320 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA440DA01E68065900C7A320 /* Thread.cpp */; };
 		DA47AC411D8A645700533933 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA47AC3F1D8A645700533933 /* Server.cpp */; };
 		DA47AC421D8A645700533933 /* Server.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA47AC401D8A645700533933 /* Server.hpp */; };
+		DA64CD801FC8143700B36285 /* Atomic.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA64CD7F1FC8143700B36285 /* Atomic.hpp */; };
 		DA801A3D1F4718790066805A /* SocketThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA801A3B1F4718790066805A /* SocketThread.cpp */; };
 		DA81C6FB1DC0B861004470DA /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA81C6F91DC0B861004470DA /* Config.cpp */; };
 		DA81C6FC1DC0B861004470DA /* Config.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA81C6FA1DC0B861004470DA /* Config.hpp */; };
@@ -111,6 +112,7 @@
 		DA440DA11E68065900C7A320 /* Thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Thread.hpp; sourceTree = "<group>"; };
 		DA47AC3F1D8A645700533933 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
 		DA47AC401D8A645700533933 /* Server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Server.hpp; sourceTree = "<group>"; };
+		DA64CD7F1FC8143700B36285 /* Atomic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Atomic.hpp; sourceTree = "<group>"; };
 		DA801A3B1F4718790066805A /* SocketThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketThread.cpp; sourceTree = "<group>"; };
 		DA801A3C1F4718790066805A /* SocketThread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketThread.hpp; sourceTree = "<group>"; };
 		DA81C6F91DC0B861004470DA /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Config.cpp; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		DA440D9B1E68029700C7A320 /* thread */ = {
 			isa = PBXGroup;
 			children = (
+				DA64CD7F1FC8143700B36285 /* Atomic.hpp */,
 				DA440D9C1E68029700C7A320 /* Condition.cpp */,
 				DA440D9D1E68029700C7A320 /* Condition.hpp */,
 				DA801A3B1F4718790066805A /* SocketThread.cpp */,
@@ -383,6 +386,7 @@
 				DA06667E1DAF9D3A00F29305 /* Game.hpp in Headers */,
 				DAFCE7D71D7D78FF0016A137 /* JobTsumo.hpp in Headers */,
 				DAFCE7C51D7D78FF0016A137 /* Config.hpp in Headers */,
+				DA64CD801FC8143700B36285 /* Atomic.hpp in Headers */,
 				DAFCE7AA1D7D78FF0016A137 /* Agari.hpp in Headers */,
 				DAFCE7D11D7D78FF0016A137 /* JobNaki.hpp in Headers */,
 			);

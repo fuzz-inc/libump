@@ -68,7 +68,7 @@ Job* JobTenpai::onUpdate() {
   auto& game = getGame();
   auto player = game.getTurnPlayer();
   if(state_ == STATE_NULL) {
-    auto& reply = player->getReply();
+    auto reply = player->getReply();
     if(reply.isExist()) {
       state_ = (reply.getType() == Command::TYPE_TENPAI)
         ? STATE_TENPAI

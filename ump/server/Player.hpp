@@ -35,6 +35,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/Command.hpp"
 #include "ump/Logger.hpp"
 #include "ump/mj/Player.hpp"
+#include "ump/thread/Atomic.hpp"
 #include "ump/thread/SocketThread.hpp"
 
 namespace ump {
@@ -59,7 +60,7 @@ class Player
  private:
   std::weak_ptr<Server> server_;
   Command command_;
-  Command reply_;
+  thread::Atomic<Command> reply_;
   std::mutex mutex_;
   std::bitset<FLAG_MAX> flag_;
   std::vector<Command> gameLog_;
@@ -79,7 +80,10 @@ class Player
   void closeSocket();
 
   UMP_GETTER(Command, command_);
-  UMP_GETTER(Reply, reply_);
+
+  Command getReply() const {
+    return reply_.get();
+  }
 
   void reset() override;
   void tsumo(const mj::Hai* hai, bool rinshan) override;

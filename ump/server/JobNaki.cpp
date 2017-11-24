@@ -132,7 +132,7 @@ void JobNaki::onEnd() {
 ***************************************************************************/
 Job* JobNaki::doReply(std::shared_ptr<Player> player) {
   auto& game = getGame();
-  auto& reply = player->getReply();
+  auto reply = player->getReply();
   auto type = reply.getType();
   auto hai = sutehai_->getHai();
   if(player->getCommand().hasArg(type)) {

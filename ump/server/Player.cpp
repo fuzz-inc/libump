@@ -109,7 +109,7 @@ bool Player::sendCommand(const Command& command) {
   }
   if(command.getSerial() != 0) {
     command_ = command;
-    reply_.clear();
+    reply_([](Command& reply) { reply.clear(); });
   }
   if(isConnect() && socket_->getSocket().sendCommand(command)) {
     return true;
@@ -244,7 +244,7 @@ mj::Sutehai* Player::sutehai(const mj::Sutehai& _sutehai) {
 ***************************************************************************/
 void Player::onRecvCommand(const Command& command) {
   if(command.getSerial() == command_.getSerial()) {
-    reply_ = command;
+    reply_.set(command);
   }
   if(auto game = getGame()) {
     game->onRecvCommand(shared_from_this(), command);
