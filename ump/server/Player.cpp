@@ -82,6 +82,8 @@ bool Player::sendCommand(const Command& command) {
   if(!command.isReconnect()) {
     switch(command.getType()) {
     case Command::TYPE_SEAT:
+      gameLog_.clear();
+      /* break */
     case Command::TYPE_PLAYER:
     case Command::TYPE_GAMESTART:
       gameLog_.emplace_back(command);
