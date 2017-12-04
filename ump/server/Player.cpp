@@ -113,6 +113,7 @@ bool Player::sendCommand(const Command& command) {
     command_ = command;
     reply_([](Command& reply) { reply.clear(); });
   }
+  onSendCommand(command);
   if(isConnect() && socket_->getSocket().sendCommand(command)) {
     return true;
   }
@@ -273,6 +274,21 @@ void Player::onOpenMentsu(std::shared_ptr<const mj::Mentsu> mentsu) {
   getGame()->onOpenMentsu(shared_from_this(), mentsu);
 }
 /***********************************************************************//**
+	@brief ログ出力
+	@param[in] level レベル
+	@param[in] message 出力メッセージ
+***************************************************************************/
+void Player::log(Logger::Level level, const std::string& message) const {
+  auto msg = Logger::Format("%s: %s", getSeatString().c_str(), 
+                            message.c_str());
+  if(auto logger = getGame()) {
+    logger->log(level, msg);
+  }
+  else {
+    std::cout << msg << std::endl;
+  }
+}
+/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 std::shared_ptr<Server> Player::getServer() const {
@@ -300,16 +316,6 @@ void Player::updateFuriten(const mj::Hai* hai) {
           std::string("[furiten+]") + hais.toString());
       setFuriten(true);
     }
-  }
-}
-/***********************************************************************//**
-	@brief ログ出力
-	@param[in] level レベル
-	@param[in] message 出力メッセージ
-***************************************************************************/
-void Player::log(Logger::Level level, const std::string& message) const {
-  if(auto logger = getGame()) {
-    logger->log(level, getSeatString() + message);
   }
 }
 /***********************************************************************//**

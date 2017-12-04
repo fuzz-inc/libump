@@ -102,10 +102,18 @@ class Player
  protected:
   mj::Sutehai* sutehai(const mj::Sutehai& sutehai) override;
 
+  /**
+   * コマンドを送信したときの処理
+   * @param[in] command コマンド
+   */
+  virtual void onSendCommand(const Command& command) {}
+
   void onRecvCommand(const Command& command) override;
   void onDisconnectSocket() override;
 
   void onOpenMentsu(std::shared_ptr<const mj::Mentsu> mentsu) override;
+
+  void log(Logger::Level level, const std::string& message) const;
 
  private:
   std::shared_ptr<Server> getServer() const;
@@ -115,8 +123,6 @@ class Player
   void updateFuriten(const mj::Hai* hai);
 
   UMP_BIT_ACCESSOR(Disconnect, flag_, FLAG_DISCONNECT);
-
-  void log(Logger::Level level, const std::string& message) const;
 };
 /***********************************************************************//**
 	$Id$
