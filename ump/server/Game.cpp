@@ -132,8 +132,13 @@ void Game::start() {
 	@brief 
 ***************************************************************************/
 void Game::stop() {
-  stopAllJob();
-  Thread::stop();
+  if(isStart()) {
+    stopAllJob();
+    Thread::stop();
+  }
+  else {
+    clearPlayer();
+  }
 }
 /***********************************************************************//**
 	@brief ジョブを開始する
@@ -263,6 +268,7 @@ void Game::operator()() {
       break;
     }
   } while(sleep(deltaTime));
+  clearPlayer();
   detach();
   getServer()->onEndGame(self);
 }
