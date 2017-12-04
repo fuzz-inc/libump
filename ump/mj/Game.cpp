@@ -76,6 +76,7 @@ void Game::removePlayer(std::shared_ptr<Player> player) {
   assert(getPlayer(player->getSeat()) == player);
   player->setGame(nullptr);
   players_.at(player->getSeat()).reset();
+  onRemovePlayer(player);
 }
 /***********************************************************************//**
 	@brief プレイヤーの人数を取得する

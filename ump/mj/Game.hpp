@@ -132,6 +132,12 @@ class Game
   virtual void onEndGame(const Players& players);
 
  protected:
+  /**
+   * プレイヤーがゲームから削除されたときの処理
+   * @param[in] player 削除されたプレイヤー
+   */
+  virtual void onRemovePlayer(std::shared_ptr<Player> player) {}
+
   void clearPlayer();
 
   void setOya(size_t oya);
