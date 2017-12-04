@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #include "ump/server/Config.hpp"
 #include "ump/server/Game.hpp"
+#include "ump/server/JobEnd.hpp"
 #include "ump/server/JobGame.hpp"
 #include "ump/server/JobKyoku.hpp"
 #include "ump/server/JobReady.hpp"
@@ -67,7 +68,7 @@ Job* JobGame::onUpdate() {
     flag_.set(FLAG_LAST_KYOKU, game.isLastKyoku());
     return this;
   }
-  return nullptr;
+  return new JobEnd(getGame());
 }
 /***********************************************************************//**
 	@brief 

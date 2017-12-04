@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2017 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -47,6 +47,7 @@ class Game
  private:
   enum {
     FLAG_RENCHAN, 
+    FLAG_END, 
     FLAG_MAX
   };
 
@@ -81,6 +82,7 @@ class Game
   UMP_ACCESSOR(Id, id_);
   UMP_GETTER(Players, players_);
   void setPlayer(size_t seat, std::shared_ptr<Player> player);
+  void removePlayer(std::shared_ptr<Player> player);
   size_t countPlayer() const;
   std::shared_ptr<Player> getPlayer(size_t seat) const;
   std::shared_ptr<Player> getPlayer(const char* seat) const;
@@ -102,6 +104,7 @@ class Game
   UMP_GETTER(LastSutehai, lastSutehai_);
 
   UMP_BIT_GETTER(Renchan, flag_, FLAG_RENCHAN);
+  UMP_BIT_GETTER(End, flag_, FLAG_END);
 
   const Hai* getBakaze() const;
 
@@ -135,6 +138,9 @@ class Game
   UMP_SETTER(Round, round_);
   UMP_SETTER(Renchan, renchan_);
   UMP_SETTER(Kyotaku, kyotaku_);
+
+ private:
+  UMP_BIT_SETTER(End, flag_, FLAG_END);
 };
 /***********************************************************************//**
         $Id$

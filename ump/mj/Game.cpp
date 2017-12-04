@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2017 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -67,6 +67,15 @@ void Game::setPlayer(size_t seat, std::shared_ptr<Player> player) {
     players_.resize(seat + 1);
   }
   players_[seat] = player;
+}
+/***********************************************************************//**
+	@brief プレイヤーを削除する
+	@param[in] player 削除するプレイヤー
+***************************************************************************/
+void Game::removePlayer(std::shared_ptr<Player> player) {
+  assert(getPlayer(player->getSeat()) == player);
+  player->setGame(nullptr);
+  players_.at(player->getSeat()).reset();
 }
 /***********************************************************************//**
 	@brief プレイヤーの人数を取得する
@@ -239,17 +248,17 @@ bool Game::canChi() const {
 	@param[in] players 着順
 ***************************************************************************/
 void Game::onEndGame(const Players& players) {
+  setEnd(true);
 }
 /***********************************************************************//**
 	@brief すべてのプレイヤーをクリアする
 ***************************************************************************/
 void Game::clearPlayer() {
-  for(auto& player : players_) {
-    if(player) {
-      player->setGame(nullptr);
+  for(size_t i = 0, n = players_.size(); i < n; i++) {
+    if(auto player = players_.at(i)) {
+      removePlayer(player);
     }
   }
-  players_.clear();
 }
 /***********************************************************************//**
 	@brief 親を変更する
