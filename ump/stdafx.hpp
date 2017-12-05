@@ -46,6 +46,10 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <WinSock2.h>
 #include <Windows.h>
 
+#elif defined(__linux)
+#define UMP_PLATFORM "linux"
+#define UMP_PLATFORM_LINUX
+
 #endif
 /***********************************************************************//**
 	@brief 
@@ -80,6 +84,10 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <poll.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#endif
+
+#if defined(UMP_PLATFORM_LINUX)
+#include <sys/prctl.h>
 #endif
 /***********************************************************************//**
 	@brief OpenSSL

@@ -35,6 +35,9 @@ class Thread {
 
   static void SetThreadName(const char* name);
   static std::string GetDemangleName(const char* name);
+
+ protected:
+  void setThreadName();
 };
 /***********************************************************************//**
 	$Id$

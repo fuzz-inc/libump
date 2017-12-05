@@ -75,7 +75,7 @@ void Thread::sleep() {
 	@brief 
 ***************************************************************************/
 void Thread::operator()() {
-  SetThreadName(GetDemangleName(typeid(*this).name()).c_str());
+  setThreadName();
 }
 /***********************************************************************//**
 	@brief 
@@ -83,6 +83,9 @@ void Thread::operator()() {
 void Thread::SetThreadName(const char* name) {
 #if defined(UMP_PLATFORM_MAC)
   pthread_setname_np(name);
+#elif defined(UMP_PLATFORM_LINUX)
+  //pthread_setname_np(pthread_self(), name);
+  prctl(PR_SET_NAME, name, 0, 0, 0);
 #endif
 }
 /***********************************************************************//**
@@ -99,6 +102,17 @@ std::string Thread::GetDemangleName(const char* name) {
   }
 #endif
   return std::string(name);
+}
+/***********************************************************************//**
+	@brief スレッド名を設定する
+***************************************************************************/
+void Thread::setThreadName() {
+  std::string name = GetDemangleName(typeid(*this).name());
+  auto pos = name.find_last_of("::");
+  if(pos != std::string::npos) {
+    name = name.substr(pos + 1);
+  }
+  SetThreadName(name.c_str());
 }
 /***********************************************************************//**
 	$Id$
