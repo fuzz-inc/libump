@@ -53,7 +53,6 @@ class Player
  private:
   enum {
     FLAG_FURITEN, 
-    FLAG_DISCONNECT, 
     FLAG_MAX
   };
 
@@ -121,8 +120,6 @@ class Player
   UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
   void updateFuriten();
   void updateFuriten(const mj::Hai* hai);
-
-  UMP_BIT_ACCESSOR(Disconnect, flag_, FLAG_DISCONNECT);
 };
 /***********************************************************************//**
 	$Id$

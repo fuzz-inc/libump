@@ -260,7 +260,6 @@ void Player::onRecvCommand(const Command& command) {
 	@copydoc SocketThread::onDisconnectSocket
 ***************************************************************************/
 void Player::onDisconnectSocket() {
-  setDisconnect(true);
   auto self = shared_from_this();
   if(auto game = getGame()) {
     game->onDisconnectPlayer(self);
