@@ -244,6 +244,9 @@ void TcpSocket::setError() {
 	@brief 
 ***************************************************************************/
 int TcpSocket::poll(int timeout, int event) {
+  if(!isOpen()) {
+    return -1;
+  }
   struct pollfd fds;
   fds.fd = fd_;
   fds.events = event;
