@@ -34,11 +34,12 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #if defined(UMP_PLATFORM_WINDOWS)
 typedef int socklen_t;
-#define poll WSAPoll
 #endif
 
 namespace ump {
 namespace socket {
+static const int DELTA_TIME = 1000;
+static const int TIMEOUT = 5 * 60 * 1000;
 /***********************************************************************//**
 	@brief デフォルトコンストラクタ
 ***************************************************************************/
@@ -142,13 +143,8 @@ bool TcpSocket::onListen(int port) {
 	@copydoc Socket::onAccept
 ***************************************************************************/
 std::shared_ptr<Socket> TcpSocket::onAccept(int timeout) {
-  {
-    struct pollfd fds;
-    fds.fd = fd_;
-    fds.events = POLLIN;
-    if(poll(&fds, 1, timeout) <= 0) {
-      return nullptr;
-    }
+  if(poll(timeout, POLLIN) <= 0) {
+    return nullptr;
   }
   struct sockaddr_in address;
   socklen_t len = sizeof(address);
@@ -165,35 +161,59 @@ std::shared_ptr<Socket> TcpSocket::onAccept(int timeout) {
 	@return 送信に成功したとき真
 ***************************************************************************/
 bool TcpSocket::onSend(const char* buff, size_t size) {
-  while(size > 0) {
-    auto sendSize = ::send(fd_, buff, size, 0);
-    if(sendSize > 0) {
-      size -= sendSize;
-      buff += sendSize;
+  int time = 0;
+  int status;
+  do {
+    status = poll(DELTA_TIME, POLLOUT);
+    if(status > 0) {
+      auto sendSize = ::send(fd_, buff, size, 0);
+      if(sendSize >= int(size)) {
+        return true;
+      }
+      else if(sendSize > 0) {
+        size -= sendSize;
+        buff += sendSize;
+      }
+      else {
+        break;
+      }
+      time = 0;
     }
     else {
-      onClose();
-      return false;
+      time += DELTA_TIME;
     }
-  }
-  return true;
+  } while(status >= 0 && time < TIMEOUT);
+  close();
+  return false;
 }
 /***********************************************************************//**
 	@copydoc Socket::recv
 ***************************************************************************/
 bool TcpSocket::onRecv(char* buff, size_t size) {
-  while(size > 0) {
-    auto recvSize = ::recv(fd_, buff, size, 0);
-    if(recvSize > 0) {
-      size -= recvSize;
-      buff += recvSize;
+  int time = 0;
+  int status;
+  do {
+    status = poll(DELTA_TIME, POLLIN);
+    if(status > 0) {
+      auto recvSize = ::recv(fd_, buff, size, 0);
+      if(recvSize >= int(size)) {
+        return true;
+      }
+      else if(recvSize > 0) {
+        size -= recvSize;
+        buff += recvSize;
+      }
+      else {
+        break;
+      }
+      time = 0;
     }
     else {
-      onClose();
-      return false;
+      time += DELTA_TIME;
     }
-  }
-  return true;
+  } while(status >= 0 && time < TIMEOUT);
+  close();
+  return false;
 }
 /***********************************************************************//**
 	@brief 
@@ -219,6 +239,19 @@ void TcpSocket::open() {
 ***************************************************************************/
 void TcpSocket::setError() {
   super::setError(strerror(errno));
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+int TcpSocket::poll(int timeout, int event) {
+  struct pollfd fds;
+  fds.fd = fd_;
+  fds.events = event;
+#if defined(UMP_PLATFORM_WINDOWS)
+  return WSAPoll(&fds, 1, timeout);
+#else
+  return ::poll(&fds, 1, timeout);
+#endif
 }
 /***********************************************************************//**
 	$Id$

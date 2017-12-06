@@ -73,6 +73,7 @@ class TcpSocket
  private:
   void open();
   void setError();
+  int poll(int timeout, int event);
 };
 /***********************************************************************//**
 	$Id$
