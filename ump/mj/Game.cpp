@@ -260,6 +260,7 @@ void Game::clearPlayer() {
       removePlayer(player);
     }
   }
+  players_.clear();
 }
 /***********************************************************************//**
 	@brief 親を変更する
