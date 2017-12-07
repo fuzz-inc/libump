@@ -155,65 +155,71 @@ std::shared_ptr<Socket> TcpSocket::onAccept(int timeout) {
   return std::make_shared<TcpSocket>(fd);
 }
 /***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool TcpSocket::pollSend(int timeout) {
+  if(isOpen()) {
+    auto status = poll(timeout, POLLOUT);
+    if(status > 0) {
+      return true;
+    }
+    else if(status < 0) {
+      close();
+    }
+  }
+  return false;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool TcpSocket::pollRecv(int timeout) {
+  if(isOpen()) {
+    auto status = poll(timeout, POLLIN);
+    if(status > 0) {
+      return true;
+    }
+    else if(status < 0) {
+      close();
+    }
+  }
+  return false;
+}
+/***********************************************************************//**
 	@brief データを送信する
 	@param buff 送信するデータ
 	@param size 送信するサイズ
 	@return 送信に成功したとき真
 ***************************************************************************/
 bool TcpSocket::onSend(const char* buff, size_t size) {
-  int time = 0;
-  int status;
-  do {
-    status = poll(DELTA_TIME, POLLOUT);
-    if(status > 0) {
-      auto sendSize = ::send(fd_, buff, size, 0);
-      if(sendSize >= int(size)) {
-        return true;
-      }
-      else if(sendSize > 0) {
-        size -= sendSize;
-        buff += sendSize;
-      }
-      else {
-        break;
-      }
-      time = 0;
+  while(size > 0) {
+    auto sendSize = ::send(fd_, buff, size, 0);
+    if(sendSize > 0) {
+      size -= sendSize;
+      buff += sendSize;
     }
     else {
-      time += DELTA_TIME;
+      close();
+      return false;
     }
-  } while(status >= 0 && time < TIMEOUT);
-  close();
-  return false;
+  }
+  return true;
 }
 /***********************************************************************//**
 	@copydoc Socket::recv
 ***************************************************************************/
 bool TcpSocket::onRecv(char* buff, size_t size) {
-  int time = 0;
-  int status;
-  do {
-    status = poll(DELTA_TIME, POLLIN);
-    if(status > 0) {
-      auto recvSize = ::recv(fd_, buff, size, 0);
-      if(recvSize >= int(size)) {
-        return true;
-      }
-      else if(recvSize > 0) {
-        size -= recvSize;
-        buff += recvSize;
-      }
-      else {
-        break;
-      }
-      time = 0;
+  while(size > 0) {
+    auto recvSize = ::recv(fd_, buff, size, 0);
+    if(recvSize > 0) {
+      size -= recvSize;
+      buff += recvSize;
     }
     else {
-      time += DELTA_TIME;
+      close();
+      return false;
     }
-  } while(status >= 0 && time < TIMEOUT);
-  close();
-  return false;
+  }
+  return true;
 }
 /***********************************************************************//**
 	@brief 

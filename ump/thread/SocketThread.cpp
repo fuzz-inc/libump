@@ -54,9 +54,11 @@ SocketThread::~SocketThread() {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-Socket& SocketThread::getSocket() const {
-  assert(socket_);
-  return *socket_;
+bool SocketThread::connect(const char* host, int port) {
+  if(socket_) {
+    return socket_->connect(host, port);
+  }
+  return false;
 }
 /***********************************************************************//**
 	@brief 接続している？
@@ -64,6 +66,24 @@ Socket& SocketThread::getSocket() const {
 ***************************************************************************/
 bool SocketThread::isOpen() const {
   return socket_ && socket_->isOpen();
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void SocketThread::closeSocket() {
+  flag_.set(FLAG_CLOSE);
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool SocketThread::sendCommand(const Command& command) {
+  if(isOpen()) {
+    sendCommands_([&command](std::queue<Command>& queue) {
+        queue.emplace(command);
+      });
+    return true;
+  }
+  return false;
 }
 /***********************************************************************//**
 	@brief スレッドを開始する
@@ -88,6 +108,13 @@ void SocketThread::resetListener(Listener* listener) {
   listener_ = listener;
 }
 /***********************************************************************//**
+	@brief 
+***************************************************************************/
+Socket& SocketThread::getSocket() const {
+  assert(socket_);
+  return *socket_;
+}
+/***********************************************************************//**
 	@brief スレッド処理
 ***************************************************************************/
 void SocketThread::operator()() {
@@ -102,10 +129,38 @@ void SocketThread::operator()() {
 	@brief 
 ***************************************************************************/
 void SocketThread::onThread() {
-  Command command;
-  if(getSocket().recvCommand(command)) {
-    listener_->onRecvCommand(command);
+  {
+    Command command;
+    while(dequeueCommand(command)) {
+      if(!socket_->pollSend(100) ||
+         !socket_->sendCommand(command)) {
+        return;
+      }
+    }
   }
+  if(flag_.test(FLAG_CLOSE)) {
+    socket_->close();
+  }
+  else if(socket_->pollRecv(100)) {
+    Command command;
+    if(socket_->recvCommand(command)) {
+      listener_->onRecvCommand(command);
+    }
+  }
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool SocketThread::dequeueCommand(Command& command) {
+  bool flag = false;
+  sendCommands_([&](std::queue<Command>& queue) {
+      if(!queue.empty()) {
+        command = queue.front();
+        queue.pop();
+        flag = true;
+      }
+    });
+  return flag;
 }
 /***********************************************************************//**
 	$Id$

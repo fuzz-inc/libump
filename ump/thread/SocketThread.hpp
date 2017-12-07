@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #pragma once
 
+#include "ump/thread/Atomic.hpp"
 #include "ump/thread/Thread.hpp"
 
 namespace ump {
@@ -48,16 +49,27 @@ class SocketThread
   class Listener;
 
  private:
+  enum {
+    FLAG_CLOSE, 
+    FLAG_MAX
+  };
+
+ private:
   std::shared_ptr<Socket> socket_;
   Listener* listener_;
+  Atomic<std::queue<Command>> sendCommands_;
+  std::bitset<FLAG_MAX> flag_;
 
  public:
   SocketThread(std::shared_ptr<Socket> socket, 
                Listener* listener);
   ~SocketThread() override;
 
-  Socket& getSocket() const;
+  bool connect(const char* host, int port);
   bool isOpen() const;
+  void closeSocket();
+
+  bool sendCommand(const Command& command);
 
   void start();
   void stop();
@@ -65,9 +77,14 @@ class SocketThread
   void resetListener(Listener* listener);
 
  protected:
+  Socket& getSocket() const;
+
   void operator()() override;
 
   virtual void onThread();
+
+ private:
+  bool dequeueCommand(Command& command);
 };
 /***********************************************************************//**
 	@brief 

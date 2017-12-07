@@ -69,6 +69,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <iostream>
 #include <map>
 #include <mutex>
+#include <queue>
 #include <random>
 #include <sstream>
 #include <stack>

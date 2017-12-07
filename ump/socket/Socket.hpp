@@ -56,6 +56,9 @@ class Socket {
   virtual bool isOpen() const = 0;
   void close();
 
+  virtual bool pollSend(int timeout);
+  virtual bool pollRecv(int timeout);
+
   bool sendCommand(const Command& command);
   bool recvCommand(Command& command);
 

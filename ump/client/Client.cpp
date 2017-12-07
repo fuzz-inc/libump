@@ -64,7 +64,7 @@ Client::~Client() {
         @return 接続に成功したら真
 ***************************************************************************/
 bool Client::open(const char* host, int port) {
-  if(getSocket().connect(host, port)) {
+  if(SocketThread::connect(host, port)) {
     start();
     return true;
   }
@@ -104,7 +104,7 @@ bool Client::sendCommand(const Command& command) {
   if(auto logger = getLogger()) {
     logger->log(Logger::LEVEL_DEBUG, command.toString(false));
   }
-  return getSocket().sendCommand(command);
+  return SocketThread::sendCommand(command);
 }
 /***********************************************************************//**
 	@brief 返答を送る

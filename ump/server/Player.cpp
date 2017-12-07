@@ -59,6 +59,8 @@ Player::~Player() {
 void Player::setGame(std::shared_ptr<mj::Game> game) {
   std::lock_guard<std::mutex> lock(mutex_);
   super::setGame(game);
+  gameLog_.clear();
+  kyokuLog_.clear();
 }
 /***********************************************************************//**
 	@brief 
@@ -114,7 +116,7 @@ bool Player::sendCommand(const Command& command) {
     reply_([](Command& reply) { reply.clear(); });
   }
   onSendCommand(command);
-  if(isConnect() && socket_->getSocket().sendCommand(command)) {
+  if(isConnect() && socket_->sendCommand(command)) {
     return true;
   }
   //log(Logger::LEVEL_ERROR, std::string(" <- ") + command.toString(false));
@@ -125,7 +127,7 @@ bool Player::sendCommand(const Command& command) {
 ***************************************************************************/
 void Player::closeSocket() {
   if(isConnect()) {
-    socket_->getSocket().close();
+    socket_->closeSocket();
   }
 }
 /***********************************************************************//**
