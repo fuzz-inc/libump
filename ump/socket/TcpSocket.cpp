@@ -143,7 +143,7 @@ bool TcpSocket::onListen(int port) {
 	@copydoc Socket::onAccept
 ***************************************************************************/
 std::shared_ptr<Socket> TcpSocket::onAccept(int timeout) {
-  if(poll(timeout, POLLIN) <= 0) {
+  if(!poll(POLL_RECV, timeout)) {
     return nullptr;
   }
   struct sockaddr_in address;
@@ -157,24 +157,17 @@ std::shared_ptr<Socket> TcpSocket::onAccept(int timeout) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-bool TcpSocket::pollSend(int timeout) {
+bool TcpSocket::poll(int flag, int timeout) {
   if(isOpen()) {
-    auto status = poll(timeout, POLLOUT);
-    if(status > 0) {
-      return true;
-    }
-    else if(status < 0) {
-      close();
-    }
-  }
-  return false;
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-bool TcpSocket::pollRecv(int timeout) {
-  if(isOpen()) {
-    auto status = poll(timeout, POLLIN);
+    struct pollfd fds;
+    fds.fd = fd_;
+    fds.events = (((flag & POLL_SEND) ? POLLOUT : 0) | 
+                  ((flag & POLL_RECV) ? POLLIN : 0));
+#if defined(UMP_PLATFORM_WINDOWS)
+    int status = WSAPoll(&fds, 1, timeout);
+#else
+    int status = ::poll(&fds, 1, timeout);
+#endif
     if(status > 0) {
       return true;
     }
@@ -245,22 +238,6 @@ void TcpSocket::open() {
 ***************************************************************************/
 void TcpSocket::setError() {
   super::setError(strerror(errno));
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-int TcpSocket::poll(int timeout, int event) {
-  if(!isOpen()) {
-    return -1;
-  }
-  struct pollfd fds;
-  fds.fd = fd_;
-  fds.events = event;
-#if defined(UMP_PLATFORM_WINDOWS)
-  return WSAPoll(&fds, 1, timeout);
-#else
-  return ::poll(&fds, 1, timeout);
-#endif
 }
 /***********************************************************************//**
 	$Id$

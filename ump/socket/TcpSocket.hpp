@@ -65,8 +65,7 @@ class TcpSocket
   bool onListen(int port) override;
   std::shared_ptr<Socket> onAccept(int timeout) override;
 
-  bool pollSend(int timeout) override;
-  bool pollRecv(int timeout) override;
+  bool poll(int flag, int timeout) override;
 
   bool onSend(const char* buff, size_t size) override;
   bool onRecv(char* buff, size_t size) override;
@@ -76,7 +75,6 @@ class TcpSocket
  private:
   void open();
   void setError();
-  int poll(int timeout, int event);
 };
 /***********************************************************************//**
 	$Id$

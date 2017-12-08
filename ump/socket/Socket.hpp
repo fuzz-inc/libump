@@ -42,6 +42,9 @@ class Socket {
   static const int EOL_SIZE = 2;
   static const char EOL[EOL_SIZE + 1];
 
+  static const int POLL_SEND = 1 << 0;
+  static const int POLL_RECV = 1 << 1;
+
  private:
   mutable std::mutex mutex_;
   std::string error_;
@@ -56,8 +59,7 @@ class Socket {
   virtual bool isOpen() const = 0;
   void close();
 
-  virtual bool pollSend(int timeout);
-  virtual bool pollRecv(int timeout);
+  virtual bool poll(int flag, int timeout);
 
   bool sendCommand(const Command& command);
   bool recvCommand(Command& command);

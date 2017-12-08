@@ -36,13 +36,16 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace ump {
 namespace thread {
+static const int DELTA_TIME = 100;
+static const int TIMEOUT = 1 * 60 * 1000;
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
 SocketThread::SocketThread(std::shared_ptr<Socket> socket, 
                            Listener* listener)
   : socket_(socket), 
-    listener_(listener)
+    listener_(listener), 
+    timeout_(0)
 {
 }
 /***********************************************************************//**
@@ -132,7 +135,7 @@ void SocketThread::onThread() {
   {
     Command command;
     while(dequeueCommand(command)) {
-      if(!socket_->pollSend(100) ||
+      if(!poll(Socket::POLL_SEND) ||
          !socket_->sendCommand(command)) {
         return;
       }
@@ -141,7 +144,7 @@ void SocketThread::onThread() {
   if(flag_.test(FLAG_CLOSE)) {
     socket_->close();
   }
-  else if(socket_->pollRecv(100)) {
+  else if(poll(Socket::POLL_RECV)) {
     Command command;
     if(socket_->recvCommand(command)) {
       listener_->onRecvCommand(command);
@@ -161,6 +164,20 @@ bool SocketThread::dequeueCommand(Command& command) {
       }
     });
   return flag;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool SocketThread::poll(int flag) {
+  if(socket_->poll(flag, DELTA_TIME)) {
+    timeout_ = 0;
+    return true;
+  }
+  timeout_ += DELTA_TIME;
+  if(timeout_ > TIMEOUT) {
+    socket_->close();
+  }
+  return false;
 }
 /***********************************************************************//**
 	$Id$

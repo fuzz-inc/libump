@@ -59,6 +59,7 @@ class SocketThread
   Listener* listener_;
   Atomic<std::queue<Command>> sendCommands_;
   std::bitset<FLAG_MAX> flag_;
+  int timeout_;
 
  public:
   SocketThread(std::shared_ptr<Socket> socket, 
@@ -85,6 +86,8 @@ class SocketThread
 
  private:
   bool dequeueCommand(Command& command);
+
+  bool poll(int flag);
 };
 /***********************************************************************//**
 	@brief 
