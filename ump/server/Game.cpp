@@ -71,25 +71,14 @@ std::shared_ptr<const Config> Game::getConfig() const {
 ***************************************************************************/
 void Game::appendPlayer(std::shared_ptr<Player> player) {
   auto seat = findSeat();
-  onAppendPlayer(seat, player);
   super::setPlayer(seat, player);
-  {
-    auto command = createCommand(Command::TYPE_PLAYER);
-    command.append(Command::SeatToString(seat));
-    command.append(player->getName());
-    sendAll(command);
-  }
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-void Game::onAppendPlayer(size_t seat, std::shared_ptr<Player> player) {
   {
     auto command = createCommand(Command::TYPE_SEAT);
     command.append(Command::SeatToString(seat));
     command.setOption(Command::OPTION_GAMEID, getId());
     sendCommand(player, command);
   }
+  /* 先に席についていた面子をplayerに送信する */
   for(auto& iter : getPlayers()) {
     if(iter && iter != player) {
       auto command = createCommand(Command::TYPE_PLAYER);
@@ -97,6 +86,13 @@ void Game::onAppendPlayer(size_t seat, std::shared_ptr<Player> player) {
       command.append(iter->getName());
       sendCommand(player, command);
     }
+  }
+  /* playerの席を全員に送信する */
+  {
+    auto command = createCommand(Command::TYPE_PLAYER);
+    command.append(Command::SeatToString(seat));
+    command.append(player->getName());
+    sendAll(command);
   }
 }
 /***********************************************************************//**

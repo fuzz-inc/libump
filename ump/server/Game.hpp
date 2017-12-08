@@ -70,7 +70,6 @@ class Game
   }
 
   void appendPlayer(std::shared_ptr<Player> player);
-  void onAppendPlayer(size_t seat, std::shared_ptr<Player> player);
   bool canStart() const;
   bool isStart() const;
   virtual void start();
