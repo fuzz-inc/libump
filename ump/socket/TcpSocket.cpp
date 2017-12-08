@@ -38,8 +38,6 @@ typedef int socklen_t;
 
 namespace ump {
 namespace socket {
-static const int DELTA_TIME = 1000;
-static const int TIMEOUT = 5 * 60 * 1000;
 /***********************************************************************//**
 	@brief デフォルトコンストラクタ
 ***************************************************************************/
