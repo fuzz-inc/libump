@@ -254,9 +254,7 @@ void Player::onRecvCommand(const Command& command) {
   if(auto game = getGame()) {
     game->onRecvCommand(shared_from_this(), command);
   }
-  else {
-    getServer()->recvCommand(shared_from_this(), command);
-  }
+  getServer()->recvCommand(shared_from_this(), command);
 }
 /***********************************************************************//**
 	@copydoc SocketThread::onDisconnectSocket
