@@ -128,6 +128,7 @@
     <ClCompile Include="..\..\ump\server\JobEnd.cpp" />
     <ClCompile Include="..\..\ump\server\JobGame.cpp" />
     <ClCompile Include="..\..\ump\server\JobHaipai.cpp" />
+    <ClCompile Include="..\..\ump\server\JobKakan.cpp" />
     <ClCompile Include="..\..\ump\server\JobKyoku.cpp" />
     <ClCompile Include="..\..\ump\server\JobNaki.cpp" />
     <ClCompile Include="..\..\ump\server\JobReady.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="..\..\ump\server\JobEnd.hpp" />
     <ClInclude Include="..\..\ump\server\JobGame.hpp" />
     <ClInclude Include="..\..\ump\server\JobHaipai.hpp" />
+    <ClInclude Include="..\..\ump\server\JobKakan.hpp" />
     <ClInclude Include="..\..\ump\server\JobKyoku.hpp" />
     <ClInclude Include="..\..\ump\server\JobNaki.hpp" />
     <ClInclude Include="..\..\ump\server\JobReady.hpp" />
