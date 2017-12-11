@@ -95,12 +95,17 @@ void JobAgari::agari() {
   }
   auto point = agari.getPoint();
   auto text = agari.getText();
-  if(getConfig()->isAotenjo() && !agari.isYakuman()) {
-    point = agari.getFu() * 32;
-    for(size_t i = 1, n = agari.getHan(); i < n; i++) {
-      point *= 2;
+  if(getConfig()->isAotenjo()) {
+    if(agari.isYakuman()) {
+      point = 1000000;
     }
-    text.clear();
+    else {
+      point = agari.getFu() * 32;
+      for(size_t i = 1, n = agari.getHan(); i < n; i++) {
+        point *= 2;
+      }
+      text.clear();
+    }
   }
   if(player_ == game.getOya()) {
     point += point / 2;
