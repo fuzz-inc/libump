@@ -59,7 +59,6 @@ void JobKakan::onBegin() {
       auto command = game.createCommand(Command::TYPE_NAKI_Q);
       command.append(hai_->toString());
       command.append(Command::TYPE_RON);
-      command.setOption("chankan", "1");
       game.sendCommand(player, command);
       players_.push_back(player);
     }
