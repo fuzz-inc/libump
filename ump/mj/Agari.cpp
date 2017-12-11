@@ -41,6 +41,7 @@ const Agari::YakuTable Agari::YakuTable_[YAKU_MAX] = {
   { 2, 0, "ダブルリーチ" }, 
   { 1, 0, "一発" }, 
   { 1, 1, "嶺上開花" }, 
+  { 1, 1, "槍槓" }, 
   { 1, 1, "海底摸月" }, 
   { 1, 1, "河底撈魚" }, 
   { 1, 1, "タンヤオ" }, 
@@ -146,6 +147,9 @@ void Agari::update(const Player& player) {
     }
     if(player.isRinshan()) {
       appendYaku(YAKU_RINSHAN);
+    }
+    else if(player.isChankan()) {
+      appendYaku(YAKU_CHANKAN);
     }
     else if(player.isHaitei()) {
       appendYaku(isRon() ? YAKU_HOUTEI : YAKU_HAITEI);

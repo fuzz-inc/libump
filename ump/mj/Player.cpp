@@ -174,7 +174,7 @@ const Hai* Player::getTsumoHai() const {
 	@brief 和了を求める
         @param[in] ron ロン和了の牌(ツモ和了のときはnullptr)
 ***************************************************************************/
-bool Player::updateAgari(const Hai* ron) {
+bool Player::updateAgari(const Hai* ron, bool chankan) {
   agari_.clear();
   if(hasUnknown()) {
     return false;
@@ -183,7 +183,7 @@ bool Player::updateAgari(const Hai* ron) {
     return false;
   }
   AgariParser parser(*this);
-  agari_ = parser.parse(ron);
+  agari_ = parser.parse(ron, chankan);
   return agari_.isExist();
 }
 /***********************************************************************//**
@@ -202,10 +202,11 @@ bool Player::canAgari() const {
 /***********************************************************************//**
 	@brief ロンできるか調べる
 	@param[in] hai 捨て牌
+	@param[in] chankan 槍槓のとき真
 	@return ロンできるとき真
 ***************************************************************************/
-bool Player::canRon(const Hai* hai) {
-  return updateAgari(hai);
+bool Player::canRon(const Hai* hai, bool chankan) {
+  return updateAgari(hai, chankan);
 }
 /***********************************************************************//**
 	@brief リーチをかけることができるか調べる

@@ -114,10 +114,10 @@ class Player
   virtual void tsumo(const Hai* hai, bool rinshan);
   const Hai* getTsumoHai() const;
 
-  bool updateAgari(const Hai* ron = nullptr);
+  bool updateAgari(const Hai* ron = nullptr, bool chankan = false);
   Agari& getAgari();
   bool canAgari() const;
-  bool canRon(const Hai* hai);
+  bool canRon(const Hai* hai, bool chankan);
 
   bool canRichi() const;
 

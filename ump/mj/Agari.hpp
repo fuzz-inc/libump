@@ -47,6 +47,7 @@ class Agari {
     YAKU_DOUBLE_RICHI, 		/**< ダブルリーチ */
     YAKU_IPPATSU, 		/**< 一発 */
     YAKU_RINSHAN, 		/**< 嶺上開花 */
+    YAKU_CHANKAN, 		/**< 槍槓 */
     YAKU_HAITEI, 		/**< 海底摸月 */
     YAKU_HOUTEI, 		/**< 河底撈魚 */
     YAKU_TANYAO, 		/**< タンヤオ */
