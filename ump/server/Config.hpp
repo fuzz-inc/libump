@@ -53,6 +53,7 @@ class Config
     FLAG_AOTENJO, 
     FLAG_CHI, 
     FLAG_SINGLE, 
+    FLAG_FURITEN, 
     FLAG_MAX
   };
 
@@ -108,6 +109,11 @@ class Config
    * 1局精算
    */
   UMP_BIT_ACCESSOR(Single, flag_, FLAG_SINGLE);
+
+  /**
+   * フリテン和了禁止
+   */
+  UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);

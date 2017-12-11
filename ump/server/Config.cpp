@@ -57,6 +57,7 @@ Config::Config()
 {
   setAgariyame(true);
   setCanChi(true);
+  setFuriten(true);
 }
 /***********************************************************************//**
 	@brief 

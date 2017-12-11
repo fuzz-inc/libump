@@ -306,7 +306,7 @@ void Player::updateFuriten() {
 	@param[in] hai 捨て牌
 ***************************************************************************/
 void Player::updateFuriten(const mj::Hai* hai) {
-  if(!isFuriten()) {
+  if(!isFuriten() && getGame()->getConfig()->isFuriten()) {
     mj::Shanten shanten;
     auto hais(getMenzen());
     hais.append(hai);
