@@ -56,6 +56,7 @@ class Player
     FLAG_SAY_TENPAI, 
     FLAG_AGARI, 
     FLAG_RINSHAN, 
+    FLAG_CHANKAN, 	/**< 槍槓 */
     FLAG_MAX
   };
 
@@ -95,6 +96,7 @@ class Player
   bool isAgari() const;
 
   UMP_BIT_ACCESSOR(Rinshan, flag_, FLAG_RINSHAN);
+  UMP_BIT_GETTER(Chankan, flag_, FLAG_CHANKAN);
 
   void onOpen();
 

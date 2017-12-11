@@ -175,8 +175,8 @@ bool Player::canRichi() const {
 /***********************************************************************//**
 	@copydoc mj::Player::canRon
 ***************************************************************************/
-bool Player::canRon(const mj::Hai* hai) {
-  return !isFuriten() && super::canRon(hai);
+bool Player::canRon(const mj::Hai* hai, bool chankan) {
+  return !isFuriten() && super::canRon(hai, chankan);
 }
 /***********************************************************************//**
 	@brief 他のプレイヤーとソケットを交換する

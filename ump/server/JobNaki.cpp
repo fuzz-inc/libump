@@ -66,7 +66,7 @@ void JobNaki::onBegin() {
     if(player->isConnect()) {
       auto command = game.createCommand(Command::TYPE_NAKI_Q);
       command.append(hai->toString());
-      if(player->canRon(hai)) {
+      if(player->canRon(hai, false)) {
         command.append(Command::TYPE_RON);
       }
       if(game.canKan() && player->canKan(hai)) {

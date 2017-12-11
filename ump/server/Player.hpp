@@ -90,7 +90,7 @@ class Player
   void onDiscarded(const Player& player, const mj::Hai* hai);
 
   bool canRichi() const;
-  bool canRon(const mj::Hai* hai);
+  bool canRon(const mj::Hai* hai, bool chankan);
 
   void swapSocket(Player& player);
   void onReconnect();

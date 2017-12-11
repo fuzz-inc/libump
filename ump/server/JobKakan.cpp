@@ -55,7 +55,7 @@ void JobKakan::onBegin() {
   for(size_t i = 1; i < playerNum; i++) {
     auto index = (game.getTurn() + i) % playerNum;
     auto player = game.getPlayer(index);
-    if(player->isConnect() && player->canRon(hai_)) {
+    if(player->isConnect() && player->canRon(hai_, true)) {
       auto command = game.createCommand(Command::TYPE_NAKI_Q);
       command.append(hai_->toString());
       command.append(Command::TYPE_RON);
@@ -75,7 +75,6 @@ Job* JobKakan::onUpdate() {
     auto reply = player->getReply();
     if(reply.isExist()) {
       if(reply.getType() == Command::TYPE_RON) {
-        player->setChankan(true);
         return new JobAgari(game, player->getSeat());
       }
       else {

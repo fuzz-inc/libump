@@ -182,8 +182,9 @@ bool Player::updateAgari(const Hai* ron, bool chankan) {
   if(!isTenpai()) {
     return false;
   }
+  flag_.set(FLAG_CHANKAN, chankan);
   AgariParser parser(*this);
-  agari_ = parser.parse(ron, chankan);
+  agari_ = parser.parse(ron);
   return agari_.isExist();
 }
 /***********************************************************************//**
