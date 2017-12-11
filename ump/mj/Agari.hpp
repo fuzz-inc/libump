@@ -127,6 +127,7 @@ class Agari {
  private:
   std::bitset<FLAG_MAX> flag_;
   std::vector<Mentsu> mentsus_;	/**< 構成面子 */
+  const Hai* ron_;		/**< ロン和了牌 */
   int yakuHan_[YAKU_MAX];	/**< 役ごとの翻数 */
   int han_;			/**< 総翻数(役満数) */
   int fu_;			/**< 符(切り上げ後) */
@@ -143,6 +144,8 @@ class Agari {
   ~Agari() = default;
 
   void clear();
+
+  UMP_ACCESSOR(Ron, ron_);
 
   void appendMentsu(const Mentsu& mentsu);
   size_t countMentsu() const;

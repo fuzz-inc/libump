@@ -100,6 +100,7 @@ bool AgariParser::isRon() const {
 void AgariParser::update() {
   if(getPlayer().isMenzen()) {
     if(isKokushi()) {
+      agari_.setRon(isRon() ? agariHai_ : nullptr);
       agari_.update(getPlayer());
       return;
     }
@@ -147,6 +148,7 @@ void AgariParser::checkChitoi() {
 	@brief 
 ***************************************************************************/
 void AgariParser::checkAgariHai(Agari& agari) {
+  agari.setRon(isRon() ? agariHai_ : nullptr);
   for(size_t i = 0, n = agari.countMentsu(); i < n; i++) {
     auto& mentsu = agari.getMentsu(i);
     if(mentsu.isMenzen() && mentsu.isInclude(agariHai_)) {

@@ -93,8 +93,9 @@ Agari::Agari() {
         @brief 和了の内容を全てクリアする
 ***************************************************************************/
 void Agari::clear() {
-  mentsus_.clear();
   flag_.reset();
+  mentsus_.clear();
+  ron_ = nullptr;
   clearYaku();
 }
 /***********************************************************************//**
@@ -239,12 +240,7 @@ bool Agari::isInclude(int yaku) const {
 	@return ロン和了のとき真
 ***************************************************************************/
 bool Agari::isRon() const {
-  for(auto& mentsu : mentsus_) {
-    if(mentsu.isRon()) {
-      return true;
-    }
-  }
-  return false;
+  return bool(ron_);
 }
 /***********************************************************************//**
 	@brief 役を追加する

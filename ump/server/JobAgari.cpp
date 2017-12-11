@@ -108,6 +108,10 @@ void JobAgari::agari() {
   {
     auto command = game.createCommand(Command::TYPE_AGARI);
     command.append(player->getSeatString());
+    if(auto ron = agari.getRon()) {
+      command.setOption(Command::ToString(Command::TYPE_RON), 
+                        ron->toString());
+    }
     if(text.empty()) {
       command.append(mj::Agari::Ceil(point, 100).toString());
     }
