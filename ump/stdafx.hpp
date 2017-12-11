@@ -135,6 +135,7 @@ class Job;
 class JobAgari;
 class JobGame;
 class JobHaipai;
+class JobKakan;
 class JobKyoku;
 class JobNaki;
 class JobReady;

@@ -10,6 +10,8 @@
 		262FB2DA1DB15072004FF73B /* Bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262FB2D81DB15072004FF73B /* Bot.cpp */; };
 		262FB2DB1DB15072004FF73B /* Bot.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 262FB2D91DB15072004FF73B /* Bot.hpp */; };
 		26560BB61DE8A5FB002753D7 /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26560BB41DE8A5FB002753D7 /* Pattern.cpp */; };
+		26706B441FDE71F600B4A6F5 /* JobKakan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26706B421FDE71F600B4A6F5 /* JobKakan.cpp */; };
+		26706B451FDE71F600B4A6F5 /* JobKakan.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 26706B431FDE71F600B4A6F5 /* JobKakan.hpp */; };
 		DA0666791DAF9CD700F29305 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0666771DAF9CD700F29305 /* Player.cpp */; };
 		DA06667A1DAF9CD700F29305 /* Player.hpp in Headers */ = {isa = PBXBuildFile; fileRef = DA0666781DAF9CD700F29305 /* Player.hpp */; };
 		DA06667D1DAF9D3A00F29305 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA06667B1DAF9D3A00F29305 /* Game.cpp */; };
@@ -97,6 +99,8 @@
 		262FB2D91DB15072004FF73B /* Bot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bot.hpp; sourceTree = "<group>"; };
 		26560BB41DE8A5FB002753D7 /* Pattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pattern.cpp; sourceTree = "<group>"; };
 		26560BB51DE8A5FB002753D7 /* Pattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pattern.hpp; sourceTree = "<group>"; };
+		26706B421FDE71F600B4A6F5 /* JobKakan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobKakan.cpp; sourceTree = "<group>"; };
+		26706B431FDE71F600B4A6F5 /* JobKakan.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JobKakan.hpp; sourceTree = "<group>"; };
 		DA0666771DAF9CD700F29305 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		DA0666781DAF9CD700F29305 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		DA06667B1DAF9D3A00F29305 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 				DAFCE78A1D7D78FF0016A137 /* JobGame.hpp */,
 				DAA597531DF0142B007BE749 /* JobHaipai.cpp */,
 				DAA597541DF0142B007BE749 /* JobHaipai.hpp */,
+				26706B421FDE71F600B4A6F5 /* JobKakan.cpp */,
+				26706B431FDE71F600B4A6F5 /* JobKakan.hpp */,
 				DAFCE78B1D7D78FF0016A137 /* JobKyoku.cpp */,
 				DAFCE78C1D7D78FF0016A137 /* JobKyoku.hpp */,
 				DAFCE78D1D7D78FF0016A137 /* JobNaki.cpp */,
@@ -374,6 +380,7 @@
 				DAFCE7B21D7D78FF0016A137 /* HaiArray.hpp in Headers */,
 				DAF407B11F79142B00495341 /* stdafx.hpp in Headers */,
 				DA8D01011D9BE99D00F1F5D2 /* Logger.hpp in Headers */,
+				26706B451FDE71F600B4A6F5 /* JobKakan.hpp in Headers */,
 				DAFCE7B61D7D78FF0016A137 /* Kawa.hpp in Headers */,
 				DAFCE7B41D7D78FF0016A137 /* Hand.hpp in Headers */,
 				DAFCE7DB1D7D78FF0016A137 /* Player.hpp in Headers */,
@@ -425,7 +432,7 @@
 		DAFCE6BA1D7D72A60016A137 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "YASUI Kentarow";
 				TargetAttributes = {
 					DAFCE6C11D7D72A60016A137 = {
@@ -465,6 +472,7 @@
 				DA1BD8D51DA50D2500334BB7 /* Socket.cpp in Sources */,
 				DAFCE7AB1D7D78FF0016A137 /* AgariParser.cpp in Sources */,
 				DAFCE7AD1D7D78FF0016A137 /* Divider.cpp in Sources */,
+				26706B441FDE71F600B4A6F5 /* JobKakan.cpp in Sources */,
 				DA1BD8D91DA50D2500334BB7 /* TcpSocket.cpp in Sources */,
 				DAFCE7A31D7D78FF0016A137 /* Client.cpp in Sources */,
 				DAA597551DF0142B007BE749 /* JobHaipai.cpp in Sources */,
@@ -513,13 +521,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -561,13 +577,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";

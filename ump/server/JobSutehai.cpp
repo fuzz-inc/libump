@@ -33,6 +33,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/server/Config.hpp"
 #include "ump/server/Game.hpp"
 #include "ump/server/JobAgari.hpp"
+#include "ump/server/JobKakan.hpp"
 #include "ump/server/JobNaki.hpp"
 #include "ump/server/JobSutehai.hpp"
 #include "ump/server/JobTsumo.hpp"
@@ -109,7 +110,8 @@ Job* JobSutehai::onUpdate() {
       if(reply.countArg() > 0) {
         if(auto hai = mj::Hai::Get(reply.getArg(0))) {
           if(auto mentsu = player->findKakanMentsu(hai)) {
-            return kan(type, *mentsu, hai);
+            openMentsu(player, type, *mentsu, hai);
+            return new JobKakan(game, hai);
           }
         }
       }

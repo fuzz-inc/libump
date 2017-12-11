@@ -33,7 +33,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ump/mj/Config.hpp"
 #include "ump/mj/Hai.hpp"
 
-//#define KAN_TEST
+#define KAN_TEST
 
 namespace ump {
 namespace mj {
