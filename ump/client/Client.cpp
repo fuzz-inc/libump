@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2017 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -388,33 +388,17 @@ void Client::execOpen(const Command& command) {
 void Client::execSay(const Command& command) {
   auto seat = Command::StringToSeat(command.getArg(0).c_str());
   auto player = getPlayer(seat);
-  if(command.hasArg(Command::TYPE_KAN) || 
-     command.hasArg(Command::TYPE_PON) ||
-     command.hasArg(Command::TYPE_CHI)) {
-    getLastSutehai()->setNaki();
-  }
-  else if(command.hasArg(Command::TYPE_RON)) {
-    getLastSutehai()->setRon();
-  }
-  else if(command.hasArg(Command::TYPE_RICHI)) {
-    //player->setSayRichi(true);
-  }
-  else if(command.hasArg(Command::TYPE_TENPAI)) {
+  if(command.hasArg(Command::TYPE_TENPAI)) {
     player->sayTenpai();
-  }
-  else if(command.hasArg(Command::TYPE_NOTEN)) {
-    //player->setClose();
   }
 }
 /***********************************************************************//**
 	@brief 和了
 ***************************************************************************/
 void Client::execAgari(const Command& command) {
-  //Player* player = getPlayer(command.getArg(0).c_str());
-  //player->setOpen();
 }
 /***********************************************************************//**
-	流局
+	@brief 流局
 ***************************************************************************/
 void Client::execRyukyoku(const Command& command) {
 }

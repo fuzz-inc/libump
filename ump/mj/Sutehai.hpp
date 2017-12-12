@@ -45,7 +45,6 @@ class Sutehai {
     FLAG_TSUMOGIRI, 
     FLAG_RICHI, 
     FLAG_NAKI, 
-    FLAG_RON, 
     FLAG_MAX
   };
 
@@ -65,7 +64,6 @@ class Sutehai {
   UMP_BIT_ACCESSOR(Tsumogiri, flag_, FLAG_TSUMOGIRI);
   UMP_BIT_ACCESSOR(Richi, flag_, FLAG_RICHI);
   UMP_BIT_ACCESSOR(Naki, flag_, FLAG_NAKI);
-  UMP_BIT_ACCESSOR(Ron, flag_, FLAG_RON);
 };
 /***********************************************************************//**
 	$Id$

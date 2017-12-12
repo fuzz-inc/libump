@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2017 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -148,6 +148,8 @@ class Player
   bool isHaitei() const;
 
  protected:
+  void onOpenMentsu(std::shared_ptr<const Mentsu> mentsu) override;
+
   /**
    * 点数がセットされたときの処理
    * @param[in] value 点数

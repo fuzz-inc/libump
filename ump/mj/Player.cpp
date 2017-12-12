@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2017 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -357,7 +357,7 @@ bool Player::canChi(const HaiArray& hais, const Hai* hai) const {
 	@return 河の捨て牌
 ***************************************************************************/
 Sutehai* Player::sutehai(const Sutehai& sutehai) {
-  assert(!sutehai.isNaki() && !sutehai.isRon());
+  assert(!sutehai.isNaki());
   sutehai_ = super::sutehai(sutehai);
   tsumoHai_ = nullptr;
   super::sort();
@@ -420,6 +420,19 @@ const HaiArray& Player::getRichiableHai() const {
 ***************************************************************************/
 bool Player::isHaitei() const {
   return getGame()->getRest() == 0;
+}
+/***********************************************************************//**
+	@copydoc Hand::onOpenMentsu
+***************************************************************************/
+void Player::onOpenMentsu(std::shared_ptr<const Mentsu> mentsu) {
+  super::onOpenMentsu(mentsu);
+  if(auto hai = mentsu->getClaimHai()) {
+    if(auto sutehai = getGame()->getLastSutehai()) {
+      if(sutehai->getHai()->isEqual(hai)) {
+        sutehai->setNaki();
+      }
+    }
+  }
 }
 /***********************************************************************//**
 	@copydoc Hand::onShowHai
