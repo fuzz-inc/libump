@@ -44,6 +44,7 @@ class Command {
   enum Type {
     TYPE_NULL, 
 
+    TYPE_ACK, 
     TYPE_HELLO, 
     TYPE_ERROR, 
     TYPE_SEAT, 

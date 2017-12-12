@@ -36,6 +36,7 @@ namespace ump {
 const char* Command::TYPE_TABLE[] = {
   "NULL", 
 
+  "ack", 
   "hello", 
   "error", 
   "seat", 

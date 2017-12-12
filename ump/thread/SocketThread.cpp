@@ -132,14 +132,8 @@ void SocketThread::operator()() {
 	@brief 
 ***************************************************************************/
 void SocketThread::onThread() {
-  {
-    Command command;
-    while(dequeueCommand(command)) {
-      if(!poll(Socket::POLL_SEND) ||
-         !socket_->sendCommand(command)) {
-        return;
-      }
-    }
+  if(!flushCommand()) {
+    return;
   }
   if(flag_.test(FLAG_CLOSE)) {
     socket_->close();
@@ -150,20 +144,54 @@ void SocketThread::onThread() {
       listener_->onRecvCommand(command);
     }
   }
+  else if(isTimeout()) {
+    Command command(Command::TYPE_ACK);
+    sendCommand(command);
+  }
 }
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-bool SocketThread::dequeueCommand(Command& command) {
+bool SocketThread::flushCommand() {
+  Command command;
+  while(fetchCommand(command)) {
+    if(poll(Socket::POLL_SEND)) {
+      if(socket_->sendCommand(command)) {
+        dequeueCommand();
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      if(isTimeout()) {
+        socket_->close();
+      }
+      return false;
+    }
+  }
+  return true;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool SocketThread::fetchCommand(Command& command) {
   bool flag = false;
   sendCommands_([&](std::queue<Command>& queue) {
       if(!queue.empty()) {
         command = queue.front();
-        queue.pop();
         flag = true;
       }
     });
   return flag;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void SocketThread::dequeueCommand() {
+  sendCommands_([&](std::queue<Command>& queue) {
+      queue.pop();
+    });
 }
 /***********************************************************************//**
 	@brief 
@@ -174,10 +202,13 @@ bool SocketThread::poll(int flag) {
     return true;
   }
   timeout_ += DELTA_TIME;
-  if(timeout_ > TIMEOUT) {
-    socket_->close();
-  }
   return false;
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+bool SocketThread::isTimeout() const {
+  return timeout_ > TIMEOUT;
 }
 /***********************************************************************//**
 	$Id$

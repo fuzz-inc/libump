@@ -85,9 +85,12 @@ class SocketThread
   virtual void onThread();
 
  private:
-  bool dequeueCommand(Command& command);
+  bool flushCommand();
+  bool fetchCommand(Command& command);
+  void dequeueCommand();
 
   bool poll(int flag);
+  bool isTimeout() const;
 };
 /***********************************************************************//**
 	@brief 
