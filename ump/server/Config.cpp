@@ -43,6 +43,7 @@ Config::Config()
     roundMax_(1), 
     doraNum_(1), 
     uma_({ 10000, -20000, -40000, -50000 }), 
+    aotenjo_(0), 
     deltaTime_(10), 
     speed_(1.0f), 
     diceWait_(1.0f), 

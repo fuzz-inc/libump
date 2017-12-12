@@ -50,7 +50,6 @@ class Config
     FLAG_OPEN, 
     FLAG_HAKOSHITA, 
     FLAG_AGARIYAME, 
-    FLAG_AOTENJO, 
     FLAG_CHI, 
     FLAG_SINGLE, 
     FLAG_FURITEN, 
@@ -64,6 +63,7 @@ class Config
   size_t roundMax_;
   size_t doraNum_;
   std::vector<BigNum> uma_;
+  int aotenjo_;
   int deltaTime_;
   float speed_;
   float diceWait_;
@@ -96,11 +96,6 @@ class Config
   UMP_BIT_ACCESSOR(Agariyame, flag_, FLAG_AGARIYAME);
 
   /**
-   * 青天井
-   */
-  UMP_BIT_ACCESSOR(Aotenjo, flag_, FLAG_AOTENJO);
-
-  /**
    * チー可能
    */
   UMP_CAN_ACCESSOR(Chi, flag_, FLAG_CHI);
@@ -123,6 +118,11 @@ class Config
   UMP_GETTER(DoraNum, doraNum_);
 
   UMP_ACCESSOR(Uma, uma_);
+
+  UMP_ACCESSOR(Aotenjo, aotenjo_);
+  bool isAotenjo() const {
+    return getAotenjo() > 1;
+  }
 
   UMP_ACCESSOR(DeltaTime, deltaTime_);
 
