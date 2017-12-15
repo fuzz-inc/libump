@@ -52,7 +52,7 @@ bool Pattern::append(const HaiArray& hais) {
 	@brief 
 ***************************************************************************/
 void Pattern::parse(const HaiArray& hais, size_t num) {
-  if(num >= hais.size()) {
+  if(num <= hais.size()) {
     parse(hais, num, HaiArray());
   }
 }
