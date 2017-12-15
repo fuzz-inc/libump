@@ -223,13 +223,7 @@ void Client::onRecvCommand(const Command& command) {
     }
     break;
   case Command::TYPE_SUTEHAI_Q:
-    {
-      auto player = getPlayer();
-      if(command.hasArg(Command::TYPE_ANKAN) ||
-         command.hasArg(Command::TYPE_KAKAN)) {
-        kanPattern_ = player->getKanPattern();
-      }
-    }
+    onRecvSutehaiQ(command);
     break;
 
   default:
@@ -401,6 +395,25 @@ void Client::execAgari(const Command& command) {
 	@brief 流局
 ***************************************************************************/
 void Client::execRyukyoku(const Command& command) {
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Client::onRecvSutehaiQ(const Command& command) {
+  auto player = getPlayer();
+  {
+    std::string hais;
+    if(command.getOption(Command::ToString(Command::TYPE_RICHI), hais)) {
+      richiPattern_.parse(mj::HaiArray(hais.c_str()), 1);
+    }
+    else {
+      richiPattern_.clear();
+    }
+  }
+  if(command.hasArg(Command::TYPE_ANKAN) ||
+     command.hasArg(Command::TYPE_KAKAN)) {
+    kanPattern_ = player->getKanPattern();
+  }
 }
 /***********************************************************************//**
 	$Id$

@@ -72,6 +72,7 @@ class Client
   mj::Pattern ponPattern_;
   mj::Pattern chiPattern_;
   mj::Pattern kanPattern_;
+  mj::Pattern richiPattern_;
   std::map<const mj::Hai*, size_t> hideHaiNums_;
   std::bitset<FLAG_MAX> flag_;
   std::shared_ptr<Logger> logger_;
@@ -108,6 +109,7 @@ class Client
   UMP_GETTER(PonPattern, ponPattern_);
   UMP_GETTER(ChiPattern, chiPattern_);
   UMP_GETTER(KanPattern, kanPattern_);
+  UMP_GETTER(RichiPattern, richiPattern_);
 
   bool sendHello();
   bool sendCommand(const Command& command);
@@ -147,6 +149,8 @@ class Client
   void execSay(const Command& command);
   void execAgari(const Command& command);
   void execRyukyoku(const Command& command);
+
+  void onRecvSutehaiQ(const Command& command);
 
   UMP_BIT_SETTER(Reconnect, flag_, FLAG_RECONNECT);
 };

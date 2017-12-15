@@ -63,8 +63,8 @@ void JobSutehai::onBegin() {
       command_.append(Command::TYPE_TSUMO);
     }
     if(player->canRichi()) {
-      command_.append(Command::TYPE_RICHI);
-      command_.append(player->getRichiableHai().toString());
+      command_.setOption(Command::ToString(Command::TYPE_RICHI), 
+                         player->getRichiableHai().toString());
     }
     if(game.canKan()) {
       if(player->canAnkan()) {

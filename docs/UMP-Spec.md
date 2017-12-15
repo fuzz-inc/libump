@@ -62,7 +62,7 @@
 |dora <牌> <表示牌>| |ドラを送る |
 |uradora <牌> <表示牌>| |裏ドラを送る |
 |tsumo <プレイヤー> <残り枚数> <牌> [rinshan]||牌をツモ|
-|sutehai? [richi <リーチ可能な牌>] [tsumo] [ankan] [kakan]| |捨牌を尋ねる。クライアントが可能なコマンドも送る |
+|sutehai? [richi=<リーチ可能な牌>] [tsumo] [ankan] [kakan]| |捨牌を尋ねる。クライアントが可能なコマンドも送る |
 | |sutehai <牌> [tsumogiri] [richi] |捨てる。ツモ切り、リーチは引数で指定する |
 | |tsumo |ツモあがり |
 | |ankan <牌列> |暗カン |
