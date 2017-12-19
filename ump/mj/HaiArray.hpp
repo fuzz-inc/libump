@@ -121,7 +121,6 @@ class HaiArray
   const char* parseString(const char* pt);
   std::string toString() const;
 
- private:
   const Hai* remove(const Hai* hai, bool isEqual);
   void remove(const HaiArray& hais, bool isEqual);
   size_t count(const Hai* hai, bool isEqual) const;
