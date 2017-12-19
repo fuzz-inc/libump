@@ -402,12 +402,10 @@ void Client::execRyukyoku(const Command& command) {
 void Client::onRecvSutehaiQ(const Command& command) {
   auto player = getPlayer();
   {
+    richiPattern_.clear();
     std::string hais;
     if(command.getOption(Command::ToString(Command::TYPE_RICHI), hais)) {
       richiPattern_.parse(mj::HaiArray(hais.c_str()), 1);
-    }
-    else {
-      richiPattern_.clear();
     }
   }
   if(command.hasArg(Command::TYPE_ANKAN) ||
