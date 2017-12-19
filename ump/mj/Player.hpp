@@ -119,7 +119,7 @@ class Player
   bool updateAgari(const Hai* ron = nullptr, bool chankan = false);
   Agari& getAgari();
   bool canAgari() const;
-  bool canRon(const Hai* hai, bool chankan);
+  bool canRon(const Hai* hai, bool chankan = false);
 
   bool canRichi() const;
 

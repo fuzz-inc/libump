@@ -279,7 +279,7 @@ bool Agari::operator<(const Agari& rhs) const {
   if(getHan() > rhs.getHan()) {
     return false;
   }
-  return getFu() < rhs.getFu();
+  return getSrcFu() < rhs.getSrcFu();
 }
 /***********************************************************************//**
 	@brief 和了を文字列に変換する
