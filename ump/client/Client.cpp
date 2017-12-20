@@ -403,9 +403,16 @@ void Client::onRecvSutehaiQ(const Command& command) {
   auto player = getPlayer();
   {
     richiPattern_.clear();
-    std::string hais;
-    if(command.getOption(Command::ToString(Command::TYPE_RICHI), hais)) {
-      richiPattern_.parse(mj::HaiArray(hais.c_str()), 1);
+    std::string value;
+    if(command.getOption(Command::ToString(Command::TYPE_RICHI), value)) {
+      mj::HaiArray richi;
+      mj::HaiArray hais(value.c_str());
+      for(auto hai : getPlayer()->getMenzen()) {
+        if(hais.isInclude(hai)) {
+          richi.append(hai);
+        }
+      }
+      richiPattern_.parse(richi.uniqueEqual(), 1);
     }
   }
   if(command.hasArg(Command::TYPE_ANKAN) ||
