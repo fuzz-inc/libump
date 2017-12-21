@@ -35,6 +35,11 @@ class Atomic {
     std::lock_guard<std::mutex> lock(mutex_);
     func(value_);
   }
+
+  void operator()(std::function<void(const T& value)> func) const {
+    std::lock_guard<std::mutex> lock(mutex_);
+    func(value_);
+  }
 };
 /***********************************************************************//**
 	$Id$
