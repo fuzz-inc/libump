@@ -34,6 +34,9 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #if defined(UMP_PLATFORM_WINDOWS)
 typedef int socklen_t;
+typedef char setsockopt_t;
+#else
+typedef int setsockopt_t;
 #endif
 
 namespace ump {
@@ -102,11 +105,7 @@ bool TcpSocket::onListen(int port) {
   address.sin_addr.s_addr = htonl(INADDR_ANY);
   open();
   {
-#if defined(UMP_PLATFORM_WINDOWS)
-    const char on = 1;
-#else
-    const int on = 1;
-#endif
+    const setsockopt_t on = 1;
     ::setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 #if defined(SO_REUSEPORT)
     ::setsockopt(fd_, SOL_SOCKET, SO_REUSEPORT, &on, sizeof(on));
@@ -182,8 +181,12 @@ bool TcpSocket::poll(int flag, int timeout) {
 	@return 送信に成功したとき真
 ***************************************************************************/
 bool TcpSocket::onSend(const char* buff, size_t size) {
+  const int flags = 0;
+#if defined(MSG_NOSIGPIPE)
+  flags |= MSG_NOSIGPIPE;
+#endif
   while(size > 0) {
-    auto sendSize = ::send(fd_, buff, size, 0);
+    auto sendSize = ::send(fd_, buff, size, flags);
     if(sendSize > 0) {
       size -= sendSize;
       buff += sendSize;
@@ -230,6 +233,10 @@ void TcpSocket::onClose() {
 void TcpSocket::open() {
   assert(!isOpen());
   fd_ = ::socket(AF_INET, SOCK_STREAM, 0);
+#if defined(SO_NOSIGPIPE)
+  const setsockopt_t on = 1;
+  ::setsockopt(fd_, SOL_SOCKET, SO_NOSIGPIPE, &on, sizeof(on));
+#endif
 }
 /***********************************************************************//**
 	@brief 
