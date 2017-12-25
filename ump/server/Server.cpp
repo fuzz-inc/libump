@@ -92,7 +92,7 @@ void Server::onEndGame(std::shared_ptr<Game> game) {
 ***************************************************************************/
 void Server::recvCommand(std::shared_ptr<Player> player, 
                          const Command& command) {
-  std::lock_guard<std::mutex> lock(mutex_);
+  //std::lock_guard<std::mutex> lock(mutex_);
   onRecvCommand(player, command);
 }
 /***********************************************************************//**
