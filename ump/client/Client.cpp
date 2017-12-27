@@ -302,7 +302,6 @@ void Client::execGameEnd(const Command& command) {
 	@param[in] command コマンド
 ***************************************************************************/
 void Client::execKyokuStart(const Command& command) {
-  beginKyoku();
   setRound(atoi(command.getArg(0).c_str()));
   setOya(Command::StringToSeat(command.getArg(1).c_str()));
   setRenchan(atoi(command.getArg(2).c_str()));
@@ -314,6 +313,7 @@ void Client::execKyokuStart(const Command& command) {
     player->setBakaze(bakaze);
     player->setZikaze(mj::Hai::Get(command.getArg(5 + i).c_str()));
   }
+  beginKyoku();
 }
 /***********************************************************************//**
 	@brief ポイント
