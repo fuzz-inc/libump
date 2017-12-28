@@ -40,6 +40,18 @@ class Atomic {
     std::lock_guard<std::mutex> lock(mutex_);
     func(value_);
   }
+
+  template <class Result>
+  Result eval(std::function<Result(T& value)> func) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    return func(value_);
+  }
+
+  template <class Result>
+  Result eval(std::function<Result(const T& value)> func) const {
+    std::lock_guard<std::mutex> lock(mutex_);
+    return func(value_);
+  }
 };
 /***********************************************************************//**
 	$Id$
