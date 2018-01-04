@@ -138,17 +138,6 @@ void Player::reset() {
   flag_.reset();
 }
 /***********************************************************************//**
-	@copydoc mj::Player::tsumo
-***************************************************************************/
-void Player::tsumo(const mj::Hai* hai, bool rinshan) {
-  super::tsumo(hai, rinshan);
-  if(!isRichi() && isFuriten()) {
-    log(Logger::LEVEL_DEBUG, 
-        std::string("[furiten-]") + getMenzen().toString());
-    setFuriten(false);
-  }
-}
-/***********************************************************************//**
 	@brief 牌が捨てられたときの処理(鳴き処理後)
 	@param[in] player 牌を捨てたプレイヤー
 	@param[in] hai 捨てた牌
@@ -177,6 +166,18 @@ bool Player::canRichi() const {
 ***************************************************************************/
 bool Player::canRon(const mj::Hai* hai, bool chankan) {
   return !isFuriten() && super::canRon(hai, chankan);
+}
+/***********************************************************************//**
+	@brief フリテン状態を設定する
+	@param[in] value フリテン状態
+***************************************************************************/
+void Player::setFuriten(bool value) {
+  if(isFuriten() != value) {
+    flag_.set(FLAG_FURITEN, value);
+    log(Logger::LEVEL_DEBUG, 
+        Logger::Format("[furiten%c]%s", (value ? '+' : '-'), 
+                       getMenzen().toString().c_str()));
+  }
 }
 /***********************************************************************//**
 	@brief 他のプレイヤーとソケットを交換する
@@ -311,8 +312,6 @@ void Player::updateFuriten(const mj::Hai* hai) {
     auto hais(getMenzen());
     hais.append(hai);
     if(shanten.update(hais, isMenzen()) < 0) {
-      log(Logger::LEVEL_DEBUG, 
-          std::string("[furiten+]") + hais.toString());
       setFuriten(true);
     }
   }

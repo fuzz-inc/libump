@@ -85,12 +85,12 @@ class Player
   }
 
   void reset() override;
-  void tsumo(const mj::Hai* hai, bool rinshan) override;
 
   void onDiscarded(const Player& player, const mj::Hai* hai);
 
   bool canRichi() const;
   bool canRon(const mj::Hai* hai, bool chankan);
+  void setFuriten(bool value);
 
   void swapSocket(Player& player);
   void onReconnect();
@@ -117,7 +117,7 @@ class Player
  private:
   std::shared_ptr<Server> getServer() const;
 
-  UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
+  UMP_BIT_GETTER(Furiten, flag_, FLAG_FURITEN);
   void updateFuriten();
   void updateFuriten(const mj::Hai* hai);
 };

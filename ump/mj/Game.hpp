@@ -95,7 +95,7 @@ class Game
   void addKyotaku(const BigNum& value);
   BigNum resetKyotaku();
 
-  void setTurn(size_t turn);
+  virtual void setTurn(size_t turn);
   UMP_GETTER(Turn, turn_);
   void resetTurn();
   size_t nextTurn();

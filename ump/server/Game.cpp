@@ -238,6 +238,16 @@ Command Game::createCommand(Command::Type type) {
   return Command(type, ++serial_);
 }
 /***********************************************************************//**
+	@brief 
+***************************************************************************/
+void Game::setTurn(size_t seat) {
+  super::setTurn(seat);
+  auto player = getPlayer(seat);
+  if(!player->isRichi()) {
+    player->setFuriten(false);
+  }
+}
+/***********************************************************************//**
 	@brief 牌山の残り枚数を取得する
 	@return 牌山の残り枚数
 ***************************************************************************/

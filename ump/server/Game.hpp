@@ -94,6 +94,7 @@ class Game
 
   Command createCommand(Command::Type type);
 
+  void setTurn(size_t seat) override;
   size_t getRest() const override;
 
   bool isLastKyoku() const;
