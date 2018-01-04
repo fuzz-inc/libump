@@ -44,7 +44,6 @@ class Config {
   size_t haipaiNum_;
   size_t wanpaiNum_;
   int richiPoint_;
-  int renchanPoint_;
 
  public:
   Config();
@@ -61,7 +60,6 @@ class Config {
   UMP_ACCESSOR(HaipaiNum, haipaiNum_);
   UMP_ACCESSOR(WanpaiNum, wanpaiNum_);
   UMP_ACCESSOR(RichiPoint, richiPoint_);
-  UMP_ACCESSOR(RenchanPoint, renchanPoint_);
 };
 /***********************************************************************//**
 	$Id$

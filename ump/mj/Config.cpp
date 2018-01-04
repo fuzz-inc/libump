@@ -44,8 +44,7 @@ Config::Config()
   : playerNum_(4), 
     haipaiNum_(13), 
     wanpaiNum_(14), 
-    richiPoint_(1000), 
-    renchanPoint_(100)
+    richiPoint_(1000)
 {
 #if defined(KAN_TEST)
   for(int i = 1; i <= 9; i++) {

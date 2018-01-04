@@ -113,6 +113,38 @@ void JobAgari::agari() {
   if(player_ == game.getOya()) {
     point += point / 2;
   }
+  auto playerNum = countPlayer();
+  std::vector<BigNum> subPoints(playerNum);
+  BigNum add;
+  if(playerNum > 1) {
+    int renchanAdd = getConfig()->getRenchan().add * game.getRenchan();
+    BigNum renchanMul = 1;
+    if(getConfig()->getRenchan().mul > 1) {
+      for(size_t i = 0, n = game.getRenchan(); i < n; i++) {
+        renchanMul *= getConfig()->getRenchan().mul;
+      }
+    }
+    if(player_ == game.getOya()) {
+      playerNum--;
+    }
+    if(game.getTurn() == player_) {
+      point /= int(playerNum);
+      for(size_t i = 0, n = countPlayer(); i < n; i++) {
+        if(i != player_) {
+          auto sub = (i == game.getOya()) ? point * 2 : point;
+          sub = mj::Agari::Ceil(sub, 100) * renchanMul;
+          add += sub;
+          subPoints[i] = sub + renchanAdd;
+        }
+      }
+    }
+    else {
+      auto sub = mj::Agari::Ceil(point, 100) * renchanMul;
+      add += sub;
+      subPoints[game.getTurn()] = 
+        sub + renchanAdd * (int(countPlayer()) - 1);
+    }
+  }
   {
     auto command = game.createCommand(Command::TYPE_AGARI);
     command.append(player->getSeatString());
@@ -121,7 +153,7 @@ void JobAgari::agari() {
                         ron->toString());
     }
     if(text.empty()) {
-      command.append(mj::Agari::Ceil(point, 100).toString());
+      command.append(add.toString());
     }
     else {
       command.append(text);
@@ -143,30 +175,17 @@ void JobAgari::agari() {
     }
     game.sendAll(command);
   }
-  auto playerNum = countPlayer();
-  if(playerNum > 1) {
-    auto renchanPoint = game.getRenchan() * getConfig()->getRenchanPoint();
-    if(player_ == game.getOya()) {
-      playerNum--;
-    }
-    if(game.getTurn() == player_) {
-      point /= int(playerNum);
-      auto add = game.resetKyotaku();
-      for(size_t i = 0, n = countPlayer(); i < n; i++) {
-        if(i != player_) {
-          auto sub = (i == game.getOya()) ? point * 2 : point;
-          sub = mj::Agari::Ceil(sub, 100) + renchanPoint;
-          addPoint(i, -sub);
-          add += sub;
-        }
+  {
+    add = game.resetKyotaku();
+    for(size_t i = 0, n = subPoints.size(); i < n; i++) {
+      auto& sub = subPoints.at(i);
+      if(sub > 0) {
+        addPoint(i, -sub);
+        add += sub;
       }
-      addPoint(player_, add);
     }
-    else {
-      point = mj::Agari::Ceil(point, 100) + 
-        renchanPoint * (int(countPlayer()) - 1);
-      addPoint(game.getTurn(), -point);
-      addPoint(player_, point + game.resetKyotaku());
+    if(add > 0) {
+      addPoint(player_, add);
     }
   }
   player->agari();

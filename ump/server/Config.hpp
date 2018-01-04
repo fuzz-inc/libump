@@ -45,6 +45,12 @@ class Config
 {
   typedef mj::Config super;
 
+ public:
+  struct Renchan {
+    int add = 100;
+    int mul = 1;
+  };
+
  private:
   enum {
     FLAG_OPEN, 
@@ -64,6 +70,7 @@ class Config
   size_t doraNum_;
   std::vector<BigNum> uma_;
   int aotenjo_;
+  Renchan renchan_;
   int deltaTime_;
   float speed_;
   float diceWait_;
@@ -123,6 +130,8 @@ class Config
   bool isAotenjo() const {
     return getAotenjo() > 1;
   }
+
+  UMP_ACCESSOR(Renchan, renchan_);
 
   UMP_ACCESSOR(DeltaTime, deltaTime_);
 
