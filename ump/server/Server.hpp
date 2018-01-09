@@ -50,7 +50,6 @@ class Server
   int timeout_;
   std::vector<std::shared_ptr<Game>> games_;
   std::shared_ptr<Game> game_;
-  std::mutex mutex_;
   int gameId_ = 0;
 
  public:
@@ -72,10 +71,6 @@ class Server
   virtual void onDisconnectPlayer(std::shared_ptr<Player> player) {}
 
  protected:
-  std::mutex& getMutex() {
-    return mutex_;
-  }
-
   void onThread() override;
 
   virtual std::shared_ptr<Player>
