@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,6 @@ namespace server {
 Config::Config()
   : point_(25000), 
     notenBappu_(3000), 
-    roundMax_(1), 
     doraNum_(1), 
     uma_({ 10000, -20000, -40000, -50000 }), 
     aotenjo_(0), 

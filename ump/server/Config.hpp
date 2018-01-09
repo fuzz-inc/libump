@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -66,7 +66,6 @@ class Config
   std::bitset<FLAG_MAX> flag_;
   BigNum point_;
   BigNum notenBappu_;
-  size_t roundMax_;
   size_t doraNum_;
   std::vector<BigNum> uma_;
   int aotenjo_;
@@ -119,7 +118,6 @@ class Config
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);
-  UMP_ACCESSOR(RoundMax, roundMax_);
 
   void setDoraNum(size_t num);
   UMP_GETTER(DoraNum, doraNum_);

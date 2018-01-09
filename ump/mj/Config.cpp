@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,8 @@ Config::Config()
   : playerNum_(4), 
     haipaiNum_(13), 
     wanpaiNum_(14), 
-    richiPoint_(1000)
+    richiPoint_(1000), 
+    roundMax_(1)
 {
 #if defined(KAN_TEST)
   for(int i = 1; i <= 9; i++) {

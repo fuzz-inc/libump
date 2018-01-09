@@ -192,14 +192,14 @@ void Game::beginKyoku() {
 	@brief 局を終了する
 ***************************************************************************/
 void Game::endKyoku() {
+  bool renchan = false;
   auto player = getPlayer(getOya());
   if(player->isAgari() || isRyukyoku()) {
     setRenchan(getRenchan() + 1);
-    flag_.set(FLAG_RENCHAN);
+    renchan = true;
   }
   else {
     setRenchan(0);
-    flag_.reset(FLAG_RENCHAN);
   }
   if(!player->isAgari() && !player->isSayTenpai()) {
     auto oya = getOya() + 1;
@@ -211,6 +211,7 @@ void Game::endKyoku() {
       setRound(getRound() + 1);
     }
   }
+  flag_.set(FLAG_FINISH, !isNext(renchan));
 }
 /***********************************************************************//**
 	@brief 和了があったか調べる
@@ -282,6 +283,22 @@ void Game::clearPlayer() {
 void Game::setOya(size_t oya) {
   assert(oya < countPlayer());
   oya_ = oya;
+}
+/***********************************************************************//**
+	@brief 次の局に進むか調べる
+	@param[in] renchan 連チャンしたとき真
+	@return 次の局に進むとき真
+***************************************************************************/
+bool Game::isNext(bool renchan) const {
+  return getRound() < getConfig()->getRoundMax();
+}
+/***********************************************************************//**
+	@brief オーラスか調べる
+	@return オーラスのとき真
+***************************************************************************/
+bool Game::isLast() const {
+  return getRound() + 1 >= getConfig()->getRoundMax() && 
+    getOya() + 1 >= countPlayer();
 }
 /***********************************************************************//**
         $Id$
