@@ -80,8 +80,8 @@ Job* JobKyoku::onUpdate() {
 ***************************************************************************/
 void JobKyoku::onEnd() {
   auto& game = getGame();
-  game.sendAll(game.createCommand(Command::TYPE_KYOKUEND));
   game.endKyoku();
+  game.sendAll(game.createCommand(Command::TYPE_KYOKUEND));
   sleep(0.5f);
 }
 /***********************************************************************//**
