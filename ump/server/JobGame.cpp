@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -75,7 +75,7 @@ Job* JobGame::onUpdate() {
 ***************************************************************************/
 void JobGame::onEnd() {
   auto& game = getGame();
-  auto players = getRanking();
+  auto players = game.getRanking();
   const auto& uma = getConfig()->getUma();
   for(size_t i = 0, n = players.size(); i < n; i++) {
     auto& player = players.at(i);
@@ -118,23 +118,11 @@ bool JobGame::isNextKyoku() const {
   if(config->isAgariyame()) {
     if(flag_.test(FLAG_LAST_KYOKU) && 
        game.isRenchan() && 
-       getRanking().at(0) == game.getPlayer(game.getOya())) {
+       game.getRanking().at(0) == game.getPlayer(game.getOya())) {
       return false;
     }
   }
   return game.getRound() < config->getRoundMax();
-}
-/***********************************************************************//**
-	@brief 
-***************************************************************************/
-mj::Players JobGame::getRanking() const {
-  auto players(getGame().getPlayers());
-  std::stable_sort(players.begin(), players.end(), 
-                   [](const std::shared_ptr<mj::Player>& a, 
-                      const std::shared_ptr<mj::Player>& b) {
-                     return a->getPoint() > b->getPoint();
-                   });
-  return players;
 }
 /***********************************************************************//**
 	$Id$

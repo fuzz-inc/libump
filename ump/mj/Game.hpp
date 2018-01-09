@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2017 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -86,6 +86,7 @@ class Game
   size_t countPlayer() const;
   std::shared_ptr<Player> getPlayer(size_t seat) const;
   std::shared_ptr<Player> getPlayer(const char* seat) const;
+  Players getRanking() const;
 
   UMP_GETTER(Oya, oya_);
   UMP_GETTER(Round, round_);

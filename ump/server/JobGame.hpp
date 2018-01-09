@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without

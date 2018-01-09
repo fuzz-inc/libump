@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2017 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -100,6 +100,19 @@ std::shared_ptr<Player> Game::getPlayer(size_t seat) const {
 ***************************************************************************/
 std::shared_ptr<Player> Game::getPlayer(const char* seat) const {
   return getPlayer(Command::StringToSeat(seat));
+}
+/***********************************************************************//**
+	@brief 着順を取得する
+	@return 着順のプレイヤーのベクター
+***************************************************************************/
+Players Game::getRanking() const {
+  auto players(getPlayers());
+  std::stable_sort(players.begin(), players.end(), 
+                   [](const std::shared_ptr<Player>& a, 
+                      const std::shared_ptr<Player>& b) {
+                     return a->getPoint() > b->getPoint();
+                   });
+  return players;
 }
 /***********************************************************************//**
 	@brief 供託を加算する
