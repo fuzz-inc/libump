@@ -60,6 +60,7 @@ class Logger {
   void log(Level level, const std::string& message);
 
   static std::string Format(const char* format, ...);
+  static std::string GetTime(const char* format);
 
  private:
   std::ostream& getOutput() const;

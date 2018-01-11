@@ -63,13 +63,10 @@ void Logger::log(Level level, const std::string& message) {
     "FATAL"
   };
   if(level >= level_) {
-    auto now = std::time(nullptr);
-    auto time = *std::localtime(&now);
-    char buff[256];
-    std::strftime(buff, sizeof(buff), "%F %T", &time);
+    auto time = GetTime("%F %T");
     {
       std::lock_guard<std::mutex> lock(mutex_);
-      getOutput() << buff
+      getOutput() << time
                   << " " << LEVELS[level] << " | "
                   << message << std::endl;
     }
@@ -85,6 +82,18 @@ std::string Logger::Format(const char* format, ...) {
   vsnprintf(buff, sizeof(buff), format, args);
   va_end(args);
   return std::string(buff);
+}
+/***********************************************************************//**
+	@brief 現在時刻の文字列を求める
+	@param[in] format 書式
+	@return 現在時刻の文字列
+***************************************************************************/
+std::string Logger::GetTime(const char* format) {
+  auto now = std::time(nullptr);
+  auto time = *std::localtime(&now);
+  char buff[256];
+  std::strftime(buff, sizeof(buff), format, &time);
+  return buff;
 }
 /***********************************************************************//**
 	@brief 
