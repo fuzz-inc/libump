@@ -49,7 +49,7 @@ class Logger {
 
  private:
   Level level_;
-  std::unique_ptr<std::ostream> out_;
+  std::unique_ptr<std::ostream> output_;
   std::mutex mutex_;
 
  public:
@@ -62,7 +62,7 @@ class Logger {
   static std::string Format(const char* format, ...);
 
  private:
-  std::ostream& getOut() const;
+  std::ostream& getOutput() const;
 };
 /***********************************************************************//**
 	$Id$

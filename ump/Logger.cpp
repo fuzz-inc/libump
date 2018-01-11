@@ -38,8 +38,7 @@ namespace ump {
 	@brief デフォルトコンストラクタ
 ***************************************************************************/
 Logger::Logger()
-  : level_(LEVEL_DEBUG), 
-    out_(nullptr)
+  : level_(LEVEL_DEBUG)
 {
 }
 /***********************************************************************//**
@@ -47,7 +46,7 @@ Logger::Logger()
 	@param[in] path ファイルパス
 ***************************************************************************/
 void Logger::openLogFile(const std::string& path) {
-  out_.reset(new std::ofstream(path.c_str()));
+  output_.reset(new std::ofstream(path.c_str()));
 }
 /***********************************************************************//**
 	@brief メッセージを出力する
@@ -70,9 +69,9 @@ void Logger::log(Level level, const std::string& message) {
     std::strftime(buff, sizeof(buff), "%F %T", &time);
     {
       std::lock_guard<std::mutex> lock(mutex_);
-      getOut() << buff
-               << " " << LEVELS[level] << " | "
-               << message << std::endl;
+      getOutput() << buff
+                  << " " << LEVELS[level] << " | "
+                  << message << std::endl;
     }
   }
 }
@@ -90,8 +89,8 @@ std::string Logger::Format(const char* format, ...) {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-std::ostream& Logger::getOut() const {
-  return out_ ? *out_ : std::cerr;
+std::ostream& Logger::getOutput() const {
+  return output_ ? *output_ : std::cerr;
 }
 /***********************************************************************//**
 	$Id$
