@@ -72,6 +72,8 @@ class TcpSocket
 
   void onClose() override;
 
+  virtual std::shared_ptr<TcpSocket> createSocket(int fd) const;
+
  private:
   void open();
   void setError();

@@ -149,7 +149,7 @@ std::shared_ptr<Socket> TcpSocket::onAccept(int timeout) {
   if(fd < 0) {
     return nullptr;
   }
-  return std::make_shared<TcpSocket>(fd);
+  return createSocket(fd);
 }
 /***********************************************************************//**
 	@brief 
@@ -226,6 +226,14 @@ void TcpSocket::onClose() {
 #endif
   fd_ = INVALID_FD;
   port_ = 0;
+}
+/***********************************************************************//**
+	@brief ソケットを生成する
+	@param[in] fd ファイルディスクリプタ
+	@return 生成したソケット
+***************************************************************************/
+std::shared_ptr<TcpSocket> TcpSocket::createSocket(int fd) const {
+  return std::make_shared<TcpSocket>(fd);
 }
 /***********************************************************************//**
 	@brief ソケットを開く
