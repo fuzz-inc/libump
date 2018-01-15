@@ -97,7 +97,7 @@ class Game
   void setTurn(size_t seat) override;
   size_t getRest() const override;
 
-  bool isNext(bool renchan) const override;
+  bool isLastKyoku() const;
 
   void operator()() override;
 

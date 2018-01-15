@@ -255,26 +255,12 @@ size_t Game::getRest() const {
   return yama_.getRest();
 }
 /***********************************************************************//**
-	@copydoc mj::Game::isNext
+	@brief オーラス？
+	@return オーラスのとき真
 ***************************************************************************/
-bool Game::isNext(bool renchan) const {
-  auto config = getConfig();
-  if(config->isSingle()) {
-    return false;
-  }
-  if(!config->isHakoshita()) {
-    for(auto player : getPlayers()) {
-      if(player->getPoint() < 0) {
-        return false;
-      }
-    }
-  }
-  if(config->isAgariyame()) {
-    if(isLast() && renchan && getRanking().at(0) == getPlayer(getOya())) {
-      return false;
-    }
-  }
-  return super::isNext(renchan);
+bool Game::isLastKyoku() const {
+  return getRound() + 1 >= getConfig()->getRoundMax() && 
+    getOya() + 1 >= countPlayer();
 }
 /***********************************************************************//**
         @brief 実行

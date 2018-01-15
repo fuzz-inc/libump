@@ -44,7 +44,8 @@ namespace server {
 	@brief コンストラクタ
 ***************************************************************************/
 JobGame::JobGame(Game& game)
-  : super(game)
+  : super(game), 
+    kyokuNum_(0)
 {}
 /***********************************************************************//**
 	@brief 開始
@@ -60,9 +61,11 @@ void JobGame::onBegin() {
 	@brief 
 ***************************************************************************/
 Job* JobGame::onUpdate() {
-  auto& game = getGame();
-  if(!game.isFinish()) {
+  if(isNextKyoku()) {
+    auto& game = getGame();
     game.beginJob(new JobKyoku(game));
+    kyokuNum_++;
+    flag_.set(FLAG_LAST_KYOKU, game.isLastKyoku());
     return this;
   }
   return new JobEnd(getGame());
@@ -94,6 +97,32 @@ void JobGame::onEnd() {
     }
     game.sendAll(command);
   }
+}
+/***********************************************************************//**
+	@brief 次の局に進むか調べる
+	@return 次の局に進むとき真
+***************************************************************************/
+bool JobGame::isNextKyoku() const {
+  const auto& game = getGame();
+  auto config = getConfig();
+  if(config->isSingle() && kyokuNum_ > 0) {
+    return false;
+  }
+  if(!config->isHakoshita()) {
+    for(auto player : game.getPlayers()) {
+      if(player->getPoint() < 0) {
+        return false;
+      }
+    }
+  }
+  if(config->isAgariyame()) {
+    if(flag_.test(FLAG_LAST_KYOKU) && 
+       game.isRenchan() && 
+       game.getRanking().at(0) == game.getPlayer(game.getOya())) {
+      return false;
+    }
+  }
+  return game.getRound() < config->getRoundMax();
 }
 /***********************************************************************//**
 	$Id$

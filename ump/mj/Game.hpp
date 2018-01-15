@@ -46,7 +46,7 @@ class Game
 {
  private:
   enum {
-    FLAG_FINISH, 
+    FLAG_RENCHAN, 
     FLAG_END, 
     FLAG_MAX
   };
@@ -104,7 +104,7 @@ class Game
   Sutehai* sutehai(Player& player, const Sutehai& sutehai);
   UMP_GETTER(LastSutehai, lastSutehai_);
 
-  UMP_BIT_GETTER(Finish, flag_, FLAG_FINISH);
+  UMP_BIT_GETTER(Renchan, flag_, FLAG_RENCHAN);
   UMP_BIT_GETTER(End, flag_, FLAG_END);
 
   const Hai* getBakaze() const;
@@ -145,9 +145,6 @@ class Game
   UMP_SETTER(Round, round_);
   UMP_SETTER(Renchan, renchan_);
   UMP_SETTER(Kyotaku, kyotaku_);
-
-  virtual bool isNext(bool renchan) const;
-  bool isLast() const;
 
  private:
   UMP_BIT_SETTER(End, flag_, FLAG_END);

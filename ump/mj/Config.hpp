@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2018 fuzz, Inc. All rights reserved. 
+Copyright 2016 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,6 @@ class Config {
   size_t haipaiNum_;
   size_t wanpaiNum_;
   int richiPoint_;
-  size_t roundMax_;
 
  public:
   Config();
@@ -61,7 +60,6 @@ class Config {
   UMP_ACCESSOR(HaipaiNum, haipaiNum_);
   UMP_ACCESSOR(WanpaiNum, wanpaiNum_);
   UMP_ACCESSOR(RichiPoint, richiPoint_);
-  UMP_ACCESSOR(RoundMax, roundMax_);
 };
 /***********************************************************************//**
 	$Id$

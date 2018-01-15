@@ -44,6 +44,16 @@ class JobGame
 {
   typedef Job super;
 
+ private:
+  enum {
+    FLAG_LAST_KYOKU, 
+    FLAG_MAX
+  };
+
+ private:
+  int kyokuNum_;
+  std::bitset<FLAG_MAX> flag_;
+
  public:
   JobGame(Game& game);
   ~JobGame() override = default;
@@ -51,6 +61,10 @@ class JobGame
   void onBegin() override;
   Job* onUpdate() override;
   void onEnd() override;
+
+ private:
+  bool isNextKyoku() const;
+  mj::Players getRanking() const;
 };
 /***********************************************************************//**
 	$Id$
