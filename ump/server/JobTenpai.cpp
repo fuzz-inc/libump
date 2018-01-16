@@ -54,7 +54,7 @@ void JobTenpai::onBegin() {
   if(player->isRichi()) {
     state_ = STATE_TENPAI;
   }
-  else if(player->isTenpai()) {
+  else if(player->isConnect() && player->isTenpai()) {
     game.sendCommand(player, game.createCommand(Command::TYPE_TENPAI_Q));
   }
   else {
@@ -75,6 +75,7 @@ Job* JobTenpai::onUpdate() {
         : STATE_NOTEN;
     }
     else if(isOverTime(getConfig()->getTenpaiWait())) {
+      player->stop();
       state_ = STATE_NOTEN;
     }
     else {

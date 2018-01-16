@@ -101,13 +101,20 @@ Job* JobNaki::onUpdate() {
     }
     std::shared_ptr<Player> player;
     for(auto iter : players_) {
-      if(!player ||
-         iter->getReply().getType() > player->getReply().getType()) {
-        player = iter;
+      if(iter->getReply().isExist()) {
+        if(!player ||
+           iter->getReply().getType() > player->getReply().getType()) {
+          player = iter;
+        }
+      }
+      else {
+        iter->stop();
       }
     }
-    if(auto nextJob = doReply(player)) {
-      return nextJob;
+    if(player) {
+      if(auto nextJob = doReply(player)) {
+        return nextJob;
+      }
     }
   }
   game.nextTurn();

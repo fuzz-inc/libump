@@ -90,35 +90,40 @@ Job* JobSutehai::onUpdate() {
      !reply.isExist()) {
     return this;
   }
-  auto type = reply.getType();
-  if(command_.hasArg(type)) {
-    switch(type) {
-    case Command::TYPE_TSUMO:
-      if(player->canAgari()) {
-        return new JobAgari(game, game.getTurn());
-      }
-      break;
-    case Command::TYPE_ANKAN:
-      if(reply.countArg() > 0) {
-        mj::HaiArray hais(reply.getArg(0).c_str());
-        if(player->canAnkan(hais)) {
-          return kan(type, hais);
+  if(reply.isExist()) {
+    auto type = reply.getType();
+    if(command_.hasArg(type)) {
+      switch(type) {
+      case Command::TYPE_TSUMO:
+        if(player->canAgari()) {
+          return new JobAgari(game, game.getTurn());
         }
-      }
-      break;
-    case Command::TYPE_KAKAN:
-      if(reply.countArg() > 0) {
-        if(auto hai = mj::Hai::Get(reply.getArg(0))) {
-          if(auto mentsu = player->findKakanMentsu(hai)) {
-            openMentsu(player, type, *mentsu, hai);
-            return new JobKakan(game, hai);
+        break;
+      case Command::TYPE_ANKAN:
+        if(reply.countArg() > 0) {
+          mj::HaiArray hais(reply.getArg(0).c_str());
+          if(player->canAnkan(hais)) {
+            return kan(type, hais);
           }
         }
+        break;
+      case Command::TYPE_KAKAN:
+        if(reply.countArg() > 0) {
+          if(auto hai = mj::Hai::Get(reply.getArg(0))) {
+            if(auto mentsu = player->findKakanMentsu(hai)) {
+              openMentsu(player, type, *mentsu, hai);
+              return new JobKakan(game, hai);
+            }
+          }
+        }
+        break;
+      default:
+        break;
       }
-      break;
-    default:
-      break;
     }
+  }
+  else {
+    player->stop();
   }
   return sutehai(reply);
 }

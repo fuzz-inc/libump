@@ -72,6 +72,10 @@ Job* JobReady::onUpdate() {
     }
     return this;
   }
+  /** タイムアウトしたプレイヤーを切断する */
+  for(auto player : players_) {
+    player->stop();
+  }
   return nullptr;
 }
 /***********************************************************************//**
