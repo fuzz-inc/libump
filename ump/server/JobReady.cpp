@@ -74,7 +74,7 @@ Job* JobReady::onUpdate() {
   }
   /** タイムアウトしたプレイヤーを切断する */
   for(auto player : players_) {
-    player->stop();
+    player->closeSocket();
   }
   return nullptr;
 }

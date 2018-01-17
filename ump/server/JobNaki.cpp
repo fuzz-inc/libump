@@ -108,7 +108,7 @@ Job* JobNaki::onUpdate() {
         }
       }
       else {
-        iter->stop();
+        iter->closeSocket();
       }
     }
     if(player) {

@@ -123,7 +123,7 @@ Job* JobSutehai::onUpdate() {
     }
   }
   else {
-    player->stop();
+    player->closeSocket();
   }
   return sutehai(reply);
 }

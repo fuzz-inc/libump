@@ -164,7 +164,7 @@ bool SocketThread::flushCommand() {
       }
     }
     else {
-      if(isTimeout()) {
+      if(flag_.test(FLAG_CLOSE) || isTimeout()) {
         socket_->close();
       }
       return false;

@@ -75,7 +75,7 @@ Job* JobTenpai::onUpdate() {
         : STATE_NOTEN;
     }
     else if(isOverTime(getConfig()->getTenpaiWait())) {
-      player->stop();
+      player->closeSocket();
       state_ = STATE_NOTEN;
     }
     else {
