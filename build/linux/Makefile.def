@@ -1,5 +1,7 @@
+ifndef CONFIG
 CONFIG		= debug
 #CONFIG		= release
+endif
 
 CC		= gcc
 CFLAGS		= -Wall
