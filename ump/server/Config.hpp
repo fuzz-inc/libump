@@ -85,6 +85,7 @@ class Config
 
  public:
   Config();
+  Config(const Config& src) = default;
   ~Config() = default;
 
   /**

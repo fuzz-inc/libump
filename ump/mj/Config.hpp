@@ -47,6 +47,7 @@ class Config {
 
  public:
   Config();
+  Config(const Config& src) = default;
   ~Config() = default;
 
   void setHaiNum(const Hai* hai, size_t num);
