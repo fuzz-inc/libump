@@ -113,6 +113,8 @@ class Player
   UMP_ACCESSOR(Bakaze, bakaze_);
   UMP_ACCESSOR(Zikaze, zikaze_);
 
+  void drawHaipai(const HaiArray& hais) override;
+
   virtual void tsumo(const Hai* hai, bool rinshan);
   const Hai* getTsumoHai() const;
 

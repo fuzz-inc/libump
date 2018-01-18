@@ -151,6 +151,13 @@ bool Player::isOya() const {
   return getGame()->getOya() == getSeat();
 }
 /***********************************************************************//**
+	@copydoc Hand::drawHaipai
+***************************************************************************/
+void Player::drawHaipai(const HaiArray& hais) {
+  super::drawHaipai(hais);
+  updateShanten();
+}
+/***********************************************************************//**
 	@brief 牌を自摸る
 	@param[in] hai ツモった牌
 	@param[in] rinshan 嶺上牌のとき真
