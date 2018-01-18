@@ -1,5 +1,6 @@
 ifndef CONFIG
 CONFIG		= debug
+#CONFIG		= debugopt
 #CONFIG		= release
 endif
 
@@ -31,7 +32,11 @@ BINEXT		=
 ifeq "$(CONFIG)" "debug"
 CFLAGS		+= -O0 -g
 else
+ifeq "$(CONFIG)" "debugopt"
+CFLAGS		+= -O2 -DNDEBUG -g
+else
 CFLAGS		+= -O2 -DNDEBUG
+endif
 endif
 
 #
