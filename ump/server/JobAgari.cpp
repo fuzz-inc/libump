@@ -72,6 +72,7 @@ void JobAgari::say() {
   command.append(Command::SeatToString(player_));
   auto player = getPlayer(player_);
   if(player->getAgari().isRon()) {
+    player->sort();
     command.append(Command::TYPE_RON);
   }
   else {
