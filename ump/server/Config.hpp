@@ -59,6 +59,7 @@ class Config
     FLAG_CHI, 
     FLAG_SINGLE, 
     FLAG_FURITEN, 
+    FLAG_ORDER_SEAT, 
     FLAG_MAX
   };
 
@@ -117,6 +118,11 @@ class Config
    * フリテン和了禁止
    */
   UMP_BIT_ACCESSOR(Furiten, flag_, FLAG_FURITEN);
+
+  /**
+   * 着席順
+   */
+  UMP_BIT_ACCESSOR(OrderSeat, flag_, FLAG_ORDER_SEAT);
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);

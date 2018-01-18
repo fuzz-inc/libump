@@ -338,8 +338,12 @@ size_t Game::findSeat() const {
     }
   }
   assert(!seats.empty());
-  std::uniform_int_distribution<size_t> random(0, seats.size() - 1);
-  return seats.at(random(getRandom()));
+  size_t index = 0;
+  if(!getConfig()->isOrderSeat()) {
+    std::uniform_int_distribution<size_t> random(0, seats.size() - 1);
+    index = random(getRandom());
+  }
+  return seats.at(index);
 }
 /***********************************************************************//**
 	@brief ジョブを実行する
