@@ -45,8 +45,15 @@ class JobSutehai
   typedef Job super;
 
  private:
+  enum {
+    FLAG_SEND, 
+    FLAG_MAX
+  };
+
+ private:
   const mj::Hai* tsumoHai_;
   Command command_;
+  std::bitset<FLAG_MAX> flag_;
 
  public:
   JobSutehai(Game& game, const mj::Hai* tsumoHai = nullptr);
