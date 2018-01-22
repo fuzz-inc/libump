@@ -413,7 +413,7 @@ int Player::getShanten() const {
 	@return	テンパイのとき真
 ***************************************************************************/
 bool Player::isTenpai() const {
-  return getShanten() <= 0;
+  return shanten_.isTenpai();
 }
 /***********************************************************************//**
 	@brief リーチがかけられる牌を取得する

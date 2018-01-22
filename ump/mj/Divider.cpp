@@ -183,19 +183,19 @@ const HaiArray& Divider::getHead() const {
   return head_;
 }
 /***********************************************************************//**
-	@brief ターツの数を取得する
-	@return ターツの数
+	@brief 牌を数える
+	@param[in] hai 数える牌
+	@return 牌の数
 ***************************************************************************/
-size_t Divider::countTatsu() const {
-  return tatsus_.size();
-}
-/***********************************************************************//**
-	@brief ターツを取得する
-	@param[in] index インデックス
-	@return ターツ
-***************************************************************************/
-const HaiArray& Divider::getTatsu(size_t index) const {
-  return tatsus_[index];
+size_t Divider::countHai(const Hai* hai) const {
+  size_t num = getHead().countSame(hai) + hais_.countSame(hai);
+  for(auto& mentsu : getMentsus()) {
+    num += mentsu.countSame(hai);
+  }
+  for(auto& tatsu : getTatsus()) {
+    num += tatsu.countSame(hai);
+  }
+  return num;
 }
 /***********************************************************************//**
 	@brief 文字列に変換する

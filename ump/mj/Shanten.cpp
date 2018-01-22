@@ -102,7 +102,7 @@ void Shanten::onMentsu() {
 void Shanten::onTatsu() {
   //dump();
   auto mentsuNum = getMentsus().size();
-  auto tatsuNum = countTatsu();
+  auto tatsuNum = getTatsus().size();
   if(mentsuNum + tatsuNum > mentsuMax_) {
     tatsuNum = mentsuMax_ - mentsuNum;
   }
@@ -112,8 +112,8 @@ void Shanten::onTatsu() {
   }
   updateShanten(shanten);
   if(shanten == 0) {
-    if(countHai() == 0 && countTatsu() == 1) {
-      richi_.append(getTatsu(0));
+    if(countHai() == 0 && getTatsus().size() == 1) {
+      richi_.append(getTatsus().at(0));
     }
     else {
       richi_.append(getHais());
@@ -127,6 +127,9 @@ void Shanten::onTatsu() {
 void Shanten::updateShanten(int shanten) {
   if(shanten < shanten_) {
     shanten_ = shanten;
+  }
+  if(shanten <= 0 && !isTenpai()) {
+    flag_.set(FLAG_TENPAI, hand_.isTenpai(*this));
   }
 }
 /***********************************************************************//**
@@ -228,8 +231,8 @@ void Shanten::dump() const {
   for(auto& mentsu : getMentsus()) {
     std::cout << "(" << mentsu.toString() << ")";
   }
-  for(size_t i = 0, n = countTatsu(); i < n; i++) {
-    std::cout << "(" << getTatsu(i).toString() << ")";
+  for(auto& tatsu : getTatsus()) {
+    std::cout << "(" << tatsu.toString() << ")";
   }
   std::cout << getHais().toString() << std::endl;
 }

@@ -73,9 +73,9 @@ class Divider {
   const HaiArray& getHead() const;
 
   UMP_GETTER(Mentsus, mentsus_);
+  UMP_GETTER(Tatsus, tatsus_);
 
-  size_t countTatsu() const;
-  const HaiArray& getTatsu(size_t index) const;
+  size_t countHai(const Hai* hai) const;
 
   std::string toString() const;
   void dump() const;
