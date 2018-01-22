@@ -151,6 +151,7 @@ class Player
 
  protected:
   void onOpenMentsu(std::shared_ptr<const Mentsu> mentsu) override;
+  bool canTenpai(const mj::Shanten& shanten) const override;
 
   /**
    * 点数がセットされたときの処理
@@ -174,6 +175,7 @@ class Player
 
  private:
   void updateShanten();
+  bool canTenpai(const mj::Shanten& shanten, const mj::Hai* hai) const;
 };
 /***********************************************************************//**
 	$Id$

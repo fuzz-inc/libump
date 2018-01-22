@@ -124,6 +124,7 @@ void AgariTest::onRun() {
     TEST(agari.getSrcFu() == 40);
   }
   testYakuman();
+  testTenpai();
 }
 /***********************************************************************//**
 	@brief 
@@ -151,6 +152,39 @@ void AgariTest::testYakuman() {
     resetHand(table.hand);
     auto& agari = getAgari(table.tsumo);
     TEST_MESSAGE(agari.isInclude(table.yakuman), agari.toString());
+  }
+}
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+void AgariTest::testTenpai() {
+  static const struct {
+    const char* menzen;
+    const char* mentsu;
+    bool tenpai;
+  } TABLES[] = {
+    { "4p3s4s5s5s6s7s8s8s8s", "4p4p4p", false }, 
+    { "4p6p3s3s4s5s6s6s7s8s", "5p5p5p5p", false }, 
+    { "6p7p3s3s4s5s6s6s7s8s", "5p5p5p5p", true }, 
+    { "8p9p3s3s4s5s6s6s7s8s", "7p7p7p7p", false }, 
+    { "1p1p1p1p2p3p4p4p4p4p1s2s3s", nullptr, false }, 
+    { "1p2p3p4p5p6p7p8p9p4s4s4s4s", nullptr, false }
+  };
+  for(auto& table : TABLES) {
+    auto menzen = ump::mj::HaiArray(table.menzen);
+    auto tsumo = menzen.removeEqual(menzen.at(0));
+    if(table.mentsu) {
+      auto mentsu = ump::mj::HaiArray(table.mentsu);
+      auto claim = mentsu.removeEqual(mentsu.at(0));
+      menzen.append(mentsu);
+      resetHand(menzen.toString().c_str());
+      openMentsu(mentsu.toString().c_str(), claim->toString());
+    }
+    else {
+      resetHand(menzen.toString().c_str());
+    }
+    player_->tsumo(tsumo, false);
+    TEST_MESSAGE(player_->isTenpai() == table.tenpai, player_->toString());
   }
 }
 /***********************************************************************//**

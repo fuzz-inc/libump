@@ -52,6 +52,7 @@ class AgariTest
 
  private:
   void testYakuman();
+  void testTenpai();
 
   const ump::mj::Agari& parse(const char* hais, bool isRon);
 

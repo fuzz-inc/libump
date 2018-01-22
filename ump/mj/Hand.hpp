@@ -79,7 +79,7 @@ class Hand {
   Pattern getKanPattern() const;
   Pattern getKanPattern(const Hai* hai) const;
 
-  virtual bool isTenpai(const Shanten& shanten) const;
+  virtual bool canTenpai(const Shanten& shanten) const;
 
  protected:
   UMP_GETTER(Mentsus, mentsus_);

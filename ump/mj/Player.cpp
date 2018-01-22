@@ -32,6 +32,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #include "ump/Command.hpp"
 #include "ump/mj/AgariParser.hpp"
+#include "ump/mj/Config.hpp"
 #include "ump/mj/Game.hpp"
 #include "ump/mj/Player.hpp"
 
@@ -443,6 +444,29 @@ void Player::onOpenMentsu(std::shared_ptr<const Mentsu> mentsu) {
   }
 }
 /***********************************************************************//**
+	@copydoc mj::Hand::canTenpai
+***************************************************************************/
+bool Player::canTenpai(const mj::Shanten& shanten) const {
+  if(shanten.getTatsus().size() == 1) {
+    auto tatsu = shanten.getTatsus().at(0);
+    tatsu.sort();
+    if(tatsu.at(0)->isSame(tatsu.at(1))) {
+      return canTenpai(shanten, tatsu.at(0));
+    }
+    else if(tatsu.at(1)->isSame(tatsu.at(0)->shift(1))) {
+      return (canTenpai(shanten, tatsu.at(0)->shift(-1)) || 
+              canTenpai(shanten, tatsu.at(1)->shift(1)));
+    }
+    else if(tatsu.at(1)->isSame(tatsu.at(0)->shift(2))) {
+      return canTenpai(shanten, tatsu.at(0)->shift(1));
+    }
+  }
+  else if(shanten.countHai() == 1) {
+    return canTenpai(shanten, shanten.getHai(0));
+  }
+  return super::canTenpai(shanten);
+}
+/***********************************************************************//**
 	@copydoc Hand::onShowHai
 ***************************************************************************/
 void Player::onShowHai(const Hai* hai) {
@@ -455,6 +479,25 @@ void Player::updateShanten() {
   if(!hasUnknown() && !isRichi()) {
     shanten_.update();
   }
+}
+/***********************************************************************//**
+	@brief 牌が手牌以外に残っているか調べる
+	@param[in] shanten シャンテン
+	@param[in] hai 牌
+	@return 残っているとき真
+***************************************************************************/
+bool Player::canTenpai(const mj::Shanten& shanten, 
+                       const mj::Hai* hai) const {
+  if(!hai) {
+    return false;
+  }
+  auto num = shanten.countHai(hai);
+  for(auto& mentsu : getMentsus()) {
+    num += mentsu->countSame(hai);
+  }
+  auto config = getGame()->getConfig();
+  return num < (config->getHaiNum(hai->getNormal()) + 
+                config->getHaiNum(hai->getDora()));
 }
 /***********************************************************************//**
 	$Id$

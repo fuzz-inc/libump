@@ -315,11 +315,11 @@ Pattern Hand::getKanPattern(const Hai* hai) const {
   return pattern;
 }
 /***********************************************************************//**
-	@brief テンパイしているか調べる
+	@brief 形テンできるか調べる
 	@param[in] shanten シャンテン
-	@return テンパイしているとき真
+	@return 形テンできるとき真
 ***************************************************************************/
-bool Hand::isTenpai(const Shanten& shanten) const {
+bool Hand::canTenpai(const Shanten& shanten) const {
   return true;
 }
 /***********************************************************************//**

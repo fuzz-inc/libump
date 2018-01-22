@@ -129,7 +129,7 @@ void Shanten::updateShanten(int shanten) {
     shanten_ = shanten;
   }
   if(shanten <= 0 && !isTenpai()) {
-    flag_.set(FLAG_TENPAI, hand_.isTenpai(*this));
+    flag_.set(FLAG_TENPAI, hand_.canTenpai(*this));
   }
 }
 /***********************************************************************//**
