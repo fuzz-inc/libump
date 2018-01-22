@@ -45,19 +45,28 @@ class Shanten
   typedef Divider super;
 
  private:
+  enum {
+    FLAG_TENPAI, 
+    FLAG_MAX
+  };
+
+ private:
+  const Hand& hand_;
   size_t mentsuMax_;
   int shanten_;
+  std::bitset<FLAG_MAX> flag_;
   HaiArray richi_;
   HaiArray kanables_;
 
  public:
-  Shanten();
+  Shanten(const Hand& hand_);
   virtual ~Shanten();
 
-  int update(const HaiArray& hais, bool isMenzen);
-  int getShanten() const;
-  const HaiArray& getRichi() const;
-
+  int update();
+  int update(const HaiArray& hais);
+  UMP_GETTER(Shanten, shanten_);
+  UMP_BIT_GETTER(Tenpai, flag_, FLAG_TENPAI);
+  UMP_GETTER(Richi, richi_);
   UMP_GETTER(Kanables, kanables_);
 
  protected:

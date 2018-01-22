@@ -32,6 +32,13 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #include "ShantenTest.hpp"
 /***********************************************************************//**
+	@brief コンストラクタ
+***************************************************************************/
+ShantenTest::ShantenTest()
+  : shanten_(hand_)
+{
+}
+/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void ShantenTest::onRun() {
@@ -64,7 +71,7 @@ void ShantenTest::onRun() {
     { "4m4m4m5M5m7m5p6p7p4s5s6s7z7z", 0, "5m7m" }
   };
   for(auto& table : TABLES) {
-    shanten_.update(table.hais, true);
+    shanten_.update(table.hais);
     if(table.richi) {
       TEST_MESSAGE(shanten_.getShanten() == 0 && 
                    shanten_.getRichi().toString() == table.richi, 

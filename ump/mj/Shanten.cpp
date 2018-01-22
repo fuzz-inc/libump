@@ -30,6 +30,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
+#include "ump/mj/Hand.hpp"
 #include "ump/mj/Shanten.hpp"
 
 namespace ump {
@@ -37,8 +38,9 @@ namespace mj {
 /***********************************************************************//**
 	@brief コンストラクタ
 ***************************************************************************/
-Shanten::Shanten()
-  : mentsuMax_(0), 
+Shanten::Shanten(const Hand& hand)
+  : hand_(hand), 
+    mentsuMax_(0), 
     shanten_(std::numeric_limits<int>::max())
 {}
 /***********************************************************************//**
@@ -48,14 +50,21 @@ Shanten::~Shanten() {
 }
 /***********************************************************************//**
 	@brief シャンテンを計算する
-	@param[in] hais 牌の配列
-	@param[in] isMenzen 面前のとき真
 	@return シャンテン数
 ***************************************************************************/
-int Shanten::update(const HaiArray& hais, bool isMenzen) {
+int Shanten::update() {
+  return update(hand_.getMenzen());
+}
+/***********************************************************************//**
+	@brief シャンテンを計算する
+	@param[in] hais 門前の牌列
+	@return シャンテン数
+***************************************************************************/
+int Shanten::update(const HaiArray& hais) {
   super::set(hais.getNormal());
   mentsuMax_ = hais.size() / 3;
   shanten_ = std::numeric_limits<int>::max();
+  flag_.reset(FLAG_TENPAI);
   richi_.clear();
   kanables_.clear();
   for(auto hai : hais.getUnique()) {
@@ -63,7 +72,7 @@ int Shanten::update(const HaiArray& hais, bool isMenzen) {
       kanables_.push_back(hai);
     }
   }
-  if(isMenzen) {
+  if(hand_.isMenzen()) {
     checkKokushi();
     checkChitoi();
   }
@@ -74,20 +83,6 @@ int Shanten::update(const HaiArray& hais, bool isMenzen) {
   }
   richi_.unique();
   return getShanten();
-}
-/***********************************************************************//**
-	@brief シャンテン数を取得する
-	@return シャンテン数
-***************************************************************************/
-int Shanten::getShanten() const {
-  return shanten_;
-}
-/***********************************************************************//**
-	@brief リーチをかけられる牌を取得する
-	@return リーチをかけられる牌の配列
-***************************************************************************/
-const HaiArray& Shanten::getRichi() const {
-  return richi_;
 }
 /***********************************************************************//**
 	@brief 

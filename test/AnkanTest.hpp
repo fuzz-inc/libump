@@ -38,10 +38,11 @@ class AnkanTest
   : public Test
 {
  private:
+  ump::mj::Hand hand_;
   ump::mj::Shanten shanten_;
 
  public:
-  AnkanTest() = default;
+  AnkanTest();
   ~AnkanTest() override = default;
 
  protected:

@@ -38,10 +38,11 @@ class ShantenTest
   : public Test
 {
  private:
+  ump::mj::Hand hand_;
   ump::mj::Shanten shanten_;
 
  public:
-  ShantenTest() = default;
+  ShantenTest();
   ~ShantenTest() override = default;
 
  protected:

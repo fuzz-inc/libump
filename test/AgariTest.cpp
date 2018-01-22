@@ -82,11 +82,12 @@ void AgariTest::onRun() {
     TEST(agari.isInclude(ump::mj::Agari::YAKU_RINSHAN));
   }
   {
-    resetHand("2z2z6p6p2s2s3z3z9m");
+    resetHand("2z2z6p6p2s2s3z3z");
     openMentsu("2z2z", "2z");
     openMentsu("6p6p", "6p");
     openMentsu("2s2s", "2s");
     openMentsu("3z3z", "3z");
+    player_->tsumo(ump::mj::Hai::Get("9m"), false);
     TEST(player_->canRon(ump::mj::Hai::Get("9m")));
   }
   {

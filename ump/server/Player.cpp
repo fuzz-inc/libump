@@ -308,10 +308,10 @@ void Player::updateFuriten() {
 ***************************************************************************/
 void Player::updateFuriten(const mj::Hai* hai) {
   if(!isFuriten() && getGame()->getConfig()->isFuriten()) {
-    mj::Shanten shanten;
+    mj::Shanten shanten(*this);
     auto hais(getMenzen());
     hais.append(hai);
-    if(shanten.update(hais, isMenzen()) < 0) {
+    if(shanten.update(hais) < 0) {
       setFuriten(true);
     }
   }

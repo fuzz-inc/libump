@@ -32,6 +32,13 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***************************************************************************/
 #include "AnkanTest.hpp"
 /***********************************************************************//**
+	@brief コンストラクタ
+***************************************************************************/
+AnkanTest::AnkanTest()
+  : shanten_(hand_)
+{
+}
+/***********************************************************************//**
 	@brief 
 ***************************************************************************/
 void AnkanTest::onRun() {
@@ -49,7 +56,7 @@ void AnkanTest::onRun() {
     { "4m6m6m8m8m6p6p8p8p6s6s4z4z", "" }
   };
   for(auto& table : TABLES) {
-    shanten_.update(table.hais, true);
+    shanten_.update(table.hais);
     TEST_MESSAGE(shanten_.getKanables().toString() == table.kanables, 
                  Format("%s => %s(%s)", table.hais, table.kanables, 
                         shanten_.getKanables().toString().c_str()));

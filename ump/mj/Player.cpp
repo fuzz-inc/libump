@@ -47,7 +47,8 @@ Player::Player()
     bakaze_(nullptr), 
     zikaze_(nullptr), 
     tsumoHai_(nullptr), 
-    sutehai_(nullptr)
+    sutehai_(nullptr), 
+    shanten_(*this)
 {}
 /***********************************************************************//**
 	@copydoc Hand::reset
@@ -452,7 +453,7 @@ void Player::onShowHai(const Hai* hai) {
 ***************************************************************************/
 void Player::updateShanten() {
   if(!hasUnknown() && !isRichi()) {
-    shanten_.update(getMenzen(), isMenzen());
+    shanten_.update();
   }
 }
 /***********************************************************************//**

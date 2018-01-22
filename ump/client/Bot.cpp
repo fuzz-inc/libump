@@ -80,10 +80,10 @@ void Bot::onRecvSutehai(const Command& command) {
     auto menzen = player->getMenzen();
     const mj::Hai* best = nullptr;
     int score = 0;
-    mj::Shanten shanten;
+    mj::Shanten shanten(*player);
     for(auto hai : menzen.getUnique()) {
       menzen.removeSame(hai);
-      shanten.update(menzen, player->isMenzen());
+      shanten.update(menzen);
       if(!best || shanten.getShanten() < score) {
         best = hai;
         score = shanten.getShanten();
