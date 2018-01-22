@@ -172,7 +172,6 @@ void AgariTest::testTenpai() {
   };
   for(auto& table : TABLES) {
     auto menzen = ump::mj::HaiArray(table.menzen);
-    auto tsumo = menzen.removeEqual(menzen.at(0));
     if(table.mentsu) {
       auto mentsu = ump::mj::HaiArray(table.mentsu);
       auto claim = mentsu.removeEqual(mentsu.at(0));
@@ -183,8 +182,10 @@ void AgariTest::testTenpai() {
     else {
       resetHand(menzen.toString().c_str());
     }
-    player_->tsumo(tsumo, false);
-    TEST_MESSAGE(player_->isTenpai() == table.tenpai, player_->toString());
+    player_->updateShanten();
+    TEST_MESSAGE(player_->isTenpai() == table.tenpai, 
+                 player_->toString() + " => " + 
+                 (table.tenpai ? "tenpai" : "noten"));
   }
 }
 /***********************************************************************//**
@@ -218,6 +219,7 @@ void AgariTest::resetHand(const char* hais) {
   player_->setBakaze(ump::mj::Hai::Get("1z"));
   player_->setZikaze(ump::mj::Hai::Get("1z"));
   player_->drawHaipai(ump::mj::HaiArray(hais));
+  player_->sort();
   player_->resetFirst();
 }
 /***********************************************************************//**

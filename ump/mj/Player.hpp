@@ -143,6 +143,7 @@ class Player
   virtual Sutehai* sutehai(const Sutehai& sutehai);
   void discardAnyHai(Sutehai& sutehai) const;
 
+  void updateShanten();
   int getShanten() const;
   bool isTenpai() const;
   const HaiArray& getRichiableHai() const;
@@ -174,7 +175,6 @@ class Player
   void onShowHai(const Hai* hai) override;
 
  private:
-  void updateShanten();
   bool canTenpai(const mj::Shanten& shanten, const mj::Hai* hai) const;
 };
 /***********************************************************************//**
