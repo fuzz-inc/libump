@@ -107,9 +107,6 @@ Job* JobNaki::onUpdate() {
           player = iter;
         }
       }
-      else {
-        iter->closeSocket();
-      }
     }
     if(player) {
       if(auto nextJob = doReply(player)) {

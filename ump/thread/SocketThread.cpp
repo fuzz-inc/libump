@@ -37,7 +37,7 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace ump {
 namespace thread {
 static const int DELTA_TIME = 100;
-static const int TIMEOUT = 1 * 60 * 1000;
+static const int TIMEOUT = 1 * 15 * 1000;
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/

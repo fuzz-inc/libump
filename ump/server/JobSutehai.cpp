@@ -123,9 +123,6 @@ Job* JobSutehai::onUpdate() {
       }
     }
   }
-  else {
-    player->closeSocket();
-  }
   return sutehai(reply);
 }
 /***********************************************************************//**
