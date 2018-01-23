@@ -60,6 +60,7 @@ class Config
     FLAG_SINGLE, 
     FLAG_FURITEN, 
     FLAG_ORDER_SEAT, 
+    FLAG_WAIT, 
     FLAG_MAX
   };
 
@@ -123,6 +124,11 @@ class Config
    * 着席順
    */
   UMP_BIT_ACCESSOR(OrderSeat, flag_, FLAG_ORDER_SEAT);
+
+  /**
+   * 返答のタイムアウト無効
+   */
+  UMP_BIT_ACCESSOR(Wait, flag_, FLAG_WAIT);
 
   UMP_ACCESSOR(Point, point_);
   UMP_ACCESSOR(NotenBappu, notenBappu_);

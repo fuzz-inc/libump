@@ -76,6 +76,9 @@ std::shared_ptr<const Config> Job::getConfig() const {
 	@return 待ち時間を過ぎているとき真
 ***************************************************************************/
 bool Job::isOverTime(const std::chrono::milliseconds& time) const {
+  if(getConfig()->isWait()) {
+    return false;
+  }
   return time.count() > 0 && getTime() > time;
 }
 /***********************************************************************//**
