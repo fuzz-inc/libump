@@ -53,7 +53,7 @@ void JobReady::onBegin() {
   for(auto iter : game.getPlayers()) {
     auto player = std::static_pointer_cast<Player>(iter);
     if(game.sendCommand(player, command)) {
-      players_.push_back(player);
+      receivers_.emplace_back(player, command);
     }
   }
 }
@@ -61,10 +61,10 @@ void JobReady::onBegin() {
 	@brief 
 ***************************************************************************/
 Job* JobReady::onUpdate() {
-  if(!players_.empty() && !isOverTime(getConfig()->getReadyWait())) {
-    for(auto iter = players_.begin(); iter != players_.end();) {
-      if((*iter)->getReply().getType() == Command::TYPE_YES) {
-        iter = players_.erase(iter);
+  if(!receivers_.empty() && !isOverTime(getConfig()->getReadyWait())) {
+    for(auto iter = receivers_.begin(); iter != receivers_.end();) {
+      if(iter->fetchReply()) {
+        iter = receivers_.erase(iter);
       }
       else {
         iter++;

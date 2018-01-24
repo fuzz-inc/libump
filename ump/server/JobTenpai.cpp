@@ -55,7 +55,9 @@ void JobTenpai::onBegin() {
     state_ = STATE_TENPAI;
   }
   else if(player->isConnect() && player->isTenpai()) {
-    game.sendCommand(player, game.createCommand(Command::TYPE_TENPAI_Q));
+    auto command = game.createCommand(Command::TYPE_TENPAI_Q);
+    game.sendCommand(player, command);
+    receiver_.reset(new Receiver(player, command));
   }
   else {
     state_ = STATE_NOTEN;
@@ -65,12 +67,11 @@ void JobTenpai::onBegin() {
 	@brief 
 ***************************************************************************/
 Job* JobTenpai::onUpdate() {
-  auto& game = getGame();
-  auto player = game.getTurnPlayer();
-  if(state_ == STATE_NULL) {
-    auto reply = player->getReply();
-    if(reply.isExist()) {
-      state_ = (reply.getType() == Command::TYPE_TENPAI)
+  if(receiver_) {
+    if(receiver_->fetchReply()) {
+      auto& reply = receiver_->getReply();
+      state_ = (reply.isExist() && 
+                reply.getType() == Command::TYPE_TENPAI)
         ? STATE_TENPAI
         : STATE_NOTEN;
     }

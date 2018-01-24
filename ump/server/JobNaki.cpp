@@ -80,7 +80,7 @@ void JobNaki::onBegin() {
       }
       if(command.countArg() > 1) {
         game.sendCommand(player, command);
-        players_.push_back(player);
+        receivers_.emplace_back(player, command);
       }
     }
   }
@@ -91,25 +91,25 @@ void JobNaki::onBegin() {
 ***************************************************************************/
 Job* JobNaki::onUpdate() {
   auto& game = getGame();
-  if(!players_.empty()) {
+  if(!receivers_.empty()) {
     if(!isOverTime(getConfig()->getNakiWait())) {
-      for(auto player : players_) {
-        if(!player->getReply().isExist()) {
+      for(auto& receiver : receivers_) {
+        if(!receiver.fetchReply()) {
           return this;
         }
       }
     }
-    std::shared_ptr<Player> player;
-    for(auto iter : players_) {
-      if(iter->getReply().isExist()) {
-        if(!player ||
-           iter->getReply().getType() > player->getReply().getType()) {
-          player = iter;
-        }
+    auto best = receivers_.end();
+    for(auto iter = receivers_.begin(); iter != receivers_.end(); iter++) {
+      auto& reply = iter->getReply();
+      if(reply.isExist() &&
+         (best == receivers_.end() || 
+          reply.getType() > best->getReply().getType())) {
+        best = iter;
       }
     }
-    if(player) {
-      if(auto nextJob = doReply(player)) {
+    if(best != receivers_.end()) {
+      if(auto nextJob = doReply(best->getPlayer(), best->getReply())) {
         return nextJob;
       }
     }
@@ -134,9 +134,9 @@ void JobNaki::onEnd() {
 /***********************************************************************//**
 	@brief 
 ***************************************************************************/
-Job* JobNaki::doReply(std::shared_ptr<Player> player) {
+Job* JobNaki::doReply(std::shared_ptr<Player> player, 
+                      const Command& reply) {
   auto& game = getGame();
-  auto reply = player->getReply();
   auto type = reply.getType();
   auto hai = sutehai_->getHai();
   if(player->getCommand().hasArg(type)) {

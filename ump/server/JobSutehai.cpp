@@ -75,22 +75,21 @@ void JobSutehai::onBegin() {
       }
     }
   }
-  flag_.set(FLAG_SEND, game.sendCommand(player, command_));
+  game.sendCommand(player, command_);
+  receiver_.reset(new Receiver(player, command_));
   sleep(0.5f);
 }
 /***********************************************************************//**
 	@copydoc Job::onUpdate
 ***************************************************************************/
 Job* JobSutehai::onUpdate() {
-  auto& game = getGame();
-  auto player = game.getTurnPlayer();
-  Command reply = player->getReply();
-  if(flag_.test(FLAG_SEND) && 
-     player->isConnect() && 
-     !isOverTime(getConfig()->getSutehaiWait()) &&
-     !reply.isExist()) {
+  if(!receiver_->fetchReply() && 
+     !isOverTime(getConfig()->getSutehaiWait())) {
     return this;
   }
+  auto& game = getGame();
+  auto player = receiver_->getPlayer();
+  auto& reply = receiver_->getReply();
   if(reply.isExist()) {
     auto type = reply.getType();
     if(command_.hasArg(type)) {

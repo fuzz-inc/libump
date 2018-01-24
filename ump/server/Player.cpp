@@ -187,6 +187,8 @@ void Player::swapSocket(Player& player) {
   socket_.swap(player.socket_);
   socket_->resetListener(this);
   player.socket_->resetListener(&player);
+  command_.clear();
+  reply_([](Command& reply) { reply.clear(); });
 }
 /***********************************************************************//**
 	@brief 再接続したときの処理

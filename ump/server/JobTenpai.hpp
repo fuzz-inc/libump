@@ -53,6 +53,7 @@ class JobTenpai
 
  private:
   State state_;
+  std::unique_ptr<Receiver> receiver_;
 
  public:
   JobTenpai(Game& game);

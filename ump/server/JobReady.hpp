@@ -45,7 +45,7 @@ class JobReady
   typedef Job super;
 
  private:
-  std::vector<std::shared_ptr<Player>> players_;
+  std::vector<Receiver> receivers_;
 
  public:
   JobReady(Game& game);

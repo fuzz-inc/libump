@@ -198,6 +198,27 @@ void Job::addPoint(size_t seat, const BigNum& value, Command::Type type) {
   getPlayer(seat)->addPoint(value);
 }    
 /***********************************************************************//**
+	@brief コンストラクタ
+***************************************************************************/
+Job::Receiver::Receiver(std::shared_ptr<Player> player, 
+                        const Command& command)
+  : player_(player), 
+    serial_(command.getSerial())
+{
+}
+/***********************************************************************//**
+	@brief 返答を取得する
+	@return 返答が有効なとき真
+***************************************************************************/
+bool Job::Receiver::fetchReply() {
+  if(!player_->isConnect() || 
+     player_->getCommand().getSerial() != serial_) {
+    return true;
+  }
+  reply_ = player_->getReply();
+  return reply_.isExist();
+}
+/***********************************************************************//**
 	$Id$
 ***************************************************************************/
 }

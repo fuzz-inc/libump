@@ -47,6 +47,9 @@ class Job {
     FLAG_MAX
   };
 
+ protected:
+  class Receiver;
+
  private:
   Game& game_;
   std::shared_ptr<Player> player_;
@@ -98,6 +101,23 @@ class Job {
                 Command::Type = Command::TYPE_POINT);
 
   virtual Job* onUpdate() = 0;
+};
+/***********************************************************************//**
+	@brief 
+***************************************************************************/
+class Job::Receiver {
+ private:
+  std::shared_ptr<Player> player_;
+  unsigned int serial_;
+  Command reply_;
+
+ public:
+  Receiver(std::shared_ptr<Player> player, const Command& command);
+  ~Receiver() = default;
+
+  UMP_GETTER(Player, player_);
+  bool fetchReply();
+  UMP_GETTER(Reply, reply_);
 };
 /***********************************************************************//**
 	$Id$

@@ -53,8 +53,7 @@ class JobNaki
  private:
   const mj::Sutehai* sutehai_;
   std::shared_ptr<Player> richier_;
-  Command command_;
-  std::vector<std::shared_ptr<Player>> players_;
+  std::vector<Receiver> receivers_;
   std::bitset<FLAG_MAX> flag_;
 
  public:
@@ -69,7 +68,7 @@ class JobNaki
  private:
   UMP_BIT_ACCESSOR(Ron, flag_, FLAG_RON);
 
-  Job* doReply(std::shared_ptr<Player> player);
+  Job* doReply(std::shared_ptr<Player> player, const Command& reply);
 };
 /***********************************************************************//**
 	$Id$
