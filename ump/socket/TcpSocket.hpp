@@ -76,6 +76,7 @@ class TcpSocket
 
  private:
   void open();
+  void open(int fd);
   void setError();
 };
 /***********************************************************************//**

@@ -45,7 +45,9 @@ namespace socket {
 	@brief デフォルトコンストラクタ
 ***************************************************************************/
 TcpSocket::TcpSocket()
-  : TcpSocket(INVALID_FD)
+  : super(), 
+    fd_(INVALID_FD), 
+    port_(0)
 {
 }
 /***********************************************************************//**
@@ -53,10 +55,10 @@ TcpSocket::TcpSocket()
 	@param[in] fd ファイルディクリプタ
 ***************************************************************************/
 TcpSocket::TcpSocket(int fd)
-  : super(), 
-    fd_(fd), 
-    port_(0)
-{}
+  : TcpSocket()
+{
+  open(fd);
+}
 /***********************************************************************//**
 	@brief デストラクタ.
 ***************************************************************************/
@@ -181,9 +183,9 @@ bool TcpSocket::poll(int flag, int timeout) {
 	@return 送信に成功したとき真
 ***************************************************************************/
 bool TcpSocket::onSend(const char* buff, size_t size) {
-  const int flags = 0;
-#if defined(MSG_NOSIGPIPE)
-  flags |= MSG_NOSIGPIPE;
+  int flags = 0;
+#if defined(MSG_NOSIGNAL)
+  flags |= MSG_NOSIGNAL;
 #endif
   while(size > 0) {
     auto sendSize = ::send(fd_, buff, size, flags);
@@ -239,8 +241,14 @@ std::shared_ptr<TcpSocket> TcpSocket::createSocket(int fd) const {
 	@brief ソケットを開く
 ***************************************************************************/
 void TcpSocket::open() {
+  open(::socket(AF_INET, SOCK_STREAM, 0));
+}
+/***********************************************************************//**
+	@brief ソケットを開く
+***************************************************************************/
+void TcpSocket::open(int fd) {
   assert(!isOpen());
-  fd_ = ::socket(AF_INET, SOCK_STREAM, 0);
+  fd_ = fd;
 #if defined(SO_NOSIGPIPE)
   const setsockopt_t on = 1;
   ::setsockopt(fd_, SOL_SOCKET, SO_NOSIGPIPE, &on, sizeof(on));
