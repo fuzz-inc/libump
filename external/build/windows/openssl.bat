@@ -1,3 +1,7 @@
+set MASM=C:\Program Files\NASM
+echo %PATH%|find "%MASM%">NUL
+if errorlevel 1 set PATH=%MASM%;%PATH%
+
 set CURDIR=%~dp0
 set OPTDIR=%CURDIR%..\..\opt\windows
 
