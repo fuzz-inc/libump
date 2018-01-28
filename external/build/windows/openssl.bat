@@ -1,4 +1,4 @@
-set MASM=C:\Program Files\NASM
+set MASM=%ProgramFiles%\NASM
 echo %PATH%|find "%MASM%">NUL
 if errorlevel 1 set PATH=%MASM%;%PATH%
 
