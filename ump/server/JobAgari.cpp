@@ -121,6 +121,9 @@ void JobAgari::agari() {
     int renchanAdd = getConfig()->getRenchan().add * game.getRenchan();
     BigNum renchanMul = 1;
     if(getConfig()->getRenchan().mul > 1) {
+      if(!agari.isYakuman()) {
+        text.clear();
+      }
       for(size_t i = 0, n = game.getRenchan(); i < n; i++) {
         renchanMul *= getConfig()->getRenchan().mul;
       }
