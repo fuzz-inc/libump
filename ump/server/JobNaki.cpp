@@ -93,10 +93,15 @@ Job* JobNaki::onUpdate() {
   auto& game = getGame();
   if(!receivers_.empty()) {
     if(!isOverTime(getConfig()->getNakiWait())) {
+      bool replyAll = true;
       for(auto& receiver : receivers_) {
-        if(!receiver.fetchReply()) {
-          return this;
+        if(!receiver.getReply().isExist() && 
+           !receiver.fetchReply()) {
+          replyAll = false;
         }
+      }
+      if(!replyAll) {
+        return this;
       }
     }
     auto best = receivers_.end();
