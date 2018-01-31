@@ -95,8 +95,7 @@ Job* JobNaki::onUpdate() {
     if(!isOverTime(getConfig()->getNakiWait())) {
       bool replyAll = true;
       for(auto& receiver : receivers_) {
-        if(!receiver.getReply().isExist() && 
-           !receiver.fetchReply()) {
+        if(!receiver.fetchReply()) {
           replyAll = false;
         }
       }

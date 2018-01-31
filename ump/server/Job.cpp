@@ -211,7 +211,8 @@ Job::Receiver::Receiver(std::shared_ptr<Player> player,
 	@return 返答が有効なとき真
 ***************************************************************************/
 bool Job::Receiver::fetchReply() {
-  if(!player_->isConnect() || 
+  if(reply_.isExist() || 
+     !player_->isConnect() || 
      player_->getCommand().getSerial() != serial_) {
     return true;
   }
