@@ -123,6 +123,7 @@ class Pattern;
 class Player;
 class Shanten;
 class Sutehai;
+class Tatsu;
 class Yama;
 
 typedef std::vector<std::shared_ptr<Player>> Players;

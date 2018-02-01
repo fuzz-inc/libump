@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2016 fuzz, Inc. All rights reserved. 
+Copyright 2018 fuzz, Inc. All rights reserved. 
    http://www.fuzz.co.jp
 
 Redistribution and use in source and binary forms, with or without
@@ -30,72 +30,40 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /***********************************************************************//**
 	@file
 ***************************************************************************/
-#pragma once
-
-#include "ump/mj/Mentsu.hpp"
 #include "ump/mj/Tatsu.hpp"
 
 namespace ump {
 namespace mj {
 /***********************************************************************//**
-	@brief 要素に分解する
+	@brief コンストラクタ
+	@param[in] hais 牌列
 ***************************************************************************/
-class Divider {
- private:
-  enum {
-    FLAG_VETO, 
-    FLAG_MAX
-  };
-
- private:
-  std::bitset<FLAG_MAX> flag_;
-  HaiArray hais_;
-  HaiArray head_;
-  std::vector<Mentsu> mentsus_;
-  std::vector<Tatsu> tatsus_;
-  size_t mentsuMax_;
-
- public:
-  Divider();
-  virtual ~Divider();
-
-  void set(const HaiArray& hais);
-
-  void eachHead();
-  void eachMentsu(size_t index = 0);
-  void eachTatsu(size_t index = 0);
-
-  bool isAll() const;
-  bool hasHead() const;
-
-  size_t countHai() const;
-  const Hai* getHai(size_t index) const;
-
-  const HaiArray& getHead() const;
-
-  UMP_GETTER(Mentsus, mentsus_);
-  UMP_GETTER(Tatsus, tatsus_);
-
-  size_t countHai(const Hai* hai) const;
-
-  std::string toString() const;
-  void dump() const;
-
- protected:
-  UMP_GETTER(Hais, hais_);
-
-  void veto();
-
-  virtual void onHead();
-  virtual void onMentsu();
-  virtual void onTatsu();
-
- private:
-  bool isVeto() const;
-  void pushMentsu(const Hai* a, const Hai* b, const Hai* c, size_t index);
-  void pushTatsu(const Hai* a, const Hai* b, size_t index);
-  void pop(const HaiArray& elem);
-};
+Tatsu::Tatsu(const HaiArray& hais)
+  : super(hais)
+{
+  assert(hais.size() == 2);
+  sort();
+  if(at(0)->isSame(at(1))) {
+    type_ = TOITSU;
+  }
+  else {
+    assert(!at(0)->isZihai());
+    if(at(0)->shift(1)->isSame(at(1))) {
+      if(at(0)->getNumber() == 1 || at(0)->getNumber() == 8) {
+        type_ = PENCHAN;
+      }
+      else {
+        type_ = RYANMEN;
+      }
+    }
+    else if(at(0)->shift(2)->isSame(at(1))) {
+      type_ = KANCHAN;
+    }
+    else {
+      assert(0);
+    }
+  }
+}
 /***********************************************************************//**
 	$Id$
 ***************************************************************************/

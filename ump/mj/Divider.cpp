@@ -268,7 +268,7 @@ void Divider::pushTatsu(const Hai* a, const Hai* b, size_t index) {
   HaiArray elem;
   elem.append(hais_.removeSame(a));
   elem.append(hais_.removeSame(b));
-  tatsus_.push_back(elem);
+  tatsus_.emplace_back(elem);
   eachTatsu(index);
   tatsus_.pop_back();
   pop(elem);

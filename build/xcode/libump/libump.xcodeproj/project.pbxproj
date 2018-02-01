@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		262FB2DA1DB15072004FF73B /* Bot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262FB2D81DB15072004FF73B /* Bot.cpp */; };
 		262FB2DB1DB15072004FF73B /* Bot.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 262FB2D91DB15072004FF73B /* Bot.hpp */; };
+		2636480E202346EF006273BC /* Tatsu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2636480C202346EE006273BC /* Tatsu.cpp */; };
+		2636480F202346EF006273BC /* Tatsu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2636480D202346EE006273BC /* Tatsu.hpp */; };
 		26560BB61DE8A5FB002753D7 /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26560BB41DE8A5FB002753D7 /* Pattern.cpp */; };
 		26706B441FDE71F600B4A6F5 /* JobKakan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26706B421FDE71F600B4A6F5 /* JobKakan.cpp */; };
 		26706B451FDE71F600B4A6F5 /* JobKakan.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 26706B431FDE71F600B4A6F5 /* JobKakan.hpp */; };
@@ -97,6 +99,8 @@
 /* Begin PBXFileReference section */
 		262FB2D81DB15072004FF73B /* Bot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bot.cpp; sourceTree = "<group>"; };
 		262FB2D91DB15072004FF73B /* Bot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bot.hpp; sourceTree = "<group>"; };
+		2636480C202346EE006273BC /* Tatsu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tatsu.cpp; sourceTree = "<group>"; };
+		2636480D202346EE006273BC /* Tatsu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tatsu.hpp; sourceTree = "<group>"; };
 		26560BB41DE8A5FB002753D7 /* Pattern.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pattern.cpp; sourceTree = "<group>"; };
 		26560BB51DE8A5FB002753D7 /* Pattern.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Pattern.hpp; sourceTree = "<group>"; };
 		26706B421FDE71F600B4A6F5 /* JobKakan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JobKakan.cpp; sourceTree = "<group>"; };
@@ -308,6 +312,8 @@
 				DAFCE7761D7D78FF0016A137 /* Shanten.hpp */,
 				DAFCE7771D7D78FF0016A137 /* Sutehai.cpp */,
 				DAFCE7781D7D78FF0016A137 /* Sutehai.hpp */,
+				2636480C202346EE006273BC /* Tatsu.cpp */,
+				2636480D202346EE006273BC /* Tatsu.hpp */,
 				DAFCE7791D7D78FF0016A137 /* Yama.cpp */,
 				DAFCE77A1D7D78FF0016A137 /* Yama.hpp */,
 			);
@@ -380,6 +386,7 @@
 				DAFCE7B21D7D78FF0016A137 /* HaiArray.hpp in Headers */,
 				DAF407B11F79142B00495341 /* stdafx.hpp in Headers */,
 				DA8D01011D9BE99D00F1F5D2 /* Logger.hpp in Headers */,
+				2636480F202346EF006273BC /* Tatsu.hpp in Headers */,
 				26706B451FDE71F600B4A6F5 /* JobKakan.hpp in Headers */,
 				DAFCE7B61D7D78FF0016A137 /* Kawa.hpp in Headers */,
 				DAFCE7B41D7D78FF0016A137 /* Hand.hpp in Headers */,
@@ -504,6 +511,7 @@
 				DAFCE7B51D7D78FF0016A137 /* Kawa.cpp in Sources */,
 				DA81C6FB1DC0B861004470DA /* Config.cpp in Sources */,
 				DAA09F151E02895C00DA374E /* BigNum.cpp in Sources */,
+				2636480E202346EF006273BC /* Tatsu.cpp in Sources */,
 				DAFCE7C81D7D78FF0016A137 /* Job.cpp in Sources */,
 				DAFCE7D41D7D78FF0016A137 /* JobRyukyoku.cpp in Sources */,
 			);
