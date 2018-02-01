@@ -70,6 +70,14 @@ class HaiArray
     return remove(hai, true);
   }
 
+  void removeSame(const HaiArray& hais) {
+    return remove(hais, false);
+  }
+
+  void removeEqual(const HaiArray& hais) {
+    return remove(hais, true);
+  }
+
   size_t countSame(const Hai* hai) const {
     return count(hai, false);
   }
@@ -114,7 +122,9 @@ class HaiArray
 
   HaiArray& unique();
   HaiArray getUnique() const;
+
   HaiArray& uniqueEqual();
+  HaiArray getUniqueEqual() const;
 
   HaiArray getNormal() const;
 
