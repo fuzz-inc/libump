@@ -53,7 +53,6 @@ class Divider {
   HaiArray head_;
   std::vector<Mentsu> mentsus_;
   std::vector<Tatsu> tatsus_;
-  size_t mentsuMax_;
 
  public:
   Divider();
