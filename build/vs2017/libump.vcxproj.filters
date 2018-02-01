@@ -156,6 +156,9 @@
     <ClCompile Include="..\..\ump\server\JobKakan.cpp">
       <Filter>ump\server</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\ump\mj\Tatsu.cpp">
+      <Filter>ump\mj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ump\BigNum.hpp">
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="..\..\ump\server\JobKakan.hpp">
       <Filter>ump\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ump\mj\Tatsu.hpp">
+      <Filter>ump\mj</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

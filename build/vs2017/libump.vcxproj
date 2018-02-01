@@ -120,6 +120,7 @@
     <ClCompile Include="..\..\ump\mj\Player.cpp" />
     <ClCompile Include="..\..\ump\mj\Shanten.cpp" />
     <ClCompile Include="..\..\ump\mj\Sutehai.cpp" />
+    <ClCompile Include="..\..\ump\mj\Tatsu.cpp" />
     <ClCompile Include="..\..\ump\mj\Yama.cpp" />
     <ClCompile Include="..\..\ump\server\Config.cpp" />
     <ClCompile Include="..\..\ump\server\Game.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="..\..\ump\mj\Player.hpp" />
     <ClInclude Include="..\..\ump\mj\Shanten.hpp" />
     <ClInclude Include="..\..\ump\mj\Sutehai.hpp" />
+    <ClInclude Include="..\..\ump\mj\Tatsu.hpp" />
     <ClInclude Include="..\..\ump\mj\Yama.hpp" />
     <ClInclude Include="..\..\ump\server\Config.hpp" />
     <ClInclude Include="..\..\ump\server\Game.hpp" />
