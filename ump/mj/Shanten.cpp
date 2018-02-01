@@ -72,7 +72,7 @@ int Shanten::update(const HaiArray& hais) {
       kanables_.push_back(hai);
     }
   }
-  if(hand_.isMenzen()) {
+  if(isMenzen()) {
     checkKokushi();
     checkChitoi();
   }
@@ -120,6 +120,13 @@ void Shanten::onTatsu() {
     }
     updateKanables();
   }
+}
+/***********************************************************************//**
+	@brief 門前か調べる
+	@return 門前のとき真
+***************************************************************************/
+bool Shanten::isMenzen() const {
+  return hand_.isMenzen();
 }
 /***********************************************************************//**
 	@brief シャンテン数を更新する

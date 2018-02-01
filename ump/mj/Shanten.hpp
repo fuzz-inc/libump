@@ -74,6 +74,8 @@ class Shanten
   virtual void onMentsu();
   virtual void onTatsu();
 
+  virtual bool isMenzen() const;
+
  private:
   void updateShanten(int shanten);
   void checkKokushi();
