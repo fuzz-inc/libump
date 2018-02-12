@@ -47,6 +47,7 @@ Logger::Logger()
 ***************************************************************************/
 void Logger::openLogFile(const std::string& path) {
   output_.reset(new std::ofstream(path.c_str()));
+  path_ = path;
 }
 /***********************************************************************//**
 	@brief メッセージを出力する
@@ -94,6 +95,19 @@ std::string Logger::GetTime(const char* format) {
   char buff[256];
   std::strftime(buff, sizeof(buff), format, &time);
   return buff;
+}
+/***********************************************************************//**
+  @brief ストリームをフラッシュする
+***************************************************************************/
+void Logger::flush() {
+  getOutput().flush();
+}
+/***********************************************************************//**
+  @brief 入力ストリームを取得する
+  @return 入力ストリーム
+***************************************************************************/
+std::unique_ptr<std::istream> Logger::getInput() const {
+  return std::unique_ptr<std::istream>(new std::ifstream(path_.c_str()));
 }
 /***********************************************************************//**
 	@brief 

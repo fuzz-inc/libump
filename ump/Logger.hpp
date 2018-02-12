@@ -49,6 +49,7 @@ class Logger {
 
  private:
   Level level_;
+  std::string path_;
   std::unique_ptr<std::ostream> output_;
   std::mutex mutex_;
 
@@ -61,6 +62,10 @@ class Logger {
 
   static std::string Format(const char* format, ...);
   static std::string GetTime(const char* format);
+
+  void flush();
+
+  std::unique_ptr<std::istream> getInput() const;
 
  private:
   std::ostream& getOutput() const;
