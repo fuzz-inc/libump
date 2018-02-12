@@ -37,46 +37,46 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace ump {
 namespace mj {
 const Agari::YakuTable Agari::YakuTable_[YAKU_MAX] = {
-  { 1, 0, "リーチ" }, 
-  { 2, 0, "ダブルリーチ" }, 
-  { 1, 0, "一発" }, 
-  { 1, 1, "嶺上開花" }, 
-  { 1, 1, "槍槓" }, 
-  { 1, 1, "海底摸月" }, 
-  { 1, 1, "河底撈魚" }, 
-  { 1, 1, "タンヤオ" }, 
-  { 1, 0, "平和" }, 
-  { 1, 0, "門前自摸" }, 
-  { 1, 0, "一盃口" }, 
-  { 2, 0, "七対子" }, 
-  { 2, 1, "チャンタ" }, 
-  { 3, 2, "純チャン" }, 
-  { 2, 2, "混老頭" }, 
-  { 2, 2, "対々和" }, 
-  { 2, 2, "三暗刻" }, 
-  { 2, 2, "三槓子" }, 
-  { 3, 0, "二盃口" }, 
-  { 2, 1, "三色同順" }, 
-  { 2, 2, "三色同刻" }, 
-  { 2, 1, "一気通貫" }, 
-  { 1, 1, "役牌" }, 
-  { 2, 2, "小三元" }, 
-  { 3, 2, "混一色" }, 
-  { 6, 5, "清一色" }, 
-  { 0, 0, "役満" }, 
-  { 1, 1, "国士無双" }, 
-  { 1, 1, "大三元" }, 
-  { 1, 1, "清老頭" }, 
-  { 1, 1, "四暗刻" }, 
-  { 1, 1, "四槓子" }, 
-  { 1, 1, "小四喜" }, 
-  { 2, 2, "大四喜" }, 
-  { 1, 1, "字一色" }, 
-  { 1, 1, "緑一色" }, 
-  { 1, 0, "九蓮宝燈" }, 
-  { 1, 0, "天和" }, 
-  { 1, 0, "地和" }, 
-  { 1, 0, "人和" }
+  { 1, 0, u8"リーチ" }, 
+  { 2, 0, u8"ダブルリーチ" }, 
+  { 1, 0, u8"一発" }, 
+  { 1, 1, u8"嶺上開花" }, 
+  { 1, 1, u8"槍槓" }, 
+  { 1, 1, u8"海底摸月" }, 
+  { 1, 1, u8"河底撈魚" }, 
+  { 1, 1, u8"タンヤオ" }, 
+  { 1, 0, u8"平和" }, 
+  { 1, 0, u8"門前自摸" }, 
+  { 1, 0, u8"一盃口" }, 
+  { 2, 0, u8"七対子" }, 
+  { 2, 1, u8"チャンタ" }, 
+  { 3, 2, u8"純チャン" }, 
+  { 2, 2, u8"混老頭" }, 
+  { 2, 2, u8"対々和" }, 
+  { 2, 2, u8"三暗刻" }, 
+  { 2, 2, u8"三槓子" }, 
+  { 3, 0, u8"二盃口" }, 
+  { 2, 1, u8"三色同順" }, 
+  { 2, 2, u8"三色同刻" }, 
+  { 2, 1, u8"一気通貫" }, 
+  { 1, 1, u8"役牌" }, 
+  { 2, 2, u8"小三元" }, 
+  { 3, 2, u8"混一色" }, 
+  { 6, 5, u8"清一色" }, 
+  { 0, 0, u8"役満" }, 
+  { 1, 1, u8"国士無双" }, 
+  { 1, 1, u8"大三元" }, 
+  { 1, 1, u8"清老頭" }, 
+  { 1, 1, u8"四暗刻" }, 
+  { 1, 1, u8"四槓子" }, 
+  { 1, 1, u8"小四喜" }, 
+  { 2, 2, u8"大四喜" }, 
+  { 1, 1, u8"字一色" }, 
+  { 1, 1, u8"緑一色" }, 
+  { 1, 0, u8"九蓮宝燈" }, 
+  { 1, 0, u8"天和" }, 
+  { 1, 0, u8"地和" }, 
+  { 1, 0, u8"人和" }
 };
 static const int COLOR_MANZU = 1 << Hai::COLOR_MANZU;
 static const int COLOR_PINZU = 1 << Hai::COLOR_PINZU;
@@ -294,17 +294,17 @@ std::string Agari::toString() const {
     }
   }
   if(isYakuman()) {
-    str << getText() << " " << getPoint().toString() << "点";
+    str << getText() << " " << getPoint().toString() << u8"点";
   }
   else {
     for(auto& mentsu : mentsus_) {
       str << mentsu.toString() << "[" << mentsu.getFu() << "]";
     }
     str << " " << 
-      getFu() << "符" << 
-      getHan() << "翻" << 
+      getFu() << u8"符" << 
+      getHan() << u8"翻" << 
       getText() << 
-      getPoint().toString() << "点";
+      getPoint().toString() << u8"点";
   }
   return str.str();
 }
@@ -431,32 +431,32 @@ void Agari::updatePoint(const Player& player) {
     fu_ = 0;
     srcFu_ = 0;
     point_ = 32000 * getYakuman();
-    text_.assign("役満");
+    text_.assign(u8"役満");
   }
   else {
     updateFu(player);
     auto han = getHan();
     if(han >= 13) {
       point_ = 32000;
-      text_.assign("数え役満");
+      text_.assign(u8"数え役満");
     }
     else if(han >= 11) {
       point_ = 24000;
-      text_.assign("三倍満");
+      text_.assign(u8"三倍満");
     }
     else if(han >= 8) {
       point_ = 16000;
-      text_.assign("倍満");
+      text_.assign(u8"倍満");
     }
     else if(han >= 6) {
       point_ = 12000;
-      text_.assign("跳満");
+      text_.assign(u8"跳満");
     }
     else {
       point_ = fu_ * int(pow(2, 4 + han));
       if(point_ >= 8000) {
         point_ = 8000;
-        text_.assign("満貫");
+        text_.assign(u8"満貫");
       }
     }
   }
