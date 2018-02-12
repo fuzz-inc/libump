@@ -88,7 +88,6 @@ void JobGame::onEnd() {
     }
     player->setPoint(point);
   }
-  game.onEndGame(players);
   {
     auto command = game.createCommand(Command::TYPE_GAMEEND);
     for(auto& player : players) {
@@ -97,6 +96,7 @@ void JobGame::onEnd() {
     }
     game.sendAll(command);
   }
+  game.onEndGame(players);
 }
 /***********************************************************************//**
 	@brief 次の局に進むか調べる
