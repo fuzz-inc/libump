@@ -131,6 +131,7 @@ class Game
   virtual void onShowHai(const Hai* hai) {}
 
   virtual void onEndGame(const Players& players);
+  virtual void onAfterEndGame(const Players& players);
 
  protected:
   /**
