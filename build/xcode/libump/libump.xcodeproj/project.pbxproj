@@ -520,7 +520,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		7F39807E200FD1D7004464A3 /* Master */ = {
+		7F39807E200FD1D7004464A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -567,9 +567,9 @@
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../..";
 			};
-			name = Master;
+			name = Release;
 		};
-		7F39807F200FD1D7004464A3 /* Master */ = {
+		7F39807F200FD1D7004464A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
@@ -577,7 +577,7 @@
 				GCC_ENABLE_CPP_RTTI = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Master;
+			name = Release;
 		};
 		DAFCE6CB1D7D72A60016A137 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -635,7 +635,7 @@
 			};
 			name = Debug;
 		};
-		DAFCE6CC1D7D72A60016A137 /* Release */ = {
+		DAFCE6CC1D7D72A60016A137 /* Develop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -682,7 +682,7 @@
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../../..";
 			};
-			name = Release;
+			name = Develop;
 		};
 		DAFCE6CE1D7D72A60016A137 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -694,7 +694,7 @@
 			};
 			name = Debug;
 		};
-		DAFCE6CF1D7D72A60016A137 /* Release */ = {
+		DAFCE6CF1D7D72A60016A137 /* Develop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = "";
@@ -702,7 +702,7 @@
 				GCC_ENABLE_CPP_RTTI = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Release;
+			name = Develop;
 		};
 /* End XCBuildConfiguration section */
 
@@ -711,21 +711,21 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DAFCE6CB1D7D72A60016A137 /* Debug */,
-				DAFCE6CC1D7D72A60016A137 /* Release */,
-				7F39807E200FD1D7004464A3 /* Master */,
+				DAFCE6CC1D7D72A60016A137 /* Develop */,
+				7F39807E200FD1D7004464A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Develop;
 		};
 		DAFCE6CD1D7D72A60016A137 /* Build configuration list for PBXNativeTarget "libump" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DAFCE6CE1D7D72A60016A137 /* Debug */,
-				DAFCE6CF1D7D72A60016A137 /* Release */,
-				7F39807F200FD1D7004464A3 /* Master */,
+				DAFCE6CF1D7D72A60016A137 /* Develop */,
+				7F39807F200FD1D7004464A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Develop;
 		};
 /* End XCConfigurationList section */
 	};
