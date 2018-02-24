@@ -300,6 +300,9 @@ std::shared_ptr<Server> Player::getServer() const {
 	@brief フリテンを更新する
 ***************************************************************************/
 void Player::updateFuriten() {
+  if(!isRichi()) {
+    setFuriten(false);
+  }
   for(auto& sutehai : getKawa()) {
     updateFuriten(sutehai.getHai());
   }
